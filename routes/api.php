@@ -33,4 +33,5 @@ Route::get('/roles', [RolesController::class, 'index']);
 Route::group( ['prefix' => 'user' ,'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [UserController::class, 'index']);
     Route::get('{user}', [UserController::class, 'show']);
+    Route::post('{user}', [UserController::class, 'update']);
 });
