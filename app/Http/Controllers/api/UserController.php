@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Controllers\api;
+
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
+
+class UserController extends Controller
+{
+
+    public function index()
+    {
+
+        $users = QueryBuilder::for(User::class)
+            ->with('practices')
+            ->AllowedFilters([
+                'name', 'location',
+                AllowedFilter::partial('practice', 'practices.name'),
+
+            ])
+            ->get();
+        return response()->json(UserResource::collection($users));
+    }
+    public function show(User $user)
+    {
+        $averageRate = DB::table('rates')
+            ->where('employee_id', $user->id)
+            ->select(DB::raw('(AVG(understanding) + AVG(problem_solving) + AVG(response_time) + AVG(communication)) / 4 as average_rate'))
+            ->value('average_rate');
+        return response()->json([
+            'user' => new UserResource($user->load(['consultations', 'GeneralQuestions', 'QuestionsReplies', 'practices'])),
+            'rate' => number_format($averageRate, 1)
+        ]);
+    }
+}
