@@ -1,6 +1,5 @@
 @extends('master.app')
 @section('content')
-
     <div class="page-wrapper">
 
         <div class="content-wrapper">

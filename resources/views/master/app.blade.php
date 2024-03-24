@@ -12,25 +12,34 @@
 
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto" rel="stylesheet">
-    <link href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/material/css/materialdesignicons.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/simplebar/simplebar.css') }}" rel="stylesheet" />
+    <link
+        href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/material/css/materialdesignicons.min.css') }}"
+        rel="stylesheet" />
+    <link href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/simplebar/simplebar.css') }}"
+        rel="stylesheet" />
 
     <!-- PLUGINS CSS STYLE -->
-    <link href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/nprogress/nprogress.css') }}" rel="stylesheet" />
-
-
-
-
-    <link href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css') }}"
+    <link href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/nprogress/nprogress.css') }}"
         rel="stylesheet" />
 
 
 
-    <link href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css') }}" rel="stylesheet" />
+
+    <link
+        href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css') }}"
+        rel="stylesheet" />
 
 
 
-    <link href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
+    <link
+        href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css') }}"
+        rel="stylesheet" />
+
+
+
+    <link
+        href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/daterangepicker/daterangepicker.css') }}"
+        rel="stylesheet" />
 
 
 
@@ -38,18 +47,21 @@
 
 
 
-    <link href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/toaster/toastr.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/toaster/toastr.min.css') }}"
+        rel="stylesheet" />
 
 
     <!-- MONO CSS -->
-    <link id="main-css-href" rel="stylesheet" href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/css/style.css') }}" />
+    <link id="main-css-href" rel="stylesheet"
+        href="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/css/style.css') }}" />
 
 
 
 
     <!-- FAVICON -->
     <link href="images/favicon.png" rel="shortcut icon" />
-    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/nprogress/nprogress.js') }}"></script>
+    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/nprogress/nprogress.js') }}">
+    </script>
 </head>
 
 
@@ -62,41 +74,58 @@
     </script>
 
     <div id="toaster"></div>
-    <div class="wrapper">
+    {{--  <div class="wrapper">  --}}
     @include('master.header')
 
     @yield('content')
 
-</div>
+    {{--  </div>  --}}
 
 
 
 
 
 
-    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/jquery/jquery.min.js') }}">
+    </script>
+    <script
+        src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}">
+    </script>
+    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/simplebar/simplebar.min.js') }}">
+    </script>
     <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
 
 
 
-    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/apexcharts/apexcharts.js') }}"></script>
+    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/apexcharts/apexcharts.js') }}">
+    </script>
 
 
 
-    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js') }}"></script>
+    <script
+        src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js') }}">
+    </script>
 
 
 
-    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js') }}"></script>
-    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/jvectormap/jquery-jvectormap-world-mill.js') }}"></script>
-    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/jvectormap/jquery-jvectormap-us-aea.js') }}"></script>
+    <script
+        src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js') }}">
+    </script>
+    <script
+        src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/jvectormap/jquery-jvectormap-world-mill.js') }}">
+    </script>
+    <script
+        src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/jvectormap/jquery-jvectormap-us-aea.js') }}">
+    </script>
 
 
 
-    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/daterangepicker/moment.min.js') }}"></script>
-    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script
+        src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/daterangepicker/moment.min.js') }}">
+    </script>
+    <script
+        src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/daterangepicker/daterangepicker.js') }}">
+    </script>
     <script>
         jQuery(document).ready(function() {
             jQuery('input[name="dateRange"]').daterangepicker({
@@ -121,7 +150,8 @@
 
 
 
-    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/toaster/toastr.min.js') }}"></script>
+    <script src="{{ asset('https://breifcase.briefcaseplatform.com/public/assets/plugins/toaster/toastr.min.js') }}">
+    </script>
 
 
 
