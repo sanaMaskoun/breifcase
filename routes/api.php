@@ -35,3 +35,7 @@ Route::group( ['prefix' => 'user' ,'middleware' => 'auth:sanctum'], function () 
     Route::get('{user}', [UserController::class, 'show']);
     Route::post('{user}', [UserController::class, 'update']);
 });
+
+Route::group( ['prefix' => 'rate' ,'middleware' => 'auth:sanctum'], function () {
+    Route::get('response/{user_response}/consultation/{consultation}', [UserController::class, 'show']);
+});
