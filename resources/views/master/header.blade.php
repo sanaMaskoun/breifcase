@@ -37,7 +37,7 @@
                     <li>
                         <a class="sidenav-item-link" href="{{route('chat')}}">
                             <i class="mdi mdi-wechat"></i>
-                            <span class="nav-text">Chat</span>
+                            <span class="nav-text">Chat app</span>
                         </a>
                     </li>
 

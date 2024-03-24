@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logou
 
 
 
-Route::get('/roles', [RolesController::class, 'index']);
+Route::get('/roles', [RolesController::class, 'index'])->middleware('auth:sanctum');
 
 
 Route::group( ['prefix' => 'user' ,'middleware' => 'auth:sanctum'], function () {
@@ -37,5 +37,5 @@ Route::group( ['prefix' => 'user' ,'middleware' => 'auth:sanctum'], function () 
 });
 
 Route::group( ['prefix' => 'rate' ,'middleware' => 'auth:sanctum'], function () {
-    Route::get('response/{user_response}/consultation/{consultation}', [UserController::class, 'show']);
+    // Route::get('response/{user_response}/consultation/{consultation}', [UserController::class, 'show']);
 });

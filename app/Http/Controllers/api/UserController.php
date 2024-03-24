@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,5 +37,28 @@ class UserController extends Controller
             'user' => new UserResource($user->load(['consultations', 'GeneralQuestions', 'QuestionsReplies', 'practices'])),
             'rate' => number_format($averageRate, 1)
         ]);
+    }
+
+    public function update(UserRequest $request, User $user)
+    {
+        if (Auth()->user()->is_active == 0) {
+            return response()->json(['error' => 'This account is inactive']);
+        }
+        $user->update($request->validated());
+
+        $user->clearMediaCollection('profileUser');
+        $user->addMedia($request->file('profileUser'))->toMediaCollection('profileUser');
+
+        $certifications = $request->file('certification');
+
+        foreach ($certifications as $certification) {
+            $user->addMedia($certification)
+                ->withCustomProperties(['do_not_replace' => true])
+                ->toMediaCollection('certification');
+        }
+
+        return response()->json(
+            new UserResource($user),
+        );
     }
 }
