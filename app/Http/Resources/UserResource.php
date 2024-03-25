@@ -3,13 +3,11 @@
 namespace App\Http\Resources;
 
 use App\Enums\ConsultationStatusEnum;
-use App\Traits\LinkShortenerTrait;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
-    use LinkShortenerTrait;
 
     public function toArray(Request $request): array
     {
@@ -27,9 +25,11 @@ class UserResource extends JsonResource
 
             'numOfConsultation' => $this->consultations()->count(),
             'closedConsultation' => $this->consultations()->where('status', ConsultationStatusEnum::closed)->count(),
-            'image'             => $this->getShortenedLink($this->getFirstMediaUrl('profileUser')),
+
+            'image'             => $this->getFirstMediaUrl('profileUser'),
+
             'certification' => $this->getMedia('certification')->map(function ($media) {
-                return $this->getShortenedLink($media->getUrl());
+                return $media->getUrl();
             }),
             
             'consultations'     => $this->whenLoaded('consultations', function () {

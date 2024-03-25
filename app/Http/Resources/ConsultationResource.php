@@ -20,6 +20,7 @@ class ConsultationResource extends JsonResource
             'title'           => $this->title,
             'description'     => $this->description,
             'status'          => $this->status,
+            'answer'          => $this->answer,
             'createdOn'       => Carbon::parse($this->created_at)->format('Y-m-d'),
 
             'sender'          => new UserResource($this->whenLoaded('sender')),

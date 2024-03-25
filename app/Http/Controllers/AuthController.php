@@ -8,14 +8,12 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use App\Traits\LinkShortenerTrait;
 use Illuminate\Http\JsonResponse;
 use BenSampo\Enum\Rules\EnumValue;
 use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
-    use LinkShortenerTrait;
 
     public function register(Request $request)
     {
@@ -106,10 +104,7 @@ class AuthController extends Controller
 
     protected function sendLoginResponse(Request $request, $user, $token)
     {
-        $imageUrl = $user->getFirstMediaUrl('profileUser');
-        $baseUrl = 'http://localhost:8000';
-
-        $imagePath = str_replace($baseUrl, '', $imageUrl);
+       
 
         return new JsonResponse([
             'id'           => $user->id,
@@ -121,7 +116,7 @@ class AuthController extends Controller
             'birth'        => $user->birth,
             'is_active'    => $user->is_active,
             'access_token' => $token,
-            'image'        =>  $imagePath,
+            'image'        => $user->getFirstMediaUrl('profileUser'),
 
         ]);
     }

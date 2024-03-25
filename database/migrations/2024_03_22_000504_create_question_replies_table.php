@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('question_replies', function (Blueprint $table) {
             $table->id();
             $table->text('reply');
+            $table->tinyInteger('rate')->nullable();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignIdFor(GeneralQuestion::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
 

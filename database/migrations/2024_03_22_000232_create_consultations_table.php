@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->tinyInteger('status')->nullable();
+            $table->string('answer')->nullable();
 
             $table->unsignedBigInteger('sender_id')->nullable();
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');

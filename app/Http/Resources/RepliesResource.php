@@ -17,6 +17,7 @@ class RepliesResource extends JsonResource
         return [
             'id'                      => $this->id,
             'reply'                   => $this->reply,
+            'rate'                    => $this->rate,
             'date'                    => $this->created_at?->format('d/m/Y'),
 
             'userResponse'            => $this->whenLoaded('user', function () {
