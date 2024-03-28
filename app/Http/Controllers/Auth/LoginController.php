@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     /*
@@ -20,20 +22,43 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
+    // public function __construct()
+    // {
+    //     $this->middleware('guest')->except('logout');
+    // }
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+
+    public function login(Request $request)
     {
-        $this->middleware('guest')->except('logout');
+        $input = $request->all();
+
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))&& Auth()->user()->is_active)
+        {
+            $roles =Auth()->user()->roles->pluck('name')->toArray();
+
+            if (in_array("typingCenter",$roles) || in_array("legalConsultant", $roles) || in_array("Lawyer", $roles)) 
+            {
+                 return redirect()->route('dashboard');
+            }
+           
+            else
+            {
+               if(in_array("admin",$roles))
+                {
+                     return redirect()->route('dashboard');
+                }
+
+            }
+
+     }
+     else
+     { 
+        return redirect()->route('login')->with('error','Email-Address And Password Are Wrong.');
     }
+}
 }

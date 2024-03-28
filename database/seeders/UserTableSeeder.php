@@ -17,8 +17,7 @@ class UserTableSeeder extends Seeder
     {
 
         $user_1 = User::create([
-            "first_name" => "ali",
-            "last_name" => "ali",
+            "name" => "ali",
             "email" => "Ali@admin.com",
             "password"=>Hash::make('123456789'),
             "phone" => "097327232",
@@ -29,8 +28,7 @@ class UserTableSeeder extends Seeder
         $user_1->assignRole('admin');
 
         $user_2 = User::create([
-            "first_name" => "omar",
-            "last_name" => "omar",
+            "name" => "omar",
             "email" => "omar@admin.com",
             "password"=>Hash::make('123456789'),
             "phone" => "097327232",

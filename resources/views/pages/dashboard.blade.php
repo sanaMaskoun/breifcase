@@ -1,167 +1,137 @@
 @extends('master.app')
 @section('content')
-    <div class="page-wrapper">
+<div class="page-wrapper">
+    <div class="content container-fluid">
 
-        <div class="content-wrapper">
-            <div class="content">
-                <!-- Top Statistics -->
-                <div class="row">
-                    <div class="col-xl-3 col-sm-6">
-                        <div class="card card-default card-mini">
-                            <div class="card-header">
-                                <h2>$18,699</h2>
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle icon-burger-mini" href="#" role="button"
-                                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                                <div class="sub-title">
-                                    <span class="mr-1">Sales of this year</span> |
-                                    <span class="mx-1">45%</span>
-                                    <i class="mdi mdi-arrow-up-bold text-success"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-wrapper">
-                                    <div>
-                                        <div id="spline-area-1"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-sub-header">
+                        <h3 class="page-title">Welcome Admin!</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item active">Admin</li>
+                        </ul>
                     </div>
-                    <div class="col-xl-3 col-sm-6">
-                        <div class="card card-default card-mini">
-                            <div class="card-header">
-                                <h2>$14,500</h2>
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle icon-burger-mini" href="#" role="button"
-                                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    </a>
+                </div>
+            </div>
+        </div>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                                <div class="sub-title">
-                                    <span class="mr-1">Expense of this year</span> |
-                                    <span class="mx-1">50%</span>
-                                    <i class="mdi mdi-arrow-down-bold text-danger"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-wrapper">
-                                    <div>
-                                        <div id="spline-area-2"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6">
-                        <div class="card card-default card-mini">
-                            <div class="card-header">
-                                <h2>$4199</h2>
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle icon-burger-mini" href="#" role="button"
-                                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    </a>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                                <div class="sub-title">
-                                    <span class="mr-1">Profit of this year</span> |
-                                    <span class="mx-1">20%</span>
-                                    <i class="mdi mdi-arrow-down-bold text-danger"></i>
-                                </div>
+        <div class="row">
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                <div class="card bg-comman w-100">
+                    <div class="card-body">
+                        <div class="db-widgets d-flex justify-content-between align-items-center">
+                            <div class="db-info">
+                                <h6>employees</h6>
+                                <h3>50055</h3>
                             </div>
-                            <div class="card-body">
-                                <div class="chart-wrapper">
-                                    <div>
-                                        <div id="spline-area-3"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6">
-                        <div class="card card-default card-mini">
-                            <div class="card-header">
-                                <h2>$20,199</h2>
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle icon-burger-mini" href="#" role="button"
-                                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                                <div class="sub-title">
-                                    <span class="mr-1">Revenue of this year</span> |
-                                    <span class="mx-1">35%</span>
-                                    <i class="mdi mdi-arrow-up-bold text-success"></i>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-wrapper">
-                                    <div>
-                                        <div id="spline-area-4"></div>
-                                    </div>
-                                </div>
+                            <div class="db-icon">
+                                <img src="" alt="Dashboard Icon">
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-                <div class="row">
-                    <div class="col-xl-12">
-                        <!-- Income and Express -->
-                        <div class="card card-default">
-                            <div class="card-header">
-                                <h2>Income And Expenses</h2>
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle icon-burger-mini" href="#" role="button"
-                                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false" data-display="static">
-                                    </a>
-                                </div>
-
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                <div class="card bg-comman w-100">
+                    <div class="card-body">
+                        <div class="db-widgets d-flex justify-content-between align-items-center">
+                            <div class="db-info">
+                                <h6>General Questions</h6>
+                                <h3>50+</h3>
                             </div>
-                            <div class="card-body">
-                                <div class="chart-wrapper">
-                                    <div id="mixed-chart-1"></div>
-                                </div>
+                            <div class="db-icon">
+                                <img src="" alt="Dashboard Icon">
                             </div>
-
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                <div class="card bg-comman w-100">
+                    <div class="card-body">
+                        <div class="db-widgets d-flex justify-content-between align-items-center">
+                            <div class="db-info">
+                                <h6>Practices</h6>
+                                <h3>30+</h3>
+                            </div>
+                            <div class="db-icon">
+                                <img src="" alt="Dashboard Icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                <div class="card bg-comman w-100">
+                    <div class="card-body">
+                        <div class="db-widgets d-flex justify-content-between align-items-center">
+                            <div class="db-info">
+                                <h6>Consultations</h6>
+                                <h3>$505</h3>
+                            </div>
+                            <div class="db-icon">
+                                <img src="" alt="Dashboard Icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
 
-
+                <div class="card card-chart">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                                <h5 class="card-title">Overview</h5>
+                            </div>
+                            <div class="col-6">
+                                <ul class="chart-list-out">
+                                    <li><span class="circle-blue"></span>Profits</li>
+                                  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="apexcharts-area"></div>
                     </div>
                 </div>
 
             </div>
+            <div class="col-md-12 col-lg-6">
 
+                <div class="card card-chart">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                                <h5 class="card-title">Number of Joiners</h5>
+                            </div>
+                            <div class="col-6">
+                                <ul class="chart-list-out">
+                                    <li><span class="circle-blue"></span>employees</li>
+                                    <li><span class="circle-green"></span>clients</li>
+                                  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="bar"></div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+      
+
+       
     </div>
+    
+</div>
 @endsection

@@ -1,182 +1,182 @@
+<div class="header">
 
-    <aside class="left-sidebar sidebar-dark" id="left-sidebar">
-        <div id="sidebar" class="sidebar sidebar-with-footer">
+    <div class="header-left">
+        <a href="{{route('dashboard')}}" class="logo">
+            <img src="{{ asset('assets/img/logo.png') }}" alt="Logo">
+        </a>
+        <a href="{{route('dashboard')}}" class="logo logo-small">
+            <img src="{{ asset('assets/img/logo-small.png') }}" alt="Logo" width="30" height="30">
+        </a>
+    </div>
 
+    <div class="menu-toggle">
+        <a href="javascript:void(0);" id="toggle_btn">
+            <i class="fas fa-bars"></i>
+        </a>
+    </div>
 
-            <!-- Aplication Brand -->
-            <div class="app-brand">
-                <a href="{{route('dashboard')}}">
-                    <img src="images/logo.png" alt="Breifcase">
-                    <span class="brand-name">Breifcase</span>
-                </a>
-            </div>
+    <div class="top-nav-search">
+        <form>
+            <input type="text" class="form-control" placeholder="Search here">
+            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
 
+    <a class="mobile_btn" id="mobile_btn">
+        <i class="fas fa-bars"></i>
+    </a>
 
-            <!-- begin sidebar scrollbar -->
-
-            <div class="sidebar-left" data-simplebar style="height: 100%;">
-                <!-- sidebar menu -->
-                <ul class="nav sidebar-inner" id="sidebar-menu">
-
-
-
-                    <li class="active">
-                        <a class="sidenav-item-link" href="{{route('dashboard')}}">
-                            <i class="mdi mdi-briefcase-account-outline"></i>
-                            <span class="nav-text">Dashboard</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="sidenav-item-link" href="analytics.html">
-                            <i class="mdi mdi-chart-line"></i>
-                            <span class="nav-text">Consultations</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="sidenav-item-link" href="{{route('chat')}}">
-                            <i class="mdi mdi-wechat"></i>
-                            <span class="nav-text">Chat app</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="sidenav-item-link" href="contacts.html">
-                            <i class="mdi mdi-phone"></i>
-                            <span class="nav-text">General Questions</span>
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-    </aside>
-
-
-
-    <!-- ====================================
-——— PAGE WRAPPER
-===================================== -->
-    <div class="page-wrapper">
-
-        <!-- Header -->
-        <header class="main-header" id="header">
-            <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
-
-
-                <!-- Sidebar toggle button -->
-
-                <button id="sidebar-toggler" class="sidebar-toggle">
-                    <span class="sr-only">Toggle navigation</span>
-                </button>
-
-                <span class="page-title">dashboard</span>
-
-                <div class="navbar-right ">
-
-                    <!-- search form -->
-                    <div class="search-form">
-                        <form action="index.html" method="get">
-                            <div class="input-group input-group-sm" id="input-group-search">
-                                <input type="text" autocomplete="off" name="query" id="search-input"
-                                    class="form-control" placeholder="Search..." />
-                                <div class="input-group-append">
-                                    <button class="btn" type="button">/</button>
-                                </div>
-                            </div>
-                        </form>
-
+    <ul class="nav user-menu">
+        <li class="nav-item dropdown noti-dropdown language-drop me-2">
+            <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
+                <img src="{{ asset('assets/img/icons/header-icon-01.svg') }}" alt="">
+            </a>
+            <div class="dropdown-menu ">
+                <div class="noti-content">
+                    <div>
+                        <a class="dropdown-item" href="javascript:;"><i
+                                class="flag flag-lr me-2"></i>English</a>
+                        <a class="dropdown-item" href="javascript:;"><i
+                                class="flag flag-bl me-2"></i>Arabic</a>
                     </div>
+                </div>
+            </div>
+        </li>
 
-                    <ul class="nav navbar-nav">
-                        <!-- Offcanvas -->
-
-                        <li class="custom-dropdown">
-                            <button class="notify-toggler custom-dropdown-toggler">
-                                <i class="mdi mdi-bell-outline icon"></i>
-                                <span class="badge badge-xs rounded-circle">21</span>
-                            </button>
-                            <div class="dropdown-notify">
-
-                                <header>
-                                    <div class="nav nav-underline" id="nav-tab" role="tablist">
-                                        <a class="nav-item nav-link active" id="all-tabs" data-toggle="tab"
-                                            href="#all" role="tab" aria-controls="nav-home"
-                                            aria-selected="true">All (5)</a>
-                                    </div>
-                                </header>
-
-                                <div class="" data-simplebar style="height: 325px;">
-                                    <div class="tab-content" id="myTabContent">
-
-                                        <div class="tab-pane fade show active" id="all" role="tabpanel"
-                                            aria-labelledby="all-tabs">
-
-                                            <div class="media media-sm bg-warning-10 p-4 mb-0">
-                                                <div class="media-sm-wrapper">
-                                                    <a href="user-profile.html">
-                                                        <img src="images/user/user-sm-02.jpg" alt="User Image">
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <a href="user-profile.html">
-                                                        <span class="title mb-0">John Doe</span>
-                                                        <span class="discribe">Extremity sweetness difficult behaviour
-                                                            he of. On disposal of as landlord horrible. Afraid at highly
-                                                            months do things on at.</span>
-                                                        <span class="time">
-                                                            <time>Just now</time>...
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+        <li class="nav-item dropdown noti-dropdown me-2">
+            <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
+                <img src="{{ asset('assets/img/icons/header-icon-05.svg') }}" alt="">
+            </a>
+            <div class="dropdown-menu notifications">
+                <div class="topnav-dropdown-header">
+                    <span class="notification-title">Notifications</span>
+                    <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                </div>
+                <div class="noti-content">
+                    <ul class="notification-list">
+                        <li class="notification-message">
+                            <a href="#">
+                                <div class="media d-flex">
+                                    <span class="avatar avatar-sm flex-shrink-0">
+                                        <img class="avatar-img rounded-circle" alt="User Image"
+                                            src="assets/img/profiles/avatar-02.jpg">
+                                    </span>
+                                    <div class="media-body flex-grow-1">
+                                        <p class="noti-details"><span class="noti-title">Carlson Tech</span> has
+                                            approved <span class="noti-title">your estimate</span></p>
+                                        <p class="noti-time"><span class="notification-time">4 mins ago</span>
+                                        </p>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-
-                        <!-- User Account -->
-                        <li class="dropdown user-menu">
-                            <button class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                <img src="images/user/user-xs-01.jpg" class="user-image rounded-circle"
-                                    alt="User Image" />
-                                <span class="d-none d-lg-inline-block">John Doe</span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li>
-                                    <a class="dropdown-link-item" href="user-profile.html">
-                                        <i class="mdi mdi-account-outline"></i>
-                                        <span class="nav-text">My Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-link-item" href="email-inbox.html">
-                                        <i class="mdi mdi-email-outline"></i>
-                                        <span class="nav-text">Message</span>
-                                        <span class="badge badge-pill badge-primary">24</span>
-                                    </a>
-                                </li>
-
-                                <li class="dropdown-footer">
-                                    <a class="dropdown-link-item" href="sign-in.html"> <i class="mdi mdi-logout"></i>
-                                        Log Out </a>
-                                </li>
-                            </ul>
+                            </a>
                         </li>
                     </ul>
                 </div>
-            </nav>
+                {{--  <div class="topnav-dropdown-footer">
+                    <a href="#">View all Notifications</a>
+                </div>  --}}
+            </div>
+        </li>
+
+        <li class="nav-item zoom-screen me-2">
+            <a href="#" class="nav-link header-nav-list win-maximize">
+                <img src="{{ asset('assets/img/icons/header-icon-04.svg') }}" alt="">
+            </a>
+        </li>
+
+        <li class="nav-item dropdown has-arrow new-user-menus">
+            <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                <span class="user-img">
+                    <img class="rounded-circle" src="{{asset('assets/img/profiles/avatar-01.jpg')}}" width="31"
+                        alt="Soeng Souy">
+                    <div class="user-text">
+                        <h6>Soeng Souy</h6>
+                        <p class="text-muted mb-0">Administrator</p>
+                    </div>
+                </span>
+            </a>
+            <div class="dropdown-menu">
+                <div class="user-header">
+                    <div class="avatar avatar-sm">
+                        <img src="{{ asset('assets/img/profiles/avatar-01.jpg') }}" alt="User Image"
+                            class="avatar-img rounded-circle">
+                    </div>
+                    <div class="user-text">
+                        <h6>Soeng Souy</h6>
+                        <p class="text-muted mb-0">Administrator</p>
+                    </div>
+                </div>
+                <a class="dropdown-item" href="profile.html">My Profile</a>
+
+                @if (Auth::check())
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fa fa-sign-out" style="font-size:24px"></i> Logout
+                </a>
+                <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                @csrf
+                </form>
+            @else
+                <a class="dropdown-item"
+                    href="{{ Route::has('login') ? route('login') : 'javascript:void(0)' }}">
+                    <i class="me-50" data-feather="log-in"></i> Login
+                </a>
+            @endif
 
 
-        </header>
+            </div>
+        </li>
+
+    </ul>
+
+</div>
 
 
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
 
+                <li class="submenu active">
+                    <a href="{{ route('dashboard') }}"><span> Dashboard</span></a>
+                </li>
 
+                <li class="submenu">
+                    <a href="#"><span> practices</span> 
+                        <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href="{{ route('list_practieces') }}">List practices </a></li>
+                        <li><a href="{{ route('add_practiece') }}">Add practice </a></li>
+                    </ul>
+                </li>
 
+                <li class="submenu">
+                    <a href="#"><span> employees</span> 
+                        <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href="{{ route('list_employees') }}">List employees </a></li>
+                        <li><a href="{{ route('add_employee') }}">Add employees </a></li>
+                    </ul>
+                </li>
 
+                <li class="submenu">
+                    <a href="{{ route('list_clients') }}"><span> clients</span> </a>
+                </li>
+
+                <li class="submenu">
+                    <a href="{{ route('list_consultations') }}"><span> consultations</span></a>
+                </li>
+
+                <li class="submenu">
+                    <a href="{{ route('list_general_questions') }}"><span> General Questions </span></a>
+                </li>
+
+                <li class="submenu">
+                    <a href="{{ route('list_join_us') }}"><span> Requests to join </span></a>
+                </li>
+
+               
+            </ul>
+        </div>
     </div>
+</div>
