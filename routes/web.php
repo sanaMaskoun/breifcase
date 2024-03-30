@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\GeneralQuestionController;
 use App\Http\Controllers\JoinUsController;
+use App\Http\Controllers\LawyerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,7 @@ Route::get('/dashboard', function () {
 })->name('dashboard')->middleware('auth:sanctum');
 
 
-Route::group(['prefix' => 'practices', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'practice', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [PracticeController::class, 'index'])->name('list_practieces');
     Route::get('/create', [PracticeController::class, 'create'])->name('add_practiece');
     Route::post('/store', [PracticeController::class, 'store'])->name('store_practiece');
@@ -33,14 +34,15 @@ Route::group(['prefix' => 'practices', 'middleware' => 'auth:sanctum'], function
     Route::get('/delete/{practice}', [PracticeController::class, 'destroy'])->name('delete_practiece');
 });
 
-Route::group(['prefix' => 'employee', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/', [EmployeeController::class, 'index'])->name('list_employees');
-    Route::get('/create', [EmployeeController::class, 'create'])->name('add_employee');
-    Route::get('/{employee}/show', [EmployeeController::class, 'show'])->name('show_employee');
-    Route::post('/store', [EmployeeController::class, 'store'])->name('store_employee');
-    Route::get('/edit/{employee}', [EmployeeController::class, 'edit'])->name('edit_employee');
-    Route::post('/update/{employee}', [EmployeeController::class, 'update'])->name('update_employee');
-    Route::get('/delete/{employee}', [EmployeeController::class, 'destroy'])->name('delete_employee');
+Route::group(['prefix' => 'lawyer', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [LawyerController::class, 'index'])->name('list_lawyers');
+    Route::get('/create', [LawyerController::class, 'create'])->name('add_lawyer');
+    Route::get('/{lawyer}/show', [LawyerController::class, 'show'])->name('show_lawyer');
+    Route::post('/store', [LawyerController::class, 'store'])->name('store_lawyer');
+    Route::get('/edit/{lawyer}', [LawyerController::class, 'edit'])->name('edit_lawyer');
+    Route::post('/update/{lawyer}', [LawyerController::class, 'update'])->name('update_lawyer');
+    Route::get('/delete/{lawyer}', [LawyerController::class, 'destroy'])->name('delete_lawyer');
+    Route::post('{lawyer}/toggle-status', [LawyerController::class, 'toggleStatus'])->name('toggleStatus');
 });
 
 Route::group(['prefix' => 'client', 'middleware' => 'auth:sanctum'], function () {

@@ -3,26 +3,34 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PracticeRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+    
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+    
     public function rules(): array
     {
+        $nameUnique = Rule::unique('practices', 'name')->ignore($this->practice);
+
         return [
-            //
+            'name'           => ['required','max:25', $nameUnique],
+            'description'    => ['required','max:255']
+        ];
+    }
+
+
+    public function validated($key = null, $default = null)
+    {
+        return [
+            'name'             => $this->name,
+            'description'      => $this->description,
+
         ];
     }
 }

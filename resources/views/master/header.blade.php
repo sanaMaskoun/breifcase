@@ -1,10 +1,10 @@
 <div class="header">
 
     <div class="header-left">
-        <a href="{{route('dashboard')}}" class="logo">
+        <a href="{{ route('dashboard') }}" class="logo">
             <img src="{{ asset('assets/img/logo.png') }}" alt="Logo">
         </a>
-        <a href="{{route('dashboard')}}" class="logo logo-small">
+        <a href="{{ route('dashboard') }}" class="logo logo-small">
             <img src="{{ asset('assets/img/logo-small.png') }}" alt="Logo" width="30" height="30">
         </a>
     </div>
@@ -13,13 +13,6 @@
         <a href="javascript:void(0);" id="toggle_btn">
             <i class="fas fa-bars"></i>
         </a>
-    </div>
-
-    <div class="top-nav-search">
-        <form>
-            <input type="text" class="form-control" placeholder="Search here">
-            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-        </form>
     </div>
 
     <a class="mobile_btn" id="mobile_btn">
@@ -34,10 +27,8 @@
             <div class="dropdown-menu ">
                 <div class="noti-content">
                     <div>
-                        <a class="dropdown-item" href="javascript:;"><i
-                                class="flag flag-lr me-2"></i>English</a>
-                        <a class="dropdown-item" href="javascript:;"><i
-                                class="flag flag-bl me-2"></i>Arabic</a>
+                        <a class="dropdown-item" href="javascript:;"><i class="flag flag-lr me-2"></i>English</a>
+                        <a class="dropdown-item" href="javascript:;"><i class="flag flag-bl me-2"></i>Arabic</a>
                     </div>
                 </div>
             </div>
@@ -87,41 +78,29 @@
         <li class="nav-item dropdown has-arrow new-user-menus">
             <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                 <span class="user-img">
-                    <img class="rounded-circle" src="{{asset('assets/img/profiles/avatar-01.jpg')}}" width="31"
+                    <img class="rounded-circle" src="{{ Auth()->user()->getFirstMediaUrl('profileUser') }}" width="31"
                         alt="Soeng Souy">
                     <div class="user-text">
-                        <h6>Soeng Souy</h6>
-                        <p class="text-muted mb-0">Administrator</p>
+                        <h6>{{ Auth()->user()->name }}</h6>
                     </div>
                 </span>
             </a>
             <div class="dropdown-menu">
-                <div class="user-header">
-                    <div class="avatar avatar-sm">
-                        <img src="{{ asset('assets/img/profiles/avatar-01.jpg') }}" alt="User Image"
-                            class="avatar-img rounded-circle">
-                    </div>
-                    <div class="user-text">
-                        <h6>Soeng Souy</h6>
-                        <p class="text-muted mb-0">Administrator</p>
-                    </div>
-                </div>
-                <a class="dropdown-item" href="profile.html">My Profile</a>
+                <a class="dropdown-item" href="{{ route('show_lawyer' , Auth()->user()->id) }}">My Profile</a>
 
                 @if (Auth::check())
-                <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fa fa-sign-out" style="font-size:24px"></i> Logout
-                </a>
-                <form method="POST" id="logout-form" action="{{ route('logout') }}">
-                @csrf
-                </form>
-            @else
-                <a class="dropdown-item"
-                    href="{{ Route::has('login') ? route('login') : 'javascript:void(0)' }}">
-                    <i class="me-50" data-feather="log-in"></i> Login
-                </a>
-            @endif
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa fa-sign-out" style="font-size:24px"></i> Logout
+                    </a>
+                    <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                        @csrf
+                    </form>
+                @else
+                    <a class="dropdown-item" href="{{ Route::has('login') ? route('login') : 'javascript:void(0)' }}">
+                        <i class="me-50" data-feather="log-in"></i> Login
+                    </a>
+                @endif
 
 
             </div>
@@ -137,45 +116,36 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
 
-                <li class="submenu active">
-                    <a href="{{ route('dashboard') }}"><span> Dashboard</span></a>
+                <li>
+                    <a href="{{ route('dashboard') }}"> Dashboard</a>
                 </li>
 
-                <li class="submenu">
-                    <a href="#"><span> practices</span> 
-                        <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a href="{{ route('list_practieces') }}">List practices </a></li>
-                        <li><a href="{{ route('add_practiece') }}">Add practice </a></li>
-                    </ul>
+                <li>
+                    <a href="{{ route('list_practieces') }}"> practieces </a>
                 </li>
 
-                <li class="submenu">
-                    <a href="#"><span> employees</span> 
-                        <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a href="{{ route('list_employees') }}">List employees </a></li>
-                        <li><a href="{{ route('add_employee') }}">Add employees </a></li>
-                    </ul>
+                <li>
+                    <a href="{{ route('list_lawyers') }}"> Lawyers </a>
                 </li>
 
-                <li class="submenu">
-                    <a href="{{ route('list_clients') }}"><span> clients</span> </a>
+                <li>
+                    <a href="{{ route('list_clients') }}"> clients </a>
                 </li>
 
-                <li class="submenu">
+
+                <li>
                     <a href="{{ route('list_consultations') }}"><span> consultations</span></a>
                 </li>
 
-                <li class="submenu">
+                <li>
                     <a href="{{ route('list_general_questions') }}"><span> General Questions </span></a>
                 </li>
 
-                <li class="submenu">
+                <li>
                     <a href="{{ route('list_join_us') }}"><span> Requests to join </span></a>
                 </li>
 
-               
+
             </ul>
         </div>
     </div>
