@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\RolesEnum;
 use App\Http\Requests\LawyerRequest;
+use App\Http\Requests\StoreLawyerRequest;
 use App\Models\Practice;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -51,14 +52,20 @@ class LawyerController extends Controller
        
         return view('pages.lawyer.details' , compact('lawyer','practices'));
     }
-    public function create()
-    {
 
-    }
-    public function store(LawyerRequest $request)
-    {
+    // public function create()
+    // {
+    //            return view('pages.lawyer.create');
+    // }
 
-    }
+    // public function store(StoreLawyerRequest $request)
+    // {
+    //     $lawyer =  User::create($request->validated());
+
+    //     return  redirect()->route('list_lawyers')
+    //         ->with('success', 'Added successfully');
+    // }
+
     public function edit(User $lawyer)
     {
         $practices=Practice::all();

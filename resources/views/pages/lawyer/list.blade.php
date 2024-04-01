@@ -18,6 +18,7 @@
                             <h3 class="page-title">List Lawyers</h3>
 
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -42,9 +43,11 @@
                                 <option value="1" {{ request('location') == '1' ? 'selected' : '' }}>Dubai</option>
                                 <option value="2" {{ request('location') == '2' ? 'selected' : '' }}>Abu Dhabi</option>
                                 <option value="3" {{ request('location') == '3' ? 'selected' : '' }}>Ajman</option>
-                                <option value="4" {{ request('location') == '4' ? 'selected' : '' }}>Ras Al Khaimah</option>
+                                <option value="4" {{ request('location') == '4' ? 'selected' : '' }}>Ras Al Khaimah
+                                </option>
                                 <option value="5" {{ request('location') == '5' ? 'selected' : '' }}>Fujairah</option>
-                                <option value="6" {{ request('location') == '6' ? 'selected' : '' }}>Umm Al-Quwain</option>
+                                <option value="6" {{ request('location') == '6' ? 'selected' : '' }}>Umm Al-Quwain
+                                </option>
                                 <option value="7" {{ request('location') == '7' ? 'selected' : '' }}>Al Ain</option>
                             </select>
                         </div>
@@ -82,6 +85,11 @@
                                     <div class="col">
                                         <h3 class="page-title">Lawyers</h3>
                                     </div>
+                                    {{--  <div class="col-auto text-end float-end ms-auto download-grp">
+
+                                        <a href="{{ route('add_lawyer') }}" class="btn btn-primary"><i
+                                                class="fas fa-plus"></i></a>
+                                    </div>  --}}
                                 </div>
                             </div>
 
@@ -93,13 +101,15 @@
                                                 <div class="card-body">
                                                     <div class="student-box flex-fill">
                                                         <div class="student-img">
-                                                            <a href="{{ route('show_lawyer',$lawyer->id) }}">
+                                                            <a href="{{ route('show_lawyer', $lawyer->id) }}">
                                                                 <img class="img-fluid" alt="Students Info"
                                                                     src="{{ asset($lawyer->getFirstMediaUrl('profileUser')) }}">
                                                             </a>
                                                         </div>
                                                         <div class="student-content pb-0">
-                                                            <h5><a href="{{ route('show_lawyer',$lawyer->id) }}">{{ $lawyer->name }}</a></h5>
+                                                            <h5><a
+                                                                    href="{{ route('show_lawyer', $lawyer->id) }}">{{ $lawyer->name }}</a>
+                                                            </h5>
                                                         </div>
                                                     </div>
                                                 </div>

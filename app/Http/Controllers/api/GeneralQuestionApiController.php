@@ -13,7 +13,7 @@ use App\Models\QuestionReply;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class GeneralQuestionController extends Controller
+class GeneralQuestionApiController extends Controller
 {
 
     public function index()

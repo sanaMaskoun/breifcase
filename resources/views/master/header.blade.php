@@ -78,15 +78,15 @@
         <li class="nav-item dropdown has-arrow new-user-menus">
             <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                 <span class="user-img">
-                    <img class="rounded-circle" src="{{ Auth()->user()->getFirstMediaUrl('profileUser') }}" width="31"
-                        alt="Soeng Souy">
+                    <img class="rounded-circle" src="{{ Auth()->user()->getFirstMediaUrl('profileUser') }}"
+                        width="31" alt="Soeng Souy">
                     <div class="user-text">
                         <h6>{{ Auth()->user()->name }}</h6>
                     </div>
                 </span>
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('show_lawyer' , Auth()->user()->id) }}">My Profile</a>
+                <a class="dropdown-item" href="{{ route('show_lawyer', Auth()->user()->id) }}">My Profile</a>
 
                 @if (Auth::check())
                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -117,32 +117,41 @@
             <ul>
 
                 <li>
-                    <a href="{{ route('dashboard') }}"> Dashboard</a>
+                    <a href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt"></i>
+                        <span> Dashboard</span></a>
                 </li>
 
                 <li>
-                    <a href="{{ route('list_practieces') }}"> practieces </a>
+                    <a href="{{ route('list_practieces') }}"><i class="fas fa-gavel"></i>
+
+                        </i>
+                        <span>practieces</span> </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('list_lawyers') }}"> Lawyers </a>
+                    <a href="{{ route('list_lawyers') }}"><i class="fas fa-user-tie"></i>
+                        <span> Lawyers </span></a>
                 </li>
 
                 <li>
-                    <a href="{{ route('list_clients') }}"> clients </a>
+                    <a href="{{ route('list_clients') }}"><i class="fas fa-users"></i>
+                        <span> clients </span></a>
                 </li>
 
 
                 <li>
-                    <a href="{{ route('list_consultations') }}"><span> consultations</span></a>
+                    <a href="{{ route('list_consultations') }}"><i class="fas fa-balance-scale"></i>
+                        <span> consultations</span></a>
                 </li>
 
                 <li>
-                    <a href="{{ route('list_general_questions') }}"><span> General Questions </span></a>
+                    <a href="{{ route('list_general_questions') }}"><i class="far fa-question-circle"></i>
+                        <span> General Questions </span></a>
                 </li>
 
                 <li>
-                    <a href="{{ route('list_join_us') }}"><span> Requests to join </span></a>
+                    <a href="{{ route('list_join_us') }}"><i class="fas fa-user-plus"></i>
+                        <span> Requests to join </span></a>
                 </li>
 
 

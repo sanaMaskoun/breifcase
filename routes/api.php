@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\ConsultationApiController;
-use App\Http\Controllers\api\GeneralQuestionController;
+use App\Http\Controllers\api\GeneralQuestionApiController;
 use App\Http\Controllers\api\RateController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\AuthController;
@@ -50,9 +50,9 @@ Route::group(['prefix' => 'rate', 'middleware' => 'auth:sanctum'], function () {
 });
 
 Route::group(['prefix' => 'general-question', 'middleware' => 'auth:sanctum'], function () {
-     Route::get('/', [GeneralQuestionController::class, 'index']);
-     Route::get('/user/{user}', [GeneralQuestionController::class, 'show']);
-     Route::post('/', [GeneralQuestionController::class, 'store']);
-     Route::post('/{general_question}/reply', [GeneralQuestionController::class, 'reply']);
-     Route::post('/reply/{reply}/rate', [GeneralQuestionController::class, 'rate']);
+     Route::get('/', [GeneralQuestionApiController::class, 'index']);
+     Route::get('/user/{user}', [GeneralQuestionApiController::class, 'show']);
+     Route::post('/', [GeneralQuestionApiController::class, 'store']);
+     Route::post('/{general_question}/reply', [GeneralQuestionApiController::class, 'reply']);
+     Route::post('/reply/{reply}/rate', [GeneralQuestionApiController::class, 'rate']);
 });

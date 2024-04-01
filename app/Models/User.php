@@ -29,7 +29,8 @@ class User extends Authenticatable implements HasMedia
     
     public function consultations()
     {
-        if (auth()->user()->getRoleNames()->first() == 'client') {
+        
+        if ($this->getRoleNames()->first() == 'client') {
             return $this->hasMany(Consultation::class, 'sender_id');
         } else {
             return $this->hasMany(Consultation::class, 'receiver_id');

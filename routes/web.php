@@ -36,12 +36,12 @@ Route::group(['prefix' => 'practice', 'middleware' => 'auth:sanctum'], function 
 
 Route::group(['prefix' => 'lawyer', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [LawyerController::class, 'index'])->name('list_lawyers');
-    Route::get('/create', [LawyerController::class, 'create'])->name('add_lawyer');
+    // Route::get('/create', [LawyerController::class, 'create'])->name('add_lawyer');
+    // Route::post('/store', [LawyerController::class, 'store'])->name('store_lawyer');
     Route::get('/{lawyer}/show', [LawyerController::class, 'show'])->name('show_lawyer');
-    Route::post('/store', [LawyerController::class, 'store'])->name('store_lawyer');
     Route::get('/edit/{lawyer}', [LawyerController::class, 'edit'])->name('edit_lawyer');
     Route::post('/update/{lawyer}', [LawyerController::class, 'update'])->name('update_lawyer');
-    Route::get('/delete/{lawyer}', [LawyerController::class, 'destroy'])->name('delete_lawyer');
+    // Route::get('/delete/{lawyer}', [LawyerController::class, 'destroy'])->name('delete_lawyer');
     Route::post('{lawyer}/toggle-status', [LawyerController::class, 'toggleStatus'])->name('toggleStatus');
 });
 
