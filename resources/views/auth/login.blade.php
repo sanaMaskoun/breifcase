@@ -4,6 +4,11 @@
     <div class="main-wrapper login-body">
         <div class="login-wrapper">
             <div class="container">
+                @if (Session::has('error'))
+                <div class="alert alert-danger text-center" role="alert">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
                 <div class="loginbox">
                     <div class="login-left">
                         <img class="img-fluid" src="assets/img/login.png" alt="Logo">

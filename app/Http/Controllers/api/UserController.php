@@ -16,17 +16,34 @@ class UserController extends Controller
 
     public function index()
     {
-
         $users = QueryBuilder::for(User::class)
             ->with('practices')
             ->AllowedFilters([
                 'name', 'location',
                 AllowedFilter::partial('practice', 'practices.name'),
-
             ])
+            ->where('is_active', true)
             ->get();
-        return response()->json(UserResource::collection($users));
+    
+        $legalConsultant = $this->getUsersByRole($users, 'legalConsultant');
+        $lawyers = $this->getUsersByRole($users, 'Lawyer');
+        $typingCenter = $this->getUsersByRole($users, 'typingCenter');
+    
+        return response()->json([
+            'lawyers' => UserResource::collection($lawyers),
+            'legalConsultant' => UserResource::collection($legalConsultant),
+            'typingCenter' => UserResource::collection($typingCenter),
+        ]);
     }
+    
+    private function getUsersByRole($users, $role)
+    {
+        return $users->filter(function ($user) use ($role) {
+            return $user->roles->contains('name', $role);
+        });
+    }
+    
+    
     public function show(User $user)
     {
         $averageRate = DB::table('rates')

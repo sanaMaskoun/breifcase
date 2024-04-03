@@ -115,7 +115,7 @@
                                             </div>
                                             <div class="views-personal">
                                                 <h4>Date of Join</h4>
-                                                <h5>{{ $client->created_at->format('Y-m-d') }}</h5>
+                                                <h5>{{ $client->created_at?->format('Y-m-d') }}</h5>
                                             </div>
                                         </div>
 
@@ -144,7 +144,7 @@
                                                         <div class="col">
                                                             <span><i class="far fa-calendar-alt"></i> Due Date</span>
                                                             <h6 class="mb-0">
-                                                                {{ $consultation->created_at->format('Y-m-d') }}</h6>
+                                                                {{ $consultation->created_at?->format('Y-m-d') }}</h6>
                                                         </div>
                                                         <div class="col">
                                                             @php
@@ -168,6 +168,8 @@
                                                 </div>
                                             </div>
                                         @endforeach
+                                        <a href="#" class="custom-btn btn-5">view more</a>
+
                                     </div>
                                 </div>
                             </div>
@@ -182,6 +184,7 @@
                                         <div class="heading-detail">
                                             <h4>General Questions:</h4>
                                         </div>
+                                       
                                         @foreach ($client?->GeneralQuestions as $GeneralQuestion)
                                             <div class="card mb-3">
                                                 <div class="card-body">
@@ -190,6 +193,8 @@
                                                 </div>
                                             </div>
                                         @endforeach
+                                        <a href="{{ route('list_general_questions',$client->id) }}" class="custom-btn btn-5">view more</a>
+
                                     </div>
                                 </div>
                             </div>

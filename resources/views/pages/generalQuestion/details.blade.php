@@ -21,7 +21,7 @@
                                             </div>
                                         </li>
                                         <li><i class="feather-clock"></i>
-                                            {{ $general_question->user->created_at->format('j M Y') }}</li>
+                                            {{ $general_question->user->created_at?->format('j M Y') }}</li>
                                         <li><i class="feather-message-square"></i> {{ count($general_question->Replies) }}
                                             Replies</li>
                                     </ul>
@@ -54,7 +54,7 @@
 
                                             </a>
                                             <p class="mb-0">{{ $reply->reply }}</p>
-                                            <i class="feather-clock me-1"></i> {{ $reply->created_at->format('j M Y') }}
+                                            <i class="feather-clock me-1"></i> {{ $reply->created_at?->format('j M Y') }}
                                         </div>
                                     </div>
                                 </div>

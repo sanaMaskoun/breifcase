@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->name('login');
 
 
 
@@ -58,7 +58,7 @@ Route::group(['prefix' => 'consultation', 'middleware' => 'auth:sanctum'], funct
 });
 
 Route::group(['prefix' => 'general_question', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/', [GeneralQuestionController::class,  'index'])->name('list_general_questions');
+    Route::get('/{user?}', [GeneralQuestionController::class,  'index'])->name('list_general_questions');
     Route::get('/{general_question}/show', [GeneralQuestionController::class, 'show'])->name('show_general_question');
 
 });

@@ -189,7 +189,7 @@
                                             </div>
                                             <div class="views-personal">
                                                 <h4>Date of join</h4>
-                                                <h5>{{ $lawyer->created_at->format('Y-m-d') }}</h5>
+                                                <h5>{{ $lawyer->created_at?->format('Y-m-d') }}</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -258,7 +258,7 @@
                                                         <div class="col">
                                                             <span><i class="far fa-calendar-alt"></i> Due Date</span>
                                                             <h6 class="mb-0">
-                                                                {{ $consultation->created_at->format('Y-m-d') }}</h6>
+                                                                {{ $consultation->created_at?->format('Y-m-d') }}</h6>
                                                         </div>
                                                         <div class="col">
                                                             @php
@@ -282,6 +282,7 @@
                                                 </div>
                                             </div>
                                         @endforeach
+                                        <a href="#" class="custom-btn btn-5">view more</a>
                                     </div>
                                 </div>
                             </div>
@@ -304,6 +305,9 @@
                                                 </div>
                                             </div>
                                         @endforeach
+                                        <a href="{{ route('list_general_questions', $lawyer->id) }}"
+                                            class="custom-btn btn-5">view more</a>
+
                                     </div>
                                 </div>
                             </div>

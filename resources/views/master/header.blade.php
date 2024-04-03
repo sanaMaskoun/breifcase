@@ -28,7 +28,9 @@
                 <div class="noti-content">
                     <div>
                         <a class="dropdown-item" href="javascript:;"><i class="flag flag-lr me-2"></i>English</a>
-                        <a class="dropdown-item" href="javascript:;"><i class="flag flag-bl me-2"></i>Arabic</a>
+                        <a class="dropdown-item" href="javascript:;"><img style="margin-right:8px" src="{{ asset('img/uae2.png') }}" > 
+
+                            Arabic</a>
                     </div>
                 </div>
             </div>

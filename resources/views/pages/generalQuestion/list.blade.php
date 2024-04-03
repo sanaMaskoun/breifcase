@@ -28,7 +28,7 @@
                                                 <span>
                                                     <span class="post-title">{{ $question->user->name }}</span>
                                                     <span class="post-date"><i class="far fa-clock"></i>
-                                                        {{ $question->user->created_at->format('j M Y') }}</span>
+                                                        {{ $question->user->created_at?->format('j M Y') }}</span>
                                                 </span>
                                             </a>
                                         </div>

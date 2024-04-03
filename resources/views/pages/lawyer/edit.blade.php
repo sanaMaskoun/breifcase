@@ -282,7 +282,7 @@
                                                 </div>
                                                 <div class="views-personal">
                                                     <h4>Date of join</h4>
-                                                    <h5>{{ $lawyer->created_at->format('Y-m-d') }}</h5>
+                                                    <h5>{{ $lawyer->created_at?->format('Y-m-d') }}</h5>
                                                 </div>
                                             </div>
                                         </div>

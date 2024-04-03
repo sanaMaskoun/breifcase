@@ -102,7 +102,7 @@
                                                     <div class="student-box flex-fill">
                                                         <div class="student-img">
                                                             <a href="{{ route('show_lawyer', $lawyer->id) }}">
-                                                                <img class="img-fluid" alt="Students Info"
+                                                                <img class="img-fluid w-50" alt="Students Info"
                                                                     src="{{ asset($lawyer->getFirstMediaUrl('profileUser')) }}">
                                                             </a>
                                                         </div>
