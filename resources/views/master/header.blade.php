@@ -28,7 +28,8 @@
                 <div class="noti-content">
                     <div>
                         <a class="dropdown-item" href="javascript:;"><i class="flag flag-lr me-2"></i>English</a>
-                        <a class="dropdown-item" href="javascript:;"><img style="margin-right:8px" src="{{ asset('img/uae2.png') }}" >
+                        <a class="dropdown-item" href="javascript:;"><img style="margin-right:8px"
+                                src="{{ asset('img/uae2.png') }}">
 
                             Arabic</a>
                     </div>
@@ -71,6 +72,12 @@
             </div>
         </li>
 
+        <li class="nav-item me-2">
+            <a href="#" class="nav-link header-nav-list win-maximize">
+                <i class="far fa-envelope" style="color: black;
+                font-size: 16px;"></i>
+            </a>
+        </li>
         <li class="nav-item zoom-screen me-2">
             <a href="#" class="nav-link header-nav-list win-maximize">
                 <img src="{{ asset('assets/img/icons/header-icon-04.svg') }}" alt="">
@@ -88,7 +95,9 @@
                 </span>
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('show_lawyer', Auth()->user()->id) }}">My Profile</a>
+                @role('lawyer|typingCenter|legalConsultant')
+                    <a class="dropdown-item" href="{{ route('show_lawyer', Auth()->user()->id) }}">My Profile</a>
+                @endrole
 
                 @if (Auth::check())
                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -118,47 +127,59 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
 
-                <li>
-                    <a href="{{ route('dashboard') }}"><i class="feather-grid"></i>
-                        <span> Dashboard</span></a>
-                </li>
-                <li>
-                    <a href="{{ route('dashboardLawyer') }}"><i class="feather-grid"></i>
-                        <span> Dashboard</span></a>
-                </li>
+                @role('lawyer|typingCenter|legalConsultant')
+                    <li>
+                        <a href="{{ route('dashboardLawyer') }}"><i class="feather-grid"></i>
+                            <span> Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('list_consultations',Auth()->user()->id) }}"><i class="fas fa-balance-scale"></i>
+                            <span> consultations</span></a>
+                    </li>
 
-                <li>
-                    <a href="{{ route('list_practieces') }}"><i class="fas fa-gavel"></i>
+                    <li>
+                        <a href="{{ route('list_general_questions',Auth()->user()->id) }}"><i class="far fa-question-circle"></i>
+                            <span> General Questions </span></a>
+                    </li>
+                @endrole
+                @role('admin')
+                    <li>
+                        <a href="{{ route('dashboard') }}"><i class="feather-grid"></i>
+                            <span> Dashboard</span></a>
+                    </li>
 
-                        </i>
-                        <span>practieces</span> </a>
-                </li>
+                    <li>
+                        <a href="{{ route('list_practieces') }}"><i class="fas fa-gavel"></i>
 
-                <li>
-                    <a href="{{ route('list_lawyers') }}"><i class="fas fa-user-tie"></i>
-                        <span> Lawyers </span></a>
-                </li>
+                            </i>
+                            <span>practieces</span> </a>
+                    </li>
 
-                <li>
-                    <a href="{{ route('list_clients') }}"><i class="fas fa-users"></i>
-                        <span> clients </span></a>
-                </li>
+                    <li>
+                        <a href="{{ route('list_lawyers') }}"><i class="fas fa-user-tie"></i>
+                            <span> Lawyers </span></a>
+                    </li>
 
+                    <li>
+                        <a href="{{ route('list_clients') }}"><i class="fas fa-users"></i>
+                            <span> clients </span></a>
+                    </li>
 
-                <li>
-                    <a href="{{ route('list_consultations') }}"><i class="fas fa-balance-scale"></i>
-                        <span> consultations</span></a>
-                </li>
+                    <li>
+                        <a href="{{ route('list_consultations') }}"><i class="fas fa-balance-scale"></i>
+                            <span> consultations</span></a>
+                    </li>
 
-                <li>
-                    <a href="{{ route('list_general_questions') }}"><i class="far fa-question-circle"></i>
-                        <span> General Questions </span></a>
-                </li>
+                    <li>
+                        <a href="{{ route('list_general_questions') }}"><i class="far fa-question-circle"></i>
+                            <span> General Questions </span></a>
+                    </li>
 
-                <li>
-                    <a href="{{ route('list_join_us') }}"><i class="fas fa-user-plus"></i>
-                        <span> Requests to join </span></a>
-                </li>
+                    <li>
+                        <a href="{{ route('list_join_us') }}"><i class="fas fa-user-plus"></i>
+                            <span> Requests to join </span></a>
+                    </li>
+                @endrole
 
 
             </ul>

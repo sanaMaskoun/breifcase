@@ -26,7 +26,7 @@
                         <div class="col-md-12">
                             <div class="about-info">
                                 <h4>Profile
-
+                                    @role('lawyer|typingCenter|legalConsultant')
                                     <div class="uplod d-flex">
                                         <form method="GET" action="{{ route('edit_lawyer', $lawyer->id) }}">
                                             <label class="file-upload profile-upbtn mb-0">
@@ -35,6 +35,7 @@
                                             </label>
                                         </form>
                                     </div>
+                                    @endrole
                                 </h4>
 
                             </div>
@@ -65,6 +66,7 @@
 
                                         </div>
                                     </div>
+                                    @role('admin')
                                     <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                         <form method="POST" action="{{ route('toggleStatus', $lawyer->id) }}">
                                             @csrf
@@ -75,6 +77,7 @@
                                             </label>
                                         </form>
                                     </div>
+                                    @endrole
                                 </div>
                             </div>
                         </div>
