@@ -61,48 +61,108 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="invoice-item invoice-item-two">
-                                <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="invoice-info">
-                                            <h4>Client Information :</h4>
-                                            <p><strong>Name:</strong> {{ $consultation->sender->name }}</p>
-                                            <p><strong>Email:</strong> {{ $consultation->sender->email }}</p>
-                                            <p><strong>Phone:</strong> {{ $consultation->sender->phone }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="invoice-info">
-                                            <h4>Lawyer Information :</h4>
-                                            <p><strong>Name:</strong> {{ $consultation->receiver->name }}</p>
-                                            <p><strong>Email:</strong> {{ $consultation->receiver->email }}</p>
-                                            <p><strong>Phone:</strong> {{ $consultation->receiver->phone }}</p>
+                                            <h4>Communication :
+                                                <span>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $consultation->rate?->communication)
+                                                            <span class="rating-star"><i class="fas fa-star"
+                                                                    style="color: rgb(242, 187, 6);"></i></span>
+                                                        @else
+                                                            <span class="rating-star"><i class="far fa-star"
+                                                                    style="color: rgb(242, 187, 6);"></i></span>
+                                                        @endif
+                                                    @endfor
+                                                </span>
+                                            </h4>
+                                            <h4>Response Time :
 
+                                                <span>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $consultation->rate?->response_time)
+                                                            <span class="rating-star"><i class="fas fa-star"
+                                                                    style="color: rgb(242, 187, 6);"></i></span>
+                                                        @else
+                                                            <span class="rating-star"><i class="far fa-star"
+                                                                    style="color: rgb(242, 187, 6);"></i></span>
+                                                        @endif
+                                                    @endfor
+                                                </span>
+                                            </h4>
+
+                                            <h4>Problem Solving :
+                                                <span>
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $consultation->rate?->problem_solving)
+                                                            <span class="rating-star"><i class="fas fa-star"
+                                                                    style="color: rgb(242, 187, 6);"></i></span>
+                                                        @else
+                                                            <span class="rating-star"><i class="far fa-star"
+                                                                    style="color: rgb(242, 187, 6);"></i></span>
+                                                        @endif
+                                                    @endfor
+                                                </span>
+                                            </h4>
                                         </div>
+                                        <h4>Understanding :
+                                            <span>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $consultation->rate?->understanding)
+                                                        <span class="rating-star"><i class="fas fa-star"
+                                                                style="color: rgb(242, 187, 6);"></i></span>
+                                                    @else
+                                                        <span class="rating-star"><i class="far fa-star"
+                                                                style="color: rgb(242, 187, 6);"></i></span>
+                                                    @endif
+                                                @endfor
+                                            </span>
+                                        </h4>
+
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="invoice-terms">
-                                        <h4>The lawyer answer to the consultation :</h4>
-                                        <p>{{ $consultation->answer }}</p>
-                                    </div>
-                                </div>
                             </div>
-
                         </div>
+
+
+
+
+                        <div class="invoice-item invoice-item-two">
+                            <div class="row mb-4 " style="margin-left: 10px">
+                                <div class="col-md-6">
+                                    <div class="invoice-info">
+                                        <h4>Client Information :</h4>
+                                        <p><strong>Name:</strong> {{ $consultation->sender->name }}</p>
+                                        <p><strong>Email:</strong> {{ $consultation->sender->email }}</p>
+                                        <p><strong>Phone:</strong> {{ $consultation->sender->phone }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="invoice-info">
+                                        <h4>Lawyer Information :</h4>
+                                        <p><strong>Name:</strong> {{ $consultation->receiver->name }}</p>
+                                        <p><strong>Email:</strong> {{ $consultation->receiver->email }}</p>
+                                        <p><strong>Phone:</strong> {{ $consultation->receiver->phone }}</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 " style="margin-left: 10px">
+                                <div class="invoice-terms">
+                                    <h4>The lawyer answer to the consultation :</h4>
+                                    <p>{{ $consultation->answer }}</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection

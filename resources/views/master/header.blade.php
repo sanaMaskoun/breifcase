@@ -28,7 +28,7 @@
                 <div class="noti-content">
                     <div>
                         <a class="dropdown-item" href="javascript:;"><i class="flag flag-lr me-2"></i>English</a>
-                        <a class="dropdown-item" href="javascript:;"><img style="margin-right:8px" src="{{ asset('img/uae2.png') }}" > 
+                        <a class="dropdown-item" href="javascript:;"><img style="margin-right:8px" src="{{ asset('img/uae2.png') }}" >
 
                             Arabic</a>
                     </div>
@@ -119,7 +119,11 @@
             <ul>
 
                 <li>
-                    <a href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt"></i>
+                    <a href="{{ route('dashboard') }}"><i class="feather-grid"></i>
+                        <span> Dashboard</span></a>
+                </li>
+                <li>
+                    <a href="{{ route('dashboardLawyer') }}"><i class="feather-grid"></i>
                         <span> Dashboard</span></a>
                 </li>
 

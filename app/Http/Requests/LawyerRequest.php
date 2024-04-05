@@ -27,7 +27,7 @@ class LawyerRequest extends FormRequest
             'consultation_price'   => ['required','numeric'],
             'practices'            => ['required', 'array', 'exists:practices,id'],
             'profileUser'          => ['nullable', 'mimes:jpg,bmp,png'],
-             'certification'       => ['required','array'],
+             'certification'       => ['nullable','array'],
 
         ];
     }
@@ -37,7 +37,7 @@ class LawyerRequest extends FormRequest
     public function validated($key = null, $default = null)
     {
         return [
- 
+
             'name'                       => $this->name,
             'email'                      => $this->email,
             'phone'                      => $this->phone,

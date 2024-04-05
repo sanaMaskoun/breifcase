@@ -26,10 +26,10 @@ class User extends Authenticatable implements HasMedia
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
     public function consultations()
     {
-        
+
         if ($this->getRoleNames()->first() == 'client') {
             return $this->hasMany(Consultation::class, 'sender_id');
         } else {
@@ -46,6 +46,10 @@ class User extends Authenticatable implements HasMedia
     public function QuestionsReplies()
     {
         return $this->hasMany(QuestionReply::class , 'user_id');
+    }
+    public function replies()
+    {
+        return $this->hasMany(QuestionReply::class, 'user_id');
     }
 
 

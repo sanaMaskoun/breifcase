@@ -56,6 +56,21 @@
                                             <p class="mb-0">{{ $reply->reply }}</p>
                                             <i class="feather-clock me-1"></i> {{ $reply->created_at?->format('j M Y') }}
                                         </div>
+                                        <div >
+                                            @if ($reply->rate != 0)
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $reply->rate)
+                                                        <span class="rating-star"><i
+                                                                class="fas fa-star"
+                                                                style="color: rgb(242, 187, 6);"></i></span>
+                                                    @else
+                                                        <span class="rating-star"><i
+                                                                class="far fa-star"
+                                                                style="color: rgb(242, 187, 6);"></i></span>
+                                                    @endif
+                                                @endfor
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach

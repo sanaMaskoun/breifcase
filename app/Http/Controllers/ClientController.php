@@ -10,7 +10,7 @@ class ClientController extends Controller
     public function index(Request $request)
     {
         $name = $request->query('name');
-        
+
         $clients = User::where('name', 'like', '%' . $name . '%')
         ->whereHas('roles', function ($query) {
             $query->where('name','client');
@@ -21,8 +21,10 @@ class ClientController extends Controller
     }
     public function show(User $client)
     {
-        
-        return view('pages.client.details',compact('client'));
+        $NumConsultation = $client->consultations->count();
+        $NumGeneralQuestion =$client->GeneralQuestions->count();
+
+         return view('pages.client.details',compact(['client','NumGeneralQuestion','NumConsultation']));
     }
 
 }

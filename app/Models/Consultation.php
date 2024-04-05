@@ -12,7 +12,7 @@ class Consultation extends Model implements HasMedia
     use HasFactory ,InteractsWithMedia ;
     protected  $guarded = [];
 
-    
+
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');
@@ -21,6 +21,10 @@ class Consultation extends Model implements HasMedia
     public function receiver()
     {
         return $this->belongsTo(User::class, 'receiver_id');
+    }
+    public function rate()
+    {
+        return $this->hasOne(Rate::class, 'consultation_id');
     }
 
 

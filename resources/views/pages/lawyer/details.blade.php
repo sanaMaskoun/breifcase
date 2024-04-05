@@ -56,11 +56,11 @@
                                         <div class="follow-group">
                                             <div class="students-follows">
                                                 <h5>No consultation</h5>
-                                                <h4>2850</h4>
+                                                <h4>{{ $NumConsultations }}</h4>
                                             </div>
                                             <div class="students-follows">
                                                 <h5>No replies</h5>
-                                                <h4>2850</h4>
+                                                <h4>{{ $NumReplies }}</h4>
                                             </div>
 
                                         </div>
@@ -245,7 +245,7 @@
                                         <div class="heading-detail">
                                             <h4>Consultations:</h4>
                                         </div>
-                                        @foreach ($lawyer?->consultations as $consultation)
+                                        @foreach ($lawyer?->consultations->take(2) as $consultation)
                                             <div class="card mb-3">
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{ $consultation->title }}</h5>
@@ -282,7 +282,8 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                        <a href="#" class="custom-btn btn-5">view more</a>
+                                        <a href="{{ route('list_consultations', $lawyer->id) }}"
+                                            class="custom-btn btn-5">view more</a>
                                     </div>
                                 </div>
                             </div>
@@ -291,24 +292,72 @@
 
                     <div class="row mt-3">
                         <div class="col-lg-12">
-                            <div class="student-personals-grp">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="heading-detail">
-                                            <h4>General Questions:</h4>
-                                        </div>
-                                        @foreach ($lawyer?->GeneralQuestions as $GeneralQuestion)
-                                            <div class="card mb-3">
-                                                <div class="card-body">
-                                                    <span class="card-text">{{ $GeneralQuestion->question }}</span>
-
+                            <div class="card blog-comments">
+                                <div class="card-header">
+                                    <h4 class="card-title">General Questions</h4>
+                                </div>
+                                <div class="card-body pb-0">
+                                    <ul class="comments-list">
+                                        @foreach ($lawyer?->replies->take(2) as $reply)
+                                            <li>
+                                                <div class="comment">
+                                                    <div class="comment-author">
+                                                        <img class="avatar" alt=""
+                                                            src="{{ $reply->generalQuestion->user->getFirstMediaUrl('profileUser') }}">
+                                                    </div>
+                                                    <div class="comment-block">
+                                                        <div class="comment-by">
+                                                            <h5 class="blog-author-name">
+                                                                {{ $reply->generalQuestion->user->name }} <span
+                                                                    class="blog-date"> <i
+                                                                        class="feather-clock me-1"></i>{{ $reply->generalQuestion->created_at?->format('Y-m-d') }}</span>
+                                                            </h5>
+                                                        </div>
+                                                        <p>{{ $reply->generalQuestion->question }}</p>
+                                                        <a class="comment-btn">
+                                                            <i class="fa fa-reply me-2"></i> Reply
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-                                        <a href="{{ route('list_general_questions', $lawyer->id) }}"
-                                            class="custom-btn btn-5">view more</a>
+                                                <ul class="comments-list reply">
+                                                    <li>
+                                                        <div class="comment">
+                                                            <div class="comment-author">
+                                                                <img class="avatar" alt=""
+                                                                    src="{{ $reply->user->getFirstMediaUrl('profileUser') }}">
+                                                            </div>
+                                                            <div class="comment-block">
+                                                                <div class="comment-by">
+                                                                    <h5 class="blog-author-name">
+                                                                        {{ $reply->user->name }} <span class="blog-date">
+                                                                            <i class="feather-clock me-1"></i>
+                                                                            {{ $reply->created_at?->format('j M Y') }}</span>
+                                                                    </h5>
+                                                                </div>
+                                                                <p>{{ $reply->reply }}</p>
 
-                                    </div>
+                                                                <div>
+                                                                    @for ($i = 1; $i <= 5; $i++)
+                                                                        @if ($i <= $reply->rate)
+                                                                            <span class="rating-star"><i
+                                                                                    class="fas fa-star"
+                                                                                    style="color: rgb(242, 187, 6);"></i></span>
+                                                                        @else
+                                                                            <span class="rating-star"><i
+                                                                                    class="far fa-star"
+                                                                                    style="color: rgb(242, 187, 6);"></i></span>
+                                                                        @endif
+                                                                    @endfor
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <a href="{{ route('list_general_questions', $lawyer->id) }}"
+                                        class="custom-btn btn-5">view more</a>
                                 </div>
                             </div>
                         </div>

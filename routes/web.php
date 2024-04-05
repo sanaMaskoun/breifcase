@@ -4,6 +4,7 @@ use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GeneralQuestionController;
 use App\Http\Controllers\JoinUsController;
 use App\Http\Controllers\LawyerController;
@@ -20,10 +21,13 @@ Route::get('/', function () {
 
 
 
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-})->name('dashboard')->middleware('auth:sanctum');
-
+Route::get('/dashboard',[DashboardController::class , 'adminDashboard'])->name('dashboard')->middleware('auth:sanctum');
+Route::get('/admin/profits',[DashboardController::class , 'adminProfits'])->middleware('auth:sanctum');
+Route::get('/admin/numberOfSubscribers',[DashboardController::class , 'numberOfSubscribers'])->middleware('auth:sanctum');
+    
+Route::get('/dashboard/lawyer',[DashboardController::class , 'lawyerDashboard'])->name('dashboardLawyer')->middleware('auth:sanctum');
+Route::get('/lawyer/profits',[DashboardController::class , 'lawyerProfits'])->middleware('auth:sanctum');
+Route::get('/lawyer/numberOfClients',[DashboardController::class , 'numberOfClients'])->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'practice', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [PracticeController::class, 'index'])->name('list_practieces');
@@ -52,7 +56,7 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth:sanctum'], function ()
 });
 
 Route::group(['prefix' => 'consultation', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/', [ConsultationController::class,  'index'])->name('list_consultations');
+    Route::get('/{user?}', [ConsultationController::class,  'index'])->name('list_consultations');
     Route::get('/{consultation}/show', [ConsultationController::class, 'show'])->name('show_consultation');
 
 });
