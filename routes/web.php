@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GeneralQuestionController;
 use App\Http\Controllers\JoinUsController;
 use App\Http\Controllers\LawyerController;
+use App\Http\Controllers\SuggestionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,7 @@ Route::get('/', function () {
 Route::get('/dashboard',[DashboardController::class , 'adminDashboard'])->name('dashboard')->middleware('auth:sanctum');
 Route::get('/admin/profits',[DashboardController::class , 'adminProfits'])->middleware('auth:sanctum');
 Route::get('/admin/numberOfSubscribers',[DashboardController::class , 'numberOfSubscribers'])->middleware('auth:sanctum');
-    
+
 Route::get('/dashboard/lawyer',[DashboardController::class , 'lawyerDashboard'])->name('dashboardLawyer')->middleware('auth:sanctum');
 Route::get('/lawyer/profits',[DashboardController::class , 'lawyerProfits'])->middleware('auth:sanctum');
 Route::get('/lawyer/numberOfClients',[DashboardController::class , 'numberOfClients'])->middleware('auth:sanctum');
@@ -74,6 +75,6 @@ Route::group(['prefix' => 'join_us', 'middleware' => 'auth:sanctum'], function (
 
 
 
-// Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+ Route::get('/suggestion', [SuggestionController::class, 'index'])->name('list_suggestion');
 
 Auth::routes();

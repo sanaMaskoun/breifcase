@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const toggleSwitch = document.querySelector('input[name="toggle_status"]');
     const hiddenInput = document.querySelector('input[name="status"]');
 
-    toggleSwitch.addEventListener('change', function() {
+    toggleSwitch.addEventListener('change', function () {
         hiddenInput.value = this.checked ? '0' : '1';
     });
 });

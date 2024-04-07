@@ -48,14 +48,14 @@ h6 {
     line-height: 42px;
     padding: 0;
     border: none;
-    background: rgb(0, 0, 0);
-    background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 100%);
+    background: #9b3d00;
+    background: linear-gradient(0deg, #9b3d00 0%, #9b3d00 100%);
     float: right;
     text-align: center;
 }
 
 .btn-5:hover {
-    color: #000000;
+    color: #9b3d00;
     background: transparent;
     box-shadow: none;
 }
@@ -68,11 +68,11 @@ h6 {
     right: 0;
     height: 2px;
     width: 0;
-    background: #020202;
+    background: #9b3d00;
     box-shadow:
         -1px -1px 5px 0px #fff,
-        7px 7px 20px 0px #0003,
-        4px 4px 5px 0px #0002;
+        7px 7px 20px 0px #9b3d00,
+        4px 4px 5px 0px #9b3d00;
     transition: 400ms ease all;
 }
 
@@ -90,11 +90,13 @@ h6 {
 }
 
 .icon-dashboard {
-    font-size: 40px;
-    float: right;
-    margin-left: 90px;
-    color: black;
+    font-size: 19px;
+    /* float: right;
+    margin-left: 90px; */
+    color: #9b3d00;
 }
+
+
 
 .certificate {
     display: grid;
@@ -187,7 +189,7 @@ input:-webkit-autofill:focus {
 }
 
 .form-control:focus {
-    border-color: #3d5ee1;
+    border-color: #9b3d00;
     box-shadow: none;
     outline: 0
 }
@@ -205,7 +207,7 @@ input:-webkit-autofill:focus {
 }
 
 a {
-    color: #3d5ee1;
+    color: #9b3d00;
     text-decoration: none
 }
 
@@ -355,7 +357,7 @@ table.table td h2 a {
 }
 
 table.table td h2 a:hover {
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 table.table td h2 span {
@@ -450,7 +452,7 @@ table.table td h2 span {
 
 .nav-tabs.menu-tabs .nav-item.active .nav-link {
     color: #fff;
-    background: #3d5ee1
+    background: #9b3d00
 }
 
 .settings-menu-links .nav-tabs.menu-tabs {
@@ -510,7 +512,7 @@ table.table td h2 span {
 .settings-btn .upload {
     position: absolute;
     z-index: 11;
-    background: #3d5ee1;
+    background: #9b3d00;
     border-radius: 5px;
     right: 2px;
     top: 1.5px;
@@ -608,8 +610,8 @@ table.table td h2 span {
     font-weight: 700;
     padding: 10px 26px;
     margin-right: 15px;
-    background: #3d5ee1;
-    border: 1px solid #3d5ee1;
+    background: #9b3d00;
+    border: 1px solid #9b3d00;
     color: #fff;
     border-radius: 4px
 }
@@ -639,8 +641,8 @@ table.table td h2 span {
 }
 
 .check:checked+.checktoggle {
-    background-color: #3d5ee1;
-    border: 1px solid #3d5ee1
+    background-color: #9b3d00;
+    border: 1px solid #9b3d00
 }
 
 .check:checked+.checktoggle:after {
@@ -662,7 +664,7 @@ table.table td h2 span {
     border-radius: 5px;
     color: #000;
     background: #fff;
-    border: 1px solid #3d5ee1
+    border: 1px solid #9b3d00
 }
 
 .nav-tabs.menu-tabs .nav-item {
@@ -673,7 +675,7 @@ table.table td h2 span {
 
 .nav-tabs.menu-tabs .nav-link:hover {
     color: #fff;
-    background: #3d5ee1
+    background: #9b3d00
 }
 
 .settings-form .social-icon {
@@ -681,8 +683,8 @@ table.table td h2 span {
     height: 40px;
     margin-right: 6px;
     color: #fff;
-    background: #3d5ee1;
-    border: 1px solid #3d5ee1;
+    background: #9b3d00;
+    border: 1px solid #9b3d00;
     border-radius: 5px;
     font-size: 24px;
     display: flex;
@@ -718,7 +720,7 @@ table.table td h2 span {
     justify-content: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
-    background-color: #3d5ee1;
+    background-color: #9b3d00;
     color: #fff;
     position: relative;
     right: -6px;
@@ -726,7 +728,7 @@ table.table td h2 span {
 }
 
 .add-links {
-    background-color: #3d5ee1;
+    background-color: #9b3d00;
     color: #fff;
     font-size: 16px;
     font-weight: 700;
@@ -791,7 +793,7 @@ table.table td h2 span {
     height: 20px;
     width: 20px;
     background-color: #fff;
-    border: 1px solid #3d5ee1;
+    border: 1px solid #9b3d00;
     border-radius: 50%
 }
 
@@ -805,7 +807,7 @@ table.table td h2 span {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #3d5ee1
+    background: #9b3d00
 }
 
 .custom_radio input {
@@ -928,7 +930,7 @@ table.table td h2 span {
 }
 
 .actions a:hover {
-    background-color: #3d5ee1 !important;
+    background-color: #9b3d00 !important;
     color: #fff !important
 }
 
@@ -1271,7 +1273,7 @@ button.bg-danger:hover {
 
 .text-primary,
 .dropdown-menu>li>a.text-primary {
-    color: #3d5ee1 !important
+    color: #9b3d00 !important
 }
 
 .text-success,
@@ -1304,8 +1306,8 @@ button.bg-danger:hover {
 }
 
 .btn-primary {
-    background-color: #3d5ee1;
-    border: 1px solid #3d5ee1
+    background-color: #9b3d00;
+    border: 1px solid #9b3d00
 }
 
 .btn-primary-save-bg {
@@ -1313,8 +1315,8 @@ button.bg-danger:hover {
 }
 
 .btn-primary-save-bg:hover {
-    background-color: #3d5ee1;
-    border: 1px solid #3d5ee1
+    background-color: #9b3d00;
+    border: 1px solid #9b3d00
 }
 
 .btn-primary:hover,
@@ -1355,8 +1357,8 @@ button.bg-danger:hover {
 
 .btn-primary.disabled,
 .btn-primary:disabled {
-    background-color: #3d5ee1;
-    border-color: #3d5ee1;
+    background-color: #9b3d00;
+    border-color: #9b3d00;
     color: #fff
 }
 
@@ -1572,8 +1574,8 @@ button.bg-danger:hover {
 }
 
 .download-grp .btn-outline-primary {
-    background-color: #3d5ee1;
-    border-color: #3d5ee1;
+    background-color: #9b3d00;
+    border-color: #9b3d00;
     color: #fff
 }
 
@@ -1592,14 +1594,14 @@ button.bg-danger:hover {
 }
 
 .btn-outline-gray.active {
-    background-color: #3d5ee1;
-    border-color: #3d5ee1;
+    background-color: #9b3d00;
+    border-color: #9b3d00;
     color: #fff
 }
 
 .btn-outline-primary {
-    color: #3d5ee1;
-    border-color: #3d5ee1
+    color: #9b3d00;
+    border-color: #9b3d00
 }
 
 .btn-outline-primary:hover,
@@ -1616,15 +1618,15 @@ button.bg-danger:hover {
 
 .btn-outline-primary.disabled,
 .btn-outline-primary:disabled {
-    color: #3d5ee1;
+    color: #9b3d00;
     background-color: transparent
 }
 
 .btn-outline-primary:not(:disabled):not(.disabled):active,
 .btn-outline-primary:not(:disabled):not(.disabled).active,
 .show>.btn-outline-primary.dropdown-toggle {
-    background-color: #3d5ee1;
-    border-color: #3d5ee1
+    background-color: #9b3d00;
+    border-color: #9b3d00
 }
 
 .btn-outline-primary:not(:disabled):not(.disabled):active:focus,
@@ -1789,17 +1791,17 @@ button.bg-danger:hover {
 .pagination>.active>span,
 .pagination>.active>span:focus,
 .pagination>.active>span:hover {
-    background-color: #3d5ee1;
-    border-color: #3d5ee1
+    background-color: #9b3d00;
+    border-color: #9b3d00
 }
 
 .pagination>li>a,
 .pagination>li>span {
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .page-link:hover {
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .page-link:focus {
@@ -1807,8 +1809,8 @@ button.bg-danger:hover {
 }
 
 .page-item.active .page-link {
-    background-color: #3d5ee1;
-    border-color: #3d5ee1
+    background-color: #9b3d00;
+    border-color: #9b3d00
 }
 
 .dropdown-menu {
@@ -1821,7 +1823,7 @@ button.bg-danger:hover {
 
 .dropdown-item.active,
 .dropdown-item:active {
-    background-color: #3d5ee1
+    background-color: #9b3d00
 }
 
 .navbar-nav .open .dropdown-menu {
@@ -1887,7 +1889,7 @@ button.bg-danger:hover {
 
 .bootstrap-datetimepicker-widget table td.active,
 .bootstrap-datetimepicker-widget table td.active:hover {
-    background-color: #3d5ee1;
+    background-color: #9b3d00;
     text-shadow: unset
 }
 
@@ -2037,8 +2039,8 @@ div.dataTables_wrapper div.dataTables_length select {
 .nav-tabs.nav-tabs-solid>.active>a,
 .nav-tabs.nav-tabs-solid>.active>a:hover,
 .nav-tabs.nav-tabs-solid>.active>a:focus {
-    background-color: #3d5ee1;
-    border-color: #3d5ee1;
+    background-color: #9b3d00;
+    border-color: #9b3d00;
     color: #fff
 }
 
@@ -2078,8 +2080,8 @@ div.dataTables_wrapper div.dataTables_length select {
 .nav-tabs.nav-tabs-solid>li>a.active,
 .nav-tabs.nav-tabs-solid>li>a.active:hover,
 .nav-tabs.nav-tabs-solid>li>a.active:focus {
-    background-color: #3d5ee1;
-    border-color: #3d5ee1;
+    background-color: #9b3d00;
+    border-color: #9b3d00;
     color: #fff
 }
 
@@ -2144,7 +2146,7 @@ div.dataTables_wrapper div.dataTables_length select {
 .nav-tabs.nav-tabs-top>li>a.active,
 .nav-tabs.nav-tabs-top>li>a.active:hover,
 .nav-tabs.nav-tabs-top>li>a.active:focus {
-    border-top-color: #3d5ee1
+    border-top-color: #9b3d00
 }
 
 .nav-tabs.nav-tabs-bottom>li {
@@ -2156,7 +2158,7 @@ div.dataTables_wrapper div.dataTables_length select {
 .nav-tabs.nav-tabs-bottom>li>a.active:focus {
     border-bottom-width: 2px;
     border-color: transparent;
-    border-bottom-color: #3d5ee1;
+    border-bottom-color: #9b3d00;
     background-color: transparent;
     transition: none 0s ease 0s;
     -moz-transition: none 0s ease 0s;
@@ -2276,7 +2278,7 @@ div.dataTables_wrapper div.dataTables_length select {
 .avatar-title {
     width: 100%;
     height: 100%;
-    background-color: #3d5ee1;
+    background-color: #9b3d00;
     color: #fff;
     display: flex;
     align-items: center;
@@ -2513,15 +2515,14 @@ div.dataTables_wrapper div.dataTables_length select {
 
 .header .header-left {
     float: left;
-    height: 60px;
-    padding: 0 20px;
+
     position: relative;
     width: 259px;
     z-index: 1;
     transition: all .2s ease-in-out;
     display: flex;
     align-items: center;
-    background: #fff;
+    background: #f7f7f7;
     box-shadow: 0 0 44px rgba(0, 0, 0, .03)
 }
 
@@ -2535,8 +2536,16 @@ div.dataTables_wrapper div.dataTables_length select {
 }
 
 .header .header-left .logo img {
-    max-height: 40px;
-    width: auto
+    width: 5rem;
+    height: 4.3rem;
+}
+
+.logo-text {
+    position: relative;
+    bottom: 61px;
+    left: 67px;
+    color: #d8801e;
+    font-size: 29px;
 }
 
 .header-left .logo.logo-small {
@@ -2631,7 +2640,7 @@ div.dataTables_wrapper div.dataTables_length select {
     line-height: 1.2;
     font-size: 12px;
     font-weight: 500;
-    color: #3d5ee1 !important
+    color: #9b3d00 !important
 }
 
 .user-img .user-text h6 {
@@ -2688,12 +2697,12 @@ div.dataTables_wrapper div.dataTables_length select {
 }
 
 .user-menu .dropdown-menu .dropdown-item:hover {
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .header .dropdown-menu>li>a:focus,
 .header .dropdown-menu>li>a:hover {
-    background-color: #3d5ee1;
+    background-color: #9b3d00;
     color: #fff
 }
 
@@ -2707,14 +2716,14 @@ div.dataTables_wrapper div.dataTables_length select {
 }
 
 .header .dropdown-menu>li>a i {
-    color: #3d5ee1;
+    color: #9b3d00;
     margin-right: 10px;
     text-align: center;
     width: 18px
 }
 
 .header .user-menu .dropdown-menu>li>a i {
-    color: #3d5ee1;
+    color: #9b3d00;
     font-size: 16px;
     margin-right: 10px;
     min-width: 18px;
@@ -2932,20 +2941,20 @@ footer p {
 
 .sidebar-menu li a:hover {
     color: #fff;
-    background: #3d5ee1;
+    background: #9b3d00;
     border-radius: 6px
 }
 
 .sidebar-menu>ul>li>a:hover {
     background-color: #fff;
-    color: #3d5ee1;
+    color: #9b3d00;
     margin: 0 -15px;
     padding-left: 30px
 }
 
 .sidebar-menu li.active>a {
     background-color: #fff;
-    color: #3d5ee1;
+    color: #9b3d00;
     position: relative;
     margin: 0 -15px;
     padding-left: 30px
@@ -2958,7 +2967,7 @@ footer p {
     position: absolute;
     left: 0;
     top: 0;
-    background: #3d5ee1;
+    background: #9b3d00;
     -webkit-transition: all .5s;
     -ms-transition: all .5s;
     transition: all .5s;
@@ -2997,7 +3006,7 @@ footer p {
 
 .sidebar-menu ul ul a.active {
     color: #fff;
-    background: #3d5ee1;
+    background: #9b3d00;
     border-radius: 6px
 }
 
@@ -3230,11 +3239,11 @@ footer p {
 }
 
 .login-wrapper .loginbox .login-left {
-    align-items: center;
+    /* align-items: center;
     background: #18aefa;
     flex-direction: column;
-    justify-content: end;
-    width: 400px;
+    justify-content: end; */
+    width: 340px;
     display: flex;
     background-blend-mode: multiply;
     border-radius: 8px 20px 20px 8px;
@@ -3388,7 +3397,7 @@ footer p {
 }
 
 .social-login>a:hover {
-    background-color: #3d5ee1;
+    background-color: #9b3d00;
     color: #fff
 }
 
@@ -3449,8 +3458,8 @@ footer p {
 }
 
 .btn-primary.primary-reset:hover {
-    background-color: #3d5ee1;
-    border: 1px solid #3d5ee1
+    background-color: #9b3d00;
+    border: 1px solid #9b3d00
 }
 
 .profile-views {
@@ -3522,7 +3531,7 @@ footer p {
 }
 
 .user-menu.nav>li>a .badge {
-    background-color: #3d5ee1;
+    background-color: #9b3d00;
     display: block;
     font-size: 10px;
     font-weight: 700;
@@ -3645,7 +3654,7 @@ footer p {
 .db-info h6 {
     margin: 0;
     font-weight: 400;
-    font-size: 14px;
+    /* font-size: 14px; */
     color: #808191;
     margin-bottom: 5px
 }
@@ -3683,7 +3692,7 @@ footer p {
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background-color: #3d5ee1
+    background-color: #9b3d00
 }
 
 .activity-feed .feed-item:after {
@@ -3894,11 +3903,11 @@ footer p {
 }
 
 .circle-blue {
-    background: #3d5ee1
+    background: #9b3d00
 }
 
 .circle-green {
-    background: #70c4cf
+    background: #d8801e
 }
 
 .circle-gray {
@@ -4142,7 +4151,7 @@ footer p {
 .fc-state-down,
 .fc-state-active,
 .fc-state-disabled {
-    background-color: #3d5ee1 !important;
+    background-color: #9b3d00 !important;
     color: #fff !important;
     text-shadow: none !important
 }
@@ -4220,7 +4229,7 @@ footer p {
 }
 
 .mail-list>li.active>a {
-    color: #3d5ee1;
+    color: #9b3d00;
     font-weight: 700
 }
 
@@ -4370,7 +4379,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .error-box h1 {
-    color: #3d5ee1;
+    color: #9b3d00;
     font-size: 10em
 }
 
@@ -4515,7 +4524,7 @@ table.table-inbox tbody tr.checked {
 .profile-edit-icon {
     width: 34px;
     height: 34px;
-    background: #3d5ee1;
+    background: #9b3d00;
     position: absolute;
     border-radius: 50px;
     bottom: 0;
@@ -4540,7 +4549,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .profile-edit-icon:hover {
-    background: #70c4cf;
+    background: #d8801e;
     transition: all .5s ease;
     -moz-transition: all .5s ease;
     -o-transition: all .5s ease;
@@ -4599,21 +4608,21 @@ table.table-inbox tbody tr.checked {
 }
 
 .follow-btn-group .follow-btns {
-    background: #3d5ee1;
-    border: 1px solid #3d5ee1;
+    background: #9b3d00;
+    border: 1px solid #9b3d00;
     margin-right: 15px
 }
 
 
 
 .follow-btn-group .message-btns {
-    background: #70c4cf;
-    border: 1px solid #70c4cf
+    background: #d8801e;
+    border: 1px solid #d8801e
 }
 
 .follow-btn-group .message-btns:hover {
-    background: #3d5ee1;
-    border: 1px solid #3d5ee1
+    background: #9b3d00;
+    border: 1px solid #9b3d00
 }
 
 .personal-activity {
@@ -4642,7 +4651,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .personal-icons i {
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .student-personals-grp .card {
@@ -4711,11 +4720,11 @@ table.table-inbox tbody tr.checked {
 }
 
 .bg-photoshop {
-    background: #3d5ee1
+    background: #9b3d00
 }
 
 .bg-editor {
-    background: #70c4cf
+    background: #d8801e
 }
 
 .bg-illustrator {
@@ -4760,8 +4769,8 @@ table.table-inbox tbody tr.checked {
 .student-submit .btn-primary {
     min-width: 160px;
     border-radius: 10px;
-    background: #3d5ee1;
-    border: 1px solid #3d5ee1
+    background: #9b3d00;
+    border: 1px solid #9b3d00
 }
 
 .student-submit .btn-primary:hover {
@@ -5014,8 +5023,8 @@ table.table-inbox tbody tr.checked {
 }
 
 .lesson .btn-info {
-    background: #3d5ee1;
-    border: 1px solid #3d5ee1
+    background: #9b3d00;
+    border: 1px solid #9b3d00
 }
 
 .lesson .btn-info:hover {
@@ -5048,7 +5057,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .lesson .lesson-confirm a {
-    color: #3d5ee1;
+    color: #9b3d00;
     font-size: 14px
 }
 
@@ -5213,18 +5222,18 @@ table.table-inbox tbody tr.checked {
 .calendar-box:before {
     content: "";
     position: absolute;
-    background: #3d5ee1;
+    background: #9b3d00;
     width: 4px;
     height: 100%;
     border-radius: 25px
 }
 
 .normal-bg:before {
-    background: #3d5ee1
+    background: #9b3d00
 }
 
 .break-bg:before {
-    background: #70c4cf
+    background: #d8801e
 }
 
 .calendar-box span {
@@ -5345,7 +5354,7 @@ table.table-inbox tbody tr.checked {
 
 .steps-history li {
     margin-bottom: 10px;
-    color: #3d5ee1;
+    color: #9b3d00;
     font-weight: 500
 }
 
@@ -5511,14 +5520,14 @@ table.table-inbox tbody tr.checked {
 }
 
 .skip-group .skip-btn:hover {
-    background: #3d5ee1;
-    border: 1px solid #3d5ee1;
+    background: #9b3d00;
+    border: 1px solid #9b3d00;
     color: #fff
 }
 
 .skip-group .continue-btn {
-    background: #3d5ee1;
-    border: 1px solid #3d5ee1;
+    background: #9b3d00;
+    border: 1px solid #9b3d00;
     color: #fff
 }
 
@@ -5529,7 +5538,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .lesson-view-all a {
-    color: #3d5ee1;
+    color: #9b3d00;
     font-weight: 500;
     font-size: 14px
 }
@@ -5709,7 +5718,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .settings-menu ul li a.active {
-    color: #3d5ee1 !important;
+    color: #9b3d00 !important;
     border: 0
 }
 
@@ -5821,7 +5830,7 @@ table.table-inbox tbody tr.checked {
 
 .invoice-item .customer-text a {
     font-size: 14px;
-    color: #3d5ee1;
+    color: #9b3d00;
     margin-left: 12px
 }
 
@@ -5893,7 +5902,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoices-links.active {
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .invoices-links .feather {
@@ -6206,7 +6215,7 @@ table.table-inbox tbody tr.checked {
 .checkbox-title {
     font-weight: 600;
     font-size: 16px;
-    color: #3d5ee1;
+    color: #9b3d00;
     margin-bottom: 14px
 }
 
@@ -6232,8 +6241,8 @@ table.table-inbox tbody tr.checked {
 }
 
 .custom_check input:checked~.checkmark {
-    background-color: #3d5ee1;
-    border-color: #3d5ee1
+    background-color: #9b3d00;
+    border-color: #9b3d00
 }
 
 .custom_check .checkmark {
@@ -6274,7 +6283,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .selectBox p .select-icon {
-    color: #3d5ee1;
+    color: #9b3d00;
     width: 20px;
     height: 20px
 }
@@ -6285,9 +6294,9 @@ table.table-inbox tbody tr.checked {
 
 .report-btn .btn {
     font-weight: 600;
-    color: #3d5ee1;
+    color: #9b3d00;
     background: #fff;
-    border: 2px solid #3d5ee1;
+    border: 2px solid #9b3d00;
     border-radius: 8px;
     width: 100%;
     padding: 11px 0
@@ -6337,12 +6346,12 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoices-tabs ul li a:hover {
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .invoices-tabs ul li a.active {
-    color: #3d5ee1;
-    border-bottom: 2px solid #3d5ee1
+    color: #9b3d00;
+    border-bottom: 2px solid #9b3d00
 }
 
 .invoices-settings-btn {
@@ -6358,7 +6367,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoices-settings-icon {
-    color: #3d5ee1;
+    color: #9b3d00;
     margin-right: 20px
 }
 
@@ -6377,8 +6386,8 @@ table.table-inbox tbody tr.checked {
     color: #fff;
     padding: 12px 0;
     min-width: 167px;
-    background: #3d5ee1;
-    border: 1px solid #3d5ee1;
+    background: #9b3d00;
+    border: 1px solid #9b3d00;
     border-radius: 6px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -6427,7 +6436,7 @@ table.table-inbox tbody tr.checked {
 .inovices-widget-header .inovices-amount {
     font-weight: 600;
     font-size: 24px;
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .inovices-all {
@@ -6547,11 +6556,11 @@ table.table-inbox tbody tr.checked {
 .invoice-load-btn .btn {
     font-weight: 700;
     font-size: 16px;
-    color: #3d5ee1;
+    color: #9b3d00;
     min-width: 170px;
     padding: 12px 15px;
     background: #fff;
-    border: 2px solid #3d5ee1;
+    border: 2px solid #9b3d00;
     border-radius: 6px;
     display: inline-flex;
     justify-content: center;
@@ -6571,7 +6580,7 @@ table.table-inbox tbody tr.checked {
     margin-right: 8px;
     vertical-align: 0;
     border: 3px solid #3e45eb7d;
-    border-right-color: #3d5ee1;
+    border-right-color: #9b3d00;
     border-radius: 50%;
     -webkit-animation: .75s linear infinite spinner-border;
     animation: .75s linear infinite spinner-border
@@ -6590,7 +6599,7 @@ table.table-inbox tbody tr.checked {
 
 .invoices-page-header .invoices-breadcrumb-item a {
     font-weight: 600;
-    color: #3d5ee1;
+    color: #9b3d00;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -6612,7 +6621,7 @@ table.table-inbox tbody tr.checked {
     width: 24px;
     height: 24px;
     margin-right: 10px;
-    background: #3d5ee1;
+    background: #9b3d00;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -6640,7 +6649,7 @@ table.table-inbox tbody tr.checked {
 
 .invoices-create-btn .invoices-preview-link {
     font-weight: 600;
-    color: #3d5ee1;
+    color: #9b3d00;
     margin-right: 30px
 }
 
@@ -6649,7 +6658,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoices-create-btn .delete-invoice-btn {
-    background: #3d5ee1;
+    background: #9b3d00;
     margin-right: 10px
 }
 
@@ -6658,7 +6667,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoices-create-btn .save-invoice-btn {
-    background: #3d5ee1
+    background: #9b3d00
 }
 
 .invoices-create-btn .save-invoice-btn:hover {
@@ -6682,7 +6691,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoices-form .multipleSelection .selectBox {
-    border: 2px solid #3d5ee1;
+    border: 2px solid #9b3d00;
     border-radius: 6px
 }
 
@@ -6721,7 +6730,7 @@ table.table-inbox tbody tr.checked {
 
 .invoice-inner-head span a {
     font-weight: 500;
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .invoice-inner-head span a:hover {
@@ -6751,7 +6760,7 @@ table.table-inbox tbody tr.checked {
 
 .invoice-inner-footer .form-control {
     position: absolute;
-    color: #3d5ee1;
+    color: #9b3d00;
     background: 0 0;
     border: 0;
     display: inline-block;
@@ -6761,7 +6770,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoice-inner-footer .form-control::placeholder {
-    color: #3d5ee1;
+    color: #9b3d00;
     font-weight: 500
 }
 
@@ -6794,7 +6803,7 @@ table.table-inbox tbody tr.checked {
 .invoice-add-table h4 {
     font-weight: 600;
     font-size: 20px;
-    color: #3d5ee1;
+    color: #9b3d00;
     margin-bottom: 30px
 }
 
@@ -6834,7 +6843,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoice-add-table .add-btn {
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .invoice-add-table .remove-btn {
@@ -6876,7 +6885,7 @@ table.table-inbox tbody tr.checked {
     width: 266px;
     border-radius: 4px;
     padding: 15px;
-    background: #3d5ee1;
+    background: #9b3d00;
     display: flex;
     justify-content: space-between;
     align-items: center
@@ -7121,7 +7130,7 @@ table.table-inbox tbody tr.checked {
 .invoice-total-box .add-links-bg {
     background: 0 0;
     padding: 0;
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .invoice-total-box .service-amount {
@@ -7147,7 +7156,7 @@ table.table-inbox tbody tr.checked {
 
 .invoice-total-box .add-links-one {
     font-weight: 500;
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .invoice-total-box .service-trash-one {
@@ -7167,7 +7176,7 @@ table.table-inbox tbody tr.checked {
 .invoice-total-footer h4 {
     font-size: 20px;
     margin-bottom: 0;
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .invoice-total-footer h4 span {
@@ -7288,7 +7297,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoice-issues-box {
-    background: #3d5ee1;
+    background: #9b3d00;
     border-radius: 10px;
     text-align: center;
     padding: 10px;
@@ -7352,7 +7361,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoice-item-bg {
-    background: #3d5ee1;
+    background: #9b3d00;
     border-radius: 10px;
     margin-top: 30px;
     margin-bottom: 30px
@@ -7470,7 +7479,7 @@ table.table-inbox tbody tr.checked {
 
 .invoices-upload-btn .upload {
     position: absolute;
-    background: #3d5ee1;
+    background: #9b3d00;
     border-radius: 4px;
     right: 6px;
     top: 8px;
@@ -7492,7 +7501,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoice-setting-btn .cancel-btn {
-    background: #3d5ee1
+    background: #9b3d00
 }
 
 .invoice-setting-btn .cancel-btn:hover {
@@ -7662,8 +7671,8 @@ table.table-inbox tbody tr.checked {
 }
 
 .paid-continue-btn {
-    background-color: #3d5ee1;
-    border: 1px solid #3d5ee1;
+    background-color: #9b3d00;
+    border: 1px solid #9b3d00;
     border-radius: 5px;
     color: #fff;
     display: block;
@@ -7677,15 +7686,15 @@ table.table-inbox tbody tr.checked {
 .paid-continue-btn:focus,
 .paid-continue-btn:active {
     background-color: #fff;
-    border: 1px solid #3d5ee1;
-    color: #3d5ee1
+    border: 1px solid #9b3d00;
+    color: #9b3d00
 }
 
 .paid-cancel-btn {
     background-color: #fff;
-    border: 1px solid #3d5ee1;
+    border: 1px solid #9b3d00;
     border-radius: 5px;
-    color: #3d5ee1;
+    color: #9b3d00;
     display: block;
     font-size: 18px;
     font-weight: 600;
@@ -7769,7 +7778,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .bank-details-btn .bank-cancel-btn {
-    background: #3d5ee1
+    background: #9b3d00
 }
 
 .bank-details-btn .bank-cancel-btn:hover {
@@ -7777,16 +7786,16 @@ table.table-inbox tbody tr.checked {
 }
 
 .bank-details-btn .bank-save-btn {
-    background: #3d5ee1
+    background: #9b3d00
 }
 
 .bank-details-btn .bank-save-btn:hover {
-    background: #3d5ee1
+    background: #9b3d00
 }
 
 .check:checked+.checktoggle {
-    background-color: #3d5ee1;
-    border: 1px solid #3d5ee1
+    background-color: #9b3d00;
+    border: 1px solid #9b3d00
 }
 
 .invoice-total-inner .checktoggle {
@@ -7831,7 +7840,7 @@ table.table-inbox tbody tr.checked {
 .settings-form .bootstrap-tagsinput .tag {
     margin-right: 5px;
     color: #fff;
-    background: #3d5ee1 !important;
+    background: #9b3d00 !important;
     border-radius: 0;
     font-size: 15px;
     font-weight: 500;
@@ -7928,13 +7937,13 @@ table.table-inbox tbody tr.checked {
 .back-btn {
     font-weight: 600;
     font-size: 16px;
-    color: #3d5ee1;
+    color: #9b3d00;
     display: inline-block;
     margin-bottom: 18px
 }
 
 .post-author span:nth-child(1):hover {
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .post-author a {
@@ -7993,7 +8002,7 @@ table.table-inbox tbody tr.checked {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #3d5ee1;
+    background: #9b3d00;
     border-radius: 6px;
     min-width: 92px;
     padding: 6px 10px;
@@ -8016,7 +8025,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .post-list .post-author a span:hover {
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .edit-delete-btn a {
@@ -8089,15 +8098,15 @@ table.table-inbox tbody tr.checked {
 
 .list-links li.active a {
     background: #fff;
-    border: 1px solid #3d5ee1;
-    color: #3d5ee1
+    border: 1px solid #9b3d00;
+    color: #9b3d00
 }
 
 .user-menu.nav>li.view-btn>a {
     color: #fff;
     padding: 10px 15px;
     border-radius: 6px;
-    background-color: #3d5ee1
+    background-color: #9b3d00
 }
 
 .user-menu.nav>li.view-btn>a:hover {
@@ -8438,9 +8447,9 @@ table.table-inbox tbody tr.checked {
 }
 
 .social-share>li>a {
-    border: 1px solid #3d5ee1;
+    border: 1px solid #9b3d00;
     border-radius: 6px;
-    color: #3d5ee1;
+    color: #9b3d00;
     display: flex;
     display: -ms-flexbox;
     align-items: center;
@@ -8451,7 +8460,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .social-share>li>a:hover {
-    background-color: #3d5ee1;
+    background-color: #9b3d00;
     color: #fff;
     border-color: #fff
 }
@@ -8507,11 +8516,11 @@ table.table-inbox tbody tr.checked {
 }
 
 a.blog-author-name:hover {
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 a.comment-btn:hover {
-    color: #3d5ee1
+    color: #9b3d00
 }
 
 .save-btn {
@@ -10040,7 +10049,7 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-o
         font-size: 18px;
         height: 40px;
         width: 40px;
-        background: #3d5ee1;
+        background: #9b3d00;
         justify-content: center;
         padding: 0 12px;
         border-radius: 10px;
@@ -10318,7 +10327,7 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-o
     }
 
     .user-menu.nav>li>a .badge {
-        background-color: #3d5ee1;
+        background-color: #9b3d00;
         color: #fff
     }
 

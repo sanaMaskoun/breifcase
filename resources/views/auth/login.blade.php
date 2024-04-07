@@ -11,7 +11,7 @@
             @endif
                 <div class="loginbox">
                     <div class="login-left">
-                        <img class="img-fluid" src="assets/img/login.png" alt="Logo">
+                        <img class="img-fluid" src="{{ asset('img/logo.jpeg') }}" alt="Logo">
                     </div>
                     <div class="login-right">
                         <div class="login-right-wrap">
@@ -35,7 +35,7 @@
                                     <label>Password <span class="login-danger">*</span></label>
                                     <input class="form-control pass-input" type="text" name="password">
                                     <span class="profile-views feather-eye toggle-password"></span>
-                                    
+
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

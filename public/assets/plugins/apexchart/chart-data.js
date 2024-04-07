@@ -15,7 +15,7 @@ $(document).ready(function () {
                     dataLabels: { enabled: false },
                     stroke: { curve: "smooth" },
                     series: [
-                        { name: "Profits", color: '#3D5EE1', data: data },
+                        { name: "Profits", color: '#9b3d00', data: data },
                     ],
                     xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], }
                 };
@@ -44,7 +44,7 @@ $(document).ready(function () {
                     dataLabels: { enabled: false },
                     stroke: { curve: "smooth" },
                     series: [
-                        { name: "Profits", color: '#3D5EE1', data: data },
+                        { name: "Profits", color: '#9b3d00', data: data },
                     ],
                     xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], }
                 };
@@ -76,8 +76,8 @@ $(document).ready(function () {
                     plotOptions: { bar: { columnWidth: '55%', endingShape: 'rounded' } },
                     stroke: { show: true, width: 2, colors: ['transparent'] },
                     series: [
-                        { name: "Clients", color: '#70C4CF', data: monthlyClients },
-                        { name: "Lawyers", color: '#3D5EE1', data: monthlyLawyers }
+                        { name: "Clients", color: '#d8801e', data: monthlyClients },
+                        { name: "Lawyers", color: '#9b3d00', data: monthlyLawyers }
                     ],
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     xaxis: {
@@ -122,7 +122,7 @@ $(document).ready(function () {
                     dataLabels: { enabled: false },
                     plotOptions: { bar: { columnWidth: '55%', endingShape: 'rounded' } },
                     stroke: { show: true, width: 2, colors: ['transparent'] },
-                    series: [{ name: "Clients", color: '#70C4CF', data: monthlyClients }],
+                    series: [{ name: "Clients", color: '#d8801e', data: monthlyClients }],
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     xaxis: {
                         labels: { show: true },

@@ -62,11 +62,11 @@
                                                     @if ($i <= $reply->rate)
                                                         <span class="rating-star"><i
                                                                 class="fas fa-star"
-                                                                style="color: rgb(242, 187, 6);"></i></span>
+                                                                style="color: #9b3d00"></i></span>
                                                     @else
                                                         <span class="rating-star"><i
                                                                 class="far fa-star"
-                                                                style="color: rgb(242, 187, 6);"></i></span>
+                                                                style="color: #9b3d00"></i></span>
                                                     @endif
                                                 @endfor
                                             @endif

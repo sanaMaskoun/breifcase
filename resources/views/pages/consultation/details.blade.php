@@ -63,63 +63,55 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="invoice-info">
-                                            <h4>Communication :
-                                                <span>
-                                                    @for ($i = 1; $i <= 5; $i++)
-                                                        @if ($i <= $consultation->rate?->communication)
-                                                            <span class="rating-star"><i class="fas fa-star"
-                                                                    style="color: rgb(242, 187, 6);"></i></span>
-                                                        @else
-                                                            <span class="rating-star"><i class="far fa-star"
-                                                                    style="color: rgb(242, 187, 6);"></i></span>
-                                                        @endif
-                                                    @endfor
-                                                </span>
-                                            </h4>
-                                            <h4>Response Time :
-
-                                                <span>
-                                                    @for ($i = 1; $i <= 5; $i++)
-                                                        @if ($i <= $consultation->rate?->response_time)
-                                                            <span class="rating-star"><i class="fas fa-star"
-                                                                    style="color: rgb(242, 187, 6);"></i></span>
-                                                        @else
-                                                            <span class="rating-star"><i class="far fa-star"
-                                                                    style="color: rgb(242, 187, 6);"></i></span>
-                                                        @endif
-                                                    @endfor
-                                                </span>
-                                            </h4>
-
-                                            <h4>Problem Solving :
-                                                <span>
-                                                    @for ($i = 1; $i <= 5; $i++)
-                                                        @if ($i <= $consultation->rate?->problem_solving)
-                                                            <span class="rating-star"><i class="fas fa-star"
-                                                                    style="color: rgb(242, 187, 6);"></i></span>
-                                                        @else
-                                                            <span class="rating-star"><i class="far fa-star"
-                                                                    style="color: rgb(242, 187, 6);"></i></span>
-                                                        @endif
-                                                    @endfor
-                                                </span>
-                                            </h4>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4 >Communication</h4>
+                                                    <h4 >Response Time</h4>
+                                                    <h4 >Problem Solving</h4>
+                                                    <h4 >Understanding</h4>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4>
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $consultation->rate?->communication)
+                                                                <span class="rating-star"><i class="fas fa-star" style="color: #9b3d00"></i></span>
+                                                            @else
+                                                                <span class="rating-star"><i class="far fa-star" style="color: #9b3d00"></i></span>
+                                                            @endif
+                                                        @endfor
+                                                    </h4>
+                                                    <h4>
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $consultation->rate?->response_time)
+                                                                <span class="rating-star"><i class="fas fa-star" style="color: #9b3d00"></i></span>
+                                                            @else
+                                                                <span class="rating-star"><i class="far fa-star" style="color: #9b3d00"></i></span>
+                                                            @endif
+                                                        @endfor
+                                                    </h4>
+                                                    <h4>
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $consultation->rate?->problem_solving)
+                                                                <span class="rating-star"><i class="fas fa-star" style="color: #9b3d00"></i></span>
+                                                            @else
+                                                                <span class="rating-star"><i class="far fa-star" style="color: #9b3d00"></i></span>
+                                                            @endif
+                                                        @endfor
+                                                    </h4>
+                                                    <h4>
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $consultation->rate?->understanding)
+                                                                <span class="rating-star"><i class="fas fa-star" style="color: #9b3d00"></i></span>
+                                                            @else
+                                                                <span class="rating-star"><i class="far fa-star" style="color: #9b3d00"></i></span>
+                                                            @endif
+                                                        @endfor
+                                                    </h4>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <h4>Understanding :
-                                            <span>
-                                                @for ($i = 1; $i <= 5; $i++)
-                                                    @if ($i <= $consultation->rate?->understanding)
-                                                        <span class="rating-star"><i class="fas fa-star"
-                                                                style="color: rgb(242, 187, 6);"></i></span>
-                                                    @else
-                                                        <span class="rating-star"><i class="far fa-star"
-                                                                style="color: rgb(242, 187, 6);"></i></span>
-                                                    @endif
-                                                @endfor
-                                            </span>
-                                        </h4>
-
                                     </div>
+
                                 </div>
 
                             </div>

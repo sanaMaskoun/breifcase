@@ -6,6 +6,7 @@ use App\Http\Controllers\api\RateController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SuggestionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -56,3 +57,6 @@ Route::group(['prefix' => 'general-question', 'middleware' => 'auth:sanctum'], f
      Route::post('/{general_question}/reply', [GeneralQuestionApiController::class, 'reply']);
      Route::post('/reply/{reply}/rate', [GeneralQuestionApiController::class, 'rate']);
 });
+
+
+Route::post('/suggestion' , [SuggestionController::class , 'store'])->middleware('auth:sanctum');

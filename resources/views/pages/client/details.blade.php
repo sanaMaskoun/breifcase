@@ -43,11 +43,11 @@
                                     <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                         <div class="follow-group">
                                             <div class="students-follows">
-                                                <h5>No consultation</h5>
+                                                <h5>Num consultation</h5>
                                                 <h4>{{ $NumConsultation }}</h4>
                                             </div>
                                             <div class="students-follows">
-                                                <h5>No General Question</h5>
+                                                <h5>Num General Question</h5>
                                                 <h4>{{ $NumGeneralQuestion }}</h4>
                                             </div>
 
@@ -250,11 +250,11 @@
                                                                             @if ($i <= $reply->rate)
                                                                                 <span class="rating-star"><i
                                                                                         class="fas fa-star"
-                                                                                        style="color: rgb(242, 187, 6);"></i></span>
+                                                                                        style="color: #9b3d00"></i></span>
                                                                             @else
                                                                                 <span class="rating-star"><i
                                                                                         class="far fa-star"
-                                                                                        style="color: rgb(242, 187, 6);"></i></span>
+                                                                                        style="color: #9b3d00"></i></span>
                                                                             @endif
                                                                         @endfor
                                                                     </div>

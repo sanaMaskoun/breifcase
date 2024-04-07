@@ -2,10 +2,11 @@
 
     <div class="header-left">
         <a href="{{ route('dashboard') }}" class="logo">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="Logo">
+            <img class="img-fluid" src="{{ asset('img/logo.jpeg') }}" alt="Logo">
+            <h1 class="logo-text">Breifcase</h1>
         </a>
         <a href="{{ route('dashboard') }}" class="logo logo-small">
-            <img src="{{ asset('assets/img/logo-small.png') }}" alt="Logo" width="30" height="30">
+            <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" width="30" height="30">
         </a>
     </div>
 
@@ -133,12 +134,14 @@
                             <span> Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="{{ route('list_consultations',Auth()->user()->id) }}"><i class="fas fa-balance-scale"></i>
+                        <a href="{{ route('list_consultations', Auth()->user()->id) }}"><i
+                                class="fas fa-balance-scale"></i>
                             <span> consultations</span></a>
                     </li>
 
                     <li>
-                        <a href="{{ route('list_general_questions',Auth()->user()->id) }}"><i class="far fa-question-circle"></i>
+                        <a href="{{ route('list_general_questions', Auth()->user()->id) }}"><i
+                                class="far fa-question-circle"></i>
                             <span> General Questions </span></a>
                     </li>
                 @endrole
@@ -178,6 +181,11 @@
                     <li>
                         <a href="{{ route('list_join_us') }}"><i class="fas fa-user-plus"></i>
                             <span> Requests to join </span></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('list_suggestion') }}"><i class="fas fa-lightbulb"></i>
+
+                            <span> Suggestions </span></a>
                     </li>
                 @endrole
 
