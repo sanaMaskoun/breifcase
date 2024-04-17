@@ -6,6 +6,7 @@ use App\Models\QuestionReply;
 use Illuminate\Http\Request;
 use App\Models\GeneralQuestion;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class GeneralQuestionController extends Controller
 {
@@ -40,6 +41,9 @@ class GeneralQuestionController extends Controller
     }
     public function show(GeneralQuestion $general_question)
     {
+        $get_notify = DB::table('notifications')->where('data->question_id', $general_question->id)->where('notifiable_id' , Auth()->user()->id)->first();
+        if ($get_notify <> null ) {DB::table('notifications')->where('id', $get_notify->id)->update(['read_at' => now()]);
+}
         return view('pages.generalQuestion.details', compact('general_question'));
     }
 }

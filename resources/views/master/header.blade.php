@@ -38,47 +38,113 @@
             </div>
         </li>
 
-        <li class="nav-item dropdown noti-dropdown me-2">
+        <li class="nav-item dropdown noti-dropdown me-2 dropdown-notifications">
+
             <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
                 <img src="{{ asset('assets/img/icons/header-icon-05.svg') }}" alt="">
+
+                <span
+                    class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow   notif-count"
+                    data-count="{{ Auth()->user()->unreadNotifications->count() }}">{{ Auth()->user()->unreadNotifications->count() }}</span>
             </a>
+
+
             <div class="dropdown-menu notifications">
-                <div class="topnav-dropdown-header">
+                <div class="topnav-dropdown-header" id="notificationCount">
                     <span class="notification-title">Notifications</span>
-                    <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                    <a href="{{ route('notification_clear_all') }}" class="clear-noti"> Clear All </a>
                 </div>
                 <div class="noti-content">
-                    <ul class="notification-list">
-                        <li class="notification-message">
-                            <a href="#">
+                    <ul class="notification-list" id="unreadNotifications">
+
+                        @foreach (Auth()->user()->unreadNotifications as $notification)
+                            <li class="notification-message">
                                 <div class="media d-flex">
-                                    <span class="avatar avatar-sm flex-shrink-0">
-                                        <img class="avatar-img rounded-circle" alt="User Image"
-                                            src="assets/img/profiles/avatar-02.jpg">
-                                    </span>
-                                    <div class="media-body flex-grow-1">
-                                        <p class="noti-details"><span class="noti-title">Carlson Tech</span> has
-                                            approved <span class="noti-title">your estimate</span></p>
-                                        <p class="noti-time"><span class="notification-time">4 mins ago</span>
-                                        </p>
-                                    </div>
+
+                                    @if ($notification->type === 'App\Notifications\RequestToJoin')
+                                        <div class="media-body flex-grow-1">
+                                            <a> <span>these user request to join :</span></a>
+
+                                            <a href="{{ route('show_lawyer', $notification->data['user_id']) }}">
+                                                <p class="noti-details"> <span style="float: right;  font-size:12px;"
+                                                        class="noti-title">{{ $notification->data['joined_user'] }}
+                                                    </span>
+                                                </p>
+
+                                            </a>
+
+
+                                            <p class="noti-time"><span
+                                                    class="notification-time">{{ $notification->created_at?->format('j M Y') }}</span>
+                                            </p>
+
+                                        </div>
+                                    @elseif ($notification->type === 'App\Notifications\SuggestionNotification')
+                                        <div class="media-body flex-grow-1 ">
+                                            <a>
+                                                <p> suggestion title: <span
+                                                        class="noti-details">{{ $notification->data['title'] }}</span><br>
+                                                    <span style="float: right;  font-size:12px;"> By : <span
+                                                            class="noti-details">{{ $notification->data['user_name'] }}</span>
+                                                    </span>
+                                                </p>
+                                            </a>
+                                            <p class="noti-time"><span
+                                                    class="notification-time">{{ $notification->created_at?->format('j M Y') }}</span>
+                                            </p>
+                                        </div>
+                                    @elseif ($notification->type === 'App\Notifications\ReplyRateNotification')
+                                        <div class="media-body flex-grow-1 row_notification">
+
+                                                <p> Your reply to the  general question has been evaluated by :
+                                                    <span class="details_notification">{{ $notification->data['client_name'] }}</span>
+                                                    <span>
+                                                       <a  href={{ route('show_general_question',$notification->data['question_id'] ) }} class="link_notification" >{{ $notification->data['question'] }}</span></a>
+
+                                                </p>
+
+                                            <p class="noti-time"><span
+                                                    class="notification-time">{{ $notification->created_at?->format('j M Y') }}</span>
+                                            </p>
+                                        </div>
+                                    @elseif ($notification->type === 'App\Notifications\ConsultationNotification')
+                                        <div class="media-body flex-grow-1 row_notification">
+
+                                            <p> A consultation has been sent by :
+                                                <span class="details_notification">{{ $notification->data['client_name'] }}</span>
+                                                <span>
+                                                    <a class="link_notification" href="{{ route('show_consultation', $notification->data['consultation_id']) }}">
+                                                        {{ $notification->data['consultation_title'] }}
+                                                    </a>
+
+                                                </span>
+                                            </p>
+
+                                            <p class="noti-time"><span
+                                                    class="notification-time">{{ $notification->created_at?->format('j M Y') }}</span>
+                                            </p>
+                                        </div>
+                                    @endif
+
                                 </div>
-                            </a>
-                        </li>
+
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
-                {{--  <div class="topnav-dropdown-footer">
-                    <a href="#">View all Notifications</a>
-                </div>  --}}
             </div>
         </li>
+
+
 
         <li class="nav-item me-2">
             <a href="#" class="nav-link header-nav-list win-maximize">
                 <i class="far fa-envelope" style="color: black;
                 font-size: 16px;"></i>
+
             </a>
         </li>
+
         <li class="nav-item zoom-screen me-2">
             <a href="#" class="nav-link header-nav-list win-maximize">
                 <img src="{{ asset('assets/img/icons/header-icon-04.svg') }}" alt="">
@@ -109,7 +175,8 @@
                         @csrf
                     </form>
                 @else
-                    <a class="dropdown-item" href="{{ Route::has('login') ? route('login') : 'javascript:void(0)' }}">
+                    <a class="dropdown-item"
+                        href="{{ Route::has('login') ? route('login') : 'javascript:void(0)' }}">
                         <i class="me-50" data-feather="log-in"></i> Login
                     </a>
                 @endif

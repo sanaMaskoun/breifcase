@@ -1,11 +1,19 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const toggleSwitch = document.querySelector('input[name="toggle_status"]');
-    const hiddenInput = document.querySelector('input[name="status"]');
+// setInterval(function () {
+//     window.location.reload();
+// }, 5000);
 
-    toggleSwitch.addEventListener('change', function () {
-        hiddenInput.value = this.checked ? '0' : '1';
-    });
-});
+
+
+
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     const toggleSwitch = document.querySelector('input[name="toggle_status"]');
+//     const hiddenInput = document.querySelector('input[name="status"]');
+
+//     toggleSwitch.addEventListener('change', function () {
+//         hiddenInput.value = this.checked ? '0' : '1';
+//     });
+// });
 (function ($) {
     "use strict"; var $wrapper = $('.main-wrapper'); var $pageWrapper = $('.page-wrapper'); var $slimScrolls = $('.slimscroll'); var Sidemenu = function () { this.$menuItem = $('#sidebar-menu a'); }; function init() {
         var $this = Sidemenu; $('#sidebar-menu a').on('click', function (e) {

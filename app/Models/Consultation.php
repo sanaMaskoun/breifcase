@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Notifications\Notifiable;
+
 
 class Consultation extends Model implements HasMedia
 {
-    use HasFactory ,InteractsWithMedia ;
+    use HasFactory , Notifiable,InteractsWithMedia ;
     protected  $guarded = [];
 
 

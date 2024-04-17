@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Enums\RolesEnum;
+use App\Events\NotificationEvent;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Notifications\RequestToJoin;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
@@ -34,6 +37,8 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+
+
         if ($user->save()) {
             $tokenResult = $user->createToken('Personal Access Token');
             $token = $tokenResult->plainTextToken;
@@ -42,6 +47,26 @@ class AuthController extends Controller
 
             if ($role == 'client') {
                 $user->update(['is_active' => true]);
+            }
+            else
+            {
+                $admins = User::whereHas('roles', function ($query) {
+                    $query->where('name', 'admin');
+                })->get();
+
+                $joined_user = $request->name;
+                $email = $request->email;
+
+                Notification::send($admins,new RequestToJoin($user->id , $joined_user ,$email));
+                $data =[
+                    'user_id' => $user->id,
+                    'user_name'  => $request->name,
+                    'email'  => $request->email,
+                    'profile_image' => $user->getFirstMediaUrl('profileUser')
+
+               ];
+                event(new NotificationEvent($data));
+
             }
 
             return response()->json([

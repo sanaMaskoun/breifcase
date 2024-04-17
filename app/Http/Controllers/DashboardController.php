@@ -47,7 +47,7 @@ class DashboardController extends Controller
         $monthlyLawyers = [];
         $monthlyClients = [];
         for ($month = 1; $month <= 12; $month++) {
-            $lawyers = User::whereMonth('created_at', $month)
+            $lawyers = User::where('is_active',true)->whereMonth('created_at', $month)
                 ->whereHas('roles', function ($query) {
                     $query->whereIn('name', ['lawyer', 'legalConsultant', 'typingCenter']);
                 })->count();
@@ -65,7 +65,7 @@ class DashboardController extends Controller
     public function lawyerDashboard()
     {
 
-        $consultations = Consultation::where('receiver_id', Auth()->user()->id)->count();
+        $consultations = Consultation::where('receiver_id', Auth()->user()->id)->where('answer','<>',null)->count();
         $replies = QuestionReply::where('user_id', Auth()->user()->id)->count();
         $practices = Auth()->user()->practices->count();
 
@@ -77,7 +77,7 @@ class DashboardController extends Controller
         $monthlyProfits = [];
 
         for ($month = 1; $month <= 12; $month++) {
-            $profitsPerMonth = Consultation::where('receiver_id', Auth()->user()->id)->whereMonth('created_at', $month)
+            $profitsPerMonth = Consultation::where('receiver_id', Auth()->user()->id)->where('answer','<>',null)->whereMonth('created_at', $month)
                 ->with('receiver')
                 ->get()
                 ->map(function ($consultation) {

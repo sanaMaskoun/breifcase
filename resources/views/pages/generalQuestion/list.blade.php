@@ -35,7 +35,7 @@
                                     </li>
                                     <li>
                                         <p>
-                                            No.Replies <span class="badge bg-secondary">
+                                            Num.Replies <span class="badge bg-secondary">
                                                 {{ count($question->Replies) }}</span>
                                         </p>
                                     </li>

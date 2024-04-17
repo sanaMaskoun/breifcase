@@ -6,6 +6,7 @@ use App\Http\Requests\LawyerRequest;
 use App\Models\Practice;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -48,21 +49,14 @@ class LawyerController extends Controller
         $practices = $lawyer->practices;
         $NumReplies = $lawyer->replies->count();
         $NumConsultations = $lawyer->consultations->count();
+
+        $get_id = DB::table('notifications')->where('data->user_id', $lawyer->id)->where('notifiable_id' , Auth()->user()->id)->pluck('id');
+        DB::table('notifications')->where('id', $get_id)->update(['read_at' => now()]);
+
         return view('pages.lawyer.details', compact(['lawyer', 'practices', 'NumReplies', 'NumConsultations']));
     }
 
-    // public function create()
-    // {
-    //            return view('pages.lawyer.create');
-    // }
 
-    // public function store(StoreLawyerRequest $request)
-    // {
-    //     $lawyer =  User::create($request->validated());
-
-    //     return  redirect()->route('list_lawyers')
-    //         ->with('success', 'Added successfully');
-    // }
 
     public function edit(User $lawyer)
     {
@@ -81,18 +75,16 @@ class LawyerController extends Controller
         if (!is_null(request()->file('certification'))) {
             $certifications = request()->file('certification');
 
-        foreach ($certifications as $certification) {
-            $lawyer->addMedia($certification)
-                ->withCustomProperties(['do_not_replace' => true])
-                ->toMediaCollection('certification');
-        }}
+            foreach ($certifications as $certification) {
+                $lawyer->addMedia($certification)
+                    ->withCustomProperties(['do_not_replace' => true])
+                    ->toMediaCollection('certification');
+            }
+        }
         return redirect()->route('show_lawyer', $lawyer->id)->with('success', 'Modified successfully.');
 
     }
-    public function destroy(User $lawyer)
-    {
 
-    }
 
     public function toggleStatus(Request $request, User $lawyer)
     {
@@ -102,5 +94,14 @@ class LawyerController extends Controller
 
         return redirect()->back()->with('success', 'The active status has been updated.');
 
+    }
+
+
+    public function clear_all()
+    {
+        foreach (Auth()->user()->unreadNotifications as $notification){
+            $notification->markAsRead();
+        }
+        return redirect()->back();
     }
 }

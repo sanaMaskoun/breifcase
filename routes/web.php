@@ -59,6 +59,7 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth:sanctum'], function ()
 Route::group(['prefix' => 'consultation', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/{user?}', [ConsultationController::class,  'index'])->name('list_consultations');
     Route::get('/{consultation}/show', [ConsultationController::class, 'show'])->name('show_consultation');
+    Route::post('{consultation}/answer', [ConsultationController::class, 'answer'])->name('answer_consultation');
 
 });
 
@@ -76,5 +77,6 @@ Route::group(['prefix' => 'join_us', 'middleware' => 'auth:sanctum'], function (
 
 
  Route::get('/suggestion', [SuggestionController::class, 'index'])->name('list_suggestion');
+ Route::get('/notification/clear-all', [LawyerController::class, 'clear_all'])->name('notification_clear_all');
 
 Auth::routes();

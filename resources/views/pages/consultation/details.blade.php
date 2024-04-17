@@ -2,16 +2,24 @@
 @section('content')
     <div class="page-wrapper">
         <div class="content container-fluid">
+            @if ($message = Session::get('success'))
+                <div class="col-md-12">
+                    <div class="alert alert-success" role="alert">
+                        {{ $message }}
+                    </div>
+                </div>
+            @endif
+            @if (Session::has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
             <div class="row justify-content-center">
                 <div class="col-xl-10">
                     <div class="card invoice-info-card">
                         <div class="card-body">
                             <div class="invoice-item invoice-item-one">
                                 <div class="row">
-                                    {{--  <div class="col-md-12">  --}}
-                                    <div class="invoice-logo col-md-6">
-                                        <img src="assets/img/logo.png" alt="logo">
-                                    </div>
 
                                     <div class="invoice-sign text-end col-md-6">
 
@@ -32,7 +40,6 @@
                                             style="padding: 1rem;
                                             font-size: 19px;">{{ $statusDescription }}</span>
                                     </div>
-                                    {{--  </div>  --}}
                                 </div>
                             </div>
 
@@ -65,45 +72,53 @@
                                         <div class="invoice-info">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <h4 >Communication</h4>
-                                                    <h4 >Response Time</h4>
-                                                    <h4 >Problem Solving</h4>
-                                                    <h4 >Understanding</h4>
+                                                    <h4>Communication</h4>
+                                                    <h4>Response Time</h4>
+                                                    <h4>Problem Solving</h4>
+                                                    <h4>Understanding</h4>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h4>
                                                         @for ($i = 1; $i <= 5; $i++)
                                                             @if ($i <= $consultation->rate?->communication)
-                                                                <span class="rating-star"><i class="fas fa-star" style="color: #9b3d00"></i></span>
+                                                                <span class="rating-star"><i class="fas fa-star"
+                                                                        style="color: #9b3d00"></i></span>
                                                             @else
-                                                                <span class="rating-star"><i class="far fa-star" style="color: #9b3d00"></i></span>
+                                                                <span class="rating-star"><i class="far fa-star"
+                                                                        style="color: #9b3d00"></i></span>
                                                             @endif
                                                         @endfor
                                                     </h4>
                                                     <h4>
                                                         @for ($i = 1; $i <= 5; $i++)
                                                             @if ($i <= $consultation->rate?->response_time)
-                                                                <span class="rating-star"><i class="fas fa-star" style="color: #9b3d00"></i></span>
+                                                                <span class="rating-star"><i class="fas fa-star"
+                                                                        style="color: #9b3d00"></i></span>
                                                             @else
-                                                                <span class="rating-star"><i class="far fa-star" style="color: #9b3d00"></i></span>
+                                                                <span class="rating-star"><i class="far fa-star"
+                                                                        style="color: #9b3d00"></i></span>
                                                             @endif
                                                         @endfor
                                                     </h4>
                                                     <h4>
                                                         @for ($i = 1; $i <= 5; $i++)
                                                             @if ($i <= $consultation->rate?->problem_solving)
-                                                                <span class="rating-star"><i class="fas fa-star" style="color: #9b3d00"></i></span>
+                                                                <span class="rating-star"><i class="fas fa-star"
+                                                                        style="color: #9b3d00"></i></span>
                                                             @else
-                                                                <span class="rating-star"><i class="far fa-star" style="color: #9b3d00"></i></span>
+                                                                <span class="rating-star"><i class="far fa-star"
+                                                                        style="color: #9b3d00"></i></span>
                                                             @endif
                                                         @endfor
                                                     </h4>
                                                     <h4>
                                                         @for ($i = 1; $i <= 5; $i++)
                                                             @if ($i <= $consultation->rate?->understanding)
-                                                                <span class="rating-star"><i class="fas fa-star" style="color: #9b3d00"></i></span>
+                                                                <span class="rating-star"><i class="fas fa-star"
+                                                                        style="color: #9b3d00"></i></span>
                                                             @else
-                                                                <span class="rating-star"><i class="far fa-star" style="color: #9b3d00"></i></span>
+                                                                <span class="rating-star"><i class="far fa-star"
+                                                                        style="color: #9b3d00"></i></span>
                                                             @endif
                                                         @endfor
                                                     </h4>
@@ -146,6 +161,34 @@
                             <div class="col-lg-6 col-md-6 " style="margin-left: 10px">
                                 <div class="invoice-terms">
                                     <h4>The lawyer answer to the consultation :</h4>
+                                    @if ($consultation->answer === null && $consultation->receiver_id === Auth()->user()->id)
+                                        <form method="POST" action="{{route('answer_consultation',$consultation->id) }}">
+                                                @csrf
+                                                <div class="row">
+
+
+                                                    <div class="col-12 col-sm-4">
+                                                        <div class="form-group local-forms">
+                                                            <input type="text" name="answer" class="form-control">
+                                                            @error('answer')
+                                                                <small class="form-text text-danger">{{ $message }}</small>
+                                                            @enderror
+                                                        </div>
+
+                                                    </div>
+
+
+
+
+
+                                                    <div class="col-12">
+                                                        <div class="student-submit">
+                                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </form>
+                                    @endif
                                     <p>{{ $consultation->answer }}</p>
                                 </div>
                             </div>
