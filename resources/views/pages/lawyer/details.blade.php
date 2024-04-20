@@ -27,6 +27,7 @@
                             <div class="about-info">
                                 <h4>Profile
                                     @role('lawyer|typingCenter|legalConsultant')
+                                    @if(Auth()->user()->id == $lawyer->id)
                                     <div class="uplod d-flex">
                                         <form method="GET" action="{{ route('edit_lawyer', $lawyer->id) }}">
                                             <label class="file-upload profile-upbtn mb-0">
@@ -35,6 +36,7 @@
                                             </label>
                                         </form>
                                     </div>
+                                    @endif
                                     @endrole
                                 </h4>
 

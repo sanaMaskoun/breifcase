@@ -65,7 +65,7 @@ class DashboardController extends Controller
     public function lawyerDashboard()
     {
 
-        $consultations = Consultation::where('receiver_id', Auth()->user()->id)->where('answer','<>',null)->count();
+        $consultations = Consultation::where('receiver_id', Auth()->user()->id)->where('status','<>',null)->count();
         $replies = QuestionReply::where('user_id', Auth()->user()->id)->count();
         $practices = Auth()->user()->practices->count();
 
@@ -95,7 +95,7 @@ class DashboardController extends Controller
         $monthlyClients = [];
         for ($month = 1; $month <= 12; $month++) {
 
-            $clients = Consultation::where('receiver_id', Auth()->user()->id)->whereMonth('created_at', $month)
+            $clients = Consultation::where('receiver_id', Auth()->user()->id)->where('status','<>',null)->whereMonth('created_at', $month)
                 ->count();
             $monthlyClients[] = $clients;
         }

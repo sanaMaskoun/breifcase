@@ -50,9 +50,10 @@ class LawyerController extends Controller
         $NumReplies = $lawyer->replies->count();
         $NumConsultations = $lawyer->consultations->count();
 
-        $get_id = DB::table('notifications')->where('data->user_id', $lawyer->id)->where('notifiable_id' , Auth()->user()->id)->pluck('id');
-        DB::table('notifications')->where('id', $get_id)->update(['read_at' => now()]);
+        $get_notify = DB::table('notifications')->where('data->user_id', $lawyer->id)->where('notifiable_id', Auth()->user()->id)->first();
+        if ($get_notify<>null ){DB::table('notifications')->where('id', $get_notify->id)->update(['read_at' => now()]);}
 
+       
         return view('pages.lawyer.details', compact(['lawyer', 'practices', 'NumReplies', 'NumConsultations']));
     }
 

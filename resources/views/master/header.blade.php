@@ -1,5 +1,7 @@
 <div class="header">
 
+    @role('admin')
+
     <div class="header-left">
         <a href="{{ route('dashboard') }}" class="logo">
             <img class="img-fluid" src="{{ asset('img/logo.jpeg') }}" alt="Logo">
@@ -9,6 +11,19 @@
             <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" width="30" height="30">
         </a>
     </div>
+@endrole
+    @role('lawyer|typingCenter|legalConsultant')
+
+    <div class="header-left">
+        <a href="{{ route('dashboardLawyer') }}" class="logo">
+            <img class="img-fluid" src="{{ asset('img/logo.jpeg') }}" alt="Logo">
+            <h1 class="logo-text">Breifcase</h1>
+        </a>
+        <a href="{{ route('dashboardLawyer') }}" class="logo logo-small">
+            <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" width="30" height="30">
+        </a>
+    </div>
+    @endrole
 
     <div class="menu-toggle">
         <a href="javascript:void(0);" id="toggle_btn">
@@ -96,12 +111,14 @@
                                     @elseif ($notification->type === 'App\Notifications\ReplyRateNotification')
                                         <div class="media-body flex-grow-1 row_notification">
 
-                                                <p> Your reply to the  general question has been evaluated by :
-                                                    <span class="details_notification">{{ $notification->data['client_name'] }}</span>
-                                                    <span>
-                                                       <a  href={{ route('show_general_question',$notification->data['question_id'] ) }} class="link_notification" >{{ $notification->data['question'] }}</span></a>
+                                            <p> Your reply to the general question has been evaluated by :
+                                                <span
+                                                    class="details_notification">{{ $notification->data['client_name'] }}</span>
+                                                <span>
+                                                    <a href={{ route('show_general_question', $notification->data['question_id']) }}
+                                                        class="link_notification">{{ $notification->data['question'] }}</span></a>
 
-                                                </p>
+                                            </p>
 
                                             <p class="noti-time"><span
                                                     class="notification-time">{{ $notification->created_at?->format('j M Y') }}</span>
@@ -111,9 +128,11 @@
                                         <div class="media-body flex-grow-1 row_notification">
 
                                             <p> A consultation has been sent by :
-                                                <span class="details_notification">{{ $notification->data['client_name'] }}</span>
+                                                <span
+                                                    class="details_notification">{{ $notification->data['client_name'] }}</span>
                                                 <span>
-                                                    <a class="link_notification" href="{{ route('show_consultation', $notification->data['consultation_id']) }}">
+                                                    <a class="link_notification"
+                                                        href="{{ route('show_consultation', $notification->data['consultation_id']) }}">
                                                         {{ $notification->data['consultation_title'] }}
                                                     </a>
 
@@ -137,13 +156,7 @@
 
 
 
-        <li class="nav-item me-2">
-            <a href="#" class="nav-link header-nav-list win-maximize">
-                <i class="far fa-envelope" style="color: black;
-                font-size: 16px;"></i>
 
-            </a>
-        </li>
 
         <li class="nav-item zoom-screen me-2">
             <a href="#" class="nav-link header-nav-list win-maximize">
@@ -256,7 +269,13 @@
                     </li>
                 @endrole
 
+                <li>
+                    <a href="{{ route('chat') }}"><i class="fas fa-comments"></i>
 
+                        <span>Chat</span>
+
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

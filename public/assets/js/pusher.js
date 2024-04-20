@@ -13,7 +13,7 @@ var notifications = notificationsWrapper.find('ul.notification-list');
 
 var channelNotification = pusher.subscribe('notify-channel');
 var channelSuggestion = pusher.subscribe('suggestion-channel');
-var channelConsultation = pusher.subscribe('consultation-channel');
+var channelConsultation = pusher.subscribe('consultation-channel.' + localStorage.getItem('user_id'));
 var channelReplayRate = pusher.subscribe('rate-channel');
 
 channelNotification.bind('App\\Events\\NotificationEvent', function (data) {
@@ -68,7 +68,7 @@ channelSuggestion.bind('App\\Events\\SuggestionEvent', function (data) {
     notificationsWrapper.show();
 });
 
-channelConsultation.bind('App\\Events\\ConsultationEvent', function (data) {
+channelConsultation.bind('App\\Events\\ConsultationEvent', function (data) {console.log(1);
     var newConsultation = `
     <li class="notification-message">
      <div class="media d-flex">

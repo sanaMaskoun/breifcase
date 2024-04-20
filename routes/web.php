@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ClientController;
@@ -73,10 +74,19 @@ Route::group(['prefix' => 'join_us', 'middleware' => 'auth:sanctum'], function (
     Route::get('/', [JoinUsController::class,  'index'])->name('list_join_us');
 
 });
+Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [ChatController::class,  'chat'])->name('chat');
+    Route::get('{receiver}', [ChatController::class,  'chat_form'])->name('chat_form');
+    Route::get('/group/{group}', [ChatController::class,  'group_form'])->name('group_form');
+    Route::post('{receiver}', [ChatController::class,  'send_message'])->name('send_message');
+
+});
 
 
 
  Route::get('/suggestion', [SuggestionController::class, 'index'])->name('list_suggestion');
  Route::get('/notification/clear-all', [LawyerController::class, 'clear_all'])->name('notification_clear_all');
+
+
 
 Auth::routes();
