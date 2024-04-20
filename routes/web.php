@@ -76,9 +76,12 @@ Route::group(['prefix' => 'join_us', 'middleware' => 'auth:sanctum'], function (
 });
 Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [ChatController::class,  'chat'])->name('chat');
+
     Route::get('{receiver}', [ChatController::class,  'chat_form'])->name('chat_form');
+    Route::post('{receiver}', [ChatController::class,  'send_message_to_user'])->name('send_message_to_user');
+
     Route::get('/group/{group}', [ChatController::class,  'group_form'])->name('group_form');
-    Route::post('{receiver}', [ChatController::class,  'send_message'])->name('send_message');
+    Route::post('/group/{group}', [ChatController::class,  'send_message_to_group'])->name('send_message_to_group');
 
 });
 

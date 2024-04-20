@@ -57,7 +57,7 @@
             </div>
 
             <div class="chat-footer">
-                <form action="{{ route('send_message', $receiver->id) }}" method="POST">
+                <form action="{{ route('send_message_to_user', $receiver->id) }}" method="POST">
                     @csrf
                     <div class="input-group input-group-chat">
                         <div class="input-group-prepend">
@@ -65,7 +65,7 @@
                                 <i class="fas fa-paperclip"></i>
                                 </button>
                         </div>
-                        <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Type a message...">
+                        <input type="text" name="message" class="form-control" aria-label="Text input with dropdown button" placeholder="Type a message...">
                         <div class="input-group-append">
                             <button class="btn btn-primary send-button" type="submit">Send</button>
                         </div>

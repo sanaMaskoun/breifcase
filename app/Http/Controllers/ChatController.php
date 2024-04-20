@@ -103,12 +103,29 @@ class ChatController extends Controller
             $query->where('groups.id', $group->id);
         })->get();
 
-        return view('pages.chat.formGroup', compact(['lawyers', 'groups', 'users', 'messages', 'members','group']));
+        return view('pages.chat.formGroup', compact(['lawyers', 'groups', 'users', 'messages', 'members', 'group']));
 
     }
 
-    public function send_message(User $recevier)
+    public function send_message_to_user(Request $request, User $receiver)
     {
-        return 1;
+        $message = new Message();
+        $message->sender_id = auth()->user()->id;
+        $message->receiver_id = $receiver->id;
+        $message->message = $request->input('message');
+        $message->save();
+
+        return redirect()->back();
+    }
+
+    public function send_message_to_group(Request $request, Group $group)
+    {
+        $message = new Message();
+        $message->sender_id = auth()->user()->id;
+        $message->group_id = $group->id;
+        $message->message = $request->input('message');
+        $message->save();
+
+        return redirect()->back();
     }
 }
