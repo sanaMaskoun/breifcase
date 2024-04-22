@@ -60,7 +60,7 @@
                                                         </h6>
                                                     </div>
                                                     <div class="col-lg-4">
-                                                        <span><i class="far fa-calendar-alt"></i> Due Date</span>
+                                                        <span><i class="far fa-calendar-alt"></i> Created at</span>
                                                         <h6 class="mb-0">{{ $consultation->created_at?->format('Y-m-d') }}
                                                         </h6>
                                                     </div>

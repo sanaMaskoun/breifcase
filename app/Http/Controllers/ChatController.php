@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChatRequest;
 use App\Models\Group;
 use App\Models\Message;
 use App\Models\User;
@@ -14,9 +15,9 @@ class ChatController extends Controller
     {
         $users = User::where('is_active', true)
             ->where('id', '<>', Auth()->user()->id)
-            ->whereHas('roles', function ($query) {
-                $query->whereIn('name', ['lawyer', 'legalConsultant', 'client', 'typingCenter']);
-            })
+        // ->whereHas('roles', function ($query) {
+        //     $query->whereIn('name', ['lawyer', 'legalConsultant', 'client', 'typingCenter']);
+        // })
             ->whereHas('sender_message', function ($query) {
                 $query->where('receiver_id', Auth()->user()->id);
             })
@@ -95,37 +96,65 @@ class ChatController extends Controller
 
     public function group_form(Group $group)
     {
+        $admin = User::whereHas('groups', function ($query) use ($group) {
+            $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
+        })->first();
         $users = session('users');
         $groups = session('groups');
         $lawyers = session('lawyers');
         $messages = Message::where('group_id', $group->id)->get();
-        $members = User::whereHas('groups', function ($query) use ($group) {
-            $query->where('groups.id', $group->id);
-        })->get();
 
-        return view('pages.chat.formGroup', compact(['lawyers', 'groups', 'users', 'messages', 'members', 'group']));
+        return view('pages.chat.formGroup', compact(['lawyers', 'groups', 'users', 'messages', 'admin', 'group']));
 
     }
 
     public function send_message_to_user(Request $request, User $receiver)
     {
-        $message = new Message();
-        $message->sender_id = auth()->user()->id;
-        $message->receiver_id = $receiver->id;
-        $message->message = $request->input('message');
-        $message->save();
+        if($request->input('message') == null)
+        {
+            return redirect()->back();
 
+        }
+        $new_message = Message::create([
+            'message'     => $request->message,
+            'sender_id'   => auth()->user()->id,
+            'receiver_id' => $request->receiver->id
+        ]);
+
+        if (!is_null(request()->file('attachments'))) {
+            $attachments = request()->file('attachments');
+
+            foreach ($attachments as $attachment) {
+                $new_message->addMedia($attachment)
+                    ->withCustomProperties(['do_not_replace' => true])
+                    ->toMediaCollection('attachments');
+            }
+        }
         return redirect()->back();
     }
 
     public function send_message_to_group(Request $request, Group $group)
     {
-        $message = new Message();
-        $message->sender_id = auth()->user()->id;
-        $message->group_id = $group->id;
-        $message->message = $request->input('message');
-        $message->save();
+        if($request->input('message') == null)
+        {
+            return redirect()->back();
 
+        }
+        $new_message = Message::create([
+            'message'     => $request->message,
+            'sender_id'   => auth()->user()->id,
+            'group_id'    => $group->id
+        ]);
+
+        if (!is_null(request()->file('attachments'))) {
+            $attachments = request()->file('attachments');
+
+            foreach ($attachments as $attachment) {
+                $new_message->addMedia($attachment)
+                    ->withCustomProperties(['do_not_replace' => true])
+                    ->toMediaCollection('attachments');
+            }
+        }
         return redirect()->back();
-    }
+           }
 }

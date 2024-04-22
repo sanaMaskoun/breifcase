@@ -24,26 +24,26 @@ class UserController extends Controller
             ])
             ->where('is_active', true)
             ->get();
-    
+
         $legalConsultant = $this->getUsersByRole($users, 'legalConsultant');
-        $lawyers = $this->getUsersByRole($users, 'Lawyer');
+        $lawyers = $this->getUsersByRole($users, 'lawyer');
         $typingCenter = $this->getUsersByRole($users, 'typingCenter');
-    
+
         return response()->json([
             'lawyers' => UserResource::collection($lawyers),
             'legalConsultant' => UserResource::collection($legalConsultant),
             'typingCenter' => UserResource::collection($typingCenter),
         ]);
     }
-    
+
     private function getUsersByRole($users, $role)
     {
         return $users->filter(function ($user) use ($role) {
             return $user->roles->contains('name', $role);
         });
     }
-    
-    
+
+
     public function show(User $user)
     {
         $averageRate = DB::table('rates')

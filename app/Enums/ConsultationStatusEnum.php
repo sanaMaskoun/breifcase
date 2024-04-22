@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare (strict_types = 1);
 
 namespace App\Enums;
 
@@ -11,6 +11,8 @@ use BenSampo\Enum\Enum;
  */
 final class ConsultationStatusEnum extends Enum
 {
-    const closed = 1;
-    const ongoing = 2;
+    const ongoing = 1;
+
+    const closed = 2;
+    const Unknown = 3;
 }

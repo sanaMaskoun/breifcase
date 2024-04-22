@@ -10,6 +10,25 @@
                     </div>
                 </div>
             </div>
+            <form method="GET" action="{{ route('list_consultations') }}">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="status">status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value=""></option>
+                                <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Ongoing</option>
+                                <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>Closed</option>
+                                <option value="3" {{ request('status') == '3' ? 'selected' : '' }}>Unknown</option>
+                                </select>
+                                <button class="btn btn_status" type="submit"><i class="fas fa-search"></i></button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
 
             <div class="row">
                 @foreach ($consultations as $consultation)
@@ -45,7 +64,7 @@
                                         <h6 class="mb-0">{{ $consultation->receiver->consultation_price }}</h6>
                                     </div>
                                     <div class="col-auto">
-                                        <span><i class="far fa-calendar-alt"></i> Due Date</span>
+                                        <span><i class="far fa-calendar-alt"></i> Created at</span>
                                         <h6 class="mb-0">{{ $consultation->created_at?->format('Y-m-d') }}</h6>
                                     </div>
                                 </div>

@@ -300,7 +300,7 @@
                                             <div class="hello-park">
                                                 <div class="certificate">
                                                     @foreach ($lawyer->getMedia('certification') as $certificate)
-                                                        
+
                                                         <img src="{{ asset($certificate->getUrl()) }}" alt="Certificate">
                                                     @endforeach
                                                 </div>
@@ -308,7 +308,7 @@
                                                     <label for="file-upload" class="btn btn-primary">
                                                         <i class="fas fa-cloud-upload-alt"></i> Upload Certificate
                                                     </label>
-                                                    <input id="file-upload" type="file" name="certification[]" multiple 
+                                                    <input id="file-upload" type="file" name="certification[]" multiple
                                                         style="display: none;">
                                                     @if ($errors->has('certification'))
                                                         <span

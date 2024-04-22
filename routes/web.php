@@ -7,6 +7,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GeneralQuestionController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\JoinUsController;
 use App\Http\Controllers\LawyerController;
 use App\Http\Controllers\SuggestionController;
@@ -83,6 +84,13 @@ Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/group/{group}', [ChatController::class,  'group_form'])->name('group_form');
     Route::post('/group/{group}', [ChatController::class,  'send_message_to_group'])->name('send_message_to_group');
 
+});
+
+Route::group(['prefix' => 'group', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/create', [GroupController::class, 'create'])->name('add_group');
+    Route::post('/store', [GroupController::class, 'store'])->name('store_group');
+    Route::get('/edit/{group}', [GroupController::class, 'edit'])->name('edit_group');
+    Route::post('/update/{group}', [GroupController::class, 'update'])->name('update_group');
 });
 
 

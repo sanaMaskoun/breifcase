@@ -32,7 +32,8 @@
                             </ul>
 
                             <div class="tab-content">
-                                <div class="tab-pane fade show active" id="chats" role="tabpanel" aria-labelledby="chats-tab">
+                                <div class="tab-pane fade show active" id="chats" role="tabpanel"
+                                    aria-labelledby="chats-tab">
                                     <ul class="card-body px-0" style="height: 450px; overflow-y: auto;">
                                         @foreach ($users as $user)
                                             <li class="mb-4 px-5 py-2">
@@ -67,11 +68,17 @@
 
                                 <div class="tab-pane fade" id="groups" role="tabpanel" aria-labelledby="groups-tab">
                                     <ul class="card-body px-0" style="height: 450px; overflow-y: auto;">
+                                        <form method="GET" action="{{ route('add_group') }}">
+                                            @csrf
+                                            <button type="submit" class="create-group-btn">
+                                                <i class="fas fa-plus"></i> Create Group
+                                            </button>
+                                        </form>
                                         @foreach ($groups as $group)
                                             <li class="mb-4 px-5 py-2">
-                                                <a href="javascript:void(0)" class="media media-message">
-                                                    <div class="position-relative mr-3">
-                                                        <a href="{{ route('group_form', $group->id) }}">
+                                                <a class="media media-message">
+                                                    <div class="position-relative mr-3 ">
+                                                        <a class="icon_group" href="{{ route('group_form', $group->id) }}">
 
                                                             <i class="fas fa-users"></i>
 

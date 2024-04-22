@@ -280,6 +280,29 @@ p.last-msg.text-smoke {
 }
 
 
+.create-group-btn {
+    background-color: #9b3d00;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.create-group-btn:hover {
+    background-color: #9b3d00;
+}
+
+.fa-plus {
+    margin-right: 8px;
+}
+
+
+
+
 .text-smoke {
     color: #8a909d !important;
 }
@@ -978,8 +1001,8 @@ table.table td h2 span {
 }
 
 .settings-btns .btn-orange:hover {
-    background: #18aefa;
-    border: 1px solid #18aefa;
+    background: #d8801e;
+    border: 1px solid #d8801e;
     color: #fff;
     opacity: .8
 }
@@ -1597,7 +1620,7 @@ button.bg-success:hover {
 
 .bg-info,
 .badge-info {
-    background-color: #009efb !important
+    background-color: #d8801e !important
 }
 
 .pro-bg-info,
@@ -1667,7 +1690,7 @@ button.bg-danger:hover {
 
 .text-info,
 .dropdown-menu>li>a.text-info {
-    color: #009efb !important
+    color: #d8801e !important
 }
 
 .text-warning,
@@ -1797,8 +1820,8 @@ button.bg-danger:hover {
 }
 
 .btn-info {
-    background-color: #009efb;
-    border: 1px solid #009efb
+    background-color: #d8801e;
+    border: 1px solid #d8801e
 }
 
 .btn-info:hover,
@@ -1839,8 +1862,8 @@ button.bg-danger:hover {
 
 .btn-info.disabled,
 .btn-info:disabled {
-    background-color: #009efb;
-    border-color: #009efb;
+    background-color: #d8801e;
+    border-color: #d8801e;
     color: #fff
 }
 
@@ -2049,14 +2072,14 @@ button.bg-danger:hover {
 }
 
 .btn-outline-info {
-    color: #009efb;
-    border-color: #009efb
+    color: #d8801e;
+    border-color: #d8801e
 }
 
 .btn-outline-info:hover {
     color: #fff;
-    background-color: #009efb;
-    border-color: #009efb
+    background-color: #d8801e;
+    border-color: #d8801e
 }
 
 .btn-outline-info:focus,
@@ -2067,14 +2090,14 @@ button.bg-danger:hover {
 .btn-outline-info.disabled,
 .btn-outline-info:disabled {
     background-color: transparent;
-    color: #009efb
+    color: #d8801e
 }
 
 .btn-outline-info:not(:disabled):not(.disabled):active,
 .btn-outline-info:not(:disabled):not(.disabled).active,
 .show>.btn-outline-info.dropdown-toggle {
-    background-color: #009efb;
-    border-color: #009efb
+    background-color: #d8801e;
+    border-color: #d8801e
 }
 
 .btn-outline-info:not(:disabled):not(.disabled):active:focus,
@@ -5832,7 +5855,7 @@ table.table-inbox tbody tr.checked {
     margin-bottom: 10px;
     margin-right: 10px;
     color: #fff;
-    background: #009efb
+    background: #d8801e
 }
 
 .dash-widget1 .dash-btn .btn:last-child {
@@ -5840,18 +5863,18 @@ table.table-inbox tbody tr.checked {
 }
 
 .dash-widget1 .dash-btn .btn:hover {
-    color: #009efb;
+    color: #d8801e;
     background: 0 0
 }
 
 .dash-widget1 .dash-btn .btn-border {
-    color: #009efb;
+    color: #d8801e;
     background: 0 0
 }
 
 .dash-widget1 .dash-btn .btn-border:hover {
     color: #fff;
-    background: #009efb
+    background: #d8801e
 }
 
 .view-link {
@@ -6891,7 +6914,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .card-middle-avatar a:hover {
-    color: #0a58ca
+    color: #9b3d00
 }
 
 .invoices-grid-card .card-footer {
@@ -6991,7 +7014,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoices-page-header .invoices-breadcrumb-item a:hover {
-    color: #18aefa
+    color: #9b3d00
 }
 
 .invoices-page-header .invoices-breadcrumb-item i {
@@ -7033,7 +7056,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoices-create-btn .invoices-preview-link:hover {
-    color: #18aefa
+    color: #9b3d00
 }
 
 .invoices-create-btn .delete-invoice-btn {
@@ -7042,7 +7065,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .invoices-create-btn .delete-invoice-btn:hover {
-    background: #18aefa
+    background: #9b3d00
 }
 
 .invoices-create-btn .save-invoice-btn {
@@ -7114,7 +7137,7 @@ table.table-inbox tbody tr.checked {
 
 .invoice-inner-head span a:hover {
     font-weight: 500;
-    color: #377dff
+    color: #9b3d00
 }
 
 .invoice-inner-footer {
@@ -7300,11 +7323,11 @@ table.table-inbox tbody tr.checked {
 }
 
 .faq-tab .panel-title a:hover {
-    color: #1b2559
+    color: #9b3d00
 }
 
 .faq-tab .panel-title a:not(.collapsed) {
-    color: #1b2559
+    color: #9b3d00
 }
 
 .faq-tab .panel-title a.collapsed::after {
@@ -7344,6 +7367,32 @@ table.table-inbox tbody tr.checked {
     border-radius: 0 0 4px 4px
 }
 
+.edit_group{
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+.admin-status{
+    position: absolute;
+    top: 25px;
+    left: 14rem;
+    color: #d8801e;
+    margin-left: 2px;
+}
+.btn_status
+{
+    position: absolute;
+    top: 11.5rem;
+    left: 26rem;
+}
+.img_members{
+    width: 30px;
+    height: 30px;
+}
+
+.icon_group:hover{
+color: #d8801e !important;
+}
 .invoice-total-card .invoice-total-title {
     font-weight: 600;
     font-size: 16px;
@@ -9640,7 +9689,7 @@ a.comment-btn:hover {
 }
 
 .nav-bordered a.active {
-    border-bottom: 2px solid #0d6efd !important
+    border-bottom: 2px solid #9b3d00 !important
 }
 
 .nav-bordered .nav-item {
@@ -9989,16 +10038,16 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-o
 
 .cd-horizontal-timeline .events a {
     padding-bottom: 6px;
-    color: #621aff
+    color: #d8801e
 }
 
 .cd-horizontal-timeline .filling-line,
 .cd-horizontal-timeline .events a.selected::after {
-    background: #621aff
+    background: #d8801e
 }
 
 .cd-horizontal-timeline .events a.selected::after {
-    border-color: #621aff
+    border-color: #d8801e
 }
 
 .cd-horizontal-timeline .m-t-40 {
@@ -10012,13 +10061,13 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-o
 
 .cd-timeline-navigation a:hover,
 .cd-timeline-navigation a:focus {
-    border-color: #621aff
+    border-color: #d8801e
 }
 
 .cd-horizontal-timeline a,
 .cd-horizontal-timeline a:hover,
 .cd-horizontal-timeline a:focus {
-    color: #621aff
+    color: #d8801e
 }
 
 .cd-horizontal-timeline blockquote,
@@ -10108,7 +10157,7 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-o
     top: 0;
     height: 100%;
     width: 100%;
-    background-color: #621aff;
+    background-color: #d8801e;
     -webkit-transform: scaleX(0);
     -moz-transform: scaleX(0);
     -ms-transform: scaleX(0);
@@ -10160,8 +10209,8 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-o
 }
 
 .no-touch .cd-horizontal-timeline .events a:hover::after {
-    background-color: #621aff;
-    border-color: #621aff
+    background-color: #d8801e;
+    border-color: #d8801e
 }
 
 .cd-horizontal-timeline .events a.selected {
@@ -10169,12 +10218,12 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-o
 }
 
 .cd-horizontal-timeline .events a.selected::after {
-    background-color: #621aff;
-    border-color: #621aff
+    background-color: #d8801e;
+    border-color: #d8801e
 }
 
 .cd-horizontal-timeline .events a.older-event::after {
-    border-color: #621aff
+    border-color: #d8801e
 }
 
 .cd-timeline-navigation a {

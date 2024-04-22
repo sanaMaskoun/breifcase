@@ -139,10 +139,10 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <span><i class="far fa-money-bill-alt"></i> Amount</span>
-                                                            <h6 class="mb-0">$1,54,220</h6>
+                                                            <h6 class="mb-0">{{ $consultation->receiver?->consultation_price }}</h6>
                                                         </div>
                                                         <div class="col">
-                                                            <span><i class="far fa-calendar-alt"></i> Due Date</span>
+                                                            <span><i class="far fa-calendar-alt"></i> Created at</span>
                                                             <h6 class="mb-0">
                                                                 {{ $consultation->created_at?->format('Y-m-d') }}</h6>
                                                         </div>

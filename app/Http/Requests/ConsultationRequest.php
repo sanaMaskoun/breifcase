@@ -7,13 +7,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ConsultationRequest extends FormRequest
 {
-    
+
     public function authorize(): bool
     {
         return true;
     }
 
-  
+
     public function rules(): array
     {
         return [
@@ -30,6 +30,7 @@ class ConsultationRequest extends FormRequest
             'description'         => $this->description,
             'sender_id'           => Auth()->user()->id,
             'receiver_id'         => $this->receiver->id,
+            'status'              => ConsultationStatusEnum::Unknown
         ];
     }
 }

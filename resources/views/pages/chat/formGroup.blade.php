@@ -4,9 +4,21 @@
         <!-- Chat -->
         <div class="card card-default chat-right-sidebar">
             <div class="card-header">
+                <h2><i class="fas fa-users"></i> {{ $group->name }}</h2>
+                <span class="admin-status">@if($admin) <i class="fas fa-crown"></i> @endif</span>
+                @if( $admin)
 
-                <h2> <i class="fas fa-users"></i> {{ $group->name }}</h2>
+                    <form method="GET" action="{{ route('edit_group', $group->id) }}">
+                        <label  class="edit_group">
+                            <button type="submit" class="btn"> <i
+                                    class="feather-edit-3"></i></button>
+                        </label>
+                    </form>
+
+                @endif
             </div>
+
+
 
             <div class="card-body pb-0" style="max-height: 450px; overflow-y: auto;">
                 @if ($messages->isEmpty())
@@ -20,7 +32,15 @@
                             <div class="media media-chat media-chat-right">
                                 <div class="media-body">
                                     <div class="text-content">
-
+                                        @if ($message->getFirstMediaUrl('attachments') != null)
+                                        @if (
+                                            $message->getMedia('attachments')->first()->extension == 'jpg' ||
+                                                $message->getMedia('attachments')->first()->extension == 'png')
+                                            <img class=" img_group"
+                                                src="{{ asset($message->getFirstMediaUrl('attachments')) }}">
+                                        @else
+                                            <a href="{{ $message->getFirstMediaUrl('attachments') }}" @endif
+                                        @endif
                                         <span class="message">{{ $message->message }}</span>
                                         <time class="time">{{ $message->created_at->diffForHumans() }}</time>
                                     </div>
@@ -43,6 +63,15 @@
                                     </a>
 
                                     <div class="text-content">
+                                        @if ($message->getFirstMediaUrl('attachments') != null)
+                                        @if (
+                                            $message->getMedia('attachments')->first()->extension == 'jpg' ||
+                                                $message->getMedia('attachments')->first()->extension == 'png')
+                                            <img class=" img_group"
+                                                src="{{ asset($message->getFirstMediaUrl('attachments')) }}">
+                                        @else
+                                            <a href="{{ $message->getFirstMediaUrl('attachments') }}" @endif
+                                        @endif
                                         <span class="message">{{ $message->message }}</span>
                                         <time class="time">{{ $message->created_at->diffForHumans() }}</time>
                                     </div>
@@ -55,16 +84,17 @@
             </div>
 
             <div class="chat-footer">
-                <form action="{{ route('send_message_to_group', $group->id) }}" method="POST">
+                <form action="{{ route('send_message_to_group', $group->id) }}" method="POST"   enctype="multipart/form-data">
+
                     @csrf
                     <div class="input-group input-group-chat">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary" type="button" id="emoji-button">
-                                <i class="fas fa-paperclip"></i>
-                            </button>
-                        </div>
-                        <input type="text" name="message" class="form-control" aria-label="Text input with dropdown button"
-                            placeholder="Type a message...">
+                        <label for="fileInput">
+                            <i class="fas fa-paperclip"></i>
+                        </label>
+                        <input id="fileInput" type="file" name="attachments[]" multiple style="display: none;">
+
+                        <input type="text" name="message" class="form-control"
+                            aria-label="Text input with dropdown button" placeholder="Type a message...">
                         <div class="input-group-append">
                             <button class="btn btn-primary send-button" type="submit">Send</button>
                         </div>
