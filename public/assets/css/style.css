@@ -22,9 +22,71 @@ h6 {
     margin-top: 0;
     color: #000
 }
+.file_attachments
+{
+    font-size: 50px;
+    width: 70px;
+    margin-left: 33px;
+}
+.img_file
+{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+#openAllAttachments {
+    padding: 6px 12px;
+    margin-left: 5px;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    color: #343a40;
+    border: 1px solid #ced4da;
+}
 
+#openAllAttachments:hover {
+    background-color: #e2e6ea;
+    color: #212529;
+    border-color: #b8c2cc;
+}
 
+.profile {
+    height: max-content !important;
+    max-height: unset !important;
+    overflow: visible !important;
+}
 
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: end;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 1px 12px;
+    margin: 0 4px;
+    color: #9b3d00;
+    border: 1px solid #9b3d00;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #9b3d00;
+    color: #fff;
+}
+
+.pagination .page-info {
+    margin-right: 10px;
+}
+
+.name_group
+{
+    display: inline-block;
+}
 /*===== CHAT =====*/
 .chat-left-sidebar {
     margin-bottom: 0;
@@ -7373,11 +7435,8 @@ table.table-inbox tbody tr.checked {
     top: 10px;
 }
 .admin-status{
-    position: absolute;
-    top: 25px;
-    left: 14rem;
+
     color: #d8801e;
-    margin-left: 2px;
 }
 .btn_status
 {

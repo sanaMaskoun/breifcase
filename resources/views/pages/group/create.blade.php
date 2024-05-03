@@ -15,7 +15,7 @@
                 <div class="row align-items-center">
                     <div class="col-sm-12">
                         <div class="page-sub-header">
-                            <h3 class="page-title">create group</h3>
+                            <h3 class="page-title">@lang('pages.create_group')</h3>
 
                         </div>
                     </div>
@@ -30,30 +30,35 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
-                                        <h5 class="form-title student-info">Group information <span></span>
+                                        <h5 class="form-title student-info">@lang('pages.group_information') <span></span>
                                         </h5>
                                     </div>
 
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
-                                            <label>Name <span class="login-danger">*</span></label>
+                                            <label>@lang('pages.name') <span class="login-danger">*</span></label>
                                             <input class="form-control" type="text" name="name"
-                                                placeholder="Enter Name">
+                                                placeholder=@lang('pages.enter_name')>
+                                            @if ($errors->has('name'))
+                                                <span class="errormsg text-danger">{{ $errors->first('name') }}</span>
+                                            @endif
                                         </div>
                                     </div>
 
 
 
                                     <div class="hello-park">
-                                        <h4>choose members</h4>
+                                        <h4>@lang('pages.choose_members')</h4>
 
                                         <div class="educate-year">
                                             <div class="follow-btn-group">
                                                 @foreach ($members as $member)
-                                                    <label  style="padding-left: 10px">
+                                                    <label style="padding-left: 10px">
                                                         <input type="checkbox" name="members[]" value="{{ $member->id }}">
-                                                          <img class="rounded-circle img_members" src="{{ asset($member->getFirstMediaUrl('profileUser')) }}"
-                                                          alt="User Image"> <span> {{ $member->name }} </span> </label><br><br>
+                                                        <img class="rounded-circle img_members"
+                                                            src="{{ asset($member->getFirstMediaUrl('profileUser')) }}"
+                                                            alt="User Image"> <span> {{ $member->name }} </span>
+                                                    </label><br><br>
                                                 @endforeach
                                                 @if ($errors->has('members'))
                                                     <span
@@ -67,7 +72,7 @@
 
                                     <div class="col-12">
                                         <div class="student-submit">
-                                            <button type="submit" class="btn btn-primary"> save </button>
+                                            <button type="submit" class="btn btn-primary"> @lang('pages.save') </button>
                                         </div>
                                     </div>
                                 </div>

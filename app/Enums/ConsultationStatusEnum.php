@@ -14,5 +14,6 @@ final class ConsultationStatusEnum extends Enum
     const ongoing = 1;
 
     const closed = 2;
-    const Unknown = 3;
+    const pending = 3;
+    const rejected = 4;
 }

@@ -30,7 +30,7 @@ class ConsultationRequest extends FormRequest
             'description'         => $this->description,
             'sender_id'           => Auth()->user()->id,
             'receiver_id'         => $this->receiver->id,
-            'status'              => ConsultationStatusEnum::Unknown
+            'status'              => ConsultationStatusEnum::pending
         ];
     }
 }

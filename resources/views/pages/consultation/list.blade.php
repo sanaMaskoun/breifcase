@@ -6,7 +6,7 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Consultations </h3>
+                        <h3 class="page-title">@lang('pages.consultation') </h3>
                     </div>
                 </div>
             </div>
@@ -15,14 +15,15 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="status">status</label>
+                            <label for="status">@lang('pages.status')</label>
                             <select name="status" id="status" class="form-control">
                                 <option value=""></option>
-                                <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Ongoing</option>
-                                <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>Closed</option>
-                                <option value="3" {{ request('status') == '3' ? 'selected' : '' }}>Unknown</option>
-                                </select>
-                                <button class="btn btn_status" type="submit"><i class="fas fa-search"></i></button>
+                                <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>@lang('EnumFile.Ongoing')</option>
+                                <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>@lang('EnumFile.Closed')</option>
+                                <option value="3" {{ request('status') == '3' ? 'selected' : '' }}>@lang('EnumFile.Pending')</option>
+                                <option value="4" {{ request('status') == '4' ? 'selected' : '' }}>@lang('EnumFile.Rejected')</option>
+                            </select>
+                            <button class="btn btn_status" type="submit"><i class="fas fa-search"></i></button>
 
                         </div>
                     </div>
@@ -32,10 +33,13 @@
 
             <div class="row">
                 @foreach ($consultations as $consultation)
+                    @php
+                        $encodedId = base64_encode($consultation->id);
+                    @endphp
                     <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
                         <div class="card invoices-grid-card w-100">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <a href="{{ route('show_consultation', $consultation->id) }}"
+                                <a href="{{ route('show_consultation', $encodedId) }}"
                                     class="invoice-grid-link">{{ $consultation->title }}</a>
                                 <div class="dropdown dropdown-action">
                                     <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
@@ -43,7 +47,7 @@
                                     <div class="dropdown-menu dropdown-menu-end">
 
                                         <a class="dropdown-item"
-                                            href="{{ route('show_consultation', $consultation->id) }}"><i
+                                            href="{{ route('show_consultation', $encodedId) }}"><i
                                                 class="far fa-eye me-2"></i>View</a>
 
                                     </div>
@@ -51,7 +55,7 @@
                             </div>
                             <div class="card-middle">
                                 <h2 class="card-middle-avatar">
-                                    <a href="{{ route('show_client', $consultation->sender->id) }}"><img
+                                    <a href="{{ route('show_client', $encodedId) }}"><img
                                             class="avatar avatar-sm me-2 avatar-img rounded-circle"
                                             src="{{ $consultation->sender->getFirstMediaUrl('profileUser') }}"
                                             alt="User Image"> {{ $consultation->sender->name }}</a>
@@ -60,11 +64,11 @@
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <span><i class="far fa-money-bill-alt"></i> Amount</span>
+                                        <span><i class="far fa-money-bill-alt"></i> @lang('pages.amount')</span>
                                         <h6 class="mb-0">{{ $consultation->receiver->consultation_price }}</h6>
                                     </div>
                                     <div class="col-auto">
-                                        <span><i class="far fa-calendar-alt"></i> Created at</span>
+                                        <span><i class="far fa-calendar-alt"></i>@lang('pages.created_at')</span>
                                         <h6 class="mb-0">{{ $consultation->created_at?->format('Y-m-d') }}</h6>
                                     </div>
                                 </div>
@@ -77,7 +81,7 @@
                                                 ? \App\Enums\ConsultationStatusEnum::getDescription(
                                                     $consultation->status,
                                                 )
-                                                : 'Unknown';
+                                                : 'pending';
                                             $badgeColor =
                                                 $consultation->status == 1
                                                     ? 'bg-danger'
@@ -85,7 +89,7 @@
                                                         ? 'bg-success'
                                                         : 'bg-primary');
                                         @endphp
-                                        <span class="badge {{ $badgeColor }}">{{ $statusDescription }}</span>
+                                        <span class="badge {{ $badgeColor }}">@lang('EnumFile.'.$statusDescription)</span>
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +97,14 @@
                     </div>
                 @endforeach
 
-
+                <div class="pagination">
+                    <span class="page-info">@lang('pagination.pages') {{ $consultations->currentPage() }} @lang('pagination.of')
+                        {{ $consultations->lastPage() }}</span>
+                    <a href="{{ $consultations->previousPageUrl() }}" class="prev"
+                        @if (!$consultations->previousPageUrl()) disabled @endif>@lang('pagination.previous')</a>
+                    <a href="{{ $consultations->nextPageUrl() }}" class="next"
+                        @if (!$consultations->nextPageUrl()) disabled @endif>@lang('pagination.next')</a>
+                </div>
             </div>
         </div>
     </div>

@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="page-sub-header">
-                            <h3 class="page-title">General Questions</h3>
+                            <h3 class="page-title">@lang('pages.general_question')</h3>
 
                         </div>
 
@@ -16,13 +16,17 @@
             </div>
             <div class="row">
                 @foreach ($questions as $question)
+                    @php
+                        $encodedIdClient = base64_encode($question->user->id);
+                        $encodedIdQuestion = base64_encode($question->id);
+                    @endphp
                     <div class="col-md-6 col-xl-4 col-sm-12 d-flex">
                         <div class="blog grid-blog flex-fill">
                             <div class="blog-content">
                                 <ul class="entry-meta meta-item">
                                     <li>
                                         <div class="post-author">
-                                            <a href="{{ route('show_client', $question->user->id) }}">
+                                            <a href="{{ route('show_client', $encodedIdClient) }}">
                                                 <img src="{{ $question->user->getFirstMediaUrl('profileUser') }}"
                                                     alt="Post Author">
                                                 <span>
@@ -35,13 +39,13 @@
                                     </li>
                                     <li>
                                         <p>
-                                            Num.Replies <span class="badge bg-secondary">
+                                            @lang('pages.num_replies') <span class="badge bg-secondary">
                                                 {{ count($question->Replies) }}</span>
                                         </p>
                                     </li>
                                 </ul>
                                 <h3 class="blog-title"><a
-                                        href="{{ route('show_general_question', $question->id) }}">{{ $question->question }}</a>
+                                        href="{{ route('show_general_question', $encodedIdQuestion) }}">{{ $question->question }}</a>
                                 </h3>
 
                             </div>
@@ -50,7 +54,13 @@
                     </div>
                 @endforeach
 
-
+                <div class="pagination">
+                    <span class="page-info">@lang('pagination.pages') {{ $questions->currentPage() }} @lang('pagination.of') {{ $questions->lastPage() }}</span>
+                    <a href="{{ $questions->previousPageUrl() }}" class="prev"
+                        @if (!$questions->previousPageUrl()) disabled @endif>@lang('pagination.previous')</a>
+                    <a href="{{ $questions->nextPageUrl() }}" class="next"
+                        @if (!$questions->nextPageUrl()) disabled @endif>@lang('pagination.next')</a>
+                </div>
 
             </div>
 

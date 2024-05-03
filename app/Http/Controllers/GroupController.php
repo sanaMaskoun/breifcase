@@ -37,11 +37,14 @@ class GroupController extends Controller
         }
 
         return  redirect()->route('add_group')
-            ->with('success', 'add successfully');
+            ->with('success', __('message.success'));
     }
 
-    public function edit(Group $group)
+    public function edit($encodedId)
     {
+        $decodedId = base64_decode($encodedId);
+        $group = Group::find($decodedId);
+
         $members = $this->get_members();
 
         return view('pages.group.edit',compact(['group','members']));
@@ -54,7 +57,10 @@ class GroupController extends Controller
 
         $group->update($request->validated());
         $group->users()->sync($updatedMembers);
-        return  redirect()->route('group_form',$group->id)
-        ->with('success', 'add successfully');
+
+        $encodedId = base64_encode($group->id);
+
+        return  redirect()->route('group_form',$encodedId)
+        ->with('success', __('message.edit'));
     }
 }

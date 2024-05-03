@@ -15,8 +15,7 @@ class SuggestionController extends Controller
 
     public function index()
     {
-        // dd (Auth()->user()->unreadNotifications);
-        $suggestions = Suggestion::all();
+        $suggestions = Suggestion::paginate(PAGINATION_COUNT);
         return view('pages.suggestion', compact('suggestions'));
 
     }

@@ -48,7 +48,7 @@ class LoginController extends Controller
             }
 
         } else {
-            return redirect()->route('login')->with('error', 'Email-Address or Password are wrong.');
+            return redirect()->route('login')->with('error',  __('message.message'));
         }
     }
 }

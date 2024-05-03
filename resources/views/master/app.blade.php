@@ -43,11 +43,12 @@
 
     <script src="{{ asset('assets/js/script.js') }}"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-<script>
-    localStorage.setItem('user_id',{{ Auth()->user()->id }})
-</script>
-    <script src="{{ asset('assets/js/pusher.js') }}"></script>
+    <script>
+        localStorage.setItem('user_id', {{ Auth()->user()->id }})
+    </script>
+    {{--  <script src="https://breifcase.briefcaseplatform.com/assets/js/pusher.js"></script>  --}}
 
+    <script src="{{ url('/assets/js/pusher.js') }}"></script>
 
 
 </body>

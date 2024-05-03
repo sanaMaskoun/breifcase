@@ -15,7 +15,7 @@
                 <div class="row align-items-center">
                     <div class="col-sm-12">
                         <div class="page-sub-header">
-                            <h3 class="page-title">Add Lawyer</h3>
+                            <h3 class="page-title">@lang('pages.add_lawyer')</h3>
 
                         </div>
                     </div>
@@ -30,14 +30,14 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
-                                        <h5 class="form-title student-info">lawyer information <span><a
+                                        <h5 class="form-title student-info">@lang('pages.lawyer_information') <span><a
                                                     href="javascript:;"><i class="feather-more-vertical"></i></a></span>
                                         </h5>
                                     </div>
 
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
-                                            <label>Name <span class="login-danger">*</span></label>
+                                            <label>@lang('pages.name') <span class="login-danger">*</span></label>
                                             <input class="form-control" type="text" name="name"
                                                 placeholder="Enter Name">
                                         </div>
@@ -45,7 +45,7 @@
 
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
-                                            <label> Email <span class="login-danger">*</span></label>
+                                            <label> @lang('pages.email') <span class="login-danger">*</span></label>
                                             <input class="form-control" type="email" name="email"
                                                 placeholder="Enter email">
                                         </div>
@@ -77,7 +77,7 @@
 
                                     <div class="col-12">
                                         <div class="student-submit">
-                                            <button type="submit" class="btn btn-primary"> save </button>
+                                            <button type="submit" class="btn btn-primary"> @lang('pages.save') </button>
                                         </div>
                                     </div>
                                 </div>

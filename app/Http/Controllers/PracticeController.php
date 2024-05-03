@@ -12,18 +12,18 @@ class PracticeController extends Controller
     public function index(Request $request)
     {
         $name = $request->query('name');
-    
+
         $practices = Practice::query();
-    
+
         if ($name) {
             $practices->where('name', 'like', '%' . $name . '%');
         }
-    
-        $practices = $practices->get();
-    
+
+        $practices = $practices->paginate(PAGINATION_COUNT);
+
         return view('pages.practices.list', compact('practices'));
     }
-    
+
 
     public function create()
     {
@@ -34,29 +34,30 @@ class PracticeController extends Controller
     public function store(PracticeRequest $request)
     {
          Practice::create($request->validated());
-         return redirect()->route('list_practieces')->with('success','Added successfully');
+         return redirect()->route('list_practieces')->with('success', __('message.success'));
 
-       
+
     }
 
 
-    public function edit(Practice $practice)
+    public function edit($encodedId)
     {
-
-        return view('pages.practices.edit', compact('practice'));
+        $decodedId = base64_decode($encodedId);
+        $practice = Practice::find($decodedId);
+        return view('pages.practices.edit', compact(['practice','decodedId']));
     }
-    public function update(PracticeRequest $request , Practice $practice)
+    public function update(PracticeRequest $request ,  Practice $practice)
     {
         $practice->update($request->validated());
-          
+
         return  redirect()->route('list_practieces')
-            ->with('success', 'Modified successfully');
+            ->with('success', __('message.edit'));
     }
     public function destroy(Practice $practice)
     {
         $practice->delete();
-          
+
         return  redirect()->route('list_practieces')
-            ->with('success', 'delete successfully');
+            ->with('success', __('message.delete'));
     }
 }

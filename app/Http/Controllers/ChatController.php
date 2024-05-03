@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ChatRequest;
+use App\Events\chatPrivateEvent;
+use App\Events\GroupEvent;
 use App\Models\Group;
 use App\Models\Message;
 use App\Models\User;
@@ -49,7 +50,6 @@ class ChatController extends Controller
         $lawyers = $this->getLawyers();
 
         $users = ($name != null) ? $this->getFilteredLawyersByName($name) : $this->getUsersForChat();
-
         session(['users' => $users, 'groups' => $groups, 'lawyers' => $lawyers]);
 
         return view('pages.chat.chat', compact(['users', 'groups', 'lawyers']));
@@ -76,8 +76,11 @@ class ChatController extends Controller
             ->get();
     }
 
-    public function chat_form(User $receiver)
+    public function chat_form($encodedId)
     {
+        $decodedId = base64_decode($encodedId);
+        $receiver = User::find($decodedId);
+
         $users = session('users');
         $groups = session('groups');
         $lawyers = session('lawyers');
@@ -94,8 +97,11 @@ class ChatController extends Controller
         return view('pages.chat.formChat', compact(['receiver', 'lawyers', 'groups', 'messages', 'users', 'role_receiver']));
     }
 
-    public function group_form(Group $group)
+    public function group_form($encodedId)
     {
+        $decodedId = base64_decode($encodedId);
+        $group = Group::find($decodedId);
+
         $admin = User::whereHas('groups', function ($query) use ($group) {
             $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
         })->first();
@@ -108,17 +114,59 @@ class ChatController extends Controller
 
     }
 
-    public function send_message_to_user(Request $request, User $receiver)
+    public function send_message_to_user(Request $request, $encodedId)
     {
-        if($request->input('message') == null)
-        {
+        $decodedId = base64_decode($encodedId);
+        $receiver = User::find($decodedId);
+
+        if ($request->input('message') == null) {
+            return response()->json(['success' => false, 'message' => 'Message is empty']);
+        }
+
+        $new_message = Message::create([
+            'message' => $request->message,
+            'sender_id' => auth()->user()->id,
+            'receiver_id' => $receiver->id,
+        ]);
+
+        if (!is_null(request()->file('attachments'))) {
+            $attachments = request()->file('attachments');
+
+            $new_message->addMedia($attachments)
+                ->withCustomProperties(['do_not_replace' => true])
+                ->toMediaCollection('attachments');
+        }
+
+        $message = $new_message->message;
+        $sender_id = auth()->user()->id;
+        $created_at = $new_message->created_at->diffForHumans();
+        $attachment = is_null(request()->file('attachments')) ? null : $new_message->getFirstMediaUrl('attachments');
+
+        // broadcast(new chatEvent($receiver, $sender_id, $message, $attachment, $created_at));
+        broadcast(new chatPrivateEvent($receiver, $sender_id, $message, $attachment, $created_at));
+
+        return response()->json([
+            'success' => true,
+            'message' => $message,
+            'created_at' => $created_at,
+            'attachment' => $attachment,
+            'sender_id' => $sender_id,
+        ]);
+    }
+
+    public function send_message_to_group(Request $request, $encodedId)
+    {
+        $decodedId = base64_decode($encodedId);
+        $group = Group::find($decodedId);
+
+        if ($request->input('message') == null) {
             return redirect()->back();
 
         }
         $new_message = Message::create([
-            'message'     => $request->message,
-            'sender_id'   => auth()->user()->id,
-            'receiver_id' => $request->receiver->id
+            'message' => $request->message,
+            'sender_id' => auth()->user()->id,
+            'group_id' => $group->id,
         ]);
 
         if (!is_null(request()->file('attachments'))) {
@@ -130,31 +178,45 @@ class ChatController extends Controller
                     ->toMediaCollection('attachments');
             }
         }
+        $sender_profile = $new_message->sender->getFirstMediaUrl('profileUser');
+        $sender_name = $new_message->sender->name;
+        $sender_id = base64_encode($new_message->sender->id);
+        $message = $new_message->message;
+        $created_at = $new_message->created_at->diffForHumans();
+        $attachment = is_null(request()->file('attachments')) ? null : $new_message->getFirstMediaUrl('attachments');
+
+        broadcast(new GroupEvent($sender_profile, $sender_name, $sender_id, $message, $attachment, $created_at));
+
         return redirect()->back();
     }
 
-    public function send_message_to_group(Request $request, Group $group)
+    public function attachments($encodedIdReceiver)
     {
-        if($request->input('message') == null)
-        {
-            return redirect()->back();
+        $decodedId = base64_decode($encodedIdReceiver);
+        $receiver = User::find($decodedId);
 
-        }
-        $new_message = Message::create([
-            'message'     => $request->message,
-            'sender_id'   => auth()->user()->id,
-            'group_id'    => $group->id
-        ]);
+        $messages = Message::where('sender_id', auth()->user()->id)
+            ->where('receiver_id', $receiver->id)
+            ->orWhere(function ($query) use ($receiver) {
+                $query->where('sender_id', $receiver->id)
+                    ->where('receiver_id', auth()->user()->id);
+            })->whereHas('media', function ($query) {
+            $query->where('collection_name', 'attachments');
+        })
+            ->paginate(PAGINATION_COUNT);
 
-        if (!is_null(request()->file('attachments'))) {
-            $attachments = request()->file('attachments');
+        return view('pages.chat.attachments', compact('messages'));
+    }
+    public function attachments_group($encodedIdGroup)
+    {
+        $decodedId = base64_decode($encodedIdGroup);
+        $group = Group::find($decodedId);
 
-            foreach ($attachments as $attachment) {
-                $new_message->addMedia($attachment)
-                    ->withCustomProperties(['do_not_replace' => true])
-                    ->toMediaCollection('attachments');
-            }
-        }
-        return redirect()->back();
-           }
+        $messages = Message::where('group_id', $group->id)->whereHas('media', function ($query) {
+            $query->where('collection_name', 'attachments');
+        })
+            ->paginate(PAGINATION_COUNT);
+
+        return view('pages.group.attachments', compact('messages'));
+    }
 }

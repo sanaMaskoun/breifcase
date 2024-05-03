@@ -15,28 +15,31 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="page-sub-header">
-                            <h3 class="page-title">Lawyer Details</h3>
+                            <h3 class="page-title">@lang('pages.lawyer_details')</h3>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card">
-                <div class="card-body">
+                <div class="card-body profile">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="about-info">
-                                <h4>Profile
+                                <h4>@lang('pages.profile')
                                     @role('lawyer|typingCenter|legalConsultant')
-                                    @if(Auth()->user()->id == $lawyer->id)
-                                    <div class="uplod d-flex">
-                                        <form method="GET" action="{{ route('edit_lawyer', $lawyer->id) }}">
-                                            <label class="file-upload profile-upbtn mb-0">
-                                                <button type="submit" class="btn"> <i
-                                                        class="feather-edit-3"></i></button>
-                                            </label>
-                                        </form>
-                                    </div>
-                                    @endif
+                                        @if (Auth()->user()->id == $lawyer->id)
+                                            @php
+                                                $encodedId = base64_encode($lawyer->id);
+                                            @endphp
+                                            <div class="uplod d-flex">
+                                                <form method="GET" action="{{ route('edit_lawyer', $encodedId) }}">
+                                                    <label class="file-upload profile-upbtn mb-0">
+                                                        <button type="submit" class="btn"> <i
+                                                                class="feather-edit-3"></i></button>
+                                                    </label>
+                                                </form>
+                                            </div>
+                                        @endif
                                     @endrole
                                 </h4>
 
@@ -58,27 +61,27 @@
                                     <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                         <div class="follow-group">
                                             <div class="students-follows">
-                                                <h5>Num consultation</h5>
+                                                <h5>@lang('pages.num_consultation')</h5>
                                                 <h4>{{ $NumConsultations }}</h4>
                                             </div>
                                             <div class="students-follows">
-                                                <h5>Num replies</h5>
+                                                <h5>@lang('pages.num_replies')</h5>
                                                 <h4>{{ $NumReplies }}</h4>
                                             </div>
 
                                         </div>
                                     </div>
                                     @role('admin')
-                                    <div class="col-lg-4 col-md-4 d-flex align-items-center">
-                                        <form method="POST" action="{{ route('toggleStatus', $lawyer->id) }}">
-                                            @csrf
-                                            <label class="switch">
-                                                <input type="checkbox" name="status" onchange="this.form.submit()"
-                                                    {{ $lawyer->is_active ? 'checked' : '' }}>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </form>
-                                    </div>
+                                        <div class="col-lg-4 col-md-4 d-flex align-items-center">
+                                            <form method="POST" action="{{ route('toggleStatus', $lawyer->id) }}">
+                                                @csrf
+                                                <label class="switch">
+                                                    <input type="checkbox" name="status" onchange="this.form.submit()"
+                                                        {{ $lawyer->is_active ? 'checked' : '' }}>
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </form>
+                                        </div>
                                     @endrole
                                 </div>
                             </div>
@@ -88,9 +91,9 @@
                         <div class="col-lg-4">
                             <div class="student-personals-grp">
                                 <div class="card">
-                                    <div class="card-body">
+                                    <div class="card-body profile">
                                         <div class="heading-detail">
-                                            <h4>Personal Details :</h4>
+                                            <h4>@lang('pages.personal_details')</h4>
                                         </div>
 
                                         <div class="personal-activity">
@@ -98,7 +101,7 @@
                                                 <i class="feather-user"></i>
                                             </div>
                                             <div class="views-personal">
-                                                <h4>Name</h4>
+                                                <h4>@lang('pages.name')</h4>
                                                 <h5>{{ $lawyer->name }}</h5>
                                             </div>
                                         </div>
@@ -109,7 +112,7 @@
                                                 <i class="feather-phone-call"></i>
                                             </div>
                                             <div class="views-personal">
-                                                <h4>Mobile</h4>
+                                                <h4>@lang('pages.mobile')</h4>
                                                 <h5>{{ $lawyer->phone }}</h5>
                                             </div>
                                         </div>
@@ -118,7 +121,7 @@
                                                 <i class="feather-mail"></i>
                                             </div>
                                             <div class="views-personal">
-                                                <h4>Email</h4>
+                                                <h4>@lang('pages.email')</h4>
                                                 <h5> {{ $lawyer->email }} </h5>
                                             </div>
                                         </div>
@@ -127,8 +130,8 @@
                                                 <i class="feather-user"></i>
                                             </div>
                                             <div class="views-personal">
-                                                <h4>Gender</h4>
-                                                <h5>{{ $lawyer->gender == 1 ? 'male' : 'fimale' }}</h5>
+                                                <h4>@lang('pages.gender')</h4>
+                                                <h5>{{ $lawyer->gender == 1 ? @lang('pages.male') : @lang('pages.fimale') }}</h5>
                                             </div>
                                         </div>
                                         <div class="personal-activity">
@@ -136,7 +139,7 @@
                                                 <i class="feather-calendar"></i>
                                             </div>
                                             <div class="views-personal">
-                                                <h4>Date of Birth</h4>
+                                                <h4>@lang('pages.date_of_birth')</h4>
                                                 <h5>{{ $lawyer->birth }}</h5>
                                             </div>
                                         </div>
@@ -145,7 +148,7 @@
                                                 <i class="fas fa-money-bill-alt"></i>
                                             </div>
                                             <div class="views-personal">
-                                                <h4>consultation price</h4>
+                                                <h4>@lang('pages.consultation_price')</h4>
                                                 <h5>{{ $lawyer->consultation_price }}</h5>
                                             </div>
                                         </div>
@@ -155,16 +158,16 @@
                                                     <i class="fas fa-check-circle"></i>
                                                 </div>
                                                 <div class="views-personal">
-                                                    <h4>status</h4>
-                                                    <h5> active </h5>
+                                                    <h4>@lang('pages.status')</h4>
+                                                    <h5> @lang('pages.active') </h5>
                                                 </div>
                                             @else
                                                 <div class="personal-icons">
                                                     <i class="fas fa-times-circle"></i>
                                                 </div>
                                                 <div class="views-personal">
-                                                    <h4>status</h4>
-                                                    <h5>non active </h5>
+                                                    <h4>@lang('pages.status')</h4>
+                                                    <h5>@lang('pages.non_active')</h5>
                                                 </div>
                                             @endif
 
@@ -174,8 +177,8 @@
                                                 <i class="feather-map-pin"></i>
                                             </div>
                                             <div class="views-personal">
-                                                <h4>Location</h4>
-                                                <h5>{{ $lawyer->location ? \App\Enums\LocationEnum::getDescription($lawyer->location) : 'Unknown' }}
+                                                <h4>@lang('pages.location')</h4>
+                                                <h5>{{ $lawyer->location ? \App\Enums\LocationEnum::getDescription(@lang('EnumFile.'.$lawyer->location)) : 'Unknown' }}
                                                 </h5>
                                             </div>
                                         </div>
@@ -184,8 +187,8 @@
                                                 <i class="fas fa-certificate"></i>
                                             </div>
                                             <div class="views-personal">
-                                                <h4>years of practice</h4>
-                                                <h5>{{ $lawyer->years_of_practice }} years</h5>
+                                                <h4>@lang('pages.years_of_practice')</h4>
+                                                <h5>{{ $lawyer->years_of_practice }} @lang('pages.years')</h5>
                                             </div>
                                         </div>
                                         <div class="personal-activity mb-0">
@@ -193,7 +196,7 @@
                                                 <i class="far fa-clock"></i>
                                             </div>
                                             <div class="views-personal">
-                                                <h4>Date of join</h4>
+                                                <h4>@lang('pages.date_of_join')</h4>
                                                 <h5>{{ $lawyer->created_at?->format('Y-m-d') }}</h5>
                                             </div>
                                         </div>
@@ -205,9 +208,9 @@
                         <div class="col-lg-8">
                             <div class="student-personals-grp">
                                 <div class="card mb-0">
-                                    <div class="card-body">
+                                    <div class="card-body profile">
                                         <div class="heading-detail">
-                                            <h4>certification :</h4>
+                                            <h4>@lang('pages.certifications')</h4>
                                         </div>
                                         <div class="hello-park">
                                             <div class="certificate">
@@ -218,14 +221,16 @@
                                         </div>
 
                                         <div class="hello-park" style="margin-top: 1.5rem">
-                                            <h4>practices :</h4>
+                                            <h4>@lang('pages.practiece')</h4>
 
                                             <div class="educate-year">
                                                 <div class="follow-btn-group">
-                                                    @foreach ($practices as $practice)
-                                                        <button type="submit"
-                                                            class="btn btn-info follow-btns">{{ $practice->name }}</button>
-                                                    @endforeach
+                                                    @if ($practices != null)
+                                                        @foreach ($practices as $practice)
+                                                            <button type="submit"
+                                                                class="btn btn-info follow-btns">{{ $practice->name }}</button>
+                                                        @endforeach
+                                                    @endif
 
                                                 </div>
                                             </div>
@@ -246,9 +251,9 @@
                         <div class="col-lg-12">
                             <div class="student-personals-grp">
                                 <div class="card">
-                                    <div class="card-body">
+                                    <div class="card-body profile">
                                         <div class="heading-detail">
-                                            <h4>Consultations:</h4>
+                                            <h4>@lang('pages.consultation')</h4>
                                         </div>
                                         @foreach ($lawyer?->consultations->take(2) as $consultation)
                                             <div class="card mb-3">
@@ -257,11 +262,11 @@
                                                     <p class="card-text">{{ $consultation->description }}</p>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <span><i class="far fa-money-bill-alt"></i> Amount</span>
+                                                            <span><i class="far fa-money-bill-alt"></i> @lang('pages.amount')</span>
                                                             <h6 class="mb-0">$1,54,220</h6>
                                                         </div>
                                                         <div class="col">
-                                                            <span><i class="far fa-calendar-alt"></i> Due Date</span>
+                                                            <span><i class="far fa-calendar-alt"></i> @lang('pages.created_at')</span>
                                                             <h6 class="mb-0">
                                                                 {{ $consultation->created_at?->format('Y-m-d') }}</h6>
                                                         </div>
@@ -271,7 +276,7 @@
                                                                     ? \App\Enums\ConsultationStatusEnum::getDescription(
                                                                         $consultation->status,
                                                                     )
-                                                                    : 'Unknown';
+                                                                    : 'pending';
                                                                 $badgeColor =
                                                                     $consultation->status == 1
                                                                         ? 'bg-danger'
@@ -280,15 +285,18 @@
                                                                             : 'bg-primary');
                                                             @endphp
                                                             <span
-                                                                class="badge {{ $badgeColor }}">{{ $statusDescription }}</span>
+                                                                class="badge {{ $badgeColor }}">@lang('EnumFile.'.$statusDescription)</span>
                                                         </div>
 
                                                     </div>
                                                 </div>
                                             </div>
                                         @endforeach
-                                        <a href="{{ route('list_consultations', $lawyer->id) }}"
-                                            class="custom-btn btn-5">view more</a>
+                                        @php
+                                            $encodedId = base64_encode($lawyer->id);
+                                        @endphp
+                                        <a href="{{ route('list_consultations', $encodedId) }}"
+                                            class="custom-btn btn-5">@lang('pages.view_more')</a>
                                     </div>
                                 </div>
                             </div>
@@ -299,9 +307,9 @@
                         <div class="col-lg-12">
                             <div class="card blog-comments">
                                 <div class="card-header">
-                                    <h4 class="card-title">General Questions</h4>
+                                    <h4 class="card-title">@lang('pages.general_question')</h4>
                                 </div>
-                                <div class="card-body pb-0">
+                                <div class="card-body pb-0 profile">
                                     <ul class="comments-list">
                                         @foreach ($lawyer?->replies->take(2) as $reply)
                                             <li>
@@ -320,7 +328,7 @@
                                                         </div>
                                                         <p>{{ $reply->generalQuestion->question }}</p>
                                                         <a class="comment-btn">
-                                                            <i class="fa fa-reply me-2"></i> Reply
+                                                            <i class="fa fa-reply me-2"></i> @lang('pages.replies')
                                                         </a>
                                                     </div>
                                                 </div>
@@ -361,8 +369,13 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                    <a href="{{ route('list_general_questions', $lawyer->id) }}"
-                                        class="custom-btn btn-5">view more</a>
+                                    @php
+                                        $encodedId = base64_encode($lawyer->id);
+
+                                    @endphp
+
+                                    <a href="{{ route('list_general_questions', $encodedId) }}"
+                                        class="custom-btn btn-5">@lang('pages.view_more')</a>
                                 </div>
                             </div>
                         </div>

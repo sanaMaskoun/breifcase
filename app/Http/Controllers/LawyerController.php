@@ -39,30 +39,35 @@ class LawyerController extends Controller
             ->whereHas('roles', function ($query) {
                 $query->whereIn('name', ['lawyer', 'legalConsultant', 'typingCenter']);
             })
-            ->get();
+            ->paginate(PAGINATION_COUNT);
 
         return view('pages.lawyer.list', compact(['lawyers', 'practices']));
     }
 
-    public function show(User $lawyer)
+    public function show($encodedId)
     {
-        $practices = $lawyer->practices;
+        $decodedId = base64_decode($encodedId);
+        $lawyer = User::find($decodedId);
+        $practices = $lawyer?->practices;
         $NumReplies = $lawyer->replies->count();
         $NumConsultations = $lawyer->consultations->count();
 
         $get_notify = DB::table('notifications')->where('data->user_id', $lawyer->id)->where('notifiable_id', Auth()->user()->id)->first();
-        if ($get_notify<>null ){DB::table('notifications')->where('id', $get_notify->id)->update(['read_at' => now()]);}
+        if ($get_notify != null) {DB::table('notifications')->where('id', $get_notify->id)->update(['read_at' => now()]);}
 
-       
         return view('pages.lawyer.details', compact(['lawyer', 'practices', 'NumReplies', 'NumConsultations']));
     }
 
-
-
-    public function edit(User $lawyer)
+    public function edit($encodedId)
     {
         $practices = Practice::all();
-        return view('pages.lawyer.edit', compact(['lawyer', 'practices']));
+        $decodedId = base64_decode($encodedId);
+        $lawyer = User::find($decodedId);
+
+        $NumReplies = $lawyer->replies->count();
+        $NumConsultations = $lawyer->consultations->count();
+
+        return view('pages.lawyer.edit', compact(['lawyer', 'practices','NumReplies', 'NumConsultations']));
     }
     public function update(LawyerRequest $request, User $lawyer)
     {
@@ -82,10 +87,11 @@ class LawyerController extends Controller
                     ->toMediaCollection('certification');
             }
         }
-        return redirect()->route('show_lawyer', $lawyer->id)->with('success', 'Modified successfully.');
+        $encodedId = base64_encode($lawyer->id);
+
+        return redirect()->route('show_lawyer', $encodedId)->with('success', __('message.edit'));
 
     }
-
 
     public function toggleStatus(Request $request, User $lawyer)
     {
@@ -93,14 +99,13 @@ class LawyerController extends Controller
         $lawyer->is_active = !$lawyer->is_active;
         $lawyer->save();
 
-        return redirect()->back()->with('success', 'The active status has been updated.');
+        return redirect()->back()->with('success', __('message.status'));
 
     }
 
-
     public function clear_all()
     {
-        foreach (Auth()->user()->unreadNotifications as $notification){
+        foreach (Auth()->user()->unreadNotifications as $notification) {
             $notification->markAsRead();
         }
         return redirect()->back();

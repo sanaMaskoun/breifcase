@@ -15,19 +15,19 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="page-sub-header">
-                            <h3 class="page-title">Edit Lawyer Details</h3>
+                            <h3 class="page-title">@lang('pages.edit_lawyer_details')</h3>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card">
-                <div class="card-body">
+                <div class="card-body profile">
                     <form method="POST" action="{{ route('update_lawyer', $lawyer->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="about-info">
-                                    <h4>Edit Profile </h4>
+                                    <h4>@lang('pages.edit_profile') </h4>
                                 </div>
                                 <div class="student-profile-head">
                                     <div class="row">
@@ -54,12 +54,12 @@
                                         <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                             <div class="follow-group">
                                                 <div class="students-follows">
-                                                    <h5>No consultation</h5>
-                                                    <h4>2850</h4>
+                                                    <h5>@lang('pages.num_consultation')</h5>
+                                                    <h4>{{ $NumConsultations }}</h4>
                                                 </div>
                                                 <div class="students-follows">
-                                                    <h5>No replies</h5>
-                                                    <h4>2850</h4>
+                                                    <h5>@lang('pages.num_replies')</h5>
+                                                    <h4>{{ $NumReplies }}</h4>
                                                 </div>
 
                                             </div>
@@ -73,9 +73,9 @@
                             <div class="col-lg-4">
                                 <div class="student-personals-grp">
                                     <div class="card">
-                                        <div class="card-body">
+                                        <div class="card-body profile">
                                             <div class="heading-detail">
-                                                <h4>Edit Personal Details :</h4>
+                                                <h4>@lang('pages.edit_profile')</h4>
                                             </div>
 
                                             <div class="personal-activity">
@@ -84,7 +84,7 @@
                                                 </div>
                                                 <div class="views-personal">
                                                     <div class="form-group local-forms">
-                                                        <label>Name <span class="login-danger">*</span></label>
+                                                        <label>@lang('pages.name') <span class="login-danger">*</span></label>
                                                         <input class="form-control" type="text" name="name"
                                                             value="{{ $lawyer->name }}">
                                                         @if ($errors->has('name'))
@@ -102,7 +102,7 @@
                                                 </div>
                                                 <div class="views-personal">
                                                     <div class="form-group local-forms">
-                                                        <label>Mobile <span class="login-danger">*</span></label>
+                                                        <label>@lang('pages.mobile') <span class="login-danger">*</span></label>
                                                         <input class="form-control" type="text" name="phone"
                                                             value="{{ $lawyer->phone }}">
                                                         @if ($errors->has('phone'))
@@ -119,7 +119,7 @@
                                                 </div>
                                                 <div class="views-personal">
                                                     <div class="form-group local-forms">
-                                                        <label> Email <span class="login-danger">*</span></label>
+                                                        <label> @lang('pages.email') <span class="login-danger">*</span></label>
                                                         <input class="form-control" type="text" name="email"
                                                             value="{{ $lawyer->email }}">
                                                         @if ($errors->has('email'))
@@ -136,12 +136,12 @@
                                                 </div>
                                                 <div class="views-personal">
                                                     <div class="form-group local-forms">
-                                                        <label>gender<span class="login-danger">*</span></label>
+                                                        <label>@lang('pages.gender')<span class="login-danger">*</span></label>
                                                         <select class="form-control" name="gender">
                                                             <option value="1"
-                                                                {{ $lawyer->gender == '1' ? 'selected' : '' }}>Male</option>
+                                                                {{ $lawyer->gender == '1' ? 'selected' : '' }}>@lang('pages.male')</option>
                                                             <option value="2"
-                                                                {{ $lawyer->gender == '2' ? 'selected' : '' }}>Female
+                                                                {{ $lawyer->gender == '2' ? 'selected' : '' }}>@lang('pages.fimale')
                                                             </option>
                                                         </select>
 
@@ -161,7 +161,7 @@
                                                 </div>
                                                 <div class="views-personal">
                                                     <div class="form-group local-forms">
-                                                        <label> Date of Birth <span class="login-danger">*</span></label>
+                                                        <label> @lang('pages.date_of_birth') <span class="login-danger">*</span></label>
                                                         <input class="form-control" type="date" name="birth"
                                                             value="{{ $lawyer->birth }}">
 
@@ -181,7 +181,7 @@
 
                                                 <div class="views-personal">
                                                     <div class="form-group local-forms">
-                                                        <label>consultation price <span
+                                                        <label>@lang('pages.consultation_price') <span
                                                                 class="login-danger">*</span></label>
                                                         <input class="form-control" type="text"
                                                             name="consultation_price"
@@ -200,16 +200,16 @@
                                                         <i class="fas fa-check-circle"></i>
                                                     </div>
                                                     <div class="views-personal">
-                                                        <h4>status</h4>
-                                                        <h5> active </h5>
+                                                        <h4>@lang('pages.status')</h4>
+                                                        <h5> @lang('pages.active') </h5>
                                                     </div>
                                                 @else
                                                     <div class="personal-icons">
                                                         <i class="fas fa-times-circle"></i>
                                                     </div>
                                                     <div class="views-personal">
-                                                        <h4>status</h4>
-                                                        <h5>non active </h5>
+                                                        <h4>@lang('pages.status')</h4>
+                                                        <h5>@lang('pages.non_active') </h5>
                                                     </div>
                                                 @endif
 
@@ -222,30 +222,28 @@
 
                                                 <div class="views-personal">
                                                     <div class="form-group local-forms">
-                                                        <label>Location <span class="login-danger">*</span></label>
+                                                        <label>@lang('pages.location') <span class="login-danger">*</span></label>
                                                         <select class="form-control" name="location">
                                                             <option value="1"
-                                                                {{ $lawyer->location == 1 ? 'selected' : '' }}>Dubai
+                                                                {{ $lawyer->location == 1 ? 'selected' : '' }}>@lang('EnumFile.dubai')
                                                             </option>
                                                             <option value="2"
-                                                                {{ $lawyer->location == 2 ? 'selected' : '' }}>Abu Dhabi
+                                                                {{ $lawyer->location == 2 ? 'selected' : '' }}>@lang('EnumFile.abu_dhabi')
                                                             </option>
                                                             <option value="3"
-                                                                {{ $lawyer->location == 3 ? 'selected' : '' }}>Ajman
+                                                                {{ $lawyer->location == 3 ? 'selected' : '' }}>@lang('EnumFile.ajman')
                                                             </option>
                                                             <option value="4"
-                                                                {{ $lawyer->location == 4 ? 'selected' : '' }}>Ras Al
-                                                                Khaimah
+                                                                {{ $lawyer->location == 4 ? 'selected' : '' }}>@lang('EnumFile.rak')
                                                             </option>
                                                             <option value="5"
-                                                                {{ $lawyer->location == 5 ? 'selected' : '' }}>Fujairah
+                                                                {{ $lawyer->location == 5 ? 'selected' : '' }}>@lang('EnumFile.fujairah')
                                                             </option>
                                                             <option value="6"
-                                                                {{ $lawyer->location == 6 ? 'selected' : '' }}>Umm
-                                                                Al-Quwain
+                                                                {{ $lawyer->location == 6 ? 'selected' : '' }}>@lang('EnumFile.um_alq')
                                                             </option>
                                                             <option value="7"
-                                                                {{ $lawyer->location == 7 ? 'selected' : '' }}>Al Ain
+                                                                {{ $lawyer->location == 7 ? 'selected' : '' }}@lang('EnumFile.al_ain')
                                                             </option>
                                                         </select>
                                                         @if ($errors->has('location'))
@@ -263,7 +261,7 @@
                                                 </div>
                                                 <div class="views-personal">
                                                     <div class="form-group local-forms">
-                                                        <label>years of practice <span
+                                                        <label>@lang('pages.years_of_practice') <span
                                                                 class="login-danger">*</span></label>
                                                         <input class="form-control" type="text"
                                                             name="years_of_practice"
@@ -281,7 +279,7 @@
                                                     <i class="far fa-clock"></i>
                                                 </div>
                                                 <div class="views-personal">
-                                                    <h4>Date of join</h4>
+                                                    <h4>@lang('pages.date_of_join')</h4>
                                                     <h5>{{ $lawyer->created_at?->format('Y-m-d') }}</h5>
                                                 </div>
                                             </div>
@@ -293,9 +291,9 @@
                             <div class="col-lg-8">
                                 <div class="student-personals-grp">
                                     <div class="card mb-0">
-                                        <div class="card-body">
+                                        <div class="card-body profile">
                                             <div class="heading-detail">
-                                                <h4>certification</h4>
+                                                <h4>@lang('pages.certifications')</h4>
                                             </div>
                                             <div class="hello-park">
                                                 <div class="certificate">
@@ -306,7 +304,7 @@
                                                 </div>
                                                 <div class="mt-3">
                                                     <label for="file-upload" class="btn btn-primary">
-                                                        <i class="fas fa-cloud-upload-alt"></i> Upload Certificate
+                                                        <i class="fas fa-cloud-upload-alt"></i> @lang('pages.upload_certificate')
                                                     </label>
                                                     <input id="file-upload" type="file" name="certification[]" multiple
                                                         style="display: none;">
@@ -318,7 +316,7 @@
                                             </div>
 
                                             <div class="hello-park">
-                                                <h4>practices</h4>
+                                                <h4>@lang('pages.practiece')</h4>
 
                                                 <div class="educate-year">
                                                     <div class="follow-btn-group">
@@ -346,7 +344,7 @@
                         </div>
                         <div class="col-12">
                             <div class="student-submit">
-                                <button type="submit" class="btn btn-primary">save</button>
+                                <button type="submit" class="btn btn-primary">@lang('pages.save')</button>
                             </div>
                         </div>
                     </form>

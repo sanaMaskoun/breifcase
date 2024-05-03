@@ -6,7 +6,6 @@ use App\Enums\ConsultationStatusEnum;
 use App\Events\ConsultationEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ConsultationAnswerRequest;
-use Illuminate\Http\Request;
 use App\Http\Requests\ConsultationRequest;
 use App\Http\Resources\ConsultationResource;
 use App\Models\Consultation;
@@ -24,15 +23,15 @@ class ConsultationApiController extends Controller
         $lawyer = User::where('id', $receiver->id)->first();
 
         $data = [
-            'client_id'          => Auth()->user()->id,
-            'client_name'        => Auth()->user()->name,
-            'consultation_id'    => $consultation->id,
+            'client_id' => Auth()->user()->id,
+            'client_name' => Auth()->user()->name,
+            'consultation_id' => $consultation->id,
             'consultation_title' => $consultation->title,
 
         ];
 
         Notification::send($lawyer, new ConsultationNotification($data));
-        event(new ConsultationEvent($data,$lawyer->id));
+        event(new ConsultationEvent($data, $lawyer->id));
 
         return response()->json(new ConsultationResource($consultation->load(['receiver', 'sender'])));
     }
@@ -42,10 +41,17 @@ class ConsultationApiController extends Controller
         $consultationSentAt = $consultation->created_at;
         $timeDifference = Carbon::now()->diffInHours($consultationSentAt);
         if ($timeDifference <= 48) {
+            // $payment = MyFatoorah::sendPayment([
+            //     'InvoiceAmount' => $consultation->receiver->consultation_price,
+            //     'CustomerName' => $consultation->receiver->name,
+            //     'CustomerEmail' => $consultation->receiver->email,
+            // ]);
 
             $consultation->update([
-                'answer'              => $request->answer,
-                'status'              => ConsultationStatusEnum::ongoing,
+                'answer' => $request->answer,
+                'status' => ConsultationStatusEnum::ongoing,
+                // 'payment_id' => $payment->id,
+
             ]);
             return response()->json(new ConsultationResource($consultation->load(['receiver', 'sender'])));
         } else {

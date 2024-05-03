@@ -12,25 +12,26 @@ use Illuminate\Support\Facades\DB;
 
 class ConsultationController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request ,$encodedId =null)
     {
-        $user_id = $request->user;
+        $decodedId = base64_decode($encodedId);
         $status = $request->query('status');
-
-        if ($user_id) {
-            $user = User::find($user_id);
+        if ($decodedId) {
+            $user = User::find($decodedId);
             $role = $user->roles()->first()->name;
 
-            $role == 'client' ? $consultations = Consultation::where('sender_id', $user_id)->get() : $consultations = Consultation::where('receiver_id', $user_id)->get();
+            $role == 'client' ? $consultations = Consultation::where('sender_id', $user->id)->paginate(PAGINATION_COUNT) : $consultations = Consultation::where('receiver_id', $user->id)->paginate(PAGINATION_COUNT);
 
         } else {
-            $status == null ? $consultations = Consultation::all() : $consultations = Consultation::where('status', $status)->get();
+            $status == null ? $consultations = Consultation::paginate(PAGINATION_COUNT) : $consultations = Consultation::where('status', $status)->paginate(PAGINATION_COUNT);
         }
 
         return view('pages.consultation.list', compact('consultations'));
     }
-    public function show(Consultation $consultation)
+    public function show($encodedId)
     {
+        $decodedId = base64_decode($encodedId);
+        $consultation = Consultation::find($decodedId);
         return view('pages.consultation.details', compact('consultation'));
     }
 
@@ -46,11 +47,11 @@ class ConsultationController extends Controller
                 'answer' => $request->answer,
                 'status' => ConsultationStatusEnum::ongoing,
             ]);
-            return redirect()->route('show_consultation', $consultation->id)
-                ->with('success', 'The response has been sent successfully');
+            return redirect()->route('show_consultation', base64_encode($consultation->id))
+                ->with('success', __('message.success_answer'));
         } else {
-            return redirect()->route('show_consultation', $consultation->id)
-                ->with('error', 'Time has run out to answer this consultation');
+            return redirect()->route('show_consultation', base64_encode($consultation->id))
+                ->with('error', __('message.exceeded_answer_time'));
         }
     }
 }

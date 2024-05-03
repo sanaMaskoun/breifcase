@@ -10,37 +10,39 @@ use Illuminate\Support\Facades\DB;
 
 class GeneralQuestionController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $encodedId =null)
     {
-        $user_id = $request->user;
+        $decodedId = base64_decode($encodedId);
 
-        if($user_id)
+        if($decodedId)
         {
-            $user = User::find($user_id);
+            $user = User::find($decodedId);
             $role = $user->roles()->first()->name;
 
             if($role == 'client')
             {
-                $questions=GeneralQuestion::where('user_id',$user_id)->get();
+                $questions=GeneralQuestion::where('user_id',$user->id)->paginate(PAGINATION_COUNT);
             }
             else
             {
-                $questions = GeneralQuestion::whereHas('Replies' , function($query) use($user_id)
+                $questions = GeneralQuestion::whereHas('Replies' , function($query) use($user)
                 {
-                    $query->where('user_id' , $user_id);
-                })->get();
+                    $query->where('user_id' , $user->id);
+                })->paginate(PAGINATION_COUNT);
             }
         }
         else
         {
-            $questions=GeneralQuestion::all();
+            $questions=GeneralQuestion::paginate(PAGINATION_COUNT);
         }
 
 
       return view('pages.generalQuestion.list',compact('questions'));
     }
-    public function show(GeneralQuestion $general_question)
+    public function show($encodedId)
     {
+        $decodedId = base64_decode($encodedId);
+        $general_question = GeneralQuestion::find($decodedId);
         $get_notify = DB::table('notifications')->where('data->question_id', $general_question->id)->where('notifiable_id' , Auth()->user()->id)->first();
         if ($get_notify <> null ) {DB::table('notifications')->where('id', $get_notify->id)->update(['read_at' => now()]);
 }

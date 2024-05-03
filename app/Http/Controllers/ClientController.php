@@ -15,12 +15,14 @@ class ClientController extends Controller
         ->whereHas('roles', function ($query) {
             $query->where('name','client');
         })
-        ->get();
+        ->paginate(PAGINATION_COUNT);
 
         return view('pages.client.list', compact('clients'));
     }
-    public function show(User $client)
+    public function show($encodedId)
     {
+        $decodedId = base64_decode($encodedId);
+        $client = User::find($decodedId);
         $NumConsultation = $client->consultations->count();
         $NumGeneralQuestion =$client->GeneralQuestions->count();
 

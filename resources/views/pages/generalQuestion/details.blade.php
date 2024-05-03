@@ -1,5 +1,8 @@
 @extends('master.app')
 @section('content')
+@php
+$encodedId = base64_encode($general_question->user->id);
+@endphp
     <div class="page-wrapper">
         <div class="content container-fluid">
             <div class="row justify-content-center">
@@ -15,15 +18,15 @@
                                     <ul>
                                         <li>
                                             <div class="post-author">
-                                                <a href="{{ route('show_client' , $general_question->user->id) }}"><img
-                                                        src="{{ $general_question->user->getFirstMediaUrl('profileUser') }}" alt="Post Author"> <span>by
+                                                <a href="{{ route('show_client' , $encodedId) }}"><img
+                                                        src="{{ $general_question->user->getFirstMediaUrl('profileUser') }}" alt="Post Author"> <span>@lang('pages.by')
                                                         {{ $general_question->user->name }} </span></a>
                                             </div>
                                         </li>
                                         <li><i class="feather-clock"></i>
                                             {{ $general_question->user->created_at?->format('j M Y') }}</li>
                                         <li><i class="feather-message-square"></i> {{ count($general_question->Replies) }}
-                                            Replies</li>
+                                            @lang('pages.replies')</li>
                                     </ul>
                                 </div>
                             </div>
@@ -36,20 +39,24 @@
 
                         <div class="card author-widget clearfix">
                             <div class="card-header">
-                                <h4 class="card-title">Replies ({{ count($general_question->Replies) }})</h4>
+                                <h4 class="card-title"> @lang('pages.replies') ({{ count($general_question->Replies) }})</h4>
                             </div>
                             @foreach ($general_question->Replies as $reply)
+                            @php
+                            $encodedId = base64_encode($reply->user->id);
+
+                        @endphp
                                 <div class="card-body">
                                     <div class="about-author">
                                         <div class="about-author-img">
                                             <div class="author-img-wrap">
-                                                <a href="{{ route('show_lawyer', $reply->user->id) }}"><img
+                                                <a href="{{ route('show_lawyer', $encodedId) }}"><img
                                                         class="img-fluid" alt=""
                                                         src="{{ $reply->user->getFirstMediaUrl('profileUser') }}"></a>
                                             </div>
                                         </div>
                                         <div class="author-details">
-                                            <a href="{{ route('show_lawyer', $reply->user->id) }}"
+                                            <a href="{{ route('show_lawyer', $encodedId) }}"
                                                 class="blog-author-name">{{ $reply->user->name }}
 
                                             </a>
