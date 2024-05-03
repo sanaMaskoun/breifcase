@@ -132,10 +132,11 @@ channelReplayRate.bind('App\\Events\\ReplyRateEvent', function (data) {
 
 //chat  private-chat-channel
 
+projectUrl= $('#projectUrl').val();
 var pusherPrivate = new Pusher('21c93d7ae9ded5a63591', {
     broadcast: 'pusher',
     cluster: 'ap2',
-    authEndpoint: "http://127.0.0.1:8000/api/pusher/auth",
+    authEndpoint: projectUrl+"/api/pusher/auth",
     auth: {
         headers: {
             // 'X-CSRF-Token': "12365",
