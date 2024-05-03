@@ -47,13 +47,13 @@
                             </div>
 
                             <div class="pagination">
-                                <span class="page-info">Page {{ $messages->currentPage() }} of
+                                <span class="page-info">@lang('pagination.pages') {{ $messages->currentPage() }} @lang('pagination.of')
                                     {{ $messages->lastPage() }}</span>
                                 @if ($messages->previousPageUrl() || $messages->nextPageUrl())
                                     <a href="{{ $messages->previousPageUrl() }}" class="prev"
-                                        @if (!$messages->previousPageUrl()) disabled @endif>Previous</a>
+                                        @if (!$messages->previousPageUrl()) disabled @endif>@lang('pagination.previous')</a>
                                     <a href="{{ $messages->nextPageUrl() }}" class="next"
-                                        @if (!$messages->nextPageUrl()) disabled @endif>Next</a>
+                                        @if (!$messages->nextPageUrl()) disabled @endif>@lang('pagination.next')</a>
                                 @endif
                             </div>
 

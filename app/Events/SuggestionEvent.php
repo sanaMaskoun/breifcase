@@ -4,6 +4,7 @@ namespace App\Events;
 
 use Carbon\Carbon;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -30,9 +31,10 @@ class SuggestionEvent implements ShouldBroadcast
 
     }
 
-    public function broadcastOn(): array
+    public function broadcastOn()
     {
-        return ['suggestion-channel'];
+        return new PrivateChannel('suggestion-channel-'. $this->user_id) ;
+
 
     }
 }

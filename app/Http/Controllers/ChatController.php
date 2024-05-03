@@ -120,7 +120,8 @@ class ChatController extends Controller
         $receiver = User::find($decodedId);
 
         if ($request->input('message') == null) {
-            return response()->json(['success' => false, 'message' => 'Message is empty']);
+            return redirect()->back();
+
         }
 
         $new_message = Message::create([
@@ -180,12 +181,14 @@ class ChatController extends Controller
         }
         $sender_profile = $new_message->sender->getFirstMediaUrl('profileUser');
         $sender_name = $new_message->sender->name;
-        $sender_id = base64_encode($new_message->sender->id);
+        $sender_id_encoded = base64_encode($new_message->sender->id);
+        $sender_id = $new_message->sender->id;
+
         $message = $new_message->message;
         $created_at = $new_message->created_at->diffForHumans();
         $attachment = is_null(request()->file('attachments')) ? null : $new_message->getFirstMediaUrl('attachments');
 
-        broadcast(new GroupEvent($sender_profile, $sender_name, $sender_id, $message, $attachment, $created_at));
+        broadcast(new GroupEvent($sender_profile,$sender_id_encoded,$sender_id, $sender_name,  $message, $attachment, $created_at));
 
         return redirect()->back();
     }

@@ -14,15 +14,18 @@ class GroupEvent implements ShouldBroadcast
     public $sender_profile;
     public $sender_name;
     public $sender_id;
+    public $sender_id_encoded;
     public $message;
     public $attachment;
     public $created_at;
-    public function __construct($sender_profile, $sender_name ,$sender_id, $message, $attachment, $created_at)
+    public function __construct($sender_profile,$sender_id_encoded ,$sender_id, $sender_name , $message, $attachment, $created_at)
     {
 
         $this->sender_profile    = $sender_profile;
         $this->sender_name       = $sender_name;
         $this->sender_id         = $sender_id;
+        $this->sender_id_encoded         = $sender_id_encoded;
+
         $this->message           = $message;
         $this->attachment        = $attachment;
         $this->created_at        = $created_at;

@@ -21,6 +21,8 @@ class ConsultationApiController extends Controller
         $consultation = Consultation::create($request->validated());
 
         $lawyer = User::where('id', $receiver->id)->first();
+        $encodedId = base64_encode($consultation->id);
+
 
         $data = [
             'client_id' => Auth()->user()->id,
@@ -31,7 +33,7 @@ class ConsultationApiController extends Controller
         ];
 
         Notification::send($lawyer, new ConsultationNotification($data));
-        event(new ConsultationEvent($data, $lawyer->id));
+        event(new ConsultationEvent($data, $encodedId ,$lawyer->id));
 
         return response()->json(new ConsultationResource($consultation->load(['receiver', 'sender'])));
     }

@@ -56,6 +56,7 @@ class AuthController extends Controller
 
                 $joined_user = $request->name;
                 $email = $request->email;
+                $encodedId = base64_encode($user->id);
 
                 Notification::send($admins,new RequestToJoin($user->id , $joined_user ,$email));
                 $data =[
@@ -65,7 +66,9 @@ class AuthController extends Controller
                     'profile_image' => $user->getFirstMediaUrl('profileUser')
 
                ];
-                event(new NotificationEvent($data));
+                event(new NotificationEvent($data , $encodedId));
+
+
 
             }
 

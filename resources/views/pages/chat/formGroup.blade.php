@@ -26,7 +26,7 @@
 
 
 
-            <div class="card-body pb-0" style="max-height: 450px; overflow-y: auto;">
+            <div class="card-body pb-0" style="max-height: 450px; overflow-y: auto;" id="group_div">
                 @if ($messages->isEmpty())
                     <div class="empty-messages">
                         <p>@lang('pages.empty_message')</p>
@@ -35,7 +35,7 @@
                     @foreach ($messages as $message)
                         @if ($message->sender_id == auth()->user()->id)
                             <!-- Media Chat Right -->
-                            <div class="media media-chat media-chat-right">
+                            <div class="media media-chat media-chat-right" id="group_area_sender">
                                 <div class="media-body">
                                     <div class="text-content">
                                         @if ($message->getFirstMediaUrl('attachments') != null)
@@ -71,7 +71,7 @@
                                 $encodedIdReceiver = base64_encode($message->sender->id);
 
                             @endphp
-                            <div class="media media-chat" id="group_area">
+                            <div class="media media-chat" id="group_area_receiver">
                                 <div class="media-body img-groups">
 
                                     <a href="{{ route('show_lawyer', $encodedIdReceiver) }}">

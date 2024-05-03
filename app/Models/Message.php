@@ -16,6 +16,10 @@ class Message extends Model implements HasMedia
     {
         return $this->belongsTo(User::class , 'sender_id');
     }
+    public function receiver()
+    {
+        return $this->belongsTo(User::class , 'receiver_id');
+    }
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('attachments');

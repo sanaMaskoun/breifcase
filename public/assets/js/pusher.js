@@ -3,6 +3,20 @@ Pusher.logToConsole = true;
 var pusher = new Pusher('21c93d7ae9ded5a63591', {
     cluster: 'ap2'
 });
+projectUrl = $('#projectUrl').val();
+var pusherPrivate = new Pusher('21c93d7ae9ded5a63591', {
+    broadcast: 'pusher',
+    cluster: 'ap2',
+    authEndpoint: projectUrl + "/api/pusher/auth",
+    auth: {
+        headers: {
+            // 'X-CSRF-Token': "12365",
+            // "Authorization": "Bearer 354681",
+            // "Access-Control-Allow-Origin": "*",
+            // 'Accept': 'application/json',
+        }
+    }
+});
 var notificationsWrapper = $('.dropdown-notifications');
 var notificationsToggle = notificationsWrapper.find('a[data-bs-toggle]');
 var notificationsCountElem = notificationsToggle.find('span[data-count]');
@@ -10,10 +24,10 @@ var notificationsCount = parseInt(notificationsCountElem.data('count'));
 var notifications = notificationsWrapper.find('ul.notification-list');
 
 
-var channelNotification = pusher.subscribe('notify-channel');
-var channelSuggestion = pusher.subscribe('suggestion-channel');
-var channelConsultation = pusher.subscribe('consultation-channel.' + localStorage.getItem('user_id'));
-var channelReplayRate = pusher.subscribe('rate-channel');
+var channelNotification = pusherPrivate.subscribe('private-notify-channel-' + localStorage.getItem('user_id'));
+var channelSuggestion = pusherPrivate.subscribe('private-suggestion-channel-' + localStorage.getItem('user_id'));
+var channelConsultation = pusherPrivate.subscribe('private-consultation-channel-' + localStorage.getItem('user_id'));
+var channelReplayRate = pusherPrivate.subscribe('private-rate-channel-' + localStorage.getItem('user_id'));
 
 channelNotification.bind('App\\Events\\NotificationEvent', function (data) {
     var newNotificationHtml = `
@@ -21,7 +35,7 @@ channelNotification.bind('App\\Events\\NotificationEvent', function (data) {
         <div class="media d-flex">
             <div class="media-body flex-grow-1">
            <a>  <span>these user request to join :</span></a>
-            <a href="${data.user_id}">
+            <a href="${data.encodedId}">
             <p class="noti-details"> <span style="float: right;  font-size:12px;"
             class="noti-title">${data.user_name} </span>
             </p>
@@ -68,7 +82,6 @@ channelSuggestion.bind('App\\Events\\SuggestionEvent', function (data) {
 });
 
 channelConsultation.bind('App\\Events\\ConsultationEvent', function (data) {
-    console.log(1);
     var newConsultation = `
     <li class="notification-message">
      <div class="media d-flex">
@@ -77,7 +90,7 @@ channelConsultation.bind('App\\Events\\ConsultationEvent', function (data) {
                 <p> A consultation has been sent by :
                 <span class="details_notification">${data.client_name}</span>
                 <span>
-                        <a class="link_notification" href="/consultation/${data.consultation_id}/show">
+                        <a class="link_notification" href="/consultation/${data.encodedId}/show">
                         ${data.consultation_title}
                         </a>
 
@@ -107,7 +120,7 @@ channelReplayRate.bind('App\\Events\\ReplyRateEvent', function (data) {
        <p> Your reply to the  general question has been evaluated by :
        <span class="details_notification">${data.client_name}</span>
                <span>
-               <a class="link_notification" href="/general_question/${data.question_id}/show">
+               <a class="link_notification" href="/general_question/${data.encodedId}/show">
                ${data.question}
                        </a>
 
@@ -132,11 +145,11 @@ channelReplayRate.bind('App\\Events\\ReplyRateEvent', function (data) {
 
 //chat  private-chat-channel
 
-projectUrl= $('#projectUrl').val();
+
 var pusherPrivate = new Pusher('21c93d7ae9ded5a63591', {
     broadcast: 'pusher',
     cluster: 'ap2',
-    authEndpoint: projectUrl+"/api/pusher/auth",
+    authEndpoint: projectUrl + "/api/pusher/auth",
     auth: {
         headers: {
             // 'X-CSRF-Token': "12365",
@@ -146,11 +159,7 @@ var pusherPrivate = new Pusher('21c93d7ae9ded5a63591', {
         }
     }
 });
-// var channelPivateChat = pusherPrivate.subscribe('private-chat-channel');
-// channelPivateChat.bind('chatMessage', function (data) {
-//     console.log("///////////////////");
-//     console.log(data);
-// });
+
 var channelPivateChat = pusherPrivate.subscribe('private-chat-channel');
 channelPivateChat.bind('chatMessage', function (data) {
     console.log(data);
@@ -196,19 +205,8 @@ channelPivateChat.bind('chatMessage', function (data) {
     if (message != "") {
         $('.empty-messages').remove();
     }
-
-    console.log(data.sender_id);
-
     $("#chat_div").append(message);
 
-
-
-    // if (data.sender_id == localStorage.getItem('user_id')) {
-    //     chat_div
-    //     $("#chat_div").append(senderMessage);
-    // } else {
-    //     $("#chat_area_receiver").append(receiverMessage);
-    // }
 });
 
 
@@ -216,11 +214,12 @@ channelPivateChat.bind('chatMessage', function (data) {
 var channelChat = pusher.subscribe('group-channel');
 channelChat.bind('groupMessage', function (data) {
     var extension = data.attachment ? data.attachment.split('.').pop().toLowerCase() : null;
+    message_group = "";
 
     let receiverMessage = `
-    <div class="media media-chat">
+    <div class="media media-chat" id="group_area_receiver">
         <div class="media-body img-groups">
-        <a href="/lawyer/${data.sender_id}/show">
+        <a href="/lawyer/${data.sender_id_encoded}/show">
         <img class="rounded-circle img_group" src="${data.sender_profile}">
         <span>${data.sender_name}</span>
         </a>
@@ -235,7 +234,36 @@ channelChat.bind('groupMessage', function (data) {
         </div>
     </div>`;
 
-    $("#group_area").append(receiverMessage);
+    let senderMessage = `
+    <div class="media media-chat media-chat-right" id="group_area_sender">
+    <div class="media-body">
+    <div class="text-content">
+    ${data.attachment ?
+            (extension === 'jpg' || extension === 'png' ?
+                `<img class="img_group" src="${data.attachment}">` :
+                `<a href="${data.attachment}" target="_blank"><p class="message">${data.message}</p></a>`) :
+            `<p class="message">${data.message} </p>`}
+    <time class="time">${data.created_at}</time>
+</div>
+    <a href="/lawyer/${data.sender_id_encoded}/show">
+    <img class="rounded-circle img_group" src="${data.sender_profile}">
+    </a>
+
+    </div>
+    </div>`;
+
+    if (data.sender_id == localStorage.getItem('user_id')) {
+        message_group = senderMessage;
+    }
+    else {
+        message_group = receiverMessage;
+    }
+    if (message_group != "") {
+        $('.empty-messages').remove();
+    }
+
+
+    $("#group_div").append(message_group);
 
 
 });

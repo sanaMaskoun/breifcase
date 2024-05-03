@@ -75,7 +75,7 @@
                                                     <h4>@lang('pages.communication')</h4>
                                                     <h4>@lang('pages.response_time')</h4>
                                                     <h4>@lang('pages.problem_solving')</h4>
-                                                    <h4>@lang('pages.understanding.')</h4>
+                                                    <h4>@lang('pages.understanding')</h4>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h4>

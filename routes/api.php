@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\api\AuthApiController;
+use App\Http\Controllers\api\ChatApiController;
 use App\Http\Controllers\api\ConsultationApiController;
 use App\Http\Controllers\api\GeneralQuestionApiController;
 use App\Http\Controllers\api\RateController;
@@ -22,14 +24,16 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::post('/pusher/auth', function () {
-    return true;
-})->name('pusher.auth');
+// Route::post('/pusher/auth', function () {
+//     return true;
+// })->name('pusher.auth');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('pusher/auth', [\App\Http\Controllers\api\AuthApiController::class, 'pusherAuth']);
+
+Route::post('pusher/auth', [AuthApiController::class, 'pusherAuth']);
+
 Route::post('checkout/{lawyer}', [FatoorahController::class, 'checkout']);
 Route::get('callback', [FatoorahController::class, 'callback']);
 
@@ -60,6 +64,16 @@ Route::group(['prefix' => 'general-question', 'middleware' => 'auth:sanctum'], f
     Route::post('/', [GeneralQuestionApiController::class, 'store']);
     Route::post('/{general_question}/reply', [GeneralQuestionApiController::class, 'reply']);
     Route::post('/reply/{reply}/rate', [GeneralQuestionApiController::class, 'rate']);
+});
+
+Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/get_message_in_chat/{receiver}', [ChatApiController::class, 'get_message_in_chat']);
+    Route::get('/get_message_in_group/{group}', [ChatApiController::class, 'get_message_in_group']);
+    Route::post('/send_message_to_user/{receiver}', [ChatApiController::class, 'send_message_to_user']);
+    Route::post('/send_message_to_group/{group}', [ChatApiController::class, 'send_message_to_group']);
+    Route::get('/attachments_chat/{receiver}', [ChatApiController::class, 'attachments_chat']);
+    Route::get('/attachments_group/{group}', [ChatApiController::class, 'attachments_group']);
+
 });
 
 Route::post('/suggestion', [SuggestionController::class, 'store'])->middleware('auth:sanctum');

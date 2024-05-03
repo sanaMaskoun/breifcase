@@ -279,7 +279,7 @@
                 <li>
                     <a href="{{ route('chat') }}"><i class="fas fa-comments"></i>
 
-                        <span>@lang('pages.chat')</span>
+                        <span>@lang('pages.chats')</span>
 
                     </a>
                 </li>

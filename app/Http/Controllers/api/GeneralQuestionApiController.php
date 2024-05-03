@@ -47,8 +47,8 @@ class GeneralQuestionApiController extends Controller
     public function rate(RateReplyGeneralQuestionRequest $request , QuestionReply $reply)
     {
          $reply->update(['rate' => $request->rate]);
-         $lawyer =User::where('id', $reply->user_id )->get();
-
+         $lawyer =User::where('id', $reply->user_id )->first();
+         $encodedId = base64_encode($reply->generalQuestion->id);
          $data = [
              'client_id'          => Auth()->user()->id,
              'client_name'        => Auth()->user()->name,
@@ -57,8 +57,7 @@ class GeneralQuestionApiController extends Controller
 
          ];
          Notification::send($lawyer, new ReplyRateNotification($data));
-
-         event(new ReplyRateEvent($data));
+         event(new ReplyRateEvent($data,$encodedId ,$lawyer->id));
 
         return response()->json((new RepliesResource($reply->load(['generalQuestion','user']))));
 

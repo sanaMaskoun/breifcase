@@ -16,13 +16,16 @@ class ReplyRateEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $client_id;
+    public $lawyer_id;
+
     public $client_name;
     public $question_id;
     public $question;
     public $date;
     public $time;
+       public $encodedId;
 
-    public function __construct($data = [])
+    public function __construct($data = [],$encodedId ,$lawyer_id)
     {
         $this->client_id   = $data['client_id'];
         $this->client_name = $data['client_name'];
@@ -30,11 +33,14 @@ class ReplyRateEvent implements ShouldBroadcast
         $this->question    = $data['question'];
         $this->date        = date("j M Y", strtotime(Carbon::now()));
         $this->time        = date("h:i A", strtotime(Carbon::now()));
+        $this->lawyer_id   = $lawyer_id;
+        $this->encodedId   = $encodedId;
 
     }
 
-    public function broadcastOn(): array
+    public function broadcastOn()
     {
-        return ['rate-channel'];
+        return new PrivateChannel('rate-channel-'. $this->lawyer_id) ;
+
     }
 }

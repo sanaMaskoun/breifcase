@@ -18,15 +18,18 @@ class ConsultationEvent implements ShouldBroadcast
     public $consultation_title;
     public $date;
     public $time;
-    public $lawyer;
+    public $lawyer_id;
+    public $encodedId;
 
-    public function __construct($data = [],$lawyer)
+    public function __construct($data = [],$encodedId,$lawyer_id  )
     {
         $this->client_id          = $data['client_id'];
         $this->client_name        = $data['client_name'];
         $this->consultation_id    = $data['consultation_id'];
         $this->consultation_title = $data['consultation_title'];
-        $this->lawyer             = $lawyer;
+        $this->lawyer_id           = $lawyer_id;
+        $this->encodedId           = $encodedId;
+
         $this->date               = date("j M Y", strtotime(Carbon::now()));
         $this->time               = date("h:i A", strtotime(Carbon::now()));
 
@@ -34,7 +37,7 @@ class ConsultationEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new PrivateChannel('consultation-channel.'. $this->lawyer) ;
+        return new PrivateChannel('consultation-channel-'. $this->lawyer_id) ;
 
     }
 }
