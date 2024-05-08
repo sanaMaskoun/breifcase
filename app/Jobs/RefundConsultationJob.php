@@ -27,9 +27,9 @@ class RefundConsultationJob implements ShouldQueue
         $refund = FatoorahService::refundPayment($this->consultation->payment_id);
 
         $this->consultation->update([
-            'status' => ConsultationStatusEnum::refunded,
-            'refund_id' => $refund->id,
+            'status' => ConsultationStatusEnum::rejected,
+            // 'refund_id' => $refund->id,
         ]);
     }
-    
+
 }

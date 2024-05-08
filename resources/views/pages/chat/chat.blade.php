@@ -20,12 +20,14 @@
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="chats-tab" data-toggle="tab" href="#chats"
-                                        role="tab" aria-controls="chats" aria-selected="true">@lang('pages.chat')</a>
+                                        role="tab" aria-controls="chats" aria-selected="true">@lang('pages.chats')</a>
                                 </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" id="groups-tab" data-toggle="tab" href="#groups" role="tab"
                                         aria-controls="groups" aria-selected="false">@lang('pages.groups')</a>
                                 </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab"
                                         aria-controls="contacts" aria-selected="false">@lang('pages.contacts')</a>
@@ -35,13 +37,14 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="chats" role="tabpanel"
                                     aria-labelledby="chats-tab">
-                                    <ul class="card-body px-0" style="height: 450px; overflow-y: auto;">
+
+                                    <ul class="card-body px-0" style="height: 450px; overflow-y: auto;" id="new_chat_div">
                                         @foreach ($users as $user)
                                             @php
                                                 $encodedId = base64_encode($user->id);
 
                                             @endphp
-                                            <li class="mb-4 px-5 py-2">
+                                            <li class="mb-4 px-5 py-2 ">
                                                 <a href="javascript:void(0)" class="media media-message">
                                                     <div class="position-relative mr-3">
                                                         <a href="{{ route('chat_form', $encodedId) }}">
@@ -50,18 +53,20 @@
                                                                 alt="User Image">
                                                             <span class="username text-dark">{{ $user->name }}</span>
                                                         </a>
-                                                        <span class="status away"></span>
-
+                                                        <div style="display: inline; ">
+                                                            {{--  @if ($user->message_count != 0)  --}}
+                                                                <span
+                                                                    class="message-counter"  id="counter_chat">{{ $user->message_count }}</span>
+                                                            {{--  @endif  --}}
+                                                        </div>
                                                         <div class="message-contents">
                                                             <p class="last-msg text-smoke">
                                                                 {{ $user->latest_message?->message }}</p>
 
-                                                            {{--  <span class="d-flex justify-content-between align-items-center mb-1">  --}}
 
                                                             <span
                                                                 class="text-smoke time_message"><em>{{ $user->latest_message?->created_at->diffForHumans() }}</em></span>
 
-                                                            {{--  </span>  --}}
                                                         </div>
                                                     </div>
                                                 </a>
@@ -130,6 +135,7 @@
                             </div>
                         </div>
                     </div>
+
                     @yield('chat_form_content')
 
                 </div>

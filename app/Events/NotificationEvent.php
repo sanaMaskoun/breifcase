@@ -40,7 +40,9 @@ class NotificationEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new PrivateChannel('notify-channel-'. $this->user_id) ;
+        return new PrivateChannel('notify-channel') ;
+        // return ['notify-channel'];
+
 
 
     }

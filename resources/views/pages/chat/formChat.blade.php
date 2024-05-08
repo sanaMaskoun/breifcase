@@ -112,7 +112,7 @@
 
                 @endphp
                 <form action="{{ route('send_message_to_user', $encodedIdReceiver) }}" method="POST"
-                    enctype="multipart/form-data">
+                    enctype="multipart/form-data" >
                     @csrf
                     <div class="input-group input-group-chat">
                         <label for="fileInput">
@@ -120,9 +120,10 @@
                         </label>
                         <input id="fileInput" type="file" name="attachments" style="display: none;">
 
-                        <input type="text" name="message" class="form-control"
+                        <input  type="text" name="message" class="form-control"
                             aria-label="Text input with dropdown button" placeholder=@lang('pages.type_message')>
                         <div class="input-group-append">
+
                             <button class="btn btn-primary send-button" type="submit">@lang('pages.send')</button>
                             <a href="{{ route('attachments', $encodedIdReceiver) }}" id="openAllAttachments"
                                 class="btn btn-secondary">
@@ -138,29 +139,7 @@
 
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.send-button').click(function(e) {
-                e.preventDefault();
-                var form = $(this).closest('form');
-                var formData = new FormData(form[0]);
 
-                $.ajax({
-                    url: form.attr('action'),
-                    method: form.attr('method'),
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        console.log(response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
+
 
 @endsection

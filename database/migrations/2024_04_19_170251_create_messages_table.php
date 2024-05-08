@@ -23,6 +23,8 @@ return new class extends Migration
             $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignIdFor(Group::class)->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
 
+            $table->boolean('is_resd')->default(false);
+
             $table->timestamps();
         });
     }

@@ -25,7 +25,7 @@ return [
     'client'                    => 'الزبائن',
     'requests_to_join'          => 'طلبات الانضمام',
     'suggestion'                => 'الإقتراحات',
-    'chat'                      => 'المحادثات',
+    'chats'                      => 'المحادثات',
 
     // attachments
     'file'                      => 'الملفات',

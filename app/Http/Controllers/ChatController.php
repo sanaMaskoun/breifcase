@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Events\chatPrivateEvent;
+use App\Events\CounterChatEvent;
 use App\Events\GroupEvent;
+use App\Events\NewChatEvent;
 use App\Models\Group;
 use App\Models\Message;
 use App\Models\User;
@@ -16,9 +18,6 @@ class ChatController extends Controller
     {
         $users = User::where('is_active', true)
             ->where('id', '<>', Auth()->user()->id)
-        // ->whereHas('roles', function ($query) {
-        //     $query->whereIn('name', ['lawyer', 'legalConsultant', 'client', 'typingCenter']);
-        // })
             ->whereHas('sender_message', function ($query) {
                 $query->where('receiver_id', Auth()->user()->id);
             })
@@ -37,9 +36,19 @@ class ChatController extends Controller
                 ->latest()
                 ->first();
 
+            $message_count = $this->messageCount();
+
             $user->latest_message = $latestMessage;
+            $user->message_count = $message_count;
         });
         return $users;
+    }
+
+    public function messageCount()
+    {
+        return Message::where('is_read', false)
+            ->where('receiver_id', Auth()->user()->id)
+            ->count();
     }
     public function chat(Request $request)
     {
@@ -50,6 +59,7 @@ class ChatController extends Controller
         $lawyers = $this->getLawyers();
 
         $users = ($name != null) ? $this->getFilteredLawyersByName($name) : $this->getUsersForChat();
+
         session(['users' => $users, 'groups' => $groups, 'lawyers' => $lawyers]);
 
         return view('pages.chat.chat', compact(['users', 'groups', 'lawyers']));
@@ -92,6 +102,11 @@ class ChatController extends Controller
                     ->where('receiver_id', auth()->user()->id);
             })
             ->get();
+
+        $messages->each(function ($message) {
+            $message->where('receiver_id', auth()->user()->id)->update(['is_read' => true]);
+
+        });
         $role_receiver = $receiver->getRoleNames()->first();
 
         return view('pages.chat.formChat', compact(['receiver', 'lawyers', 'groups', 'messages', 'users', 'role_receiver']));
@@ -124,33 +139,75 @@ class ChatController extends Controller
 
         }
 
-        $new_message = Message::create([
-            'message' => $request->message,
-            'sender_id' => auth()->user()->id,
-            'receiver_id' => $receiver->id,
-        ]);
+        $has_previous_chat = Message::where('sender_id', Auth()->user()->id)->where('receiver_id', $receiver->id)->orWhere(function ($query) use ($receiver) {
+            $query->where('sender_id', $receiver->id)
+                ->where('receiver_id', auth()->user()->id);
+        })->get();
 
-        if (!is_null(request()->file('attachments'))) {
-            $attachments = request()->file('attachments');
+        if ($has_previous_chat->isEmpty()) {
+            $new_message = Message::create([
+                'message' => $request->message,
+                'sender_id' => auth()->user()->id,
+                'receiver_id' => $receiver->id,
+            ]);
 
-            $new_message->addMedia($attachments)
-                ->withCustomProperties(['do_not_replace' => true])
-                ->toMediaCollection('attachments');
+            if (!is_null(request()->file('attachments'))) {
+                $attachments = request()->file('attachments');
+
+                $new_message->addMedia($attachments)
+                    ->withCustomProperties(['do_not_replace' => true])
+                    ->toMediaCollection('attachments');
+            }
+
+            $message = $new_message->message;
+            $receiver = [
+                'receiver_encoded_id' => $encodedId,
+                'receiver_id' => $receiver->id,
+                'name' => $receiver->name,
+                'profile' => $receiver->getFirstMediaUrl('profileUser'),
+            ];
+            $sender = [
+                'sender_encoded_id' => base64_encode(auth()->user()->id),
+                'sender_id' => auth()->user()->id,
+                'name' => auth()->user()->name,
+                'profile' => Auth()->user()->getFirstMediaUrl('profileUser'),
+            ];
+
+            $created_at = $new_message->created_at->diffForHumans();
+            $message_count = $this->messageCount();
+
+            broadcast(new NewChatEvent($message, $receiver, $sender, $created_at, $message_count));
+
+        } else {
+            $new_message = Message::create([
+                'message' => $request->message,
+                'sender_id' => auth()->user()->id,
+                'receiver_id' => $receiver->id,
+            ]);
+
+            if (!is_null(request()->file('attachments'))) {
+                $attachments = request()->file('attachments');
+
+                $new_message->addMedia($attachments)
+                    ->withCustomProperties(['do_not_replace' => true])
+                    ->toMediaCollection('attachments');
+            }
+
+            $message = $new_message->message;
+            $sender_id = auth()->user()->id;
+            $created_at = $new_message->created_at->diffForHumans();
+            $attachment = is_null(request()->file('attachments')) ? null : $new_message->getFirstMediaUrl('attachments');
+            $message_count = $this->messageCount();
+            broadcast(new chatPrivateEvent($receiver, $sender_id, $message, $attachment, $created_at));
+            broadcast(new CounterChatEvent($message_count, $sender_id, $receiver->id));
+
         }
-
-        $message = $new_message->message;
-        $sender_id = auth()->user()->id;
-        $created_at = $new_message->created_at->diffForHumans();
-        $attachment = is_null(request()->file('attachments')) ? null : $new_message->getFirstMediaUrl('attachments');
-
-        // broadcast(new chatEvent($receiver, $sender_id, $message, $attachment, $created_at));
-        broadcast(new chatPrivateEvent($receiver, $sender_id, $message, $attachment, $created_at));
 
         return response()->json([
             'success' => true,
             'message' => $message,
             'created_at' => $created_at,
-            'attachment' => $attachment,
+            'attachment' => $attachment == null ? null : $attachment,
             'sender_id' => $sender_id,
         ]);
     }
@@ -188,9 +245,16 @@ class ChatController extends Controller
         $created_at = $new_message->created_at->diffForHumans();
         $attachment = is_null(request()->file('attachments')) ? null : $new_message->getFirstMediaUrl('attachments');
 
-        broadcast(new GroupEvent($sender_profile,$sender_id_encoded,$sender_id, $sender_name,  $message, $attachment, $created_at));
+        broadcast(new GroupEvent($sender_profile, $sender_id_encoded, $sender_id, $sender_name, $message, $attachment, $created_at, $group->id));
 
-        return redirect()->back();
+        // return redirect()->back();
+        return response()->json([
+            'success' => true,
+            'message' => $message,
+            'created_at' => $created_at,
+            'attachment' => $attachment,
+            'sender_id' => $sender_id,
+        ]);
     }
 
     public function attachments($encodedIdReceiver)

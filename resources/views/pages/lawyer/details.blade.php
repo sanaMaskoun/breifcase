@@ -131,7 +131,7 @@
                                             </div>
                                             <div class="views-personal">
                                                 <h4>@lang('pages.gender')</h4>
-                                                <h5>{{ $lawyer->gender == 1 ? @lang('pages.male') : @lang('pages.fimale') }}</h5>
+                                                <h5>{{ $lawyer->gender == 1 ? __('pages.male') : __('pages.female') }}</h5>
                                             </div>
                                         </div>
                                         <div class="personal-activity">
@@ -178,7 +178,12 @@
                                             </div>
                                             <div class="views-personal">
                                                 <h4>@lang('pages.location')</h4>
-                                                <h5>{{ $lawyer->location ? \App\Enums\LocationEnum::getDescription(@lang('EnumFile.'.$lawyer->location)) : 'Unknown' }}
+                                                <h5>
+                                                    @if (in_array($lawyer->location, [1, 2, 3, 4, 5, 6, 7]))
+                                                        {{ \App\Enums\LocationEnum::getDescription($lawyer->location) }}
+                                                    @else
+                                                        Unknown
+                                                    @endif
                                                 </h5>
                                             </div>
                                         </div>
@@ -262,11 +267,13 @@
                                                     <p class="card-text">{{ $consultation->description }}</p>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <span><i class="far fa-money-bill-alt"></i> @lang('pages.amount')</span>
+                                                            <span><i class="far fa-money-bill-alt"></i>
+                                                                @lang('pages.amount')</span>
                                                             <h6 class="mb-0">$1,54,220</h6>
                                                         </div>
                                                         <div class="col">
-                                                            <span><i class="far fa-calendar-alt"></i> @lang('pages.created_at')</span>
+                                                            <span><i class="far fa-calendar-alt"></i>
+                                                                @lang('pages.created_at')</span>
                                                             <h6 class="mb-0">
                                                                 {{ $consultation->created_at?->format('Y-m-d') }}</h6>
                                                         </div>
@@ -285,7 +292,7 @@
                                                                             : 'bg-primary');
                                                             @endphp
                                                             <span
-                                                                class="badge {{ $badgeColor }}">@lang('EnumFile.'.$statusDescription)</span>
+                                                                class="badge {{ $badgeColor }}">@lang('EnumFile.' . $statusDescription)</span>
                                                         </div>
 
                                                     </div>

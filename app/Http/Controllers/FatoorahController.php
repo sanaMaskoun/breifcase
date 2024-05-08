@@ -29,7 +29,9 @@ class FatoorahController extends Controller
             "Languagn" => 'en',
             "DisplayCurrencyIna" => 'KWD',
         ];
+
         return  $this->fatoorahService->sendPayment($data);
+        
   }
 
     public function callback(Request $request)

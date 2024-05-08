@@ -2749,6 +2749,14 @@ div.dataTables_wrapper div.dataTables_length select {
     justify-content: center
 }
 
+.message-counter {
+    background-color: green;
+    color: #fff;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 12px;
+    float: right;
+}
 .avatar-away:before,
 .avatar-offline:before,
 .avatar-online:before {

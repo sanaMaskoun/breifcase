@@ -19,6 +19,29 @@
         document.querySelector('input[name="message"]').value = fileName;
     });
 
+    $(document).ready(function() {
+        $('.send-button').click(function(e) {
+            e.preventDefault();
+            var form = $(this).closest('form');
+            var formData = new FormData(form[0]);
+
+            $.ajax({
+                url: form.attr('action'),
+                method: form.attr('method'),
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    form.find('input[type="text"]').val('');
+
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
 
 (function ($) {
     "use strict"; var $wrapper = $('.main-wrapper'); var $pageWrapper = $('.page-wrapper'); var $slimScrolls = $('.slimscroll'); var Sidemenu = function () { this.$menuItem = $('#sidebar-menu a'); }; function init() {

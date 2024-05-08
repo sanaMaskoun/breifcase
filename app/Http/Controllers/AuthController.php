@@ -127,7 +127,7 @@ class AuthController extends Controller
 
         return new JsonResponse([
             'access_token' => $token,
-            'user'         => new UserResource($user->load(['consultations', 'GeneralQuestions', 'QuestionsReplies', 'practices'])),
+            'user'         => new UserResource($user->load(['consultations', 'GeneralQuestions', 'QuestionsReplies', 'practices' , 'groups' , 'receiver_message' , 'sender_message'])),
 
         ]);
     }

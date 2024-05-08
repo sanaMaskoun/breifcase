@@ -33,7 +33,9 @@ class SuggestionEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new PrivateChannel('suggestion-channel-'. $this->user_id) ;
+        return new PrivateChannel('suggestion-channel') ;
+        // return ['suggestion-channel'];
+
 
 
     }

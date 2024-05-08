@@ -6,7 +6,7 @@ use App\Events\chatPrivateEvent;
 use App\Events\GroupEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ChatResource;
-use App\Http\Resources\GroupResource;
+use App\Http\Resources\GroupMessagesResource;
 use App\Http\Resources\UserResource;
 use App\Models\Group;
 use App\Models\Message;
@@ -38,7 +38,7 @@ class ChatApiController extends Controller
         $messages = Message::where('group_id', $group->id)->get();
 
         return ['admin' => new UserResource($admin),
-            'messages' => GroupResource::collection($messages->load('sender'))];
+            'messages' => GroupMessagesResource::collection($messages->load('sender'))];
 
     }
 
@@ -99,9 +99,9 @@ class ChatApiController extends Controller
         $created_at = $new_message->created_at->diffForHumans();
         $attachment = $request->attachments ? null : $new_message->getFirstMediaUrl('attachments');
 
-        broadcast(new GroupEvent($sender_profile, $sender_id_encoded, $sender_id, $sender_name, $message, $attachment, $created_at));
+        broadcast(new GroupEvent($sender_profile, $sender_id_encoded, $sender_id, $sender_name, $message, $attachment, $created_at, $group->id));
 
-        return new GroupResource($new_message->load('sender'));
+        return new GroupMessagesResource($new_message->load('sender'));
 
     }
 
@@ -127,7 +127,7 @@ class ChatApiController extends Controller
             $query->where('collection_name', 'attachments');
         })->get();
 
-        return   GroupResource::collection($messages->load('sender'));
+        return GroupMessagesResource::collection($messages->load('sender'));
 
     }
 }

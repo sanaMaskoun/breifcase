@@ -18,7 +18,8 @@ class GroupEvent implements ShouldBroadcast
     public $message;
     public $attachment;
     public $created_at;
-    public function __construct($sender_profile,$sender_id_encoded ,$sender_id, $sender_name , $message, $attachment, $created_at)
+    public $group;
+    public function __construct($sender_profile,$sender_id_encoded ,$sender_id, $sender_name , $message, $attachment, $created_at ,$group)
     {
 
         $this->sender_profile    = $sender_profile;
@@ -29,11 +30,12 @@ class GroupEvent implements ShouldBroadcast
         $this->message           = $message;
         $this->attachment        = $attachment;
         $this->created_at        = $created_at;
+        $this->group        = $group;
     }
 
     public function broadcastOn(): array
     {
-        return ['group-channel'];
+        return ['group-channel-'. $this->group];
     }
     public function broadcastAs()
 

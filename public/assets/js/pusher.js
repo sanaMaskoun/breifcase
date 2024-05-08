@@ -24,64 +24,95 @@ var notificationsCount = parseInt(notificationsCountElem.data('count'));
 var notifications = notificationsWrapper.find('ul.notification-list');
 
 
-var channelNotification = pusherPrivate.subscribe('private-notify-channel-' + localStorage.getItem('user_id'));
-var channelSuggestion = pusherPrivate.subscribe('private-suggestion-channel-' + localStorage.getItem('user_id'));
 var channelConsultation = pusherPrivate.subscribe('private-consultation-channel-' + localStorage.getItem('user_id'));
 var channelReplayRate = pusherPrivate.subscribe('private-rate-channel-' + localStorage.getItem('user_id'));
 
-channelNotification.bind('App\\Events\\NotificationEvent', function (data) {
-    var newNotificationHtml = `
-    <li class="notification-message">
-        <div class="media d-flex">
-            <div class="media-body flex-grow-1">
-           <a>  <span>these user request to join :</span></a>
-            <a href="${data.encodedId}">
-            <p class="noti-details"> <span style="float: right;  font-size:12px;"
-            class="noti-title">${data.user_name} </span>
-            </p>
 
+//new chat
+var channelPivateNewChat = pusherPrivate.subscribe('private-new-chat-channel');
+channelPivateNewChat.bind('newChatMessage', function (data) {
+    let newChatMessageSender = `
+    <li class="mb-4 px-5 py-2" id="new_chat_div">
+        <a href="javascript:void(0)" class="media media-message">
+            <div class="position-relative mr-3">
+                <a href="/chat/${data.sender_encoded_id}">
+                    <img class="rounded-circle img_list_chat" src="${data.sender_profile}" alt="User Image">
+                    <span class="username text-dark">${data.sender_name}</span>
+                </a>
+                <span class="message-counter">${data.message_count + 1}</span>
+
+                <div class="message-contents">
+                    <p class="last-msg text-smoke">${data.message}</p>
+                    <span class="text-smoke time_message"><em>${data.created_at}</em></span>
+                </div>
+            </div>
         </a>
-                <p class="noti-time"><span class="notification-time">${data.date}</span></p>
-            </div>
-        </div>
-    </li>
-`;
-    notifications.prepend(newNotificationHtml);
-    notificationsCount += 1;
-    notificationsCountElem.text(notificationsCount);
+    </li>`;
 
-    notificationsWrapper.find('.notif-count').text(notificationsCount);
-    notificationsWrapper.show();
+    let newChatMessageReceiver = `
+    <li class="mb-4 px-5 py-2" id="new_chat_div">
+        <a href="javascript:void(0)" class="media media-message">
+            <div class="position-relative mr-3">
+                <a href="/chat/${data.receiver_encoded_id}">
+                    <img class="rounded-circle img_list_chat" src="${data.receiver_profile}" alt="User Image">
+                    <span class="username text-dark">${data.receiver_name}</span>
+                </a>
+                <div class="message-contents">
+                    <p class="last-msg text-smoke">${data.message}</p>
+                    <span class="text-smoke time_message"><em>${data.created_at}</em></span>
+                </div>
+            </div>
+        </a>
+    </li>`;
+    if (data.sender_id == localStorage.getItem('user_id')) {
+
+        // newMessage = newChatMessageReceiver;
+        $("#new_chat_div").append(newChatMessageReceiver);
+    }
+    else if (data.receiver_id == localStorage.getItem('user_id')) {
+        // newMessage = newChatMessageSender;
+        $("#new_chat_div").append(newChatMessageSender);
+    }
+
+
+    // $("#new_chat_div").append(newChatMessage);
 });
 
-channelSuggestion.bind('App\\Events\\SuggestionEvent', function (data) {
-    var newSuggestionHtml = `
-    <li class="notification-message">
-        <div class="media d-flex">
+//counter chat
+var channelPivatcounterChat = pusherPrivate.subscribe('private-counter-chat-channel');
+channelPivatcounterChat.bind('counterChat', function (data) {
 
-            <div class="media-body flex-grow-1">
-            <a>
-            <p> suggestion title: <span
-                    class="noti-details"> ${data.title}</span><br>
-                    <span style="float: right;  font-size:12px;"> By : <span
-                            class="noti-details">${data.user_name}</span>
-                            </span>
-                        </p>
-                    </a>
-                <p class="noti-time"><span class="notification-time">${data.date}</span></p>
-            </div>
-        </div>
-    </li>
-`;
-    notifications.prepend(newSuggestionHtml);
-    notificationsCount += 1;
-    notificationsCountElem.text(notificationsCount);
+    // let counterChatReceiver = `
+    // <div style="display: inline;" id="counter_chat">
 
-    notificationsWrapper.find('.notif-count').text(notificationsCount);
-    notificationsWrapper.show();
+    //     <span
+    //         class="message-counter">${data.message_count + 1}</span>
+
+    // </div>`;
+    // if (data.receiver_id == localStorage.getItem('user_id')) {
+    //     $("#counter_chat").append(counterChatReceiver);
+    // }
+
+    var counterElement = document.getElementById('counter_chat');
+
+if (counterElement) {
+    var counterText = counterElement.textContent.trim();
+
+    if (counterText !== '') {
+        var count = parseInt(counterText);
+
+        count++;
+
+        counterElement.textContent = count.toString();
+    }
+}
+
 });
+
 
 channelConsultation.bind('App\\Events\\ConsultationEvent', function (data) {
+    console.log('ConsultationEvent');
+
     var newConsultation = `
     <li class="notification-message">
      <div class="media d-flex">
@@ -143,26 +174,9 @@ channelReplayRate.bind('App\\Events\\ReplyRateEvent', function (data) {
 });
 
 
-//chat  private-chat-channel
-
-
-var pusherPrivate = new Pusher('21c93d7ae9ded5a63591', {
-    broadcast: 'pusher',
-    cluster: 'ap2',
-    authEndpoint: projectUrl + "/api/pusher/auth",
-    auth: {
-        headers: {
-            // 'X-CSRF-Token': "12365",
-            // "Authorization": "Bearer 354681",
-            // "Access-Control-Allow-Origin": "*",
-            // 'Accept': 'application/json',
-        }
-    }
-});
 
 var channelPivateChat = pusherPrivate.subscribe('private-chat-channel');
 channelPivateChat.bind('chatMessage', function (data) {
-    console.log(data);
     var extension = data.attachment ? data.attachment.split('.').pop().toLowerCase() : null;
     message = "";
     let receiverMessage = `
@@ -208,6 +222,9 @@ channelPivateChat.bind('chatMessage', function (data) {
     $("#chat_div").append(message);
 
 });
+
+
+
 
 
 //chat group

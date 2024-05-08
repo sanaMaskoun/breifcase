@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Notification;
 
 class ConsultationApiController extends Controller
 {
+    // use MyFatoorah;
+
     public function store(ConsultationRequest $request, User $receiver)
     {
         $consultation = Consultation::create($request->validated());
