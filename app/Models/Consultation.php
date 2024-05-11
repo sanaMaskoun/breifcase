@@ -28,6 +28,10 @@ class Consultation extends Model implements HasMedia
     {
         return $this->hasOne(Rate::class, 'consultation_id');
     }
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class, 'consultation_id');
+    }
 
 
     public function registerMediaCollections(): void

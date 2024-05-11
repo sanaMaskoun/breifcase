@@ -55,12 +55,12 @@
                                                         </a>
                                                         <div style="display: inline; ">
                                                             {{--  @if ($user->message_count != 0)  --}}
-                                                                <span
-                                                                    class="message-counter"  id="counter_chat">{{ $user->message_count }}</span>
+                                                            <span class="message-counter" id="counter_chat_{{ $user->id }}">{{ $user->message_count }}</span>
+
                                                             {{--  @endif  --}}
                                                         </div>
                                                         <div class="message-contents">
-                                                            <p class="last-msg text-smoke">
+                                                            <p class="last-msg text-smoke" id="last_message_{{ $user->id }}">
                                                                 {{ $user->latest_message?->message }}</p>
 
 
@@ -99,6 +99,8 @@
 
                                                             <span class="username text-dark">{{ $group->name }}</span>
                                                         </a>
+                                                        <span class="message-counter" id="counter_chat_{{ $group->id }}">1</span>
+
                                                         <span class="status away"></span>
                                                     </div>
                                                 </a>

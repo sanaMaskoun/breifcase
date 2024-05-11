@@ -18,18 +18,20 @@ class CounterChatEvent implements ShouldBroadcast
 public $sender_id;
 public $receiver_id;
 public $message_count;
-    public function __construct($message_count,$sender_id , $receiver_id )
+public $message;
+    public function __construct($message_count,$sender_id , $receiver_id ,$message)
     {
        $this->receiver_id = $receiver_id;
        $this->sender_id = $sender_id;
        $this->message_count = $message_count;
+       $this->message = $message;
     }
 
 
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('counter-chat-channel'),
+            new PrivateChannel('counter-chat-channel-'.$this->receiver_id)
         ];
     }
     public function broadcastAs()

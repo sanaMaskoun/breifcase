@@ -77,23 +77,51 @@
 
             var channelNotification = pusherPrivate.subscribe('private-notify-channel');
             var channelSuggestion = pusherPrivate.subscribe('private-suggestion-channel');
+            var channelRefundConsultation = pusherPrivate.subscribe('private-refund-consultation-channel');
+
+            channelRefundConsultation.bind('App\\Events\\RefundConsultationEvent', function(data) {
+                var newRefundConsultationHtml = `
+                    <li class="notification-message">
+                        <div class="media d-flex">
+
+                            <div class="media-body flex-grow-1">
+                                <p> This consultation has not been responded to. Return the amount to the customer
+                                    <span>
+                                            <a class="link_notification" href="/consultation/${data.encodedId}/show">
+                                            ${data.title}
+                                            </a>
+
+                                        </span>
+                                    </p>
+                            </div>
+                        </div>
+                    </li>
+                `;
+                notifications.prepend(newRefundConsultationHtml);
+                notificationsCount += 1;
+                notificationsCountElem.text(notificationsCount);
+
+                notificationsWrapper.find('.notif-count').text(notificationsCount);
+                notificationsWrapper.show();
+            });
+
             channelNotification.bind('App\\Events\\NotificationEvent', function(data) {
                 var newNotificationHtml = `
-            <li class="notification-message">
-                <div class="media d-flex">
-                    <div class="media-body flex-grow-1">
-                   <a>  <span>these user request to join :</span></a>
-                    <a href="${data.encodedId}">
-                    <p class="noti-details"> <span style="float: right;  font-size:12px;"
-                    class="noti-title">${data.user_name} </span>
-                    </p>
+                    <li class="notification-message">
+                        <div class="media d-flex">
+                            <div class="media-body flex-grow-1">
+                        <a>  <span>these user request to join :</span></a>
+                            <a href="${data.encodedId}">
+                            <p class="noti-details"> <span style="float: right;  font-size:12px;"
+                            class="noti-title">${data.user_name} </span>
+                            </p>
 
-                </a>
-                        <p class="noti-time"><span class="notification-time">${data.date}</span></p>
-                    </div>
-                </div>
-            </li>
-        `;
+                        </a>
+                                <p class="noti-time"><span class="notification-time">${data.date}</span></p>
+                            </div>
+                        </div>
+                    </li>
+                `;
                 notifications.prepend(newNotificationHtml);
                 notificationsCount += 1;
                 notificationsCountElem.text(notificationsCount);
@@ -101,25 +129,26 @@
                 notificationsWrapper.find('.notif-count').text(notificationsCount);
                 notificationsWrapper.show();
             });
+
             channelSuggestion.bind('App\\Events\\SuggestionEvent', function(data) {
                 var newSuggestionHtml = `
-            <li class="notification-message">
-                <div class="media d-flex">
+                    <li class="notification-message">
+                        <div class="media d-flex">
 
-                    <div class="media-body flex-grow-1">
-                    <a>
-                    <p> suggestion title: <span
-                            class="noti-details"> ${data.title}</span><br>
-                            <span style="float: right;  font-size:12px;"> By : <span
-                                    class="noti-details">${data.user_name}</span>
-                                    </span>
-                                </p>
-                            </a>
-                        <p class="noti-time"><span class="notification-time">${data.date}</span></p>
-                    </div>
-                </div>
-            </li>
-        `;
+                            <div class="media-body flex-grow-1">
+                            <a>
+                            <p> suggestion title: <span
+                                    class="noti-details"> ${data.title}</span><br>
+                                    <span style="float: right;  font-size:12px;"> By : <span
+                                            class="noti-details">${data.user_name}</span>
+                                            </span>
+                                        </p>
+                                    </a>
+                                <p class="noti-time"><span class="notification-time">${data.date}</span></p>
+                            </div>
+                        </div>
+                    </li>
+                `;
                 notifications.prepend(newSuggestionHtml);
                 notificationsCount += 1;
                 notificationsCountElem.text(notificationsCount);
@@ -127,6 +156,8 @@
                 notificationsWrapper.find('.notif-count').text(notificationsCount);
                 notificationsWrapper.show();
             });
+
+
         </script>
     @endif
 

@@ -3,13 +3,17 @@
 namespace App\Jobs;
 
 use App\Enums\ConsultationStatusEnum;
-use App\Http\Services\FatoorahService;
+use App\Enums\InvoiceStatusEnum;
+use App\Events\RefundConsultationEvent;
 use App\Models\Consultation;
+use App\Models\User;
+use App\Notifications\RefundConsultationNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Notification;
 
 class RefundConsultationJob implements ShouldQueue
 {
@@ -24,11 +28,26 @@ class RefundConsultationJob implements ShouldQueue
 
     public function handle()
     {
-        $refund = FatoorahService::refundPayment($this->consultation->payment_id);
+        $admins = User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->get();
+
+        $data = [
+            "consultation_id"   =>   $this->consultation->id,
+            "title"             =>  $this->consultation->title
+        ];
+
+        $encodedId = base64_encode( $this->consultation->id);
+
+        Notification::send($admins, new RefundConsultationNotification($data));
+        event(new RefundConsultationEvent($data, $encodedId));
+
 
         $this->consultation->update([
             'status' => ConsultationStatusEnum::rejected,
-            // 'refund_id' => $refund->id,
+        ]);
+        $this->consultation->invoice->update([
+            'status' => InvoiceStatusEnum::refund,
         ]);
     }
 

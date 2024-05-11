@@ -19,5 +19,9 @@ return [
 'um_alq'              => 'ام الق',
 'al_ain'              => 'العين',
 
+//invoice enum
+'Refund'            => 'استرداد',
+'pending'            => 'قيد الانتظار',
+'Accepte'            => 'مقبول',
 
 ];

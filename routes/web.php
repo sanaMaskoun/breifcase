@@ -6,6 +6,7 @@ use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GeneralQuestionController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\JoinUsController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\LawyerController;
@@ -95,8 +96,9 @@ Route::group(['prefix' => 'group', 'middleware' => 'auth:sanctum'], function () 
     Route::post('/update/{group}', [GroupController::class, 'update'])->name('update_group');
 });
 
-Route::get('/suggestion', [SuggestionController::class, 'index'])->name('list_suggestion');
-Route::get('/notification/clear-all', [LawyerController::class, 'clear_all'])->name('notification_clear_all');
+Route::get('/suggestion', [SuggestionController::class, 'index'])->name('list_suggestion')->middleware('auth:sanctum');
+Route::get('/invoice', [InvoiceController::class, 'index'])->name('list_invoice')->middleware('auth:sanctum');
+Route::get('/notification/clear-all', [LawyerController::class, 'clear_all'])->name('notification_clear_all')->middleware('auth:sanctum');
 
 Route::get('error', function () {
     return 'payment failed';

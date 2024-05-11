@@ -63,11 +63,11 @@
                                         $encodedIdSender = base64_encode(auth()->user()->id);
 
                                     @endphp
-                                    <a href="{{ route('show_lawyer', $encodedIdSender) }}">
+                                    {{--  <a href="{{ route('show_lawyer', $encodedIdSender) }}">
                                         <img src="{{ auth()->user()->getFirstMediaUrl('profileUser') }}"
                                             class="rounded-circle img_group" alt="user_img">
 
-                                    </a>
+                                    </a>  --}}
                                 </div>
                             </div>
                         @else

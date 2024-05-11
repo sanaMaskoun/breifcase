@@ -21,4 +21,11 @@ return [
 'um_alq'              => 'UM_ALQ',
 'al_ain'              => 'al_ain',
 
+
+
+//invoice enum
+'Refund'            => 'refund',
+'pending'            => 'pending',
+'Accepte'            => 'accepte',
+
 ];

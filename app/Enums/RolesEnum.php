@@ -8,7 +8,7 @@ use BenSampo\Enum\Enum;
 
 final class RolesEnum extends Enum
 {
-    const Lawyer = 1;
+    const lawyer = 1;
     const legalConsultant = 2;
     const typingCenter = 3;
     const client = 4;

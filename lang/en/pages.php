@@ -28,6 +28,7 @@ return [
      'requests_to_join'          => 'Requests to join',
      'suggestion'                => 'Suggestions',
      'chats'                      => 'Chat',
+     'invoices'                      => 'invoices',
 
 
 
@@ -79,6 +80,7 @@ return [
       'lawyer_information'           => 'Lawyer Information :',
       'lawyer_reply'                 => 'The lawyer answer to the consultation :',
       'status'                       => 'status',
+      'refund_consultation_notification'  => 'This consultation has not been responded to. Return the amount to the customer',
 
 
       // general question
@@ -142,6 +144,17 @@ return [
       'profits'                      => 'Profits',
       'number_of_subscribers'         => 'Number of subscribers',
       'number_of_clients'             => 'Number of Clients',
+
+
+        //invoices
+        'list_invoices'               => 'list invoices',
+        'receiver'                    => 'receiver' ,
+        'invoiceId'                   => 'invoice number',
+        'titleConsultation'           => 'Consultation title',
+
+
+
+
 
 
 

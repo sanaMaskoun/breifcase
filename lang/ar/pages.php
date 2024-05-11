@@ -26,6 +26,7 @@ return [
     'requests_to_join'          => 'طلبات الانضمام',
     'suggestion'                => 'الإقتراحات',
     'chats'                      => 'المحادثات',
+    'invoices'                   => 'الفواتير',
 
     // attachments
     'file'                      => 'الملفات',
@@ -76,6 +77,8 @@ return [
       'client_information'           => 'معلومات الزبون :',
       'lawyer_reply'                 => 'رد المحامي على الاستشارة :',
       'status'                       => 'الحالة',
+      'refund_consultation_notification'  => 'لم يتم الرد على هذه الاستشارة. إعادة المبلغ للعميل',
+
 
 
 
@@ -143,6 +146,17 @@ return [
        'profits'                      => 'الأرباح',
        'number_of_subscribers'         => 'عدد المشتركين',
        'number_of_clients'             => 'عدد الزبائن',
+
+
+
+
+       //invoices
+       'list_invoices'               => 'لائحة الفواتير',
+       'receiver'                    => 'المستقبل' ,
+       'invoiceId'                   => 'رقم الفاتورة',
+       'titleConsultation'           => 'عنوان الإستشارة',
+
+
 
 
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\api\RateController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FatoorahController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SuggestionController;
 use Illuminate\Http\Request;
@@ -77,3 +78,7 @@ Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
 });
 
 Route::post('/suggestion', [SuggestionController::class, 'store'])->middleware('auth:sanctum');
+
+Route::group(['prefix' => 'invoice', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('/', [InvoiceController::class, 'store']);
+});

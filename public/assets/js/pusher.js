@@ -29,7 +29,7 @@ var channelReplayRate = pusherPrivate.subscribe('private-rate-channel-' + localS
 
 
 //new chat
-var channelPivateNewChat = pusherPrivate.subscribe('private-new-chat-channel');
+var channelPivateNewChat = pusherPrivate.subscribe('private-new-chat-channel-'+ localStorage.getItem('user_id'));
 channelPivateNewChat.bind('newChatMessage', function (data) {
     let newChatMessageSender = `
     <li class="mb-4 px-5 py-2" id="new_chat_div">
@@ -39,7 +39,7 @@ channelPivateNewChat.bind('newChatMessage', function (data) {
                     <img class="rounded-circle img_list_chat" src="${data.sender_profile}" alt="User Image">
                     <span class="username text-dark">${data.sender_name}</span>
                 </a>
-                <span class="message-counter">${data.message_count + 1}</span>
+                <span class="message-counter">${data.message_count+1}</span>
 
                 <div class="message-contents">
                     <p class="last-msg text-smoke">${data.message}</p>
@@ -79,39 +79,34 @@ channelPivateNewChat.bind('newChatMessage', function (data) {
 });
 
 //counter chat
-var channelPivatcounterChat = pusherPrivate.subscribe('private-counter-chat-channel');
-channelPivatcounterChat.bind('counterChat', function (data) {
+var channelPrivateCounterChat = pusherPrivate.subscribe('private-counter-chat-channel-'+ localStorage.getItem('user_id'));
+channelPrivateCounterChat.bind('counterChat', function (data) {
 
-    // let counterChatReceiver = `
-    // <div style="display: inline;" id="counter_chat">
+    var userId = localStorage.getItem('user_id');
 
-    //     <span
-    //         class="message-counter">${data.message_count + 1}</span>
+    var isSender = (data.sender_id == userId);
+    if (data.receiver_id == userId) {
+        var lastMessage = data.message;
+        $('#last_message_' + data.sender_id).text(lastMessage);
 
-    // </div>`;
-    // if (data.receiver_id == localStorage.getItem('user_id')) {
-    //     $("#counter_chat").append(counterChatReceiver);
-    // }
+        var counterElement = $('#counter_chat_' + data.sender_id);
+        var counterText = counterElement.text().trim();
 
-    var counterElement = document.getElementById('counter_chat');
-
-if (counterElement) {
-    var counterText = counterElement.textContent.trim();
-
-    if (counterText !== '') {
-        var count = parseInt(counterText);
-
-        count++;
-
-        counterElement.textContent = count.toString();
+        if (counterText !== '') {
+            var count = parseInt(counterText);
+            count++;
+            counterElement.text(count.toString());
+        } else {
+            counterElement.text('1');
+        }
+    } else if (isSender) {
+        var lastMessage = data.message;
+        $('#last_message').text(lastMessage);
     }
-}
-
 });
 
 
 channelConsultation.bind('App\\Events\\ConsultationEvent', function (data) {
-    console.log('ConsultationEvent');
 
     var newConsultation = `
     <li class="notification-message">
@@ -174,8 +169,8 @@ channelReplayRate.bind('App\\Events\\ReplyRateEvent', function (data) {
 });
 
 
-
-var channelPivateChat = pusherPrivate.subscribe('private-chat-channel');
+//chat
+var channelPivateChat = pusherPrivate.subscribe('private-chat-channel-'+ localStorage.getItem('user_id'));
 channelPivateChat.bind('chatMessage', function (data) {
     var extension = data.attachment ? data.attachment.split('.').pop().toLowerCase() : null;
     message = "";
@@ -228,61 +223,61 @@ channelPivateChat.bind('chatMessage', function (data) {
 
 
 //chat group
-var channelChat = pusher.subscribe('group-channel');
-channelChat.bind('groupMessage', function (data) {
-    var extension = data.attachment ? data.attachment.split('.').pop().toLowerCase() : null;
-    message_group = "";
+// var channelChat = pusher.subscribe('group-channel');
+// channelChat.bind('groupMessage', function (data) {
+//     var extension = data.attachment ? data.attachment.split('.').pop().toLowerCase() : null;
+//     message_group = "";
 
-    let receiverMessage = `
-    <div class="media media-chat" id="group_area_receiver">
-        <div class="media-body img-groups">
-        <a href="/lawyer/${data.sender_id_encoded}/show">
-        <img class="rounded-circle img_group" src="${data.sender_profile}">
-        <span>${data.sender_name}</span>
-        </a>
-            <div class="text-content">
-                ${data.attachment ?
-            (extension === 'jpg' || extension === 'png' ?
-                `<img class="img_group" src="${data.attachment}">` :
-                `<a href="${data.attachment}" target="_blank"><p class="message">${data.message}</p></a>`) :
-            `<p class="message">${data.message} </p>`}
-                <time class="time">${data.created_at}</time>
-            </div>
-        </div>
-    </div>`;
+//     let receiverMessage = `
+//     <div class="media media-chat" id="group_area_receiver">
+//         <div class="media-body img-groups">
+//         <a href="/lawyer/${data.sender_id_encoded}/show">
+//         <img class="rounded-circle img_group" src="${data.sender_profile}">
+//         <span>${data.sender_name}</span>
+//         </a>
+//             <div class="text-content">
+//                 ${data.attachment ?
+//             (extension === 'jpg' || extension === 'png' ?
+//                 `<img class="img_group" src="${data.attachment}">` :
+//                 `<a href="${data.attachment}" target="_blank"><p class="message">${data.message}</p></a>`) :
+//             `<p class="message">${data.message} </p>`}
+//                 <time class="time">${data.created_at}</time>
+//             </div>
+//         </div>
+//     </div>`;
 
-    let senderMessage = `
-    <div class="media media-chat media-chat-right" id="group_area_sender">
-    <div class="media-body">
-    <div class="text-content">
-    ${data.attachment ?
-            (extension === 'jpg' || extension === 'png' ?
-                `<img class="img_group" src="${data.attachment}">` :
-                `<a href="${data.attachment}" target="_blank"><p class="message">${data.message}</p></a>`) :
-            `<p class="message">${data.message} </p>`}
-    <time class="time">${data.created_at}</time>
-</div>
-    <a href="/lawyer/${data.sender_id_encoded}/show">
-    <img class="rounded-circle img_group" src="${data.sender_profile}">
-    </a>
+//     let senderMessage = `
+//     <div class="media media-chat media-chat-right" id="group_area_sender">
+//     <div class="media-body">
+//     <div class="text-content">
+//     ${data.attachment ?
+//             (extension === 'jpg' || extension === 'png' ?
+//                 `<img class="img_group" src="${data.attachment}">` :
+//                 `<a href="${data.attachment}" target="_blank"><p class="message">${data.message}</p></a>`) :
+//             `<p class="message">${data.message} </p>`}
+//     <time class="time">${data.created_at}</time>
+// </div>
+//     <a href="/lawyer/${data.sender_id_encoded}/show">
+//     <img class="rounded-circle img_group" src="${data.sender_profile}">
+//     </a>
 
-    </div>
-    </div>`;
+//     </div>
+//     </div>`;
 
-    if (data.sender_id == localStorage.getItem('user_id')) {
-        message_group = senderMessage;
-    }
-    else {
-        message_group = receiverMessage;
-    }
-    if (message_group != "") {
-        $('.empty-messages').remove();
-    }
-
-
-    $("#group_div").append(message_group);
+//     if (data.sender_id == localStorage.getItem('user_id')) {
+//         message_group = senderMessage;
+//     }
+//     else {
+//         message_group = receiverMessage;
+//     }
+//     if (message_group != "") {
+//         $('.empty-messages').remove();
+//     }
 
 
-});
+//     $("#group_div").append(message_group);
+
+
+// });
 
 

@@ -155,6 +155,24 @@
                                                     class="notification-time">{{ $notification->created_at?->format('j M Y') }}</span>
                                             </p>
                                         </div>
+                                        @elseif ($notification->type === 'App\Notifications\RefundConsultationNotification')
+                                        @php
+                                        $encodedIdConsultation = base64_encode($notification->data['consultation_id']);
+                                         @endphp
+                                         <div class="media-body flex-grow-1 row_notification">
+
+                                            <p> @lang('pages.refund_consultation_notification')
+
+                                                    <a class="link_notification"
+                                                        href="{{ route('show_consultation', $encodedIdConsultation) }}">
+                                                        {{ $notification->data['title'] }}
+                                                    </a>
+
+                                                </span>
+                                            </p>
+
+
+                                        </div>
                                     @endif
 
                                 </div>
@@ -273,6 +291,11 @@
                         <a href="{{ route('list_suggestion') }}"><i class="fas fa-lightbulb"></i>
 
                             <span> @lang('pages.suggestion') </span></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('list_invoice') }}"><i class="fas fa-file-invoice"></i>
+
+                            <span> @lang('pages.invoices') </span></a>
                     </li>
                 @endrole
 

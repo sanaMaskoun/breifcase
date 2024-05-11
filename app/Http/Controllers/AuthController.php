@@ -27,7 +27,7 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'confirmed'],
             'password_confirmation' => ['required', 'same:password'],
             'phone' => ['required', 'numeric', 'digits_between:7,14'],
-            'role' => ['required', Rule::in([RolesEnum::client, RolesEnum::Lawyer, RolesEnum::legalConsultant, RolesEnum::typingCenter])],
+            'role' => ['required', Rule::in([RolesEnum::client, RolesEnum::lawyer, RolesEnum::legalConsultant, RolesEnum::typingCenter])],
         ]);
         $user = new User([
             'name' => $request->name,
@@ -37,19 +37,24 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-
-
         if ($user->save()) {
             $tokenResult = $user->createToken('Personal Access Token');
             $token = $tokenResult->plainTextToken;
 
             $user->assignRole($role);
-
             if ($role == 'client') {
                 $user->update(['is_active' => true]);
-            }
-            else
-            {
+            } else {
+                if ($role == 'lawyer') {
+                    $request->validate([
+                        'certifications' => ['required'],
+                    ]);
+                    foreach ($request->certifications as $certification) {
+                        $user->addMedia($certification)
+                            ->withCustomProperties(['do_not_replace' => true])
+                            ->toMediaCollection('certification');
+                    }
+                }
                 $admins = User::whereHas('roles', function ($query) {
                     $query->where('name', 'admin');
                 })->get();
@@ -58,17 +63,15 @@ class AuthController extends Controller
                 $email = $request->email;
                 $encodedId = base64_encode($user->id);
 
-                Notification::send($admins,new RequestToJoin($user->id , $joined_user ,$email));
-                $data =[
+                Notification::send($admins, new RequestToJoin($user->id, $joined_user, $email));
+                $data = [
                     'user_id' => $user->id,
-                    'user_name'  => $request->name,
-                    'email'  => $request->email,
-                    'profile_image' => $user->getFirstMediaUrl('profileUser')
+                    'user_name' => $request->name,
+                    'email' => $request->email,
+                    'profile_image' => $user->getFirstMediaUrl('profileUser'),
 
-               ];
-                event(new NotificationEvent($data , $encodedId));
-
-
+                ];
+                event(new NotificationEvent($data, $encodedId));
 
             }
 
@@ -127,7 +130,7 @@ class AuthController extends Controller
 
         return new JsonResponse([
             'access_token' => $token,
-            'user'         => new UserResource($user->load(['consultations', 'GeneralQuestions', 'QuestionsReplies', 'practices' , 'groups' , 'receiver_message' , 'sender_message'])),
+            'user' => new UserResource($user->load(['consultations', 'GeneralQuestions', 'QuestionsReplies', 'practices', 'groups', 'receiver_message', 'sender_message'])),
 
         ]);
     }
