@@ -239,11 +239,18 @@
                         <a href="{{ route('dashboardLawyer') }}"><i class="feather-grid"></i>
                             <span> @lang('pages.dashboard')</span></a>
                     </li>
+                    @role('lawyer|legalConsultant')
                     <li>
                         <a href="{{ route('list_consultations', $encodedId) }}"><i class="fas fa-balance-scale"></i>
                             <span> @lang('pages.consultation')</span></a>
                     </li>
-
+                    @endrole
+                    @role('typingCenter')
+                    <li>
+                        <a href="{{ route('list_consultations', $encodedId) }}"><i class="fas fa-balance-scale"></i>
+                            <span> @lang('pages.translateFile')</span></a>
+                    </li>
+                    @endrole
                     <li>
                         <a href="{{ route('list_general_questions', $encodedId) }}"><i
                                 class="far fa-question-circle"></i>

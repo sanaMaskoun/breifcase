@@ -29,7 +29,7 @@ var channelReplayRate = pusherPrivate.subscribe('private-rate-channel-' + localS
 
 
 //new chat
-var channelPivateNewChat = pusherPrivate.subscribe('private-new-chat-channel-'+ localStorage.getItem('user_id'));
+var channelPivateNewChat = pusherPrivate.subscribe('private-new-chat-channel-' + localStorage.getItem('user_id'));
 channelPivateNewChat.bind('newChatMessage', function (data) {
     let newChatMessageSender = `
     <li class="mb-4 px-5 py-2" id="new_chat_div">
@@ -39,10 +39,10 @@ channelPivateNewChat.bind('newChatMessage', function (data) {
                     <img class="rounded-circle img_list_chat" src="${data.sender_profile}" alt="User Image">
                     <span class="username text-dark">${data.sender_name}</span>
                 </a>
-                <span class="message-counter">${data.message_count+1}</span>
+                <span class="message-counter" id="counter_chat_${data.sender_id}">${data.message_count }</span>
 
                 <div class="message-contents">
-                    <p class="last-msg text-smoke">${data.message}</p>
+                    <p class="last-msg text-smoke" id="last_message_${ data.sender_id }">${data.message}</p>
                     <span class="text-smoke time_message"><em>${data.created_at}</em></span>
                 </div>
             </div>
@@ -79,7 +79,7 @@ channelPivateNewChat.bind('newChatMessage', function (data) {
 });
 
 //counter chat
-var channelPrivateCounterChat = pusherPrivate.subscribe('private-counter-chat-channel-'+ localStorage.getItem('user_id'));
+var channelPrivateCounterChat = pusherPrivate.subscribe('private-counter-chat-channel-' + localStorage.getItem('user_id'));
 channelPrivateCounterChat.bind('counterChat', function (data) {
 
     var userId = localStorage.getItem('user_id');
@@ -90,8 +90,8 @@ channelPrivateCounterChat.bind('counterChat', function (data) {
         $('#last_message_' + data.sender_id).text(lastMessage);
 
         var counterElement = $('#counter_chat_' + data.sender_id);
-        var counterText = counterElement.text().trim();
 
+        var counterText = counterElement.text().trim();
         if (counterText !== '') {
             var count = parseInt(counterText);
             count++;
@@ -101,7 +101,7 @@ channelPrivateCounterChat.bind('counterChat', function (data) {
         }
     } else if (isSender) {
         var lastMessage = data.message;
-        $('#last_message').text(lastMessage);
+        $('#last_message_'+ data.receiver_id).text(lastMessage);
     }
 });
 
@@ -170,7 +170,7 @@ channelReplayRate.bind('App\\Events\\ReplyRateEvent', function (data) {
 
 
 //chat
-var channelPivateChat = pusherPrivate.subscribe('private-chat-channel-'+ localStorage.getItem('user_id'));
+var channelPivateChat = pusherPrivate.subscribe('private-chat-channel-' + localStorage.getItem('user_id'));
 channelPivateChat.bind('chatMessage', function (data) {
     var extension = data.attachment ? data.attachment.split('.').pop().toLowerCase() : null;
     message = "";

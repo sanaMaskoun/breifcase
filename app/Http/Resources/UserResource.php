@@ -31,6 +31,7 @@ class UserResource extends JsonResource
             'certification' => $this->getMedia('certification')->map(function ($media) {
                 return $media->getUrl();
             }),
+            'unreadNotifications' => NotificationResource::collection($this->unreadNotifications),
 
             'consultations' => $this->whenLoaded('consultations', function () {
                 return ConsultationResource::collection($this->consultations->load(['receiver', 'sender']));
@@ -49,10 +50,10 @@ class UserResource extends JsonResource
                 return GroupResource::collection($this->groups->load('messeges'));
             }),
             'senderMessage' => $this->whenLoaded('sender_message', function () {
-                return ChatResource::collection($this->sender_message->load(['receiver','sender']));
+                return ChatResource::collection($this->sender_message->load(['receiver', 'sender']));
             }),
             'receiverMessage' => $this->whenLoaded('receiver_message', function () {
-                return ChatResource::collection($this->receiver_message->load(['receiver','sender']));
+                return ChatResource::collection($this->receiver_message->load(['receiver', 'sender']));
             }),
         ];
     }

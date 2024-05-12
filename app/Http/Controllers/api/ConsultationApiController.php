@@ -22,10 +22,20 @@ class ConsultationApiController extends Controller
     {
         $consultation = Consultation::create($request->validated());
 
+
         $lawyer = User::where('id', $receiver->id)->first();
         $encodedId = base64_encode($consultation->id);
 
+        if ($lawyer->roles->pluck('name')->first() == 'typingCenter')
+        {
+            $request->validate([
+                'translate_file' => ['required','file'],
+            ]);
+                $consultation->addMedia($request->translate_file)
+                    ->withCustomProperties(['do_not_replace' => true])
+                    ->toMediaCollection('translateFile');
 
+        };
         $data = [
             'client_id' => Auth()->user()->id,
             'client_name' => Auth()->user()->name,

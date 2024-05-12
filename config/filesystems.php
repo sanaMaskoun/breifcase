@@ -11,7 +11,7 @@ return [
     | by the framework. The "local" disk, as well as a variety of cloud
     | based disks are available to your application. Just store away!
     |
-    */
+     */
 
     'default' => env('FILESYSTEM_DISK', 'local'),
 
@@ -26,7 +26,7 @@ return [
     |
     | Supported Drivers: "local", "ftp", "sftp", "s3"
     |
-    */
+     */
 
     'disks' => [
 
@@ -39,7 +39,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -57,10 +57,21 @@ return [
         ],
         'media' => [
             'driver' => 'local',
-            'root'   => public_path('media'),
+            'root' => public_path('media'),
 
-            // 'root' => public_path('..') . '/media',
-            'url'    => env('APP_URL').'/media',
+            'url' => env('APP_URL') . '/media',
+
+            'permissions' => [
+                'file' => [
+                    'public' => 0777,
+                    'private' => 0777,
+                ],
+                'dir' => [
+                    'public' => 0777,
+                    'private' => 0777,
+                ],
+            ],
+
         ],
 
     ],
@@ -71,10 +82,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may configure the symbolic links that will be created when the
-    | `storage:link` Artisan command is executed. The array keys should be
+    | storage:link Artisan command is executed. The array keys should be
     | the locations of the links and the values should be their targets.
     |
-    */
+     */
 
     'links' => [
         public_path('storage') => storage_path('app/public'),

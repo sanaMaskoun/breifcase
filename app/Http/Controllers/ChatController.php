@@ -49,7 +49,8 @@ class ChatController extends Controller
 
     public function messageCount($receiver_id)
     {
-        return Message::where('receiver_id', Auth()->user()->id)->where('sender_id', $receiver_id)
+        return
+        Message::where('receiver_id', Auth()->user()->id)->where('sender_id', $receiver_id)
             ->where('is_read', false)
             ->count();
     }
@@ -184,16 +185,16 @@ class ChatController extends Controller
 
         }
 
-        broadcast(new CounterChatEvent($message_count, auth()->user()->id, $receiver->id, $message));
+        broadcast(new CounterChatEvent(1, auth()->user()->id, $receiver->id, $message));
 
         broadcast(new chatPrivateEvent($receiver, auth()->user()->id, $message, $attachment, $created_at));
-
         return response()->json([
             'success' => true,
             'message' => $message,
             'created_at' => $created_at,
             'attachment' => $attachment == null ? null : $attachment,
             'sender_id' => auth()->user()->id,
+            'receiver_id' => $receiver->id,
             'receiver_encoded_id' =>$encodedId,
             'receiver_profile' =>$receiver->getFirstMediaUrl('profileUser'),
             'receiver_name' =>$receiver->name,

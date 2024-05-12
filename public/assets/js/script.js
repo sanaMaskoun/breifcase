@@ -41,8 +41,21 @@ $(document).ready(function () {
                 var messageText = $('<span class="message"></span>').text(response.message);
                 var timeText = $('<time class="time"></time>').text(response.created_at);
 
+                textContent.append(messageText);
+                textContent.append(timeText);
+                mediaBody.append(textContent);
 
-                let newChatMessageReceiver = `
+                messageElement.append(mediaBody);
+                if (messageElement != "") {
+                    $('.empty-messages').remove();
+                }
+                $('#chat_div').append(messageElement);
+
+                var lastMessage = response.message;
+                $('#last_message_' + response.receiver_id).text(lastMessage);
+
+                if (response.has_previous_chat) {
+                    let newChatMessageReceiver = `
                     <li class="mb-4 px-5 py-2" id="new_chat_div">
                         <a href="javascript:void(0)" class="media media-message">
                             <div class="position-relative mr-3">
@@ -57,21 +70,11 @@ $(document).ready(function () {
                             </div>
                         </a>
                     </li>`;
-
-
-                textContent.append(messageText);
-                textContent.append(timeText);
-                mediaBody.append(textContent);
-
-                messageElement.append(mediaBody);
-                if (messageElement != "") {
-                    $('.empty-messages').remove();
-                }
-                $('#chat_div').append(messageElement); 
-                if (response.has_previous_chat) {
                     $("#new_chat_div").append(newChatMessageReceiver);
                 }
-                console.log(response);
+
+
+                // console.log(response);
             },
             error: function (xhr, status, error) {
                 console.error(xhr.responseText);

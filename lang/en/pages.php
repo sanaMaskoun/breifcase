@@ -29,6 +29,7 @@ return [
      'suggestion'                => 'Suggestions',
      'chats'                      => 'Chat',
      'invoices'                      => 'invoices',
+     'translateFile'              => 'translate File',
 
 
 

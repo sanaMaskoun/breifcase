@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Group;
+use App\Models\Message;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,19 +13,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('message_group', function (Blueprint $table) {
             $table->id();
-            $table->text('message');
 
-            $table->unsignedBigInteger('sender_id');
-            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
-
-            $table->unsignedBigInteger('receiver_id')->nullable();
+            $table->unsignedBigInteger('receiver_id');
             $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->foreignIdFor(Group::class)->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-
             $table->boolean('is_resd')->default(false);
+            $table->foreignIdFor(Message::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
 
             $table->timestamps();
         });
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('message_group');
     }
 };

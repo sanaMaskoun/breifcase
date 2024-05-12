@@ -66,6 +66,11 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @role('typingCenter')
+                                            <a href="{{ $consultation->getFirstMediaUrl('translateFile') }}"   target="_blank"> <i
+                                                class="fas fa-file file_attachments"></i><span>translate file</span></a>
+
+                                            @endrole
                                         </div>
                                     </div>
                                     <div class="col-md-6">

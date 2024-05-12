@@ -27,6 +27,8 @@ return [
     'suggestion'                => 'الإقتراحات',
     'chats'                      => 'المحادثات',
     'invoices'                   => 'الفواتير',
+    'translateFile'              => 'ملفات الترجمة',
+
 
     // attachments
     'file'                      => 'الملفات',
