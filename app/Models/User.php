@@ -72,6 +72,11 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsToMany(Group::class, 'group_user', 'user_id', 'group_id')->withPivot('is_admin');
     }
+
+    public function readStatuses()
+    {
+        return $this->hasMany(MessageReadStatusInGroup::class ,'user_id');
+    }
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('profileUser')

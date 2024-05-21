@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('pusher/auth', [AuthApiController::class, 'pusherAuth']);
+Route::post('pusher/auth', [AuthApiController::class, 'pusherAuth'])->name('pusherAuth');
 
 Route::post('checkout/{lawyer}', [FatoorahController::class, 'checkout']);
 Route::get('callback', [FatoorahController::class, 'callback']);
@@ -82,3 +82,7 @@ Route::post('/suggestion', [SuggestionController::class, 'store'])->middleware('
 Route::group(['prefix' => 'invoice', 'middleware' => 'auth:sanctum'], function () {
     Route::post('/', [InvoiceController::class, 'store']);
 });
+
+
+
+Route::get('/pusher_config', [AuthApiController::class, 'getPusherConfig'])->middleware('auth:sanctum');

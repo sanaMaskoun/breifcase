@@ -13,7 +13,7 @@
             </a>
         </div>
     @endrole
-    @role('lawyer|typingCenter|legalConsultant')
+    @role('lawyer|typingCenter|legalConsultant|translator')
         <div class="header-left">
             <a href="{{ route('dashboardLawyer') }}" class="logo">
                 <img class="img-fluid" src="{{ asset('img/logo.jpeg') }}" alt="Logo">
@@ -201,7 +201,7 @@
                 </span>
             </a>
             <div class="dropdown-menu">
-                @role('lawyer|typingCenter|legalConsultant')
+                @role('lawyer|typingCenter|legalConsultant|translator')
                     <a class="dropdown-item" href="{{ route('show_lawyer', $encodedId) }}">@lang('pages.profile')</a>
                 @endrole
 
@@ -234,18 +234,19 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
 
-                @role('lawyer|typingCenter|legalConsultant')
+                @role('lawyer|typingCenter|legalConsultant|translator')
                     <li>
                         <a href="{{ route('dashboardLawyer') }}"><i class="feather-grid"></i>
                             <span> @lang('pages.dashboard')</span></a>
                     </li>
-                    @role('lawyer|legalConsultant')
+                    @role('lawyer|typingCenter|legalConsultant')
                     <li>
                         <a href="{{ route('list_consultations', $encodedId) }}"><i class="fas fa-balance-scale"></i>
                             <span> @lang('pages.consultation')</span></a>
                     </li>
                     @endrole
-                    @role('typingCenter')
+
+                    @role('translator')
                     <li>
                         <a href="{{ route('list_consultations', $encodedId) }}"><i class="fas fa-balance-scale"></i>
                             <span> @lang('pages.translateFile')</span></a>

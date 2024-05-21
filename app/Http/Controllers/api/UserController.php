@@ -24,7 +24,6 @@ class UserController extends Controller
             ])
             ->where('is_active', true)
             ->get();
-
         $legalConsultant = $this->getUsersByRole($users, 'legalConsultant');
         $lawyers = $this->getUsersByRole($users, 'lawyer');
         $typingCenter = $this->getUsersByRole($users, 'typingCenter');

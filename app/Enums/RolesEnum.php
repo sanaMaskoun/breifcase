@@ -12,4 +12,5 @@ final class RolesEnum extends Enum
     const legalConsultant = 2;
     const typingCenter = 3;
     const client = 4;
+    const translator = 5;
 }

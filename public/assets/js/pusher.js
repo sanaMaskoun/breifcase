@@ -28,6 +28,29 @@ var channelConsultation = pusherPrivate.subscribe('private-consultation-channel-
 var channelReplayRate = pusherPrivate.subscribe('private-rate-channel-' + localStorage.getItem('user_id'));
 
 
+
+//counter chat in group
+var channelPrivateCounterChatGroup = pusherPrivate.subscribe('private-counter-chat-group-channel-'+localStorage.getItem('user_id'));
+channelPrivateCounterChatGroup.bind('counterChatGroup', function (data) {
+
+    var userId = localStorage.getItem('user_id');
+      if (data.member_id == userId) {
+
+    var counterElement = $('#counter_chat_group_' + data.group_id);
+
+    var counterText = counterElement.text().trim();
+    if (counterText !== '') {
+        var count = parseInt(counterText);
+        count++;
+        counterElement.text(count.toString());
+    } else {
+        counterElement.text('1');
+    }
+     }
+});
+
+
+
 //new chat
 var channelPivateNewChat = pusherPrivate.subscribe('private-new-chat-channel-' + localStorage.getItem('user_id'));
 channelPivateNewChat.bind('newChatMessage', function (data) {
@@ -39,10 +62,10 @@ channelPivateNewChat.bind('newChatMessage', function (data) {
                     <img class="rounded-circle img_list_chat" src="${data.sender_profile}" alt="User Image">
                     <span class="username text-dark">${data.sender_name}</span>
                 </a>
-                <span class="message-counter" id="counter_chat_${data.sender_id}">${data.message_count }</span>
+                <span class="message-counter" id="counter_chat_${data.sender_id}">${data.message_count}</span>
 
                 <div class="message-contents">
-                    <p class="last-msg text-smoke" id="last_message_${ data.sender_id }">${data.message}</p>
+                    <p class="last-msg text-smoke" id="last_message_${data.sender_id}">${data.message}</p>
                     <span class="text-smoke time_message"><em>${data.created_at}</em></span>
                 </div>
             </div>
@@ -101,9 +124,10 @@ channelPrivateCounterChat.bind('counterChat', function (data) {
         }
     } else if (isSender) {
         var lastMessage = data.message;
-        $('#last_message_'+ data.receiver_id).text(lastMessage);
+        $('#last_message_' + data.receiver_id).text(lastMessage);
     }
 });
+
 
 
 channelConsultation.bind('App\\Events\\ConsultationEvent', function (data) {

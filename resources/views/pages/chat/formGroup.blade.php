@@ -146,18 +146,19 @@
 @endsection
 @section('scripts')
     <script>
+        
         var channelChat = pusher.subscribe('group-channel-{{ $group->id }}');
         channelChat.bind('groupMessage', function(data) {
             var extension = data.attachment ? data.attachment.split('.').pop().toLowerCase() : null;
             message_group = "";
 
             let receiverMessage = `
-    <div class="media media-chat" id="group_area_receiver">
-        <div class="media-body img-groups">
-        <a href="/lawyer/${data.sender_id_encoded}/show">
-        <img class="rounded-circle img_group" src="${data.sender_profile}">
-        <span>${data.sender_name}</span>
-        </a>
+            <div class="media media-chat" id="group_area_receiver">
+            <div class="media-body img-groups">
+            <a href="/lawyer/${data.sender_id_encoded}/show">
+            <img class="rounded-circle img_group" src="${data.sender_profile}">
+            <span>${data.sender_name}</span>
+            </a>
             <div class="text-content">
                 ${data.attachment ?
             (extension === 'jpg' || extension === 'png' ?
@@ -165,27 +166,27 @@
                 `<a href="${data.attachment}" target="_blank"><p class="message">${data.message}</p></a>`) :
             `<p class="message">${data.message} </p>`}
                 <time class="time">${data.created_at}</time>
+                </div>
             </div>
-        </div>
-    </div>`;
+            </div>`;
 
             let senderMessage = `
-    <div class="media media-chat media-chat-right" id="group_area_sender">
-    <div class="media-body">
-    <div class="text-content">
-    ${data.attachment ?
-            (extension === 'jpg' || extension === 'png' ?
-                `<img class="img_group" src="${data.attachment}">` :
-                `<a href="${data.attachment}" target="_blank"><p class="message">${data.message}</p></a>`) :
-            `<p class="message">${data.message} </p>`}
-    <time class="time">${data.created_at}</time>
-</div>
-    <a href="/lawyer/${data.sender_id_encoded}/show">
-    <img class="rounded-circle img_group" src="${data.sender_profile}">
-    </a>
+            <div class="media media-chat media-chat-right" id="group_area_sender">
+            <div class="media-body">
+            <div class="text-content">
+            ${data.attachment ?
+                (extension === 'jpg' || extension === 'png' ?
+                    `<img class="img_group" src="${data.attachment}">` :
+                    `<a href="${data.attachment}" target="_blank"><p class="message">${data.message}</p></a>`) :
+                `<p class="message">${data.message} </p>`}
+           <time class="time">${data.created_at}</time>
+             </div>
+            <a href="/lawyer/${data.sender_id_encoded}/show">
+            <img class="rounded-circle img_group" src="${data.sender_profile}">
+            </a>
 
-    </div>
-    </div>`;
+            </div>
+            </div>`;
 
             if (data.sender_id == localStorage.getItem('user_id')) {
                 message_group = senderMessage;

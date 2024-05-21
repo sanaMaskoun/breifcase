@@ -35,6 +35,10 @@ class RolesTableSeeder extends Seeder
             'name' => 'client'
 
         ]);
+        Role::create([
+            'name' => 'translator'
+
+        ]);
 
 
 

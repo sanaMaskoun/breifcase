@@ -20,6 +20,11 @@ class Message extends Model implements HasMedia
     {
         return $this->belongsTo(User::class , 'receiver_id');
     }
+
+    public function readStatuses()
+    {
+        return $this->hasMany(MessageReadStatusInGroup::class ,'message_id');
+    }
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('attachments');

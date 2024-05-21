@@ -99,7 +99,7 @@
 
                                                             <span class="username text-dark">{{ $group->name }}</span>
                                                         </a>
-                                                        <span class="message-counter" id="counter_chat_{{ $group->id }}">1</span>
+                                                        <span class="message-counter" id="counter_chat_group_{{ $group->id }}">{{ $group->message_count }}</span>
 
                                                         <span class="status away"></span>
                                                     </div>
@@ -147,3 +147,5 @@
         </div>
     </div>
 @endsection
+
+

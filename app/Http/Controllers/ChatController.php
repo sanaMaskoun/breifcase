@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Events\chatPrivateEvent;
 use App\Events\CounterChatEvent;
+use App\Events\CounterChatGroupEvent;
 use App\Events\GroupEvent;
 use App\Events\NewChatEvent;
 use App\Models\Group;
+use App\Models\GroupUser;
 use App\Models\Message;
+use App\Models\MessageReadStatusInGroup;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -42,9 +45,21 @@ class ChatController extends Controller
             $user->message_count = $message_count;
 
         });
-        // dd($users);
-
         return $users;
+    }
+
+    public function getUserGroups()
+    {
+        $groups = User::find(Auth()->user()->id)->groups;
+        $groups->each(function ($group) {
+            $message_count = $this->messageCountInGroup($group->id);
+
+            $group->message_count = $message_count;
+
+        });
+
+        return $groups;
+
     }
 
     public function messageCount($receiver_id)
@@ -54,9 +69,19 @@ class ChatController extends Controller
             ->where('is_read', false)
             ->count();
     }
+    public function messageCountInGroup($group_id)
+    {
+        return MessageReadStatusInGroup::where('user_id', Auth()->user()->id)
+            ->whereHas('message', function ($query) use ($group_id) {
+                $query->where('group_id', $group_id);
+            })
+            ->where('is_read', false)
+            ->count();
+    }
+
     public function chat(Request $request)
     {
-        $groups = User::find(Auth()->user()->id)->groups;
+        $groups = $this->getUserGroups();
 
         $name = $request->query('name');
 
@@ -122,9 +147,13 @@ class ChatController extends Controller
         $decodedId = base64_decode($encodedId);
         $group = Group::find($decodedId);
 
+        MessageReadStatusInGroup::where('user_id', Auth()->user()->id)
+            ->update(['is_read' => true]);
+
         $admin = User::whereHas('groups', function ($query) use ($group) {
             $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
         })->first();
+
         $users = session('users');
         $groups = session('groups');
         $lawyers = session('lawyers');
@@ -195,10 +224,10 @@ class ChatController extends Controller
             'attachment' => $attachment == null ? null : $attachment,
             'sender_id' => auth()->user()->id,
             'receiver_id' => $receiver->id,
-            'receiver_encoded_id' =>$encodedId,
-            'receiver_profile' =>$receiver->getFirstMediaUrl('profileUser'),
-            'receiver_name' =>$receiver->name,
-            'has_previous_chat' => $has_previous_chat->isEmpty()
+            'receiver_encoded_id' => $encodedId,
+            'receiver_profile' => $receiver->getFirstMediaUrl('profileUser'),
+            'receiver_name' => $receiver->name,
+            'has_previous_chat' => $has_previous_chat->isEmpty(),
         ]);
     }
 
@@ -225,6 +254,17 @@ class ChatController extends Controller
                     ->withCustomProperties(['do_not_replace' => true])
                     ->toMediaCollection('attachments');
             }
+        }
+
+        $groupMembers = GroupUser::where('group_id', $group->id)->where('user_id', '<>', auth()->user()->id)->get();
+        foreach ($groupMembers as $member) {
+            MessageReadStatusInGroup::create([
+                'message_id' => $new_message->id,
+                'user_id' => $member->user_id,
+                'is_read' => false,
+            ]);
+            broadcast(new CounterChatGroupEvent(1,$member->user_id, $group->id));
+
         }
 
         $sender_profile = $new_message->sender->getFirstMediaUrl('profileUser');

@@ -10,6 +10,7 @@ class GroupResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id'       => $this->id,
             'name'     => $this->name,
             'is_admin' => $this->pivot->is_admin,
             'messeges' => $this->whenLoaded('messeges' , function()
