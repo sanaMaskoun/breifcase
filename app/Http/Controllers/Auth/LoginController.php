@@ -37,7 +37,7 @@ class LoginController extends Controller
 
         if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])) && Auth()->user()->is_active) {
             $roles = Auth()->user()->roles->pluck('name')->toArray();
-            if (in_array("typingCenter", $roles) || in_array("legalConsultant", $roles) || in_array("lawyer", $roles)) {
+            if (in_array("typingCenter", $roles) || in_array("legalConsultant", $roles) || in_array("lawyer", $roles)|| in_array("translator", $roles)) {
 
                 return redirect()->route('dashboardLawyer');
             } else {
