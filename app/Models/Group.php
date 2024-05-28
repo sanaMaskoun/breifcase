@@ -14,9 +14,22 @@ class Group extends Model
     {
         return $this->belongsToMany(User::class, 'group_user', 'group_id', 'user_id')->withPivot('is_admin');
     }
-
+    public function admin()
+    {
+        return $this->belongsToMany(User::class, 'group_user', 'group_id', 'user_id')
+                    ->wherePivot('is_admin', 1)
+                    ;
+    }
+    public function members()
+    {
+        return $this->belongsToMany(User::class, 'group_user', 'group_id', 'user_id')
+                    ->wherePivot('is_admin', 0)
+                    ;
+    }
     public function messeges()
     {
         return $this->hasMany(Message::class , 'group_id');
     }
+
+
 }

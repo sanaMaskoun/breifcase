@@ -44,10 +44,13 @@ Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logou
 
 Route::get('/roles', [RolesController::class, 'index'])->middleware('auth:sanctum');
 
+Route::get('/messages',[UserController::class, 'get_messages'])->middleware('auth:sanctum');
+
 Route::group(['prefix' => 'user', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [UserController::class, 'index']);
     Route::get('{user}', [UserController::class, 'show']);
     Route::post('{user}', [UserController::class, 'update']);
+
 });
 
 Route::group(['prefix' => 'consultation', 'middleware' => 'auth:sanctum'], function () {
@@ -82,6 +85,10 @@ Route::post('/suggestion', [SuggestionController::class, 'store'])->middleware('
 Route::group(['prefix' => 'invoice', 'middleware' => 'auth:sanctum'], function () {
     Route::post('/', [InvoiceController::class, 'store']);
 });
+Route::group(['prefix' => 'group', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('/', [ChatApiController::class, 'create_group']);
+});
+
 
 
 

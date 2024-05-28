@@ -27,7 +27,7 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'confirmed'],
             'password_confirmation' => ['required', 'same:password'],
             'phone' => ['required', 'numeric', 'digits_between:7,14'],
-            'role' => ['required', Rule::in([RolesEnum::client, RolesEnum::lawyer, RolesEnum::legalConsultant, RolesEnum::typingCenter])],
+            'role' => ['required', Rule::in([RolesEnum::client, RolesEnum::lawyer, RolesEnum::legalConsultant, RolesEnum::typingCenter ,RolesEnum::translator])],
         ]);
         $user = new User([
             'name' => $request->name,
@@ -130,7 +130,7 @@ class AuthController extends Controller
 
         return new JsonResponse([
             'access_token' => $token,
-            'user' => new UserResource($user->load(['consultations', 'GeneralQuestions', 'QuestionsReplies', 'practices', 'groups', 'receiver_message', 'sender_message'])),
+            'user' => new UserResource($user->load(['consultations','unreadNotifications', 'GeneralQuestions', 'QuestionsReplies', 'practices', 'groups'])),
 
         ]);
     }

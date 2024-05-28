@@ -12,7 +12,16 @@ class GroupResource extends JsonResource
         return [
             'id'       => $this->id,
             'name'     => $this->name,
-            'is_admin' => $this->pivot->is_admin,
+
+            'admin'    => $this->whenLoaded('admin' , function()
+            {
+
+                return new UserResource($this->admin->first());
+            }),
+            'members' => $this->whenLoaded('members' , function()
+            {
+                return UserResource::collection($this->members);
+            }),
             'messeges' => $this->whenLoaded('messeges' , function()
             {
                 return ChatResource::collection($this->messeges);

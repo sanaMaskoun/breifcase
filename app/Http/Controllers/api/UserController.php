@@ -27,11 +27,13 @@ class UserController extends Controller
         $legalConsultant = $this->getUsersByRole($users, 'legalConsultant');
         $lawyers = $this->getUsersByRole($users, 'lawyer');
         $typingCenter = $this->getUsersByRole($users, 'typingCenter');
+        $translator = $this->getUsersByRole($users, 'translator');
 
         return response()->json([
             'lawyers' => UserResource::collection($lawyers),
             'legalConsultant' => UserResource::collection($legalConsultant),
             'typingCenter' => UserResource::collection($typingCenter),
+            'translator' => UserResource::collection($translator),
         ]);
     }
 
@@ -76,5 +78,14 @@ class UserController extends Controller
         return response()->json(
             new UserResource($user),
         );
+    }
+
+
+    public function get_messages()
+    {
+
+
+       return new UserResource(auth()->user()->load([ 'receiver_message', 'sender_message']));
+
     }
 }

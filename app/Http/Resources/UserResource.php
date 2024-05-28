@@ -13,6 +13,7 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            // 'is_admin'  => $this->groups?->is_admin,
             'name' => $this->name,
             'email' => $this->email,
             'birth' => $this->birth,
@@ -31,7 +32,10 @@ class UserResource extends JsonResource
             'certification' => $this->getMedia('certification')->map(function ($media) {
                 return $media->getUrl();
             }),
-            'unreadNotifications' => NotificationResource::collection($this->unreadNotifications),
+            'unreadNotifications' =>$this->whenLoaded('unreadNotifications',function()
+            {
+                return NotificationResource::collection($this->unreadNotifications);
+            }) ,
 
             'consultations' => $this->whenLoaded('consultations', function () {
                 return ConsultationResource::collection($this->consultations->load(['receiver', 'sender']));
