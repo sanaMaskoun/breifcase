@@ -15,12 +15,12 @@ class GeneralQuestionsResource extends JsonResource
             'question'        => $this->question,
             'date'            => $this->created_at?->format('d/m/Y'),
 
-            'isReply'         => $this->Replies->isEmpty() ? 0 : 1,
+            'isReply'         => $this->replies->isEmpty() ? false : true,
             'userRequest'      => $this->whenLoaded('user', function () {
                 return   new UserResource($this->user);
             }),
-            'replies'      => $this->whenLoaded('Replies', function () {
-                return   RepliesResource::collection($this->Replies->load(['user']));
+            'replies'      => $this->whenLoaded('replies', function () {
+                return   RepliesResource::collection($this->replies->load(['user']));
             })
         ];
     }

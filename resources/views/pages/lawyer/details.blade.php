@@ -26,7 +26,7 @@
                         <div class="col-md-12">
                             <div class="about-info">
                                 <h4>@lang('pages.profile')
-                                    @role('lawyer|typingCenter|legalConsultant')
+                                    @role('lawyer|typingCenter|legalConsultant|translator')
                                         @if (Auth()->user()->id == $lawyer->id)
                                             @php
                                                 $encodedId = base64_encode($lawyer->id);

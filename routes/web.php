@@ -4,6 +4,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GeneralChatController;
 use App\Http\Controllers\GeneralQuestionController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\InvoiceController;
@@ -15,7 +16,6 @@ use App\Http\Controllers\SuggestionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-define('PAGINATION_COUNT', 12);
 
 Route::get('/', function () {
     return view('auth.login');
@@ -64,13 +64,13 @@ Route::group(['prefix' => 'consultation', 'middleware' => 'auth:sanctum'], funct
 
 });
 
-Route::group(['prefix' => 'general_question', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'general-question', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/{encodedId?}', [GeneralQuestionController::class, 'index'])->name('list_general_questions');
     Route::get('/{encodedId}/show', [GeneralQuestionController::class, 'show'])->name('show_general_question');
 
 });
 
-Route::group(['prefix' => 'join_us', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'join-us', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [JoinUsController::class, 'index'])->name('list_join_us');
 
 });
@@ -94,6 +94,13 @@ Route::group(['prefix' => 'group', 'middleware' => 'auth:sanctum'], function () 
     Route::post('/store', [GroupController::class, 'store'])->name('store_group');
     Route::get('/edit/{encodedId}', [GroupController::class, 'edit'])->name('edit_group');
     Route::post('/update/{group}', [GroupController::class, 'update'])->name('update_group');
+});
+
+Route::group(['prefix' => 'general-chat', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [GeneralChatController::class, 'create'])->name('add_general_chat');
+    Route::post('/', [GeneralChatController::class, 'store'])->name('store_general_chat');
+    Route::get('{encoded_general_chat}', [GeneralChatController::class, 'edit'])->name('edit_general_chat');
+    Route::post('{general_chat}', [GeneralChatController::class, 'update'])->name('update_general_chat');
 });
 
 Route::get('/suggestion', [SuggestionController::class, 'index'])->name('list_suggestion')->middleware('auth:sanctum');

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Enums\ConsultationStatusEnum;
+use App\Enums\DocumentStatusEnum;
+use App\Enums\DocumentTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ConsultationRequest extends FormRequest
@@ -30,7 +32,8 @@ class ConsultationRequest extends FormRequest
             'description'         => $this->description,
             'sender_id'           => Auth()->user()->id,
             'receiver_id'         => $this->receiver->id,
-            'status'              => ConsultationStatusEnum::pending
+            'status'              => DocumentStatusEnum::pending,
+            'type'                => DocumentTypeEnum::consultation
         ];
     }
 }

@@ -35,8 +35,8 @@ class RateRequest extends FormRequest
             'understanding'             => $this->understanding,
             'comment'                   => $this->comment,
             'client_id'                 => $this->consultation->sender_id,
-            'employee_id'               => $this->consultation->receiver_id,
-            'consultation_id'           => $this->consultation->id
+            'lawyer_id'                => $this->consultation->receiver_id,
+            'document_id'              => $this->consultation->id
 
         ];
     }

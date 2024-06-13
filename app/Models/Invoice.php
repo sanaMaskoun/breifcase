@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\DocumentTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,7 +22,12 @@ class Invoice extends Model
 
     public function consultation()
     {
-        return $this->belongsTo(Consultation::class , 'consultation_id');
+        return $this->belongsTo(Document::class , 'document_id')->where('type' , DocumentTypeEnum::consultation);
+
+    }
+    public function case()
+    {
+        return $this->belongsTo(Document::class , 'document_id')->where('type' , DocumentTypeEnum::case);
 
     }
 }

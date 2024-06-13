@@ -20,10 +20,10 @@ class ConsultationController extends Controller
             $user = User::find($decodedId);
             $role = $user->roles()->first()->name;
 
-            $role == 'client' ? $consultations = Consultation::where('sender_id', $user->id)->paginate(PAGINATION_COUNT) : $consultations = Consultation::where('receiver_id', $user->id)->paginate(PAGINATION_COUNT);
+            $role == 'client' ? $consultations = Consultation::where('sender_id', $user->id)->paginate(config('constants.PAGINATION_COUNT')) : $consultations = Consultation::where('receiver_id', $user->id)->paginate(config('constants.PAGINATION_COUNT'));
 
         } else {
-            $status == null ? $consultations = Consultation::paginate(PAGINATION_COUNT) : $consultations = Consultation::where('status', $status)->paginate(PAGINATION_COUNT);
+            $status == null ? $consultations = Consultation::paginate(config('constants.PAGINATION_COUNT')) : $consultations = Consultation::where('status', $status)->paginate(config('constants.PAGINATION_COUNT'));
         }
 
         return view('pages.consultation.list', compact('consultations'));

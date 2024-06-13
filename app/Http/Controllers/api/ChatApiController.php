@@ -133,18 +133,6 @@ class ChatApiController extends Controller
 
     }
 
-    public function create_group(GroupRequest $request)
-    {
-        $group = Group::create($request->validated());
-
-        $user_id = auth()->id();
-
-       $group->users()->attach($user_id, ['is_admin' => true]);
-        if ($request->members) {
-            $group->users()->attach($request->members);
-        }
-        return new GroupResource($group->load(['members','admin']));
-
-    }
+   
 
 }

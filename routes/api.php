@@ -2,15 +2,29 @@
 
 use App\Http\Controllers\api\AuthApiController;
 use App\Http\Controllers\api\ChatApiController;
+use App\Http\Controllers\api\ClientApiController;
 use App\Http\Controllers\api\ConsultationApiController;
+use App\Http\Controllers\api\GeneralChatApiController;
 use App\Http\Controllers\api\GeneralQuestionApiController;
+use App\Http\Controllers\api\GroupApiController;
+use App\Http\Controllers\Api\LanguageApiController;
+use App\Http\Controllers\Api\LawyerApiController;
+use App\Http\Controllers\Api\LibraryApiController;
+use App\Http\Controllers\Api\PracticeApiController;
 use App\Http\Controllers\api\RateController;
+use App\Http\Controllers\api\SuggestionApiController;
+use App\Http\Controllers\Api\TemplateApiController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FatoorahController;
+use App\Http\Controllers\FrequentlyQuestionController;
+use App\Http\Controllers\GeneralChatController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\LawyerController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SuggestionController;
+use App\Models\FrequentlyQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,32 +48,47 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('pusher/auth', [AuthApiController::class, 'pusherAuth'])->name('pusherAuth');
+Route::get('/pusher_config', [AuthApiController::class, 'getPusherConfig'])->middleware('auth:sanctum');
 
-Route::post('checkout/{lawyer}', [FatoorahController::class, 'checkout']);
-Route::get('callback', [FatoorahController::class, 'callback']);
 
-Route::post('login', [AuthController::class, 'login']);
-Route::post('register', [AuthController::class, 'register']);
-Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
-Route::get('/roles', [RolesController::class, 'index'])->middleware('auth:sanctum');
+Route::post('login', [AuthApiController::class, 'login']);
+Route::post('register', [AuthApiController::class, 'register']);
+Route::middleware('auth:sanctum')->post('logout', [AuthApiController::class, 'logout']);
 
-Route::get('/messages',[UserController::class, 'get_messages'])->middleware('auth:sanctum');
 
-Route::group(['prefix' => 'user', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/', [UserController::class, 'index']);
-    Route::get('{user}', [UserController::class, 'show']);
-    Route::post('{user}', [UserController::class, 'update']);
+
+Route::group(['prefix' => 'lawyer', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [LawyerApiController::class, 'index']);
+    Route::get('{user}', [LawyerApiController::class, 'show']);
+    Route::post('{user}', [LawyerApiController::class, 'update']);
+
+});
+
+Route::group(['prefix' => 'client', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [ClientApiController::class, 'index']);
+    Route::get('{user}', [ClientApiController::class, 'show']);
+    Route::post('{user}', [ClientApiController::class, 'update']);
+
+
+});
+
+
+Route::group(['prefix' => 'practice', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [PracticeApiController::class, 'index']);
+
+});
+
+Route::group(['prefix' => 'language', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [LanguageApiController::class, 'index']);
 
 });
 
 Route::group(['prefix' => 'consultation', 'middleware' => 'auth:sanctum'], function () {
     Route::post('{receiver}', [ConsultationApiController::class, 'store']);
     Route::post('{consultation}/answer', [ConsultationApiController::class, 'answer']);
-});
+    Route::post('{consultation}/rate', [ConsultationApiController::class, 'rate']);
 
-Route::group(['prefix' => 'rate', 'middleware' => 'auth:sanctum'], function () {
-    Route::post('consultation/{consultation}', [RateController::class, 'rate']);
 });
 
 Route::group(['prefix' => 'general-question', 'middleware' => 'auth:sanctum'], function () {
@@ -69,6 +98,41 @@ Route::group(['prefix' => 'general-question', 'middleware' => 'auth:sanctum'], f
     Route::post('/{general_question}/reply', [GeneralQuestionApiController::class, 'reply']);
     Route::post('/reply/{reply}/rate', [GeneralQuestionApiController::class, 'rate']);
 });
+
+
+Route::group(['prefix' => 'invoice', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('/', [InvoiceController::class, 'store']);
+});
+
+Route::group(['prefix' => 'frequently-question', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [FrequentlyQuestionController::class, 'index']);
+});
+
+Route::group(['prefix' => 'news', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [NewsController::class, 'index']);
+});
+
+Route::group(['prefix' => 'suggestion', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [SuggestionApiController::class, 'index']);
+    Route::post('/', [SuggestionApiController::class, 'store']);
+});
+
+
+Route::group(['prefix' => 'template', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [TemplateApiController::class, 'index']);
+    Route::post('/', [TemplateApiController::class, 'store']);
+});
+
+
+Route::group(['prefix' => 'library', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [LibraryApiController::class, 'index']);
+    Route::post('/', [LibraryApiController::class, 'store']);
+});
+
+
+Route::get('/messages',[UserController::class, 'get_messages'])->middleware('auth:sanctum');
+
+
 
 Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/get_message_in_chat/{receiver}', [ChatApiController::class, 'get_message_in_chat']);
@@ -80,16 +144,25 @@ Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
 
 });
 
-Route::post('/suggestion', [SuggestionController::class, 'store'])->middleware('auth:sanctum');
-
-Route::group(['prefix' => 'invoice', 'middleware' => 'auth:sanctum'], function () {
-    Route::post('/', [InvoiceController::class, 'store']);
-});
 Route::group(['prefix' => 'group', 'middleware' => 'auth:sanctum'], function () {
-    Route::post('/', [ChatApiController::class, 'create_group']);
+    Route::get('for-user/{user}', [GroupApiController::class, 'index']);
+
+    Route::post('/', [GroupApiController::class, 'store']);
+    Route::post('{group}', [GroupApiController::class, 'update']);
+});
+
+Route::group(['prefix' => 'general-chat', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('for-user/{user}', [GeneralChatApiController::class, 'index']);
+    Route::post('/', [GeneralChatApiController::class, 'store']);
+    Route::post('{general_chat}', [GeneralChatApiController::class, 'update']);
 });
 
 
 
 
-Route::get('/pusher_config', [AuthApiController::class, 'getPusherConfig'])->middleware('auth:sanctum');
+
+
+
+//test
+Route::post('checkout/{lawyer}', [FatoorahController::class, 'checkout']);
+Route::get('callback', [FatoorahController::class, 'callback']);

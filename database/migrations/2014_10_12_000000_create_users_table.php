@@ -15,16 +15,19 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone')->nullable();
-            $table->boolean('is_active')->default(false)->nullable();
             $table->string('password');
-            $table->integer('consultation_price')->nullable();
-            $table->string('birth')->nullable();
             $table->tinyInteger('gender')->nullable();
-            $table->tinyInteger('location')->nullable();
-            $table->integer('years_of_practice')->nullable();
+            $table->string('birth')->nullable();
+            $table->string('phone')->nullable();
+            $table->tinyInteger('country')->nullable();
+            $table->tinyInteger('city')->nullable();
+            $table->tinyInteger('type');
+            $table->integer('emirates_id')->nullable();
 
-            $table->rememberToken();   
+
+            $table->boolean('is_active')->default(false);
+
+            $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });

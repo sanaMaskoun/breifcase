@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\InvoiceStatusEnum;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -13,21 +14,29 @@ class InvoiceResource extends JsonResource
         return [
         'id'                => $this->id,
         'invoiceId'         => $this->invoiceId,
-        'status'            => $this->status,
-        'created_at'         => $this->created_at?->format('Y m d'),
+        'invoiceValue'      => $this->invoice_value	,
+        'status'            => InvoiceStatusEnum::getKey($this->status) ,
+        'createdAt'         => $this->created_at?->format('Y m d'),
 
-        'sender_id'         =>$this->whenLoaded('sender', function()
+        'sender'          =>$this->whenLoaded('sender', function()
         {
             return new UserResource($this->sender);
         }),
-        'receiver_id'       =>$this->whenLoaded('receiver', function()
+        'receiver'        =>$this->whenLoaded('receiver', function()
         {
             return new UserResource($this->receiver);
         }),
-        'consultation_id'    =>$this->whenLoaded('consultation', function()
+
+        'consultation'     =>$this->whenLoaded('consultation', function()
         {
             return new ConsultationResource($this->consultation);
         }),
+
+        'case'            => $this->whenLoaded('case', function ()
+        {
+            return CaseResource::collection($this->case);
+        }),
+
         ];
     }
 }

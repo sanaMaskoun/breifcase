@@ -19,19 +19,19 @@ class ConsultationEvent implements ShouldBroadcast
     public $date;
     public $time;
     public $lawyer_id;
-    public $encodedId;
+    public $consultation_encoded_id;
 
-    public function __construct($data = [],$encodedId,$lawyer_id  )
+    public function __construct($data = [], $consultation_encoded_id , $lawyer_id  )
     {
-        $this->client_id          = $data['client_id'];
-        $this->client_name        = $data['client_name'];
-        $this->consultation_id    = $data['consultation_id'];
-        $this->consultation_title = $data['consultation_title'];
-        $this->lawyer_id           = $lawyer_id;
-        $this->encodedId           = $encodedId;
+        $this->client_id                    = $data['client_id'];
+        $this->client_name                  = $data['client_name'];
+        $this->consultation_id              = $data['consultation_id'];
+        $this->consultation_title           = $data['consultation_title'];
+        $this->lawyer_id                    = $lawyer_id;
+        $this->consultation_encoded_id      = $consultation_encoded_id;
 
-        $this->date               = date("j M Y", strtotime(Carbon::now()));
-        $this->time               = date("h:i A", strtotime(Carbon::now()));
+        $this->date                         = date("j M Y", strtotime(Carbon::now()));
+        $this->time                         = date("h:i A", strtotime(Carbon::now()));
 
     }
 

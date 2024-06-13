@@ -21,19 +21,19 @@ class GeneralQuestionController extends Controller
 
             if($role == 'client')
             {
-                $questions=GeneralQuestion::where('user_id',$user->id)->paginate(PAGINATION_COUNT);
+                $questions=GeneralQuestion::where('user_id',$user->id)->paginate(config('constants.PAGINATION_COUNT'));
             }
             else
             {
                 $questions = GeneralQuestion::whereHas('Replies' , function($query) use($user)
                 {
                     $query->where('user_id' , $user->id);
-                })->paginate(PAGINATION_COUNT);
+                })->paginate(config('constants.PAGINATION_COUNT'));
             }
         }
         else
         {
-            $questions=GeneralQuestion::paginate(PAGINATION_COUNT);
+            $questions=GeneralQuestion::paginate(config('constants.PAGINATION_COUNT'));
         }
 
 

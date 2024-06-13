@@ -11,7 +11,7 @@ class QuestionReply extends Model
     use HasFactory , Notifiable;
     protected  $guarded = [];
 
-    public function generalQuestion()
+    public function general_question()
     {
         return $this->belongsTo(GeneralQuestion::class);
     }

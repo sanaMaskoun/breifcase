@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserTypeEnum;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
@@ -19,10 +18,9 @@ class UserTableSeeder extends Seeder
         $user_1 = User::create([
             "name" => "ali",
             "email" => "Ali@admin.com",
-            "password"=>Hash::make('123456789'),
-            "phone" => "097327232",
+            "password" => Hash::make('123456789'),
             "is_active" => true,
-            "location" => null,
+            "type" => UserTypeEnum::admin,
             "created_at" => "2023-08-15 22:54:44",
         ]);
         $user_1->assignRole('admin');
@@ -30,14 +28,12 @@ class UserTableSeeder extends Seeder
         $user_2 = User::create([
             "name" => "omar",
             "email" => "omar@admin.com",
-            "password"=>Hash::make('123456789'),
-            "phone" => "097327232",
+            "password" => Hash::make('123456789'),
             "is_active" => true,
-            "location" => null,
+            "type" => UserTypeEnum::admin,
             "created_at" => "2023-08-15 22:54:44",
         ]);
         $user_2->assignRole('admin');
-       
-        
+
     }
 }

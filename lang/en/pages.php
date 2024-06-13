@@ -43,6 +43,8 @@ return [
      'groups'                   => 'Groups',
      'contacts'                 => 'Contacts',
      'create_group'             => 'Create Group',
+     'general_chat'             => 'General Chat',
+     'create_general_chat'      => 'Create General Chat',
 
 
      //form chat
@@ -97,10 +99,17 @@ return [
       //group
       'group_information'             => 'Group information',
       'choose_members'                => 'choose members',
+      'choose_role'                  => 'choose roles',
       'save'                          => 'save',
       'edit_group'                    => 'Edit group',
-      'enter_name'                    => 'Enter Name',
+      'enter_name'                    => 'Enter name',
 
+    //general chat
+    'general_chat_information'           => 'General Chat Information',
+
+
+     //edit general chat
+     'edit_general_chat'                  =>'Edit General Chat',
 
 
       //lawyer

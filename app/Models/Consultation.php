@@ -13,15 +13,7 @@ class Consultation extends Model implements HasMedia
     use HasFactory, Notifiable, InteractsWithMedia;
     protected $guarded = [];
 
-    public function sender()
-    {
-        return $this->belongsTo(User::class, 'sender_id');
-    }
 
-    public function receiver()
-    {
-        return $this->belongsTo(User::class, 'receiver_id');
-    }
     public function rate()
     {
         return $this->hasOne(Rate::class, 'consultation_id');
@@ -31,10 +23,5 @@ class Consultation extends Model implements HasMedia
         return $this->hasOne(Invoice::class, 'consultation_id');
     }
 
-    public function registerMediaCollections(): void
-    {
-        $this->addMediaCollection('files');
-        $this->addMediaCollection('translateFile')
-            ->singleFile();
-    }
+   
 }

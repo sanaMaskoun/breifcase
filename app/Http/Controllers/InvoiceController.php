@@ -14,7 +14,7 @@ class InvoiceController extends Controller
     {
         $status = $request->query('status');
 
-        $status == null ? $invoices = Invoice::paginate(PAGINATION_COUNT): $invoices = Invoice::where('status', $status)->paginate(PAGINATION_COUNT);
+        $status == null ? $invoices = Invoice::paginate(config('constants.PAGINATION_COUNT')): $invoices = Invoice::where('status', $status)->paginate(config('constants.PAGINATION_COUNT'));
 
 
             return view('pages.invoices', compact('invoices'));
@@ -24,6 +24,6 @@ class InvoiceController extends Controller
     {
 
         $invoice = Invoice::create($request->validated());
-        return  new InvoiceResource($invoice->load('sender' , 'receiver' , 'consultation'));
+        return  new InvoiceResource($invoice->load('sender' , 'receiver' , 'consultation','case'));
     }
 }

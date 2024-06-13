@@ -28,4 +28,9 @@ return [
 'pending'            => 'pending',
 'Accepte'            => 'accepte',
 
+
+//role enum
+'Lawyer'            => 'Lawyers',
+'translator'        => 'translators',
+
 ];

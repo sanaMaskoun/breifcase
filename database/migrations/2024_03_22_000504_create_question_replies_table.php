@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\GeneralQuestion;
+use App\Models\Lawyer;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,7 +18,9 @@ return new class extends Migration
             $table->id();
             $table->text('reply');
             $table->tinyInteger('rate')->nullable();
+
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+
             $table->foreignIdFor(GeneralQuestion::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
 
             $table->timestamps();

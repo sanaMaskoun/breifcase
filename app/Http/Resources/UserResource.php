@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Enums\ConsultationStatusEnum;
+use App\Enums\CountryEnum;
+use App\Enums\SaudiCityEnum;
+use App\Enums\UAECityEnum;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -11,45 +13,88 @@ class UserResource extends JsonResource
 
     public function toArray(Request $request): array
     {
+
+            $country_value = intval($this->country);
+            $city_value = intval($this->city);
+            $country = $this->country == null ? 'unknow' : CountryEnum::getKey($country_value);
+
+            if ($country_value === CountryEnum::Saudi) {
+                $city =  SaudiCityEnum::getKey($city_value);
+            } elseif ($country_value === CountryEnum::UAE) {
+                $city = UAECityEnum::getKey($city_value);
+            }
+            else {
+                $city = 'unknow';
+            }
+
         return [
             'id' => $this->id,
-            // 'is_admin'  => $this->groups?->is_admin,
+            'isActive' => $this->is_active == null ? false : true,
+            'role' => $this->getRoleNames()->first(),
             'name' => $this->name,
             'email' => $this->email,
-            'birth' => $this->birth,
-            'gender' => $this->gender,
             'phone' => $this->phone,
-            'consultationPrice' => $this->consultation_price,
-            'is_active' => $this->is_active,
-            'location' => $this->location,
-            'yearsOfPractice' => $this->years_of_practice,
+            'gender' => $this->gender == 1 ? 'male' : 'female',
+            'birth' => $this->birth,
+            'country' => $country,
+            'city' => $city,
+            'emiratesId' => $this->emirates_id,
+            'frontEmiratesId' => $this->getFirstMediaUrl('front_emirates_id'),
+            'backEmiratesId' => $this->getFirstMediaUrl('back_emirates_id'),
+            'profile' => $this->getFirstMediaUrl('profile'),
 
-            'numOfConsultation' => $this->consultations()->count(),
-            'closedConsultation' => $this->consultations()->where('status', ConsultationStatusEnum::closed)->count(),
-
-            'image' => $this->getFirstMediaUrl('profileUser'),
-
-            'certification' => $this->getMedia('certification')->map(function ($media) {
-                return $media->getUrl();
-            }),
-            'unreadNotifications' =>$this->whenLoaded('unreadNotifications',function()
-            {
-                return NotificationResource::collection($this->unreadNotifications);
-            }) ,
-
-            'consultations' => $this->whenLoaded('consultations', function () {
-                return ConsultationResource::collection($this->consultations->load(['receiver', 'sender']));
+            'client' => $this->whenLoaded('client', function () {
+                return new ClientResource($this->client);
             }),
 
-            'generalQuestions' => $this->whenLoaded('GeneralQuestions', function () {
-                return GeneralQuestionsResource::collection($this->GeneralQuestions->load(['Replies', 'user']));
+            'lawyer' => $this->whenLoaded('lawyer', function () {
+                return new LawyerResource($this->lawyer);
             }),
-            'questionsReplies' => $this->whenLoaded('QuestionsReplies', function () {
-                return RepliesResource::collection($this->QuestionsReplies->load(['generalQuestion', 'user']));
+
+            'consultationsReceiver' => $this->whenLoaded('consultations_receiver', function () {
+                return ConsultationResource::collection($this->consultations_receiver->load('sender', 'receiver'));
             }),
+
+            'consultationsSender' => $this->whenLoaded('consultations_sender', function () {
+                return ConsultationResource::collection($this->consultations_sender->load('sender', 'receiver'));
+            }),
+
+            'casesSender' => $this->whenLoaded('cases_sender', function () {
+                return CaseResource::collection($this->cases_sender->load('sender', 'receiver'));
+            }),
+            'casesReceiver' => $this->whenLoaded('cases_receiver', function () {
+                return CaseResource::collection($this->cases_receiver->load('sender', 'receiver'));
+            }),
+
             'practices' => $this->whenLoaded('practices', function () {
                 return PracticeResource::collection($this->practices);
             }),
+
+            'languages' => $this->whenLoaded('languages', function () {
+                return LanguageResource::collection($this->languages);
+            }),
+
+            'invoiceSender' => $this->whenLoaded('invoice_sender', function () {
+                return InvoiceResource::collection($this->invoice_sender->load(['sender', 'receiver', 'case', 'consultation']));
+            }),
+            'invoiceReceiver' => $this->whenLoaded('invoice_receiver', function () {
+                return InvoiceResource::collection($this->invoice_receiver->load(['sender', 'receiver', 'case', 'consultation']));
+            }),
+
+            'generalQuestions' => $this->whenLoaded('general_questions', function () {
+                return GeneralQuestionsResource::collection($this->general_questions);
+            }),
+
+            'questionsReplies' => $this->whenLoaded('questions_replies', function () {
+                return RepliesResource::collection($this->questions_replies);
+            }),
+            // 'numOfConsultation' => $this->consultations()->count(),
+            // 'closedConsultation' => $this->consultations()->where('status', ConsultationStatusEnum::closed)->count(),
+
+            'unreadNotifications' => $this->whenLoaded('unreadNotifications', function () {
+                return NotificationResource::collection($this->unreadNotifications);
+            }),
+
             'groups' => $this->whenLoaded('groups', function () {
                 return GroupResource::collection($this->groups->load('messeges'));
             }),

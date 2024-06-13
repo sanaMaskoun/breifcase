@@ -27,6 +27,10 @@
                                     <a class="nav-link" id="groups-tab" data-toggle="tab" href="#groups" role="tab"
                                         aria-controls="groups" aria-selected="false">@lang('pages.groups')</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="general_chat-tab" data-toggle="tab" href="#generalChat" role="tab"
+                                        aria-controls="generalChat" aria-selected="false">@lang('pages.general_chat')</a>
+                                </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab"
@@ -100,6 +104,41 @@
                                                             <span class="username text-dark">{{ $group->name }}</span>
                                                         </a>
                                                         <span class="message-counter" id="counter_chat_group_{{ $group->id }}">{{ $group->message_count }}</span>
+
+                                                        <span class="status away"></span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+
+                                <div class="tab-pane fade" id="generalChat" role="tabpanel" aria-labelledby="general_chat-tab">
+                                    <ul class="card-body px-0" style="height: 450px; overflow-y: auto;">
+                                        @role('admin')
+                                        <form method="GET" action="{{ route('add_general_chat') }}">
+                                            @csrf
+                                            <button type="submit" class="create-group-btn">
+                                                <i class="fas fa-plus"></i> @lang('pages.create_general_chat')
+                                            </button>
+                                        </form>
+                                        @endrole
+                                        @foreach ($general_chats as $general_chat)
+                                            @php
+                                                $encoded_general_chat_id = base64_encode($general_chat->id);
+
+                                            @endphp
+                                            <li class="mb-4 px-5 py-2">
+                                                <a class="media media-message">
+                                                    <div class="position-relative mr-3 ">
+                                                        <a class="icon_group"
+                                                            href="{{ route('group_form', $encoded_general_chat_id) }}">
+
+                                                            <i class="fas fa-users"></i>
+
+                                                            <span class="username text-dark">{{ $general_chat->name }}</span>
+                                                        </a>
+                                                        <span class="message-counter" id="counter_chat_group_{{ $general_chat->id }}">{{ $general_chat->message_count }}</span>
 
                                                         <span class="status away"></span>
                                                     </div>

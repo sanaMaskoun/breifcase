@@ -15,7 +15,7 @@ class ClientController extends Controller
         ->whereHas('roles', function ($query) {
             $query->where('name','client');
         })
-        ->paginate(PAGINATION_COUNT);
+        ->paginate(config('constants.PAGINATION_COUNT'));
 
         return view('pages.client.list', compact('clients'));
     }

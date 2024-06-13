@@ -23,8 +23,8 @@ class RepliesResource extends JsonResource
             'userResponse'            => $this->whenLoaded('user', function () {
                 return new UserResource($this->user);
             }),
-            'generalQuestion'         => $this->whenLoaded('generalQuestion', function () {
-                return new GeneralQuestionsResource($this->generalQuestion->load('user'));
+            'generalQuestion'         => $this->whenLoaded('general_question', function () {
+                return new GeneralQuestionsResource($this->general_question->load('user'));
             })
         ];
     }

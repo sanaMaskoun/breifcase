@@ -15,7 +15,8 @@ class GeneralQuestionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'question'             => ['required', 'max:255']
+            'title'         => ['required','max:50'],
+            'question'      => ['required', 'max:255']
         ];
     }
 
@@ -24,8 +25,9 @@ class GeneralQuestionRequest extends FormRequest
     public function validated($key = null, $default = null)
     {
         return [
+            'title'            => $this->title,
             'question'         => $this->question,
-            'user_id'          => Auth()->user()->id
+            'sender_id'          => Auth()->user()->id
         ];
     }
 }

@@ -39,6 +39,8 @@ return [
      'groups'                   => 'المجموعات',
      'contacts'                 => 'جهات الاتصال',
      'create_group'             => 'إنشاء مجموعة',
+     'general_chat'             => 'محادثة عامة',
+     'create_general_chat'      => 'إنشاء محادثة عامة',
 
 
 
@@ -99,12 +101,17 @@ return [
       //group
       'group_information'             => 'معلومات المجموعة',
       'choose_members'                => 'اختر الأعضاء',
+      'choose_role'                   => 'اختر الصلاحية',
       'save'                          => 'حفظ',
       'edit_group'                    => 'تعديل المجموعة',
       'enter_name'                    => 'ادخل الاسم',
 
 
+        //general chat
+        'general_chat_information'           => 'معلومات المحادثة العامة',
 
+        //edit general chat
+        'edit_general_chat'                  => 'تعديل بيانات المحادثة العامة',
 
 
       //lawyer

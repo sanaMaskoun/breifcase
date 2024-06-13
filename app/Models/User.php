@@ -3,6 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\DocumentTypeEnum;
+use App\Enums\GroupTypeEnum;
+use App\Enums\UserTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -25,33 +29,68 @@ class User extends Authenticatable implements HasMedia
         'email_verified_at' => 'datetime',
     ];
 
-    public function consultations()
+    public function client()
     {
-
-        if ($this->getRoleNames()->first() == 'client') {
-            return $this->hasMany(Consultation::class, 'sender_id');
-        } else {
-            return $this->hasMany(Consultation::class, 'receiver_id');
-        }
+        return $this->hasOne(Client::class, 'user_id');
+    }
+    public function lawyer()
+    {
+        return $this->hasOne(Lawyer::class, 'user_id');
+    }
+    public function consultations_sender()
+    {
+        return $this->hasMany(Document::class, 'sender_id')
+            ->where('type', DocumentTypeEnum::consultation);
+    }
+    public function consultations_receiver()
+    {
+        return $this->hasMany(Document::class, 'receiver_id')
+            ->where('type', DocumentTypeEnum::consultation);
+    }
+    public function cases_sender()
+    {
+        return $this->hasMany(Document::class, 'sender_id')
+            ->where('type', DocumentTypeEnum::case);
+    }
+    public function cases_receiver()
+    {
+        return $this->hasMany(Document::class, 'receiver_id')
+            ->where('type', DocumentTypeEnum::case);
     }
 
-    public function GeneralQuestions()
+
+
+    public function invoice_sender()
     {
-        return $this->hasMany(GeneralQuestion::class);
+        return $this->hasMany(Invoice::class, 'sender_id');
+    }
+    public function invoice_receiver()
+    {
+        return $this->hasMany(Invoice::class, 'receiver_id');
     }
 
-    public function QuestionsReplies()
+    public function general_questions()
+    {
+        return $this->hasMany(GeneralQuestion::class, 'sender_id');
+    }
+    public function questions_replies()
     {
         return $this->hasMany(QuestionReply::class, 'user_id');
     }
+    public function practices()
+    {
+        return $this->belongsToMany(Practice::class, 'practice_lawyer', 'lawyer_id', 'practice_id');
+    }
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class, 'language_user', 'user_id', 'language_id');
+    }
+    ////////////
+
+
     public function replies()
     {
         return $this->hasMany(QuestionReply::class, 'user_id');
-    }
-
-    public function practices()
-    {
-        return $this->belongsToMany(Practice::class, 'practice_user', 'user_id', 'practice_id');
     }
 
     public function rate()
@@ -70,19 +109,24 @@ class User extends Authenticatable implements HasMedia
 
     public function groups()
     {
-        return $this->belongsToMany(Group::class, 'group_user', 'user_id', 'group_id')->withPivot('is_admin');
+        return $this->belongsToMany(Group::class, 'group_user', 'user_id', 'group_id')->withPivot('is_admin')->where('type', GroupTypeEnum::group);
+    }
+    public function general_chats()
+    {
+        return $this->belongsToMany(Group::class, 'group_user', 'user_id', 'group_id')->withPivot('is_admin')->where('type', GroupTypeEnum::general_chat);
     }
 
-    public function readStatuses()
+    public function read_statuses()
     {
-        return $this->hasMany(MessageReadStatusInGroup::class ,'user_id');
+        return $this->hasMany(MessageReadStatusInGroup::class, 'user_id');
     }
+
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('profileUser')
+        $this->addMediaCollection('profile')
             ->useFallbackUrl(config('app.url') . '/img/user_icon.png')
-
             ->singleFile();
-        $this->addMediaCollection('certification');
+        $this->addMediaCollection('front_emirates_id')->singleFile();;
+        $this->addMediaCollection('back_emirates_id')->singleFile();;
     }
 }

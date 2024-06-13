@@ -10,12 +10,14 @@ class GeneralQuestion extends Model
     use HasFactory;
     protected  $guarded = [];
 
-    public function Replies()
+
+
+    public function replies()
     {
         return $this->hasMany(QuestionReply::class);
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class ,'sender_id');
     }
 }

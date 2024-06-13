@@ -7,16 +7,26 @@
                 <h2 class="name_group"><i class="fas fa-users"></i> {{ $group->name }}</h2>
 
                 <span class="admin-status">
-                    @if ($admin)
+                    @if ($admin_group || $admin_general_chat)
                         <i class="fas fa-crown"></i>
                     @endif
                 </span>
 
-                @if ($admin)
+                @if ($admin_group)
                     @php
-                        $encodedId = base64_encode($group->id);
+                        $encoded_group_id = base64_encode($group->id);
                     @endphp
-                    <form method="GET" action="{{ route('edit_group', $encodedId) }}">
+                    <form method="GET" action="{{ route('edit_group', $encoded_group_id) }}">
+                        <label class="edit_group">
+                            <button type="submit" class="btn"> <i class="feather-edit-3"></i></button>
+                        </label>
+                    </form>
+                @endif
+                @if ($admin_general_chat)
+                    @php
+                        $encoded_general_chat_id= base64_encode($group->id);
+                    @endphp
+                    <form method="GET" action="{{ route('edit_general_chat', $encoded_general_chat_id) }}">
                         <label class="edit_group">
                             <button type="submit" class="btn"> <i class="feather-edit-3"></i></button>
                         </label>
@@ -146,7 +156,7 @@
 @endsection
 @section('scripts')
     <script>
-        
+
         var channelChat = pusher.subscribe('group-channel-{{ $group->id }}');
         channelChat.bind('groupMessage', function(data) {
             var extension = data.attachment ? data.attachment.split('.').pop().toLowerCase() : null;

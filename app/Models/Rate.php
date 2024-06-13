@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\DocumentTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,9 +11,10 @@ class Rate extends Model
     use HasFactory;
     protected  $guarded = [];
 
-    public function employee()
+
+    public function lawyer()
     {
-        return $this->belongsTo(User::class, 'employee_id');
+        return $this->belongsTo(User::class, 'lawyer_id');
     }
     public function client()
     {
@@ -20,6 +22,10 @@ class Rate extends Model
     }
     public function consultation()
     {
-        return $this->belongsTo(Consultation::class, 'consultation_id');
+        return $this->belongsTo(Document::class, 'document_id')->where('type' , DocumentTypeEnum::consultation);
+    }
+    public function case()
+    {
+        return $this->belongsTo(Document::class, 'document_id')->where('type' , DocumentTypeEnum::case);
     }
 }

@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Client;
 use App\Models\Consultation;
+use App\Models\Document;
+use App\Models\Lawyer;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,9 +27,10 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id')->nullable();
             $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedBigInteger('employee_id')->nullable();
-            $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignIdFor(Consultation::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->unsignedBigInteger('lawyer_id')->nullable();
+            $table->foreign('lawyer_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreignIdFor(Document::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
 
             $table->timestamps();
         });

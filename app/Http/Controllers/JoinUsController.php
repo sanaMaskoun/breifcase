@@ -37,7 +37,7 @@ class JoinUsController extends Controller
         ->whereHas('roles', function ($query) {
             $query->whereIn('name', ['lawyer', 'legalConsultant', 'typingCenter']);
         })
-        ->paginate(PAGINATION_COUNT);
+        ->paginate(config('constants.PAGINATION_COUNT'));
 
         return view('pages.lawyer.list', compact(['lawyers','practices']));
     }

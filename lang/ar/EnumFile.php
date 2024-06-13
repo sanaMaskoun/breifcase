@@ -24,4 +24,8 @@ return [
 'pending'            => 'قيد الانتظار',
 'Accepte'            => 'مقبول',
 
+
+//role enum
+'Lawyer'            => 'المحامون',
+'translator'        => 'المترجمون',
 ];

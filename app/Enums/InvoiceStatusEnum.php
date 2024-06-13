@@ -8,8 +8,8 @@ use BenSampo\Enum\Enum;
 
 final class InvoiceStatusEnum extends Enum
 {
-    const accepte = 1;
+    const pending = 1;
 
-    const pending = 2;
-    const refund = 3;
+    const accepte = 1;
+    const refund = 2;
 }

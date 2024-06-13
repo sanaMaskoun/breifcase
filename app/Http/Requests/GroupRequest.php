@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\GroupTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GroupRequest extends FormRequest
@@ -16,7 +17,7 @@ class GroupRequest extends FormRequest
     {
         return [
             'name'          => ['required','max:30', ],
-            'members'       => ['required','array','exists:users,id']
+            'members'       => ['array','exists:users,id']
         ];
     }
 
@@ -24,7 +25,8 @@ class GroupRequest extends FormRequest
     public function validated($key = null, $default = null)
     {
         return [
-            'name'   => $this->name
+            'name'   => $this->name,
+            'type' => GroupTypeEnum::group
         ];
     }
 }

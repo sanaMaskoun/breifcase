@@ -19,12 +19,16 @@ class RateResource extends JsonResource
             "client"              => $this->whenLoaded('client', function () {
                 return new UserResource($this->client);
             }),
-            "employee"            => $this->whenLoaded('employee', function () {
-                return new UserResource($this->employee);
+            "lawyer"            => $this->whenLoaded('lawyer', function () {
+                return new UserResource($this->lawyer);
             }),
             "consultation"            => $this->whenLoaded('consultation' , function()
             {
                 return new ConsultationResource ($this->consultation);
+            }),
+            "case"            => $this->whenLoaded('case' , function()
+            {
+                return new CaseResource ($this->case);
             }),
         ];
     }

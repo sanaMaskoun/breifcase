@@ -21,12 +21,12 @@ class GeneralQuestionApiController extends Controller
 
     public function index()
     {
-        $general_questions = GeneralQuestion::with(['user', 'Replies'])->get();
+        $general_questions = GeneralQuestion::with(['user', 'replies'])->get();
         return response()->json([GeneralQuestionsResource::collection($general_questions)]);
     }
     public function show(User $user)
     {
-        $general_questions = GeneralQuestion::with(['Replies'])->where('user_id' , $user->id)->get();
+        $general_questions = GeneralQuestion::with(['replies'])->where('sender_id' , $user->id)->get();
         return response()->json([GeneralQuestionsResource::collection($general_questions)]);
     }
     public function store(GeneralQuestionRequest $request)
@@ -37,8 +37,8 @@ class GeneralQuestionApiController extends Controller
     public function reply(ReplyGeneralQuestionRequest $request , GeneralQuestion $general_question)
     {
         if (Auth()->user()->is_active === 1) {
-            $ReplyGeneralQuestion = QuestionReply::create($request->validated());
-            return response()->json([new GeneralQuestionsResource($general_question->load(['user','Replies']))]);
+           QuestionReply::create($request->validated());
+            return response()->json([new GeneralQuestionsResource($general_question->load(['user','replies']))]);
         } else {
             return response()->json((['message' => 'This account is inactive']));
         }
@@ -47,19 +47,21 @@ class GeneralQuestionApiController extends Controller
     public function rate(RateReplyGeneralQuestionRequest $request , QuestionReply $reply)
     {
          $reply->update(['rate' => $request->rate]);
+
          $lawyer =User::where('id', $reply->user_id )->first();
-         $encodedId = base64_encode($reply->generalQuestion->id);
+         $general_question_encoded_id = base64_encode($reply->general_question->id);
+
          $data = [
              'client_id'          => Auth()->user()->id,
              'client_name'        => Auth()->user()->name,
-             'question_id'        => $reply->generalQuestion->id,
-             'question'           => $reply->generalQuestion->question,
+             'question_id'        => $reply->general_question->id,
+             'question'           => $reply->general_question->question,
 
          ];
          Notification::send($lawyer, new ReplyRateNotification($data));
-         event(new ReplyRateEvent($data,$encodedId ,$lawyer->id));
+         event(new ReplyRateEvent($data,$general_question_encoded_id ,$lawyer->id));
 
-        return response()->json((new RepliesResource($reply->load(['generalQuestion','user']))));
+        return response()->json((new RepliesResource($reply->load(['general_question','user']))));
 
     }
 }

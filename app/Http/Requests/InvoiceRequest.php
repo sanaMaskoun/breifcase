@@ -19,7 +19,7 @@ class InvoiceRequest extends FormRequest
            'invoiceId'              => ['required','unique:invoices,invoiceId'],
            'sender_id'              => ['required' ,'exists:users,id'],
            'receiver_id'            => ['required' ,'exists:users,id'],
-           'consultation_id'        => ['required' ,'exists:consultations,id'],
+           'document_id'            => ['required' ,'exists:documents,id'],
            'invoice_value'          => ['required']
         ];
     }
@@ -32,7 +32,7 @@ class InvoiceRequest extends FormRequest
             'invoiceId'            => $this->invoiceId,
             'sender_id'            => $this->sender_id,
             'receiver_id'          => $this->receiver_id,
-            'consultation_id'      => $this->consultation_id,
+            'document_id'          => $this->document_id,
             'invoice_value'        => $this->invoice_value,
             'status'               =>  InvoiceStatusEnum::pending,
 

@@ -24,21 +24,15 @@ class RolesTableSeeder extends Seeder
 
         ]);
         Role::create([
-            'name' => 'legalConsultant'
+            'name' => 'translation_company'
 
         ]);
-        Role::create([
-            'name' => 'typingCenter'
-
-        ]);
+       
         Role::create([
             'name' => 'client'
 
         ]);
-        Role::create([
-            'name' => 'translator'
-
-        ]);
+      
 
 
 

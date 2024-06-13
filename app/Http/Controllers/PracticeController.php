@@ -19,7 +19,7 @@ class PracticeController extends Controller
             $practices->where('name', 'like', '%' . $name . '%');
         }
 
-        $practices = $practices->paginate(PAGINATION_COUNT);
+        $practices = $practices->paginate(config('constants.PAGINATION_COUNT'));
 
         return view('pages.practices.list', compact('practices'));
     }

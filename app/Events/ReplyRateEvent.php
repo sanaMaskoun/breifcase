@@ -23,9 +23,9 @@ class ReplyRateEvent implements ShouldBroadcast
     public $question;
     public $date;
     public $time;
-       public $encodedId;
+    public $general_question_encoded_id;
 
-    public function __construct($data = [],$encodedId ,$lawyer_id)
+    public function __construct($data = [],$general_question_encoded_id ,$lawyer_id)
     {
         $this->client_id   = $data['client_id'];
         $this->client_name = $data['client_name'];
@@ -34,7 +34,7 @@ class ReplyRateEvent implements ShouldBroadcast
         $this->date        = date("j M Y", strtotime(Carbon::now()));
         $this->time        = date("h:i A", strtotime(Carbon::now()));
         $this->lawyer_id   = $lawyer_id;
-        $this->encodedId   = $encodedId;
+        $this->general_question_encoded_id   = $general_question_encoded_id;
 
     }
 

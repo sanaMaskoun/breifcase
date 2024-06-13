@@ -61,6 +61,19 @@ class ChatController extends Controller
         return $groups;
 
     }
+    public function getUserGeneralChats()
+    {
+        $general_chats = User::find(Auth()->user()->id)->generalChats;
+        $general_chats->each(function ($general_chat) {
+            $message_count = $this->messageCountInGroup($general_chat->id);
+
+            $general_chat->message_count = $message_count;
+
+        });
+
+        return $general_chats;
+
+    }
 
     public function messageCount($receiver_id)
     {
@@ -82,6 +95,7 @@ class ChatController extends Controller
     public function chat(Request $request)
     {
         $groups = $this->getUserGroups();
+        $general_chats = $this->getUserGeneralChats();
 
         $name = $request->query('name');
 
@@ -89,9 +103,9 @@ class ChatController extends Controller
 
         $users = ($name != null) ? $this->getFilteredLawyersByName($name) : $this->getUsersForChat();
 
-        session(['users' => $users, 'groups' => $groups, 'lawyers' => $lawyers]);
+        session(['users' => $users, 'groups' => $groups, 'general_chats' => $general_chats, 'lawyers' => $lawyers]);
 
-        return view('pages.chat.chat', compact(['users', 'groups', 'lawyers']));
+        return view('pages.chat.chat', compact(['users', 'groups', 'general_chats', 'lawyers']));
     }
 
     public function getLawyers()
@@ -150,16 +164,22 @@ class ChatController extends Controller
         MessageReadStatusInGroup::where('user_id', Auth()->user()->id)
             ->update(['is_read' => true]);
 
-        $admin = User::whereHas('groups', function ($query) use ($group) {
+        $admin_group = User::whereHas('groups', function ($query) use ($group) {
             $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
+        })->first();
+
+        $admin_general_chat= User::whereHas('generalChats', function ($query) use ($group) {
+            $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
+
         })->first();
 
         $users = session('users');
         $groups = session('groups');
         $lawyers = session('lawyers');
+        $general_chats = session('general_chats');
         $messages = Message::where('group_id', $group->id)->get();
 
-        return view('pages.chat.formGroup', compact(['lawyers', 'groups', 'users', 'messages', 'admin', 'group']));
+        return view('pages.chat.formGroup', compact(['lawyers', 'groups', 'general_chats', 'users', 'messages', 'admin_group','admin_general_chat', 'group']));
 
     }
 
@@ -263,7 +283,7 @@ class ChatController extends Controller
                 'user_id' => $member->user_id,
                 'is_read' => false,
             ]);
-            broadcast(new CounterChatGroupEvent(1,$member->user_id, $group->id));
+            broadcast(new CounterChatGroupEvent(1, $member->user_id, $group->id));
 
         }
 
@@ -300,7 +320,7 @@ class ChatController extends Controller
             })->whereHas('media', function ($query) {
             $query->where('collection_name', 'attachments');
         })
-            ->paginate(PAGINATION_COUNT);
+            ->paginate(config('constants.PAGINATION_COUNT'));
 
         return view('pages.chat.attachments', compact('messages'));
     }
@@ -312,7 +332,7 @@ class ChatController extends Controller
         $messages = Message::where('group_id', $group->id)->whereHas('media', function ($query) {
             $query->where('collection_name', 'attachments');
         })
-            ->paginate(PAGINATION_COUNT);
+            ->paginate(config('constants.PAGINATION_COUNT'));
 
         return view('pages.group.attachments', compact('messages'));
     }
