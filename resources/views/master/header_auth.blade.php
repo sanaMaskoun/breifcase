@@ -1,7 +1,6 @@
-
 <header id="header">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex align-items-center my-5 container">
 
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex align-items-center my-5" style="height: 3.5rem">
         <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="logo__img img-fluid" />
             <br />
@@ -12,10 +11,8 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-
                 <li class="nav-item dropdown">
                     <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Explore
@@ -48,22 +45,17 @@
                     <a class="nav-link active" href="{{ route('about') }}">About Us</a>
                 </li>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Sign in</a>
-                </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link act dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        join
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{ route('join_lawyer') }}">lawyer</a>
-                        <a class="dropdown-item" href="{{ route('join_client') }}">client</a>
-                        <a class="dropdown-item" href="{{ route('join_translation_company') }}">Translation Company</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        <i class="bx bx-chat icon-header"></i></a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        <i class="bx bx-bell icon-header"></i></a>
+                </li>
+            </ul>
+            <img class="img-profile" src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__5_-removebg-preview.png') }}" alt="" />
             </ul>
         </div>
     </nav>

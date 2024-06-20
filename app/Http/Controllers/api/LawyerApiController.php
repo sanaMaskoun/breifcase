@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\api;
 
 use App\Enums\UserTypeEnum;
 use App\Filters\CityFilter;
@@ -14,7 +14,6 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class LawyerApiController extends Controller
 {
-
     public function index()
     {
         $users = QueryBuilder::for(User::class)

@@ -61,6 +61,7 @@ class ClientRequest extends FormRequest
             'country'     => $this->country,
             'city'        => $this->city,
             'emirates_id' => $this->emirates_id,
+            'is_active'   => true
         ];
     }
     public function clientValidated($key = null, $default = null)
