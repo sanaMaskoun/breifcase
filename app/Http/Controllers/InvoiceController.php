@@ -12,12 +12,11 @@ class InvoiceController extends Controller
 
     public function index(Request $request)
     {
-        $status = $request->query('status');
+$client = Auth()->user();
+      $invoices = Invoice::where('sender_id' , Auth()->user()->id)->get() ;
 
-        $status == null ? $invoices = Invoice::paginate(config('constants.PAGINATION_COUNT')): $invoices = Invoice::where('status', $status)->paginate(config('constants.PAGINATION_COUNT'));
 
-
-            return view('pages.invoices', compact('invoices'));
+            return view('pages.invoice.list', compact('invoices','client'));
 
     }
     public function store(InvoiceRequest $request)

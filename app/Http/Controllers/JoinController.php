@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class JoinController extends Controller
 {
@@ -26,12 +27,13 @@ class JoinController extends Controller
         $user->client()->create($request->clientValidated());
 
 
-        if (empty($request->file('profile'))) {
+        if (!empty($request->file('profile'))) {
              $user->addMedia($request->file('profile'))->toMediaCollection('profile');
         }
         $user->addMedia($request->file('front_emirates_id'))->toMediaCollection('front_emirates_id');
 
         $user->addMedia($request->file('back_emirates_id'))->toMediaCollection('back_emirates_id');
+        Auth::login($user);
 
         return redirect()->route('home');
     }

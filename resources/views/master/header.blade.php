@@ -49,7 +49,7 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Sign in</a>
+                    <a class="nav-link" href="{{ route('login') }}">Sign in</a>
                 </li>
 
                 <li class="nav-item dropdown">

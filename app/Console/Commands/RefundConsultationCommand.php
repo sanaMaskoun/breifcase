@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Enums\ConsultationStatusEnum;
+use App\Enums\DocumentStatusEnum;
 use App\Jobs\RefundConsultationJob;
 use App\Models\Consultation;
 use Carbon\Carbon;
@@ -18,8 +18,8 @@ class RefundConsultationCommand extends Command
 
     public function handle()
     {
-        $consultations = Consultation::where('status', ConsultationStatusEnum::pending)
-        ->where('created_at', '<=', Carbon::now()->subHours(48))
+        $consultations = Consultation::where('status', DocumentStatusEnum::pending)
+        ->where('created_at', '<=', Carbon::now()->subHours(72))
         ->get();
         foreach ($consultations as $consultation) {
             dispatch(new RefundConsultationJob($consultation));

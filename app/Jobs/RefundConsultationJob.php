@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Enums\ConsultationStatusEnum;
+use App\Enums\DocumentStatusEnum;
 use App\Enums\InvoiceStatusEnum;
 use App\Events\RefundConsultationEvent;
 use App\Models\Consultation;
@@ -44,7 +45,7 @@ class RefundConsultationJob implements ShouldQueue
 
 
         $this->consultation->update([
-            'status' => ConsultationStatusEnum::rejected,
+            'status' => DocumentStatusEnum::rejected,
         ]);
         $this->consultation->invoice->update([
             'status' => InvoiceStatusEnum::refund,

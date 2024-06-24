@@ -96,8 +96,13 @@ class UserResource extends JsonResource
             }),
 
             'groups' => $this->whenLoaded('groups', function () {
-                return GroupResource::collection($this->groups->load('messeges'));
+                return GroupResource::collection($this->groups);
             }),
+
+            'generalChats' => $this->whenLoaded('general_chats', function () {
+                return GroupResource::collection($this->general_chats);
+            }),
+
             'senderMessage' => $this->whenLoaded('sender_message', function () {
                 return ChatResource::collection($this->sender_message->load(['receiver', 'sender']));
             }),

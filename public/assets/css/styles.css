@@ -112,6 +112,7 @@ header {
     height: auto;
     border-radius: 10px;
 }
+
 .logo-container {
     display: flex;
     flex-direction: column;
@@ -170,8 +171,7 @@ header {
     margin-top: 10rem;
 }
 
-.sapce_section_home
-{
+.sapce_section_home {
     margin-bottom: 7.5rem;
 }
 
@@ -189,7 +189,7 @@ header {
 }
 
 
-.title_question{
+.title_question {
     padding: 20px;
 }
 
@@ -198,10 +198,11 @@ header {
     padding: 10px;
 }
 
-.img_news{
+.img_news {
     max-width: 150px;
     height: auto;
 }
+
 .text_4 {
     font-weight: 600;
     margin-top: 51px;
@@ -312,7 +313,7 @@ header {
     margin-top: 15px;
 }
 
-.form-group{
+.form-group {
     margin-top: 15px;
 
 }
@@ -366,14 +367,21 @@ header {
     border-radius: 5px;
 }
 
+.btn_send_file {
+    background: none;
+    font-size: 20px;
+}
+
 .btn1 {
     background: black;
     color: #fff !important;
     box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
-    border-radius: 10%;
-    margin-top: 5px;
-    margin-bottom: 15px;
     padding: 10px;
+    border-radius: 15px;
+}
+
+.btn1:hover {
+    text-decoration: none;
 }
 
 /*homeclient*/
@@ -473,6 +481,12 @@ header {
     font-weight: 600;
 }
 
+.link-profile:hover {
+    text-decoration: none;
+    color: white;
+
+}
+
 /*document*/
 .tab {
     overflow: hidden;
@@ -505,17 +519,54 @@ header {
 .tabcontent {
     display: none;
     padding: 6px 12px;
-
+    flex-wrap: wrap;
     border-top: none;
 }
 
-.Edit {
+
+.title-consultation {
+    color: #000000;
+    height: 50px;
+    background: none;
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.card_send_consultation input::placeholder {
+    color: black !important;
+}
+
+.consultation-card p {
+    margin-bottom: 0px;
+}
+
+.consultation-card {
+    padding: 10px;
+
+}
+
+.form_edit {
+    width: 100%;
+}
+
+.edit {
+    display: flex !important;
+    justify-content: end !important;
+    margin-left: -27px;
+}
+
+.btn_edit_profile {
     color: #000000 !important;
     font-weight: 700;
-    text-align: right !important;
     font-size: 20px;
-    text-decoration: none;
+    border: none;
+    background: none;
+
 }
+
 
 .img-doc {
     width: 3rem;
@@ -544,17 +595,18 @@ header {
 .logo_general_question {
     width: 6rem;
     margin-top: 1rem;
-  }
-  .title_general_question {
+}
+
+.title_general_question {
     margin-top: 2rem;
-  }
+}
 
 /*explore*/
 .sidebar {
     width: 300px;
 }
 
-.text_explore_lawyer{
+.text_explore_lawyer {
     margin-top: 15px;
     font-weight: 700;
     font-size: 40px;
@@ -613,7 +665,7 @@ header {
 
 .profile-card img {
     max-width: 100%;
-        height: auto;
+    height: auto;
     object-fit: contain;
     border-radius: 50%;
 }
@@ -656,6 +708,83 @@ header {
 }
 
 /*CHAT*/
+.message-counter {
+    background-color: green;
+    color: #fff;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 12px;
+    float: right;
+}
+.time_message {
+    float: right;
+    color: black;
+}
+
+p.last-msg.text-smoke {
+    padding-left: 13%;
+}
+
+.last-msg {
+    position: relative;
+    top: 21px;
+    right: 55px;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 0;
+    color: black;
+}
+
+@media (min-width: 768px) {
+    .last-msg {
+        width: 300px;
+    }
+}
+
+@media (min-width: 992px) {
+    .last-msg {
+        width: 125px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .last-msg {
+        width: 220px;
+    }
+}
+
+.list_contact_info
+{
+    width: 100%;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 60%;
+    display: inline-block;
+}
+
+.sender {
+    background-color: #9d3d0287;
+    align-self: flex-end;
+    text-align: right;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.receiver {
+    background-color: #d4812082;
+    align-self: flex-start;
+    text-align: left;
+    margin-bottom: 5px;
+    border-radius: 15px;
+    padding: 5px;
+}
 
 #contact-list {
     overflow-y: scroll;
@@ -670,8 +799,8 @@ header {
 }
 
 #contact-list .list-group-item1 img {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     margin-right: 10px;
 }
 
@@ -736,46 +865,53 @@ header {
 }
 
 /*lawyer*/
+.rating {
+    margin-left: 129px;
+    margin-top: -22px;
+}
 
 .card {
     border-radius: 15px;
-    background-color: rgba(73, 70, 70, 0.705);
+    background-color: rgb(125 125 125 / 71%);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
     overflow-y: scroll;
     border-radius: 15px;
-  }
+}
 
-  .profile-image img {
+.profile-image img {
     width: 130px;
     height: 130px;
-  }
+}
 
-  .certifications img,
-  .license img {
-    width: 50px;
-    height: 50px;
-  }
+.certifications img,
+.license img {
+    width: 130px;
+    height: 100px;
+    border-radius: 30px;
+}
 
-  .top-expertise ul {
+.top-expertise ul {
     list-style-type: none;
     padding: 0;
-  }
+}
 
-  .top-expertise ul li {
+.top-expertise ul li {
     margin-bottom: 5px;
-  }
-  .fa-star {
-    color: rgb(240, 123, 13);
-    font-size: 20px;
-  }
+}
 
-  .bx-chat-1 {
+.fa-star {
+    color: rgb(240, 123, 13);
+    font-size: 20px;
+}
+
+.bx-chat-1 {
     font-size: 50px;
-  }
-  .bx-check-circle {
+}
+
+.bx-check-circle {
     font-size: 20px;
     color: rgb(240, 123, 13);
-  }
+}
 
 
 
@@ -811,12 +947,25 @@ header {
     font-weight: 500;
 }
 
+.link_send_consultation {
+    margin-top: -80px;
+}
+
+.card_send_consultation {
+    width: 550px;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.img_contact {
+    padding: 10px;
+}
+
 #chat-area {
     display: flex;
     flex-direction: column;
-    width: 400px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    width: 500px;
+    border-radius: 20px;
     overflow-y: scroll;
     height: 40ch;
 }
@@ -855,11 +1004,8 @@ header {
 
 #send-button,
 #media-button {
-    margin-left: 10px;
-    padding: 10px 20px;
     border: none;
 
-    color: white;
     cursor: pointer;
     border-radius: 5px;
 }
@@ -881,10 +1027,10 @@ header {
 }
 
 #chat-box_1 {
-    flex: 1;
-    padding: 10px;
     overflow-y: auto;
-    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 #chat-input_1 {
@@ -893,11 +1039,34 @@ header {
     padding: 10px;
 }
 
+nav.navbar.navbar-expand-lg.navbar-light.fixed-top.d-flex.align-items-center.my-5.container {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    /* margin: auto; */
+}
+
+.send_contact {
+    width: 20px;
+    padding: 2px;
+}
+
+.btn_contact {
+    border: none;
+    position: relative;
+    left: -42px;
+    background-color: white;
+}
+
 #message-input_1 {
     flex: 1;
     padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: none;
+    border-radius: 10px;
+}
+
+#message-input_1:hover {
+    border: none;
+
 }
 
 .message_1 {
@@ -905,4 +1074,233 @@ header {
     border-radius: 15px;
     padding: 10px;
     width: 40%;
+}
+
+
+
+.img-fluid {
+    transition: transform 0.3s ease;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+/* لضبط مظهر الصور عند التكبير */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+.modal-content,
+#caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.top-expertise ul {
+    list-style-type: circle;
+    padding-left: 10px;
+}
+
+.description {
+    background-color: rgb(125 125 125 / 71%);
+    padding: 20px;
+    border-radius: 30px;
+
+}
+
+.error-message {
+    color: red;
+    display: none;
+}
+
+
+
+.input-group-append {
+    position: relative;
+    right: 30px;
+    top: 5px;
+}
+
+.info_profile {
+    background-color: white;
+    border-radius: 30px;
+    width: 70%;
+    max-width: 100% !important;
+    text-align: center;
+}
+
+.details {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/*ques*/
+.box-profile-post {
+    height: 50ch;
+    border-radius: 15px;
+    background-color: rgb(125 125 125 / 71%);
+    overflow: scroll;
+}
+
+.box-profile-post .title-post {
+    /* display: flex;
+    justify-content: center; */
+    color: #000000;
+    height: 50px;
+    background: none;
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+}
+
+.box-profile-post input::placeholder {
+    color: black !important;
+}
+
+.box-profile-post .p-Questions {
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    color: #fff;
+    margin-bottom: 3px;
+}
+
+.box-profile-post .link-Questions {
+    color: #000000;
+    text-align: center !important;
+    font-size: 12px;
+    display: block;
+    margin-top: 10px;
+    text-decoration: underline;
+}
+
+.text-Questions textarea {
+    height: 200px !important;
+    width: 100%;
+    padding: 13px;
+    overflow-y: scroll;
+    border-radius: 30px;
+}
+
+/*chat*/
+.chat-header img {
+    width: 50px;
+    height: 50px;
+}
+
+.box-profile-chat {
+    border-radius: 15px;
+    background-color: rgb(125 125 125 / 71%);
+    overflow: scroll;
+}
+.list-group-item1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    outline: none !important;
+  }
+  .list-group :hover,
+  .list-group :focus {
+    text-decoration: none !important;
+    outline: none !important;
+  }
+  .contact-info {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin-left: 10px;
+  }
+  .contact-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .contact-info .user-name {
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+    position: relative;
+    top: 14px;
+    font-size: 20px;
+  }
+  .contact-info .last-seen {
+    font-size: 0.8em;
+    color: rgb(150, 147, 147);
+  }
+  .contact-info .last-message {
+    font-size: 0.9em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #000000;
+    max-width: 15ch; /* Limit to approximately 3 words */
+  }
+  .badge {
+    background-color: red;
+    color: white;
+  }
+
+.form_login
+{
+    position: relative;
+    right: 68px;
+}
+
+.btn_login
+{
+    margin-bottom: 10px;
 }

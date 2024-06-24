@@ -1,3 +1,7 @@
+@php
+$client_encoded_id = base64_encode(Auth()->user()->id);
+
+@endphp
 <header id="header">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex align-items-center my-5 container">
 
@@ -11,6 +15,7 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
@@ -47,15 +52,16 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">
+                    <a class="nav-link active" href="{{ route('chat') }}">
                         <i class="bx bx-chat icon-header"></i></a>
                 </li>
+                
                 <li class="nav-item">
                     <a class="nav-link active" href="#">
                         <i class="bx bx-bell icon-header"></i></a>
                 </li>
             </ul>
-            <img class="img-profile" src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__5_-removebg-preview.png') }}" alt="" />
+           <a href="{{ route('show_client' , $client_encoded_id ) }}"> <img class="img-profile" src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__5_-removebg-preview.png') }}" alt="" /></a>
             </ul>
         </div>
     </nav>

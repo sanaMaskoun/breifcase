@@ -14,10 +14,11 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
+use App\Traits\CalculatesAverageRate;
 
 class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia, CalculatesAverageRate,HasRoles;
 
     protected $guarded = [];
     protected $hidden = [
@@ -85,6 +86,22 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsToMany(Language::class, 'language_user', 'user_id', 'language_id');
     }
+
+    public function geta_average_rate()
+    {
+        return $this->calculateAverageRate($this->id);
+    }
+
+
+    public function sender_message()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+    public function receiver_message()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
     ////////////
 
 
@@ -98,14 +115,6 @@ class User extends Authenticatable implements HasMedia
         return $this->hasOne(Rate::class, 'employee_id');
     }
 
-    public function sender_message()
-    {
-        return $this->hasMany(Message::class, 'sender_id');
-    }
-    public function receiver_message()
-    {
-        return $this->hasMany(Message::class, 'receiver_id');
-    }
 
     public function groups()
     {

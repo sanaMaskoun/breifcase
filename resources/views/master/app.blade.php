@@ -22,7 +22,6 @@
 
 <body class="en ar">
     <div class="main-wrapper">
-
         @if (Auth()->user() != null)
             @include('master.header_auth')
         @else
@@ -46,6 +45,8 @@
     <script src="{{asset('assets/js/search.js')}}"></script>
     <script src="{{asset('assets/js/index.js')}}"></script>
     <script src="{{asset('assets/js/tab.js')}}"></script>
+    <script src="{{asset('assets/js/img.js')}}"></script>
+    <script src="{{asset('assets/js/script.js')}}"></script>
 
     {{--  pusher  --}}
     <input type="hidden" id="projectUrl" value="{{ url('/') }}"></div>

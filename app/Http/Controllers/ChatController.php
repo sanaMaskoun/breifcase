@@ -12,42 +12,43 @@ use App\Models\GroupUser;
 use App\Models\Message;
 use App\Models\MessageReadStatusInGroup;
 use App\Models\User;
+use App\Traits\GetUsersForChatTrait;
+use App\Traits\MessageTrait;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-
-    public function getUsersForChat()
+    use GetUsersForChatTrait ,MessageTrait;
+    public function contact($receiver_encoded_id)
     {
-        $users = User::where('is_active', true)
-            ->where('id', '<>', Auth()->user()->id)
-            ->whereHas('sender_message', function ($query) {
-                $query->where('receiver_id', Auth()->user()->id);
-            })
-            ->orWhereHas('receiver_message', function ($query) {
-                $query->where('sender_id', Auth()->user()->id);
-            })
-            ->get();
+        $receiver_encoded_id = base64_decode($receiver_encoded_id);
 
-        $users->each(function ($user) {
-            $latestMessage = Message::where('sender_id', auth()->user()->id)
-                ->where('receiver_id', $user->id)
-                ->orWhere(function ($query) use ($user) {
-                    $query->where('sender_id', $user->id)
-                        ->where('receiver_id', auth()->user()->id);
-                })
-                ->latest()
-                ->first();
-
-            $message_count = $this->messageCount($user->id);
-
-            $user->latest_message = $latestMessage;
-            $user->message_count = $message_count;
-
-        });
-        return $users;
+        $lawyer = User::find($receiver_encoded_id);
+        return view('pages.chat.contact', compact('lawyer'));
     }
 
+    public function chat()
+    {
+        $client = Auth()->user();
+        $users = $this->get_users_for_chat();
+        return view('pages.chat.chat', compact('client' ,'users'));
+    }
+
+    public function chat_form($encoded_sender_id)
+    {
+        $client = Auth()->user();
+        $decoded_sender_id = base64_decode($encoded_sender_id);
+        $sender = User::find($decoded_sender_id);
+
+        $users = $this->get_users_for_chat();
+
+
+        $messages = $this->get_messages($sender);
+
+        return view('pages.chat.formChat', compact([ 'client','messages', 'users']));
+    }
+
+    ///////////
     public function getUserGroups()
     {
         $groups = User::find(Auth()->user()->id)->groups;
@@ -75,13 +76,6 @@ class ChatController extends Controller
 
     }
 
-    public function messageCount($receiver_id)
-    {
-        return
-        Message::where('receiver_id', Auth()->user()->id)->where('sender_id', $receiver_id)
-            ->where('is_read', false)
-            ->count();
-    }
     public function messageCountInGroup($group_id)
     {
         return MessageReadStatusInGroup::where('user_id', Auth()->user()->id)
@@ -90,22 +84,6 @@ class ChatController extends Controller
             })
             ->where('is_read', false)
             ->count();
-    }
-
-    public function chat(Request $request)
-    {
-        $groups = $this->getUserGroups();
-        $general_chats = $this->getUserGeneralChats();
-
-        $name = $request->query('name');
-
-        $lawyers = $this->getLawyers();
-
-        $users = ($name != null) ? $this->getFilteredLawyersByName($name) : $this->getUsersForChat();
-
-        session(['users' => $users, 'groups' => $groups, 'general_chats' => $general_chats, 'lawyers' => $lawyers]);
-
-        return view('pages.chat.chat', compact(['users', 'groups', 'general_chats', 'lawyers']));
     }
 
     public function getLawyers()
@@ -129,32 +107,7 @@ class ChatController extends Controller
             ->get();
     }
 
-    public function chat_form($encodedId)
-    {
-        $decodedId = base64_decode($encodedId);
-        $receiver = User::find($decodedId);
 
-        $users = session('users');
-        $groups = session('groups');
-        $lawyers = session('lawyers');
-
-        $messages = Message::where('sender_id', auth()->user()->id)
-            ->where('receiver_id', $receiver->id)
-            ->orWhere(function ($query) use ($receiver) {
-                $query->where('sender_id', $receiver->id)
-                    ->where('receiver_id', auth()->user()->id);
-            })
-            ->get();
-
-        $messages->each(function ($message) use ($receiver) {
-            $message->where('receiver_id', auth()->user()->id)->where('sender_id', $receiver->id)
-                ->update(['is_read' => true]);
-
-        });
-        $role_receiver = $receiver->getRoleNames()->first();
-
-        return view('pages.chat.formChat', compact(['receiver', 'lawyers', 'groups', 'messages', 'users', 'role_receiver']));
-    }
 
     public function group_form($encodedId)
     {
@@ -168,7 +121,7 @@ class ChatController extends Controller
             $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
         })->first();
 
-        $admin_general_chat= User::whereHas('generalChats', function ($query) use ($group) {
+        $admin_general_chat = User::whereHas('generalChats', function ($query) use ($group) {
             $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
 
         })->first();
@@ -179,7 +132,7 @@ class ChatController extends Controller
         $general_chats = session('general_chats');
         $messages = Message::where('group_id', $group->id)->get();
 
-        return view('pages.chat.formGroup', compact(['lawyers', 'groups', 'general_chats', 'users', 'messages', 'admin_group','admin_general_chat', 'group']));
+        return view('pages.chat.formGroup', compact(['lawyers', 'groups', 'general_chats', 'users', 'messages', 'admin_group', 'admin_general_chat', 'group']));
 
     }
 

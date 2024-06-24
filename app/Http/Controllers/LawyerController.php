@@ -44,16 +44,11 @@ class LawyerController extends Controller
         $lawyer_decoded_id = base64_decode($lawyer_encoded_id);
         $lawyer = User::find($lawyer_decoded_id);
         $practices = $lawyer?->practices;
+        
+        $get_notify = DB::table('notifications')->where('data->user_id', $lawyer->id)->where('notifiable_id', Auth()->user()->id)->first();
+        if ($get_notify != null) {DB::table('notifications')->where('id', $get_notify->id)->update(['read_at' => now()]);}
 
-        $average_rate = DB::table('rates')
-            ->where('lawyer_id', $lawyer->id)
-            ->select(DB::raw('(AVG(understanding) + AVG(problem_solving) + AVG(response_time) + AVG(communication)) / 4 as average_rate'))
-            ->value('average_rate');
-        $rate = number_format($average_rate, 1);
-        // $get_notify = DB::table('notifications')->where('data->user_id', $lawyer->id)->where('notifiable_id', Auth()->user()->id)->first();
-        // if ($get_notify != null) {DB::table('notifications')->where('id', $get_notify->id)->update(['read_at' => now()]);}
-
-        return view('pages.lawyer.details', compact(['lawyer', 'practices', 'rate']));
+        return view('pages.lawyer.details', compact(['lawyer', 'practices']));
     }
 
     // public function edit($encodedId)

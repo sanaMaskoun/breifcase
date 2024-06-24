@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Enums\CountryEnum;
 use App\Enums\SaudiCityEnum;
 use App\Enums\UAECityEnum;
+use App\Enums\UserTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -18,10 +19,11 @@ class ClientRequest extends FormRequest
 
     public function rules(): array
     {
-        $emailUnique = Rule::unique('users', 'email')->ignore($this->user);
+        // dd(request()->all());
+        $email_unique = Rule::unique('users', 'email')->ignore($this->user);
         return [
             'name'                   => ['required', 'max:50'],
-            'email'                  => ['required', 'email', $emailUnique],
+            'email'                  => ['required', 'email', $email_unique],
             'password'               => ['required', 'string', 'confirmed'],
             'password_confirmation'  => ['required', 'same:password'],
             'phone'                  => ['required', 'numeric', 'digits_between:7,14'],
@@ -61,7 +63,8 @@ class ClientRequest extends FormRequest
             'country'     => $this->country,
             'city'        => $this->city,
             'emirates_id' => $this->emirates_id,
-            'is_active'   => true
+            'is_active'   => true,
+            'type'        => UserTypeEnum::client
         ];
     }
     public function clientValidated($key = null, $default = null)

@@ -1,5 +1,3 @@
-
-
 const chatBox = document.getElementById("chat-box_1");
 const messageInput = document.getElementById("message-input_1");
 const mediaInput = document.getElementById("media-input");
@@ -8,7 +6,7 @@ const mediaButton = document.getElementById("media-button");
 
 function addMessage(content, isImage = false) {
   const messageElement = document.createElement("div");
-  messageElement.classList.add("message_1");
+  messageElement.classList.add("sender");
   if (isImage) {
     const img = document.createElement("img");
     img.src = content;
@@ -48,3 +46,42 @@ mediaInput.addEventListener("change", () => {
     reader.readAsDataURL(file);
   }
 });
+document.getElementById("send-button").addEventListener("click", function () {
+  sendMessage();
+});
+
+document
+  .getElementById("message-input_1")
+  .addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  });
+
+function sendMessage() {
+  const messageInput = document.getElementById("message-input_1");
+  const message = messageInput.value.trim();
+
+  if (message !== "") {
+    addMessageToChat("sender", message);
+    messageInput.value = "";
+
+    // Simulate receiving a response after 1 second
+    setTimeout(() => {
+      addMessageToChat("receiver", "This is a reply from the future.");
+    }, 1000);
+  }
+}
+
+function addMessageToChat(senderType, message) {
+  const chatBox = document.getElementById("chat-box_1");
+  const messageDiv = document.createElement("div");
+  messageDiv.classList.add("message", senderType);
+  messageDiv.textContent = message;
+  chatBox.appendChild(messageDiv);
+  chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+}
+
+// Optionally, add some initial messages to the chat
+addMessageToChat("sender", "This is a message from the sender.");
+addMessageToChat("receiver", "This is a message from the receiver.");

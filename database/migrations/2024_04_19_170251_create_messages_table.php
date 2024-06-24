@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->foreignIdFor(Group::class)->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
 
-            $table->boolean('is_resd')->default(false);
+            $table->boolean('is_read')->default(false);
 
             $table->timestamps();
         });

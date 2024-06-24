@@ -23,5 +23,4 @@ class Consultation extends Model implements HasMedia
         return $this->hasOne(Invoice::class, 'consultation_id');
     }
 
-   
 }

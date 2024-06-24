@@ -267,8 +267,8 @@ class AuthApiController extends Controller
         }
         return new JsonResponse([
             'access_token' => $token,
-            'user' => new UserResource($user)
-            // ->load(['consultations', 'unreadNotifications', 'GeneralQuestions', 'QuestionsReplies', 'practices', 'groups'])),
+            'user' => new UserResource($user
+            ->load(['consultations_receiver','consultations_sender','cases_sender','cases_receiver', 'unreadNotifications', 'general_questions', 'questions_replies', 'practices', 'groups','general_chats'])),
 
         ]);
     }
