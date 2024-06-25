@@ -10,7 +10,8 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 
-    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/ClientStyles.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/LawyerStyles.css') }}" />
     <title>Briefcase - The Legal Platform</title>
     <style>
         :root {
@@ -47,6 +48,7 @@
     <script src="{{asset('assets/js/tab.js')}}"></script>
     <script src="{{asset('assets/js/img.js')}}"></script>
     <script src="{{asset('assets/js/script.js')}}"></script>
+    <script src="{{asset('assets/js/oldScript.js')}}"></script>
 
     {{--  pusher  --}}
     <input type="hidden" id="projectUrl" value="{{ url('/') }}"></div>

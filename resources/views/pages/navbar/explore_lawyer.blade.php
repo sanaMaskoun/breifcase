@@ -1,8 +1,8 @@
 @extends('master.app')
 @section('content')
     <div class="box1 container">
-        <div class="row">
-            <div class="sidebar col-lg-4 col-md-3 col-sm-12 ">
+        <div class="row filter-lawyer">
+            <div class="sidebar explore_lawyer col-lg-4 col-md-3 col-sm-12 ">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <h2 class="text_explore_lawyer">Practices</h2>
                     @foreach ($practices as $practice)
@@ -11,7 +11,7 @@
                 </div>
             </div>
 
-            <div class="content col-lg-8 col-md-9 col-sm-12">
+            <div class="content explore_lawyer col-lg-8 col-md-9 col-sm-12">
                 <div class="col-12">
                     <h2 class="text_explore_lawyer">Lawyers</h2>
                     <div class="row" id="lawyer-list">

@@ -1,6 +1,3 @@
-// احصل على جميع الصور التي يمكن النقر عليها
-const images = document.querySelectorAll(".clickable");
-
 // إنشاء عنصر الـ modal
 const modal = document.createElement("div");
 modal.classList.add("modal");
@@ -17,14 +14,6 @@ closeBtn.classList.add("close");
 closeBtn.innerHTML = "&times;";
 modal.appendChild(closeBtn);
 
-// وظيفة لفتح الـ modal عند النقر على الصورة
-images.forEach((image) => {
-  image.addEventListener("click", function () {
-    modal.style.display = "block";
-    modalContent.src = this.src;
-  });
-});
-
 // وظيفة لإغلاق الـ modal عند النقر على زر الإغلاق
 closeBtn.addEventListener("click", function () {
   modal.style.display = "none";
@@ -36,6 +25,20 @@ modal.addEventListener("click", function (event) {
     modal.style.display = "none";
   }
 });
+
+// وظيفة لفتح الـ modal عند النقر على الصورة
+function addModalFunctionality(image) {
+  image.addEventListener("click", function () {
+    modal.style.display = "block";
+    modalContent.src = this.src;
+  });
+}
+
+// احصل على جميع الصور التي يمكن النقر عليها في البداية
+const images = document.querySelectorAll(".clickable");
+images.forEach(addModalFunctionality);
+
+
 
 // img input
 document.querySelectorAll(".custom-file-input").forEach((inputElement) => {

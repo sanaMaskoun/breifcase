@@ -24,9 +24,9 @@ Route::group(['prefix' => 'explore'], function () {
 
 });
 
-Route::get('/library', function () {
-    return view('pages.library');
-})->name('library');
+Route::get('/library', [NavbarController::class, 'library'])->name('library');
+Route::post('/download', [NavbarController::class, 'download_book'])->name('download_book')->middleware('auth:sanctum');;;
+
 
 Route::get('/about-us', function () {
     return view('pages.about');
@@ -100,19 +100,19 @@ Route::group(['prefix' => 'document', 'middleware' => 'auth:sanctum'], function 
     // Route::post('{consultation}/answer', [ConsultationController::class, 'answer'])->name('answer_consultation');
 
 });
-Route::get('contact/{receiver_encoded_id}' , [ChatController::class, 'contact'])->name('comtact')->middleware('auth:sanctum');;
+Route::get('contact/{receiver_encoded_id}' , [ChatController::class, 'contact'])->name('comtact')->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [ChatController::class, 'chat'])->name('chat');
 
-    Route::get('{encoded_sender_id}', [ChatController::class, 'chat_form'])->name('chat_form');
-    Route::post('{encoded_sender_id}', [ChatController::class, 'send_message_to_user'])->name('send_message_to_user');
+    Route::get('{receiver_encoded_id}', [ChatController::class, 'chat_form'])->name('chat_form');
+    Route::post('{receiver_encoded_id}', [ChatController::class, 'send_message_to_user'])->name('send_message_to_user');
 
-    Route::get('/group/{encodedId}', [ChatController::class, 'group_form'])->name('group_form');
-    Route::post('/group/{encodedId}', [ChatController::class, 'send_message_to_group'])->name('send_message_to_group');
+    // Route::get('/group/{encodedId}', [ChatController::class, 'group_form'])->name('group_form');
+    // Route::post('/group/{encodedId}', [ChatController::class, 'send_message_to_group'])->name('send_message_to_group');
 
     Route::get('/attachments/{encodedIdReceiver}', [ChatController::class, 'attachments'])->name('attachments');
-    Route::get('/attachments/group/{encodedIdGroup}', [ChatController::class, 'attachments_group'])->name('attachments_group');
+    // Route::get('/attachments/group/{encodedIdGroup}', [ChatController::class, 'attachments_group'])->name('attachments_group');
 
 });
 

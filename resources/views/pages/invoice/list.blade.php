@@ -5,7 +5,7 @@
         <div class="details">
 
             @foreach ($invoices as $invoice)
-                <div class="col-lg-6 col-md-6 col-sm-12 consultation-card">
+                <div class="col-lg-4 col-md-6 col-sm-12 consultation-card">
                     <img src="{{ asset('assets/img/invoice.png') }}" alt="invoice Image" class="img-doc">
                     <div>
                         <p>title:<span>

@@ -1,26 +1,26 @@
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    const roleSelect = document.getElementById('role');
-    const memberCheckboxes = document.querySelectorAll('.member-checkbox');
+// document.addEventListener('DOMContentLoaded', function() {
+//     const roleSelect = document.getElementById('role');
+//     const memberCheckboxes = document.querySelectorAll('.member-checkbox');
 
-    function updateFieldStates() {
-        if (roleSelect.value) {
-            memberCheckboxes.forEach(checkbox => {
-                checkbox.disabled = true;
-                checkbox.checked = false;
-            });
-        } else {
-            memberCheckboxes.forEach(checkbox => {
-                checkbox.disabled = false;
-            });
-        }
-    }
+//     function updateFieldStates() {
+//         if (roleSelect.value) {
+//             memberCheckboxes.forEach(checkbox => {
+//                 checkbox.disabled = true;
+//                 checkbox.checked = false;
+//             });
+//         } else {
+//             memberCheckboxes.forEach(checkbox => {
+//                 checkbox.disabled = false;
+//             });
+//         }
+//     }
 
-    roleSelect.addEventListener('change', updateFieldStates);
+//     roleSelect.addEventListener('change', updateFieldStates);
 
-    updateFieldStates();
-});
+//     updateFieldStates();
+// });
 
 
 $(document).ready(function () {
@@ -36,11 +36,16 @@ $(document).ready(function () {
 });
 
 
+
+
+
+
 const fileInput = document.getElementById('fileInput');
 fileInput.addEventListener('change', function () {
     const fileName = this.files[0].name;
-    document.querySelector('input[name="message"]').value = fileName;
+    document.querySelector('textarea[name="message"]').value = fileName;
 });
+
 
 $(document).ready(function () {
     $('.send-button').click(function (e) {
@@ -56,27 +61,54 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (response) {
-                form.find('input[type="text"]').val('');
+                // تفريغ محتوى حقل النص
+                form.find('textarea[name="message"]').val('');
 
+                // إنشاء عناصر DOM لعرض الرسالة الجديدة
                 var messageElement = $('<div class="media media-chat media-chat-right"></div>');
                 var mediaBody = $('<div class="media-body"></div>');
                 var textContent = $('<div class="text-content"></div>');
-                var messageText = $('<span class="message"></span>').text(response.message);
                 var timeText = $('<time class="time"></time>').text(response.created_at);
 
-                textContent.append(messageText);
+                // تحقق من وجود مرفقات في الاستجابة
+                if (response.attachment) {
+                    var attachment = response.attachment;
+                    if (attachment.extension === 'jpg' || attachment.extension === 'png') {
+                        var imgElement = $('<img class="img_group clickable">').attr('src', attachment.url);
+                        textContent.append(imgElement);
+                        var messageText = $('<span class="message"></span>').text(response.message);
+                        textContent.append(messageText);
+
+                        // أضف وظيفة الـ Modal للصورة الجديدة
+                        addModalFunctionality(imgElement[0]);
+
+                    } else {
+                        var fileLink = $('<a></a>').attr('href', attachment.url).attr('target', '_blank');
+                        var messageText = $('<p class="message"></p>').text(response.message);
+                        fileLink.append(messageText);
+                        textContent.append(fileLink);
+                    }
+                } else {
+                    var messageText = $('<span class="message"></span>').text(response.message);
+                    textContent.append(messageText);
+                }
+
                 textContent.append(timeText);
                 mediaBody.append(textContent);
-
                 messageElement.append(mediaBody);
-                if (messageElement != "") {
+
+                // إزالة رسالة "لا توجد رسائل" إذا كانت موجودة
+                if ($('.empty-messages').length > 0) {
                     $('.empty-messages').remove();
                 }
+
+                // إضافة الرسالة الجديدة إلى المحادثة
                 $('#chat_div').append(messageElement);
 
-                var lastMessage = response.message;
-                $('#last_message_' + response.receiver_id).text(lastMessage);
+                // تحديث آخر رسالة في قائمة المحادثات
+                $('#last_message_' + response.receiver_id).text(response.message);
 
+                // إضافة محادثة جديدة إذا كانت هذه هي الرسالة الأولى
                 if (response.has_previous_chat) {
                     let newChatMessageReceiver = `
                     <li class="mb-4 px-5 py-2" id="new_chat_div">
@@ -95,9 +127,6 @@ $(document).ready(function () {
                     </li>`;
                     $("#new_chat_div").append(newChatMessageReceiver);
                 }
-
-
-                // console.log(response);
             },
             error: function (xhr, status, error) {
                 console.error(xhr.responseText);
@@ -105,5 +134,10 @@ $(document).ready(function () {
         });
     });
 });
+
+
+
+
+
 
 

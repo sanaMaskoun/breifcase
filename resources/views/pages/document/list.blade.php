@@ -10,7 +10,7 @@
     <div id="Consultations" class="tabcontent">
 
         @foreach ($consultations as $consultation)
-            <div class="col-lg-6 col-md-6 col-sm-12 consultation-card">
+            <div class="col-lg-4 col-md-6 col-sm-12 consultation-card">
                 <img src="{{ asset('assets/img/consultation.png') }}" alt="Consultation Image" class="img-doc">
                 <div>
                     <p>title:<span> {{ $consultation->title }} </span></p>
@@ -23,7 +23,7 @@
     <div id="Cases" class="tabcontent">
 
         @foreach ($cases as $case)
-            <div class="col-lg-6 col-md-6 col-sm-12 consultation-card">
+            <div class="col-lg-4 col-md-6 col-sm-12 consultation-card">
                 <img src="{{ asset('assets/img/case.png') }}" alt="Cases Image" class="img-doc">
                 <p>title: <span>{{ $case->title }}</span> </p>
                 <p>lawyer:<span>{{ $case->receiver->name }}</span> </p>

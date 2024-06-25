@@ -196,7 +196,7 @@ channelReplayRate.bind('App\\Events\\ReplyRateEvent', function (data) {
 //chat
 var channelPivateChat = pusherPrivate.subscribe('private-chat-channel-' + localStorage.getItem('user_id'));
 channelPivateChat.bind('chatMessage', function (data) {
-    var extension = data.attachment ? data.attachment.split('.').pop().toLowerCase() : null;
+    var extension = data.attachment ? data.attachment.extension.toLowerCase() : null;
     message = "";
     let receiverMessage = `
     <div class="media media-chat" id="chat_area_receiver">
@@ -204,9 +204,10 @@ channelPivateChat.bind('chatMessage', function (data) {
             <div class="text-content">
                 ${data.attachment ?
             (extension === 'jpg' || extension === 'png' ?
-                `<img class="img_group" src="${data.attachment}">` :
-                `<a href="${data.attachment}" target="_blank"><p class="message">${data.message}</p></a>`) :
-            `<p class="message">${data.message} </p>`}
+                `<img class="img_group clickable" src="${data.attachment.url}">
+                 <span class="message">${data.message}</span>` :
+                `<a href="${data.attachment.url}" target="_blank"><p class="message">${data.message}</p></a>`) :
+            `<p class="message">${data.message}</p>`}
                 <time class="time">${data.created_at}</time>
             </div>
         </div>
@@ -218,20 +219,18 @@ channelPivateChat.bind('chatMessage', function (data) {
             <div class="text-content">
                 ${data.attachment ?
             (extension === 'jpg' || extension === 'png' ?
-                `<img class="img_group" src="${data.attachment}">` :
-                `<a href="${data.attachment}" target="_blank"><p class="message">${data.message}</p></a>`) :
-            `<p class="message">${data.message} </p>`}
+                `<img class="img_group clickable" src="${data.attachment.url}">
+                 <span class="message">${data.message}</span>` :
+                `<a href="${data.attachment.url}" target="_blank"><p class="message">${data.message}</p></a>`) :
+            `<p class="message">${data.message}</p>`}
                 <time class="time">${data.created_at}</time>
             </div>
         </div>
     </div>`;
 
-
     if (data.sender_id == localStorage.getItem('user_id')) {
-
         message = senderMessage;
-    }
-    else if (data.receiver.id == localStorage.getItem('user_id')) {
+    } else if (data.receiver.id == localStorage.getItem('user_id')) {
         message = receiverMessage;
     }
 
@@ -240,7 +239,10 @@ channelPivateChat.bind('chatMessage', function (data) {
     }
     $("#chat_div").append(message);
 
+     const newImages = document.querySelectorAll(".img_group.clickable");
+     newImages.forEach(addModalFunctionality);
 });
+
 
 
 

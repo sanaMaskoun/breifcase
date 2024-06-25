@@ -18,37 +18,114 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    use GetUsersForChatTrait ,MessageTrait;
+    use GetUsersForChatTrait, MessageTrait;
     public function contact($receiver_encoded_id)
     {
         $receiver_encoded_id = base64_decode($receiver_encoded_id);
 
         $lawyer = User::find($receiver_encoded_id);
-        return view('pages.chat.contact', compact('lawyer'));
+        $messages = $this->get_messages($lawyer);
+        return view('pages.chat.contact', compact('lawyer', 'messages'));
     }
 
     public function chat()
     {
         $client = Auth()->user();
         $users = $this->get_users_for_chat();
-        return view('pages.chat.chat', compact('client' ,'users'));
+        return view('pages.chat.chat', compact('client', 'users'));
     }
-
-    public function chat_form($encoded_sender_id)
+    public function chat_form($receiver_encoded_id)
     {
         $client = Auth()->user();
-        $decoded_sender_id = base64_decode($encoded_sender_id);
-        $sender = User::find($decoded_sender_id);
+
+        $receiver_decoded_id = base64_decode($receiver_encoded_id);
+        $receiver = User::find($receiver_decoded_id);
 
         $users = $this->get_users_for_chat();
 
+        $messages = $this->get_messages($receiver);
 
-        $messages = $this->get_messages($sender);
-
-        return view('pages.chat.formChat', compact([ 'client','messages', 'users']));
+        return view('pages.chat.formChat', compact(['client', 'receiver','messages', 'users']));
     }
+    public function send_message_to_user(Request $request, $receiver_encoded_id)
+    {
+        $receiver_decoded_id = base64_decode($receiver_encoded_id);
+        $receiver = User::find($receiver_decoded_id);
 
+        if ($request->input('message') == null) {
+            return redirect()->back();
+
+        }
+
+        $has_previous_chat = $this->get_messages($receiver);
+
+        $new_message = Message::create([
+            'message' => $request->message,
+            'sender_id' => auth()->user()->id,
+            'receiver_id' => $receiver->id,
+        ]);
+
+        if (!is_null(request()->file('attachments'))) {
+            $attachments = request()->file('attachments');
+            $new_message->addMedia($attachments)
+                ->toMediaCollection('attachments');
+        }
+
+        $message = $new_message->message;
+
+        $receiver_data = [
+            'receiver_encoded_id' => $receiver_encoded_id,
+            'receiver_id' => $receiver->id,
+            'name' => $receiver->name,
+            'profile' => $receiver->getFirstMediaUrl('profile'),
+        ];
+
+        $sender_data = [
+            'sender_encoded_id' => base64_encode(auth()->user()->id),
+            'sender_id' => auth()->user()->id,
+            'name' => auth()->user()->name,
+            'profile' => Auth()->user()->getFirstMediaUrl('profile'),
+        ];
+        $attachment = null;
+        if ($new_message->getFirstMediaUrl('attachments') != null) {
+            $media = $new_message->getMedia('attachments')->first();
+            $mime_type = $media->mime_type;
+            $extension = explode('/', $mime_type)[1];
+            $attachment = [
+                'url' => $media->getUrl(),
+                'extension' => $extension,
+            ];
+        }
+
+        $created_at = $new_message->created_at->diffForHumans();
+        $message_count = $this->message_count($receiver->id);
+
+        if ($has_previous_chat->isEmpty()) {
+
+            broadcast(new NewChatEvent($message, $receiver_data, $sender_data, $created_at, $message_count));
+
+        }
+
+        broadcast(new CounterChatEvent(1, auth()->user()->id, $receiver->id, $message));
+
+        broadcast(new chatPrivateEvent($receiver, auth()->user()->id, $message, $attachment, $created_at));
+        return response()->json([
+            'success' => true,
+            'message' => $message,
+            'created_at' => $created_at,
+            'attachment' => $attachment == null ? null : $attachment,
+            'sender_id' => auth()->user()->id,
+            'receiver_id' => $receiver->id,
+            'receiver_encoded_id' => $receiver_encoded_id,
+            'receiver_profile' => $receiver->getFirstMediaUrl('profileUser'),
+            'receiver_name' => $receiver->name,
+            'has_previous_chat' => $has_previous_chat->isEmpty(),
+        ]);
+    }
     ///////////
+
+
+
     public function getUserGroups()
     {
         $groups = User::find(Auth()->user()->id)->groups;
@@ -107,8 +184,6 @@ class ChatController extends Controller
             ->get();
     }
 
-
-
     public function group_form($encodedId)
     {
         $decodedId = base64_decode($encodedId);
@@ -134,74 +209,6 @@ class ChatController extends Controller
 
         return view('pages.chat.formGroup', compact(['lawyers', 'groups', 'general_chats', 'users', 'messages', 'admin_group', 'admin_general_chat', 'group']));
 
-    }
-
-    public function send_message_to_user(Request $request, $encodedId)
-    {
-        $decodedId = base64_decode($encodedId);
-        $receiver = User::find($decodedId);
-
-        if ($request->input('message') == null) {
-            return redirect()->back();
-
-        }
-
-        $has_previous_chat = Message::where('sender_id', Auth()->user()->id)->where('receiver_id', $receiver->id)->orWhere(function ($query) use ($receiver) {
-            $query->where('sender_id', $receiver->id)
-                ->where('receiver_id', auth()->user()->id);
-        })->get();
-        $new_message = Message::create([
-            'message' => $request->message,
-            'sender_id' => auth()->user()->id,
-            'receiver_id' => $receiver->id,
-        ]);
-
-        if (!is_null(request()->file('attachments'))) {
-            $attachments = request()->file('attachments');
-
-            $new_message->addMedia($attachments)
-                ->withCustomProperties(['do_not_replace' => true])
-                ->toMediaCollection('attachments');
-        }
-        $message = $new_message->message;
-        $receiverData = [
-            'receiver_encoded_id' => $encodedId,
-            'receiver_id' => $receiver->id,
-            'name' => $receiver->name,
-            'profile' => $receiver->getFirstMediaUrl('profileUser'),
-        ];
-        $sender = [
-            'sender_encoded_id' => base64_encode(auth()->user()->id),
-            'sender_id' => auth()->user()->id,
-            'name' => auth()->user()->name,
-            'profile' => Auth()->user()->getFirstMediaUrl('profileUser'),
-        ];
-        $attachment = is_null(request()->file('attachments')) ? null : $new_message->getFirstMediaUrl('attachments');
-
-        $created_at = $new_message->created_at->diffForHumans();
-        $message_count = $this->messageCount($receiver->id);
-
-        if ($has_previous_chat->isEmpty()) {
-
-            broadcast(new NewChatEvent($message, $receiverData, $sender, $created_at, $message_count));
-
-        }
-
-        broadcast(new CounterChatEvent(1, auth()->user()->id, $receiver->id, $message));
-
-        broadcast(new chatPrivateEvent($receiver, auth()->user()->id, $message, $attachment, $created_at));
-        return response()->json([
-            'success' => true,
-            'message' => $message,
-            'created_at' => $created_at,
-            'attachment' => $attachment == null ? null : $attachment,
-            'sender_id' => auth()->user()->id,
-            'receiver_id' => $receiver->id,
-            'receiver_encoded_id' => $encodedId,
-            'receiver_profile' => $receiver->getFirstMediaUrl('profileUser'),
-            'receiver_name' => $receiver->name,
-            'has_previous_chat' => $has_previous_chat->isEmpty(),
-        ]);
     }
 
     public function send_message_to_group(Request $request, $encodedId)

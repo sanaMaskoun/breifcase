@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserTypeEnum;
+use App\Models\Language;
+use App\Models\Library;
 use App\Models\News;
 use App\Models\Practice;
 use App\Models\User;
@@ -33,9 +35,8 @@ class NavbarController extends Controller
 
         if ($request->has('available') && $request->available == 1) {
 
-            $query->whereHas('lawyer' , function($q)
-            {
-              return $q->where('available', true);
+            $query->whereHas('lawyer', function ($q) {
+                return $q->where('available', true);
             });
 
         }
@@ -57,7 +58,33 @@ class NavbarController extends Controller
 
     public function explore_translation_company()
     {
-        return view('pages.navbar.explore_translation_company');
+        $languages = Language::all();
+        $translation_companies= User::where('is_active' , true)->where('type', UserTypeEnum::translation_company)->get();
+        return view('pages.navbar.explore_translation_company' ,compact('languages','translation_companies'));
 
     }
+
+    public function library()
+    {
+        $books = Library::all();
+        return view('pages.library', compact('books'));
+
+    }
+
+    public function download_book(Request $request)
+    {
+        $request->validate([
+            'book' => 'required|file|mimes:pdf,doc,docx|max:10240',
+        ]);
+
+        $tilte = $request->file('book')->getClientOriginalName();
+
+        $book = Library::create(['title' => $tilte,
+            'user_id' => Auth()->user()->id,
+        ]);
+
+        $book->addMediaFromRequest('book')->toMediaCollection('library');
+        return redirect()->back();
+    }
+
 }

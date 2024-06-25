@@ -18,7 +18,7 @@
     @endphp
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 ">
+            <div class="col-lg-4 col-md-6 col-sm-12 ">
                 <div class="box-profile">
                     <div class="row">
                         <div class="col-lg-4 col-md-12 col-sm-12">
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="col-lg-8 col-md-12 col-sm-12">
                 <div class="box-profile">
                     <div class="container">
                         <div class="row d-flex">

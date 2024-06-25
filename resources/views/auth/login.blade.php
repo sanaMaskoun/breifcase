@@ -50,7 +50,7 @@
                                 </div>
 
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <button type="submit" class="btn btn1 btn_login">Log In</button>
+                                    <button type="submit" class="btn_login">Log In</button>
                                 </div>
                             </div>
                         </div>

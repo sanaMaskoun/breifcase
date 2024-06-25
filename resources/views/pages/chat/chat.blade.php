@@ -8,10 +8,10 @@
                     <div class="list-group">
                         @foreach ($users as $user)
                             @php
-                                $encoded_sender_id = base64_encode($user->id);
+                                $receiver_encoded_id = base64_encode($user->id);
 
                             @endphp
-                            <a href="#" class="list-group-item1" onclick="openChat('Jamie Chastain')">
+                            <a href="{{ route('chat_form' ,$receiver_encoded_id) }}" class="list-group-item1" onclick="openChat('Jamie Chastain')">
                                 <div class="contact-info">
                                     <img src="{{ $user->getFirstMediaUrl('profile') }}" alt="User Image">
                                     <div class="list_contact_info">
