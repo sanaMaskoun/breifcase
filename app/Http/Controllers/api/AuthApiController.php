@@ -8,8 +8,10 @@ use App\Enums\UAECityEnum;
 use App\Enums\UserTypeEnum;
 use App\Events\NotificationEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ContactResource;
 use App\Http\Resources\PracticeResource;
 use App\Http\Resources\UserResource;
+use App\Models\Message;
 use App\Models\Practice;
 use App\Models\User;
 use App\Notifications\RequestToJoin;
@@ -221,13 +223,12 @@ class AuthApiController extends Controller
 
     public function login(Request $request)
     {
-
         $this->validateLogin($request);
 
         $user = User::query()->where($this->username(), $request->input($this->username()))->first();
         if (!$user || !Hash::check($request->input('password'), $user->password)) {
             throw ValidationException::withMessages([
-                $this->username() => [trans('message.loginError')],
+                $this->username() => [trans('me ssage.loginError')],
             ]);
         }
 
@@ -265,10 +266,31 @@ class AuthApiController extends Controller
         } elseif ($user->type ==  UserTypeEnum::lawyer) {
             $user->load('lawyer');
         }
+        $contacts = Message::where('group_id' , null)
+        ->where('sender_id', $user->id)
+        ->orWhere('receiver_id', $user->id)
+        ->with('sender', 'receiver')
+        ->get()
+        ->map(function ($message) use ($user) {
+            return $message->sender_id == $user->id ? $message->receiver : $message->sender;
+        })
+        ->unique('id') ;
+
         return new JsonResponse([
             'access_token' => $token,
             'user' => new UserResource($user
-            ->load(['consultations_receiver','consultations_sender','cases_sender','cases_receiver', 'unreadNotifications', 'general_questions', 'questions_replies', 'practices', 'groups','general_chats'])),
+            ->load(['consultations_receiver',
+                    'consultations_sender',
+                    'cases_sender',
+                    'cases_receiver',
+                    'unreadNotifications',
+                    'general_questions',
+                    'questions_replies',
+                    'practices',
+                    'groups',
+                    'general_chats'
+            ])),
+            'contacts' => ContactResource::collection($contacts)
 
         ]);
     }

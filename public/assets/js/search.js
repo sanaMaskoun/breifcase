@@ -1,24 +1,107 @@
+//Filtering lawyers
 $(document).ready(function() {
+    let selectedPracticeId = null;
+    let selectedLanguageId = null;
+
     $('.practice-link').on('click', function(e) {
         e.preventDefault();
         var practiceId = $(this).data('id');
+
+        if (selectedPracticeId === practiceId) {
+            selectedPracticeId = null;
+        } else {
+            selectedPracticeId = practiceId;
+        }
+
+        fetchLawyers();
+    });
+
+    $('.language-link').on('click', function(e) {
+        e.preventDefault();
+        var languageId = $(this).data('id');
+
+        if (selectedLanguageId === languageId) {
+            selectedLanguageId = null;
+        } else {
+            selectedLanguageId = languageId;
+        }
+
+        fetchLawyers();
+    });
+
+    function fetchLawyers() {
         $.ajax({
             url: '/explore/lawyers',
             type: 'GET',
-            data: { practice_id: practiceId },
+            data: { practice_id: selectedPracticeId, language_id: selectedLanguageId },
             success: function(data) {
                 $('#lawyer-list').empty();
-                $.each(data.lawyers, function(index, lawyer) {
-                    var lawyerHtml = '<div class="profile-card col-lg-3 col-md-6 col-sm-12">' +
-                                     '<a href="/lawyer/' + lawyer.lawyer_encoded_id + '/show"> <img src="' + lawyer.profile_url + '" alt="Profile" /> </a>' +
-                                     '<p>' + lawyer.name + '</p>' +
-                                     '</div>';
-                    $('#lawyer-list').append(lawyerHtml);
-                });
+                if (data.lawyers.length > 0) {
+                    $.each(data.lawyers, function(index, lawyer) {
+                        var lawyerHtml = '<div class="profile-card col-lg-3 col-md-6 col-sm-12">' +
+                                         '<a href="/lawyer/' + lawyer.lawyer_encoded_id + '/show"> <img src="' + lawyer.profile_url + '" alt="Profile" /> </a>' +
+                                         '<p>' + lawyer.name + '</p>' +
+                                         '</div>';
+                        $('#lawyer-list').append(lawyerHtml);
+                    });
+                } else {
+                    $('#lawyer-list').append('<p>No lawyers found.</p>');
+                }
             }
         });
-    });
+    }
 });
+
+//Filtering translation companies
+$(document).ready(function() {
+    let selectedLanguageIds = [];
+    $('.language-filter').on('click', function(e) {
+        e.preventDefault();
+        var languageId = $(this).data('id');
+        if (selectedLanguageIds.includes(languageId)) {
+            selectedLanguageIds = selectedLanguageIds.filter(id => id !== languageId);
+        } else {
+            selectedLanguageIds.push(languageId);
+        }
+
+        fetchCompanies();
+    });
+
+    function fetchCompanies() {
+        $.ajax({
+            url: '/explore/translation-companies',
+            type: 'GET',
+            data: { languages: selectedLanguageIds },
+            success: function(data) {
+                $('#company-list').empty();
+                if (data.translation_companies.length > 0) {
+                    $.each(data.translation_companies, function(index, company) {
+                        var companyHtml = '<div class="col-lg-3 col-md-6 col-sm-12">' +
+                                          '<div class="profile-card_1">' +
+                                         '<img src="' + company.profile_url + '" alt="Profile" />' +
+                                         '<p>' + company.name + '</p>' +
+                                         '</div>'
+                                         '</div>'
+                                         ;
+                        $('#company-list').append(companyHtml);
+                    });
+                } else {
+                    $('#company-list').append('<p>No companies found.</p>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+});
+
+
+
+
+
+
+
 
 const data = [
   { name: "John Doe", profession: "Tax Lawyer" },

@@ -43,6 +43,19 @@ a.link-profile {
     width: 100% !important;
 }
 
+.language_company{
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 20px
+}
+.filter-translation-companies
+{
+    width: 100%;
+}
 /* ******** */
 /*sign**/
 

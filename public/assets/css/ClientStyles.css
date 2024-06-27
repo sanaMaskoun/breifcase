@@ -664,7 +664,7 @@ header {
     overflow-y: scroll;
 }
 
-.sidebar .col-lg-12 {
+.sidebar .col-lg-6 {
     display: flex;
     flex-direction: column;
 }
