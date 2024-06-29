@@ -23,7 +23,7 @@ class SuggestionRequest extends FormRequest
 
     public function validated($key = null, $default = null)
     {
-        
+
 
         return [
             'title'       =>  $this->title,

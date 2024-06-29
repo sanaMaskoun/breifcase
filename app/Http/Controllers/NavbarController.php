@@ -13,11 +13,17 @@ use Illuminate\Http\Request;
 class NavbarController extends Controller
 {
 
-    public function home()
+    public function home_client()
     {
         $news = News::all();
-        return view('pages.home', compact('news'));
+        return view('pages.navbar.homeClient', compact('news'));
     }
+    public function home_lawyer()
+    {
+        $news = News::all();
+        return view('pages.navbar.homeLawyer', compact('news'));
+    }
+
     public function explore_lawyer(Request $request)
     {
         $practices = Practice::all();
@@ -64,6 +70,7 @@ class NavbarController extends Controller
 
         return view('pages.navbar.explore_lawyer', compact('practices', 'lawyers', 'languages'));
     }
+
     public function explore_translation_company(Request $request)
     {
         $languages = Language::all();
@@ -100,7 +107,7 @@ class NavbarController extends Controller
     public function library()
     {
         $books = Library::all();
-        return view('pages.library', compact('books'));
+        return view('pages.navbar.library', compact('books'));
 
     }
 

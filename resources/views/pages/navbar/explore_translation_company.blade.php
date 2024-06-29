@@ -31,8 +31,10 @@
             @foreach ($translation_companies as $translation_company)
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="profile-card_1">
-                        <img src="{{ $translation_company->getFirstMediaUrl('profile') }}" alt="Profile" />
-                        <p>{{ $translation_company->name }}</p>
+                        <a class="link-in-explore-page" href="{{ route('show_company' , base64_encode($translation_company->id) ) }}">
+                           <img src="{{ $translation_company->getFirstMediaUrl('profile') }}" alt="Profile" />
+                           <p class="name-in-explore-page">{{ $translation_company->name }}</p>
+                        </a>
                     </div>
                 </div>
             @endforeach

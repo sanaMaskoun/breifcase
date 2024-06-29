@@ -19,14 +19,7 @@ use Illuminate\Http\Request;
 class ChatController extends Controller
 {
     use GetUsersForChatTrait, MessageTrait;
-    public function contact($receiver_encoded_id)
-    {
-        $receiver_encoded_id = base64_decode($receiver_encoded_id);
-
-        $lawyer = User::find($receiver_encoded_id);
-        $messages = $this->get_messages($lawyer);
-        return view('pages.chat.contact', compact('lawyer', 'messages'));
-    }
+   
 
     public function chat()
     {

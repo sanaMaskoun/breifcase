@@ -2,7 +2,7 @@
 <header id="header">
 
     <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex align-items-center my-5" style="height: 3.5rem">
-        <a class="navbar-brand" href="{{ route('home') }}">
+        <a class="navbar-brand" href="{{ route('home_client') }}">
             <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="logo__img img-fluid" />
             <br />
             <span class="logo__name">The legal platform</span>

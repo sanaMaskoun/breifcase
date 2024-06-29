@@ -1,22 +1,63 @@
 document.getElementById("fullscreen-button").addEventListener("click", function () {
-        var chatArea = document.getElementById("chat-area");
-        chatArea.classList.add("fullscreen");
-        document.getElementById("fullscreen-button").style.display = "none";
-        document.getElementById("exit-fullscreen-button").style.display = "block";
-        chatArea.style.top = "17rem"; // Adjust the top position for fullscreen
-    });
+    var chatArea = document.getElementById("chat-area");
+    chatArea.classList.add("fullscreen");
+    document.getElementById("fullscreen-button").style.display = "none";
+    document.getElementById("exit-fullscreen-button").style.display = "block";
+    chatArea.style.top = "17rem"; // Adjust the top position for fullscreen
+});
 
 document.getElementById("exit-fullscreen-button").addEventListener("click", function () {
-        var chatArea = document.getElementById("chat-area");
-        chatArea.classList.remove("fullscreen");
-        document.getElementById("fullscreen-button").style.display = "block";
-        document.getElementById("exit-fullscreen-button").style.display = "none";
-        chatArea.style.top = "0"; // Reset the top position when exiting fullscreen
+    var chatArea = document.getElementById("chat-area");
+    chatArea.classList.remove("fullscreen");
+    document.getElementById("fullscreen-button").style.display = "block";
+    document.getElementById("exit-fullscreen-button").style.display = "none";
+    chatArea.style.top = "0"; // Reset the top position when exiting fullscreen
+});
+
+
+// update cities
+function updateCities() {
+    const countrySelect = document.getElementById('country');
+    const citySelect = document.getElementById('city');
+    const selectedCountry = countrySelect.value;
+
+    // إخفاء جميع خيارات المدينة أولاً
+    citySelect.querySelectorAll('option').forEach(option => {
+        option.style.display = 'none';
     });
 
+    // عرض خيارات الدولة المحددة فقط
+    if (selectedCountry === '2') { // United Arab Emirates
+        citySelect.querySelectorAll('option:not(.saudi-city)').forEach(option => {
+            option.style.display = '';
+        });
+    } else if (selectedCountry === '1') { // Saudi Arabia
+        citySelect.querySelectorAll('.saudi-city').forEach(option => {
+            option.style.display = '';
+        });
+    }
+}
+
+// تنفيذ الدالة عند تحميل الصفحة لعرض الدولة الافتراضية
+document.addEventListener('DOMContentLoaded', () => {
+    updateCities();
+});
 
 
 
+// icon password
+document.querySelectorAll('.toggle-password').forEach(item => {
+    item.addEventListener('click', function () {
+        let input = this.parentElement.previousElementSibling;
+        if (input.type === "password") {
+            input.type = "text";
+            this.innerHTML = '<i class="fas fa-eye-slash"></i>';
+        } else {
+            input.type = "password";
+            this.innerHTML = '<i class="fas fa-eye"></i>';
+        }
+    });
+});
 
 
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\api\AuthApiController;
 use App\Http\Controllers\api\ChatApiController;
 use App\Http\Controllers\api\ClientApiController;
 use App\Http\Controllers\api\ConsultationApiController;
+use App\Http\Controllers\api\FrequentlyQuestionApiController;
 use App\Http\Controllers\api\GeneralChatApiController;
 use App\Http\Controllers\api\GeneralQuestionApiController;
 use App\Http\Controllers\api\GroupApiController;
@@ -15,7 +16,6 @@ use App\Http\Controllers\api\SuggestionApiController;
 use App\Http\Controllers\Api\TemplateApiController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\FatoorahController;
-use App\Http\Controllers\FrequentlyQuestionController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Http\Request;
@@ -98,7 +98,7 @@ Route::group(['prefix' => 'invoice', 'middleware' => 'auth:sanctum'], function (
 });
 
 Route::group(['prefix' => 'frequently-question', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/', [FrequentlyQuestionController::class, 'index']);
+    Route::get('/', [FrequentlyQuestionApiController::class, 'index']);
 });
 
 Route::group(['prefix' => 'news', 'middleware' => 'auth:sanctum'], function () {

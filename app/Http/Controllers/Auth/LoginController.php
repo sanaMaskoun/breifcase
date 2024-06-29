@@ -3,21 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-     */
 
     use AuthenticatesUsers;
 
@@ -35,18 +26,31 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])) && Auth()->user()->is_active) {
+        $user = User::where('email', $input['email'])->first();
+
+        if ($user && $user->is_active == 0) {
+            return view('pages.welcome');
+        }
+
+        if (auth()->attempt(['email' => $input['email'], 'password' => $input['password']])) {
             $roles = Auth()->user()->roles->pluck('name')->toArray();
 
             if (in_array("admin", $roles)) {
                 // return redirect()->route('dashboard');
-            } else {
-                return redirect()->route('home');
-
             }
 
-        } else {
+            if (in_array("client", $roles)) {
+                return redirect()->route('home_client');
+            }
+
+            if (in_array("lawyer", $roles) || in_array("translation_company", $roles)) {
+                return redirect()->route('home_lawyer');
+            }
+
+        }
+        else {
             return redirect()->route('login')->with('error', __('message.message'));
         }
     }
+
 }

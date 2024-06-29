@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Enums\CountryEnum;
 use App\Enums\SaudiCityEnum;
 use App\Enums\UAECityEnum;
+use App\Enums\UserTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -75,6 +76,8 @@ class LawyerRequest extends FormRequest
             'country'                    => $this->country,
             'city'                       => $this->city,
             'emirates_id'                => $this->emirates_id,
+            'type'                       => UserTypeEnum::lawyer,
+            'is_active'                  => false
         ];
     }
     public function lawyerValidated($key = null, $default = null)
@@ -86,7 +89,7 @@ class LawyerRequest extends FormRequest
             'location'                 => $this->location,
             'bio'                      => $this->bio,
             'years_of_practice'        => $this->years_of_practice,
-            'available'                => $this->available,
+            'available'                => $this->available == null ? false : true,
            ];
     }
 }

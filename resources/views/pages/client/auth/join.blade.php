@@ -205,33 +205,5 @@
             </div>
         </div>
     </div>
-    <script>
-        // عند تحديث حقل الـ Country
-        function updateCities() {
-            const countrySelect = document.getElementById('country');
-            const citySelect = document.getElementById('city');
-            const selectedCountry = countrySelect.value;
-
-            // إخفاء جميع خيارات المدينة أولاً
-            citySelect.querySelectorAll('option').forEach(option => {
-                option.style.display = 'none';
-            });
-
-            // عرض خيارات الدولة المحددة فقط
-            if (selectedCountry === '2') { // United Arab Emirates
-                citySelect.querySelectorAll('option:not(.saudi-city)').forEach(option => {
-                    option.style.display = '';
-                });
-            } else if (selectedCountry === '1') { // Saudi Arabia
-                citySelect.querySelectorAll('.saudi-city').forEach(option => {
-                    option.style.display = '';
-                });
-            }
-        }
-
-        // تنفيذ الدالة عند تحميل الصفحة لعرض الدولة الافتراضية
-        document.addEventListener('DOMContentLoaded', () => {
-            updateCities();
-        });
-    </script>
+    
 @endsection

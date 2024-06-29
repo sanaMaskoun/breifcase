@@ -11,6 +11,7 @@ class FrequentlyQuestionController extends Controller
     public function index()
     {
         $frequently_questions = FrequentlyQuestion::all();
-        return response()->json(FrequentlyQuestionResource::collection($frequently_questions->load('user')));
+        return view('pages.frequentlyQuestion.list' , compact('frequently_questions'));
     }
+
 }

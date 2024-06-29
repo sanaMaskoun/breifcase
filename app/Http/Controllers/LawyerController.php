@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Traits\MessageTrait;
+
 
 class LawyerController extends Controller
 {
+    use  MessageTrait;
     // public function index(Request $request)
+
+
     // {
     //     $name = $request->query('name');
     //     $location = $request->query('location');
@@ -39,18 +44,30 @@ class LawyerController extends Controller
     //     return view('pages.lawyer.list', compact(['lawyers', 'practices']));
     // }
 
+
+    
+
     public function show($lawyer_encoded_id)
     {
         $lawyer_decoded_id = base64_decode($lawyer_encoded_id);
         $lawyer = User::find($lawyer_decoded_id);
         $practices = $lawyer?->practices;
-        
+        $languages = $lawyer?->languages;
+
         $get_notify = DB::table('notifications')->where('data->user_id', $lawyer->id)->where('notifiable_id', Auth()->user()->id)->first();
         if ($get_notify != null) {DB::table('notifications')->where('id', $get_notify->id)->update(['read_at' => now()]);}
 
-        return view('pages.lawyer.details', compact(['lawyer', 'practices']));
+        return view('pages.lawyer.details', compact(['lawyer', 'practices','languages']));
     }
 
+    public function contact($receiver_encoded_id)
+    {
+        $receiver_encoded_id = base64_decode($receiver_encoded_id);
+
+        $lawyer = User::find($receiver_encoded_id);
+        $messages = $this->get_messages($lawyer);
+        return view('pages.lawyer.contact', compact('lawyer', 'messages'));
+    }
     // public function edit($encodedId)
     // {
     //     $practices = Practice::all();

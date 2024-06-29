@@ -39,11 +39,12 @@ a.link-profile {
 .col-12.d-flex.header_lang {
     padding-top: 30px;
 }
-.filter-lawyer{
+
+.filter-lawyer {
     width: 100% !important;
 }
 
-.language_company{
+.language_company {
     background-color: black;
     color: white;
     font-size: 20px;
@@ -52,10 +53,189 @@ a.link-profile {
     padding: 5px;
     border-radius: 20px
 }
-.filter-translation-companies
-{
+
+.filter-translation-companies {
     width: 100%;
 }
+
+.name-in-explore-page {
+    color: black;
+}
+
+.link-in-explore-page:hover {
+    text-decoration: none;
+}
+
+.upload-documents {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/** general question **/
+.box-general-questions{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    max-height: 400px !important;
+}
+
+.link-reply-question{
+    color: black;
+}
+.link-reply-question:hover{
+   text-decoration: none;
+   color: black;
+}
+
+.box-reply-question{
+    margin: 0 auto;
+    background-color: rgb(125 125 125 / 71%);
+    width: 80%;
+    border-radius: 30px;
+    height: 525px;
+
+}
+/*** end general question **/
+
+
+/** start sidebar dashboard **/
+.sidebar-dashboard {
+    background-color: rgb(125 125 125 / 71%);
+    padding: 20px;
+    border-radius: 15px;
+  }
+  .sidebar-dashboard a {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    font-weight: 600;
+    font-size: 20px;
+    color: #333;
+    text-decoration: none;
+  }
+  .sidebar-dashboard a i {
+    margin-right: 10px;
+    font-size: 30px;
+  }
+/** end sidebar dashboard **/
+
+
+
+/** start document dashboard **/
+.list-document-dashboard{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+.title-document-dashboard{
+    font-size: 17px;
+    margin-top: 5px;
+    font-weight: 700;
+    margin-bottom: 0px;
+}
+
+.container-details-document-dashboard{
+    margin-bottom: 1.5rem;
+}
+.details-document-dashboard{
+    margin-bottom: 0px;
+    font-size: 14px;
+}
+
+.header-documents-dashboard
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.num-documents{
+    font-size: 21px;
+
+}
+/** end document dashboard **/
+
+/** start template dashboard **/
+.list-template-dashboard{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+.img-template-dashboard {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.btn-remove-template{
+    background: none;
+    border: none;
+    display: block;
+    position: absolute;
+    right: 8px;
+    top: -6px;
+}
+.icon-remove-template{
+    font-size: 24px;
+    color: #fff;
+    border: 1px solid #81807e;
+    background: #81807e;
+}
+/** start template dashboard **/
+
+
+/*start welcome page */
+.content-box-welcome {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.box_welcome {
+    background-color: rgb(125 125 125 / 71%);
+    border-radius: 30px;
+    height: 500px;
+    width: 1200px;
+}
+
+.img-welcome {
+    width: 800px;
+    margin-top: 70px;
+}
+
+.welcome-phrase-1 {
+    font-weight: 800;
+    font-size: 30px;
+    position: relative;
+    top: -36px;
+}
+
+.welcome-phrase-2{
+    position: relative;
+    top: 3.5rem;
+    font-size: 26px;
+
+}
+@media screen and (max-width: 999px) {
+    .welcome-phrase-1 {
+        position: relative;
+        top: -9px;
+        left: 9px;
+        font-size: 19px;
+        }
+        .welcome-phrase-2{
+            position: relative;
+            top: 14rem;
+            font-size: 20px;
+
+        }
+}
+
+
+/*end welcome page */
+
+
 /* ******** */
 /*sign**/
 
@@ -140,6 +320,29 @@ a.link-profile {
     font-size: 24px;
     color: #000000;
     padding-left: 3px;
+    cursor: pointer;
+
+}
+
+#remove_file {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 50px;
+}
+
+.icon-remove {
+    font-size: 24px;
+    color: red !important;
+    border: 1px solid #000;
+}
+
+.bx-file {
+
+    font-size: 25px !important;
+    color: black;
+
 }
 
 .file-upload {
@@ -216,7 +419,7 @@ a.link-profile {
     width: 95%;
     margin-top: 8rem;
     margin-bottom: 3rem;
-    height: au;
+    height: auto;
 
     display: flex;
     align-items: center;
@@ -264,6 +467,7 @@ a.link-profile {
     background-color: rgb(125 125 125 / 71%);
     padding: 20px;
     height: 70ch;
+    overflow-y: scroll;
 }
 
 .reviews {
@@ -452,16 +656,13 @@ a.link-profile {
     /* Centers the box horizontally */
 
     background-color: rgb(125 125 125 / 71%);
-    margin-top: 13rem;
+    /* margin-top: 13rem; */
     min-height: 100vh;
     /* Ensures the box takes at least the full viewport height */
     overflow-y: scroll;
 }
 
-.box1 {
-    margin-bottom: 30px;
-    border-radius: 15px;
-}
+
 
 .p1 {
     font-weight: 700;

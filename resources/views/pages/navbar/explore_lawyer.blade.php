@@ -34,9 +34,11 @@
                                 @php
                                     $lawyer_encoded_id = base64_encode($lawyer->id);
                                 @endphp
-                                <a href="{{ route('show_lawyer', $lawyer_encoded_id) }}"> <img
-                                        src="{{ $lawyer->getFirstMediaUrl('profile') }}" alt="Profile" /></a>
-                                <p>{{ $lawyer->name }}</p>
+                                <a class="link-in-explore-page" href="{{ route('show_lawyer', $lawyer_encoded_id) }}"> <img
+                                        src="{{ $lawyer->getFirstMediaUrl('profile') }}" alt="Profile" />
+                                        <p class="name-in-explore-page">{{ $lawyer->name }}</p>
+                                </a>
+
                             </div>
                         @endforeach
                     </div>

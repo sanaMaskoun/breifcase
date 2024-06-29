@@ -649,20 +649,7 @@ header {
     font-size: 40px;
 }
 
-.box1 {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-width: 80%;
-    border-radius: 15px;
-    justify-content: center;
-    margin: 0 auto;
 
-    background-color: rgb(125 125 125 / 71%);
-    margin-top: 13rem;
-    min-height: 100vh;
-    overflow-y: scroll;
-}
 
 .sidebar .col-lg-6 {
     display: flex;
