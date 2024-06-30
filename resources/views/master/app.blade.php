@@ -51,15 +51,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="{{ asset('assets/js/search.js') }}"></script>
-    <script src="{{ asset('assets/js/index.js') }}"></script>
-    <script src="{{ asset('assets/js/tab.js') }}"></script>
-    <script src="{{ asset('assets/js/img.js') }}"></script>
-    <script src="{{ asset('assets/js/script.js') }}"></script>
-    <script src="{{ asset('assets/js/oldScript.js') }}"></script>
-    <script src="{{ asset('assets/js/file.js') }}"></script>
-    <script src="{{ asset('assets/js/dash-1.js') }}"></script>
-    <script src="{{ asset('assets/js/dash.js') }}"></script>
+
 
     {{--  pusher  --}}
     <input type="hidden" id="projectUrl" value="{{ url('/') }}"></div>
@@ -181,6 +173,17 @@
     @endif
 
     @yield('scripts')
+
+
+    <script src="{{ asset('assets/js/search.js') }}"></script>
+    <script src="{{ asset('assets/js/index.js') }}"></script>
+    <script src="{{ asset('assets/js/tab.js') }}"></script>
+    <script src="{{ asset('assets/js/img.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="{{ asset('assets/js/oldScript.js') }}"></script>
+    <script src="{{ asset('assets/js/file.js') }}"></script>
+    <script src="{{ asset('assets/js/dash-1.js') }}"></script>
+    <script src="{{ asset('assets/js/dash.js') }}"></script>
 </body>
 
 </html>

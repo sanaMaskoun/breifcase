@@ -753,11 +753,11 @@ p.last-msg.text-smoke {
     position: relative;
     top: 21px;
     right: 55px;
-    font-size: 12px;
+    font-size: 16px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
     color: black;
 }
 
@@ -860,8 +860,8 @@ p.last-msg.text-smoke {
 }
 
 #contact-list .list-group-item1 img {
-   width: 70px;
-   height: 70px;
+    width: 70px;
+    height: 70px;
     margin-right: 10px;
 }
 
@@ -1389,9 +1389,14 @@ nav.navbar.navbar-expand-lg.navbar-light.fixed-top.d-flex.align-items-center.my-
 }
 
 .box-profile-chat {
+
     border-radius: 15px;
     background-color: rgb(125 125 125 / 71%);
-    /* overflow: scroll; */
+}
+
+.box-chat-contact {
+    overflow: scroll;
+    height: 400px;
 }
 
 .card_form_chat {
@@ -1676,6 +1681,10 @@ textarea.form-control {
     background: none;
     color: black;
 }
+.send-button-group:hover {
+    background: none;
+    color: black;
+}
 
 .form_chat_profile {
     width: 100%;
@@ -1711,8 +1720,20 @@ textarea.form-control {
     border: none;
     color: #333;
 }
+.send-button-group {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -40px;
+    z-index: 1;
+    background-color: transparent;
+    border: none;
+    color: #333;
+}
 
 .send-button i {
+    font-size: 18px;
+}
+.send-button-group i {
     font-size: 18px;
 }
 
@@ -1748,7 +1769,8 @@ textarea.form-control {
     padding: 20px;
     display: inline-block;
     font-weight: 600;
-  }
-  .language-container .custom-checkbox {
+}
+
+.language-container .custom-checkbox {
     margin-right: 20px;
-  }
+}

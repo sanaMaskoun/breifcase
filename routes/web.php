@@ -68,7 +68,8 @@ Route::group(['prefix' => 'general-question', 'middleware' => 'auth:sanctum'], f
     Route::get('list/{user_encoded_id?}', [GeneralQuestionController::class, 'index'])->name('list_general_questions');
     Route::get('/create', [GeneralQuestionController::class, 'create'])->name('create_general_question');
     Route::post('store', [GeneralQuestionController::class, 'store'])->name('save_general_question');
-    Route::get('/reply' , [GeneralQuestionController::class , 'reply'])->name('reply_general_question');
+    Route::get('/reply/{encoded_general_question}' , [GeneralQuestionController::class , 'reply'])->name('reply_general_question');
+    Route::post('/reply/{general_question}' , [GeneralQuestionController::class , 'store_reply'])->name('store_reply_general_question');
     // Route::get('/{question_encoded_id}/show', [GeneralQuestionController::class, 'show'])->name('show_general_question');
 
 });
@@ -111,6 +112,8 @@ Route::group(['prefix' => 'document', 'middleware' => 'auth:sanctum'], function 
 
     Route::get('create/{receiver_encoded_id}', [DocumentController::class, 'create'])->name('create_document');
     Route::post('store/{receiver}', [DocumentController::class, 'store'])->name('store_document');
+
+    Route::get('reviews' , [DocumentController::class, 'reviews'])->name('reviews');
     // Route::get('/{encodedId}/show', [ConsultationController::class, 'show'])->name('show_consultation');
     // Route::post('{consultation}/answer', [ConsultationController::class, 'answer'])->name('answer_consultation');
 
@@ -128,17 +131,30 @@ Route::group(['prefix' => 'frequently-question', 'middleware' => 'auth:sanctum']
 
 Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [ChatController::class, 'chat'])->name('chat');
+    Route::get('/dashboard', [ChatController::class, 'chat_dashboard'])->name('chat_dashboard');
+    Route::get('/group', [ChatController::class, 'group'])->name('group');
+    Route::get('/forum', [ChatController::class, 'general_chat'])->name('general_chat');
 
+    Route::get('/dashboard/{receiver_encoded_id}', [ChatController::class, 'chat_form_dashboard'])->name('chat_form_dashboard');
     Route::get('{receiver_encoded_id}', [ChatController::class, 'chat_form'])->name('chat_form');
+    Route::get('/group/{group_encoded_id}', [ChatController::class, 'group_form'])->name('group_form');
+    Route::get('/forum/{general_chat_encoded_id}', [ChatController::class, 'general_chat_form'])->name('general_chat_form');
+
+
+
+
     Route::post('{receiver_encoded_id}', [ChatController::class, 'send_message_to_user'])->name('send_message_to_user');
 
-    // Route::get('/group/{encodedId}', [ChatController::class, 'group_form'])->name('group_form');
-    // Route::post('/group/{encodedId}', [ChatController::class, 'send_message_to_group'])->name('send_message_to_group');
+    Route::post('/group/{group_encoded_id}', [ChatController::class, 'send_message_to_group'])->name('send_message_to_group');
 
     Route::get('/attachments/{encodedIdReceiver}', [ChatController::class, 'attachments'])->name('attachments');
     Route::get('/attachments/group/{encodedIdGroup}', [ChatController::class, 'attachments_group'])->name('attachments_group');
 
 });
+Route::get('/dashboard-contact', [ChatController::class, 'contact'])->name('contact_dashboard')->middleware('auth:sanctum');;
+Route::get('/contact-client', [ChatController::class, 'contact_client'])->name('contact_client')->middleware('auth:sanctum');;
+Route::get('/contact-client/{receiver_encoded_id}', [ChatController::class, 'form_contact_client'])->name('form_contact_client')->middleware('auth:sanctum');;
+
 
 // Route::group(['prefix' => 'group', 'middleware' => 'auth:sanctum'], function () {
 //     Route::get('/create', [GroupController::class, 'create'])->name('add_group');

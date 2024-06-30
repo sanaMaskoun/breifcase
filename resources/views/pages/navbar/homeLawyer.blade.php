@@ -26,7 +26,7 @@
                             <div class="box-Questions-1">
                                 <p class="link-questions-1">General Questions</p>
                                 <a href="{{ route('list_general_questions') }}"> <img
-                                        src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__2_-removebg-preview.png') }}"
+                                        src="{{ asset('assets/img/reply_general_question.png') }}"
                                         alt="" class="img_1" /></a>
                             </div>
 

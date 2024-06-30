@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Enums\UserTypeEnum;
 use App\Http\Requests\GeneralQuestionRequest;
+use App\Http\Requests\ReplyGeneralQuestionRequest;
 use App\Models\GeneralQuestion;
+use App\Models\QuestionReply;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -57,11 +59,19 @@ class GeneralQuestionController extends Controller
     }
 
 
-    public function reply()
+    public function reply($encoded_general_question)
     {
-        return view('pages.generalQuestion.reply');
+        $decoded_general_question = base64_decode($encoded_general_question);
+        $question = GeneralQuestion::find($decoded_general_question);
+        return view('pages.generalQuestion.reply',compact('question'));
     }
 
+    public function store_reply(ReplyGeneralQuestionRequest $request , GeneralQuestion $general_question)
+    {
+
+        QuestionReply::create($request->validated());
+        return view('pages.thankyou');
+    }
     // public function show($question_encoded_id)
     // {
     //     $question_decoded_id = base64_decode($question_encoded_id);

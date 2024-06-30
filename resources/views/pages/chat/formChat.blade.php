@@ -9,14 +9,11 @@
                 <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat" id="contact-list">
                     <div class="list-group">
                         @foreach ($users as $user)
-                            @php
-                                $receiver_encoded_id = base64_encode($user->id);
 
-                            @endphp
-                            <a href="{{ route('chat_form', $receiver_encoded_id) }}" class="list-group-item1"
+                            <a href="{{ route('chat_form', base64_encode($user->id)) }}" class="list-group-item1"
                                 onclick="openChat('Jamie Chastain')">
                                 <div class="contact-info">
-                                    <img src="{{ $user->getFirstMediaUrl('profile') }}" alt="User Image">
+                                    <img src="{{ $user->getFirstMediaUrl('profile') }}"  alt="User Image">
                                     <div>
                                         <div class="user-name">{{ $user->name }}</div>
                                         <div class="last-message  last_msg_form_chat" id="last_message_{{ $user->id }}">
@@ -115,18 +112,14 @@
 
 
                         <div class="chat-footer">
-                            @php
-                                $receiver_encoded_id = base64_encode($receiver->id);
-
-                            @endphp
-                            <form id="messageForm" action="{{ route('send_message_to_user', $receiver_encoded_id) }}"
+                            <form id="messageForm" action="{{ route('send_message_to_user', base64_encode($receiver->id)) }}"
                                 method="POST" enctype="multipart/form-data" class="form_chat_profile">
                                 @csrf
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-lg-10 d-flex align-items-center">
                                             <textarea name="message" class="form-control message-input" placeholder="@lang('pages.type_message')"></textarea>
-                                            <button class="btn  send-button" type="submit"><i
+                                            <button class="btn send-button" type="submit"><i
                                                     class="fas fa-paper-plane"></i></button>
                                         </div>
 
@@ -136,7 +129,7 @@
                                             </label>
                                             <input id="fileInput" type="file" name="attachments" style="display: none;">
 
-                                            <a href="{{ route('attachments', $receiver_encoded_id) }}"
+                                            <a href="{{ route('attachments', base64_encode($receiver->id)) }}"
                                                 id="openAllAttachments" class="btn ">
                                                 <i class="fas fa-folder-open"></i>
                                             </a>

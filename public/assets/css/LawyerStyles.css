@@ -72,38 +72,106 @@ a.link-profile {
 }
 
 /** general question **/
-.box-general-questions{
+.box-general-questions {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     max-height: 400px !important;
 }
 
-.link-reply-question{
+.link-reply-question {
     color: black;
 }
-.link-reply-question:hover{
-   text-decoration: none;
-   color: black;
+
+.link-reply-question:hover {
+    text-decoration: none;
+    color: black;
 }
 
-.box-reply-question{
+.box-reply-question {
     margin: 0 auto;
     background-color: rgb(125 125 125 / 71%);
     width: 80%;
     border-radius: 30px;
     height: 525px;
+    overflow-y: scroll;
+}
+
+.title-reply-general-question {
+    font-weight: 700;
+    font-size: 25px;
+    text-transform: uppercase;
 
 }
+
+.description-reply-general-question {
+    font-size: 20px;
+}
+
+.answer-general-question {
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.reply-general-question {
+    resize: none;
+    width: 100% !important;
+    height: 200px !important;
+}
+
+.container-btn-posr-reply {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-post-reply {
+    background-color: black;
+    color: white;
+    border: none;
+    width: 50%;
+    padding: 5px;
+    border-radius: 30px;
+    font-size: 20px;
+}
+
+.img-thank-you {
+    text-align: center;
+}
+
+.container-box-thank-you {
+    justify-content: center;
+}
+
+.box-thank-you {
+    background-color: rgb(125 125 125 / 71%);
+    border-radius: 30px;
+    height: 500px;
+    width: 80%;
+}
+
 /*** end general question **/
 
 
 /** start sidebar dashboard **/
+#myChart {
+    height: 300px !important;
+    margin-top: 3rem;
+}
+
 .sidebar-dashboard {
     background-color: rgb(125 125 125 / 71%);
     padding: 20px;
     border-radius: 15px;
-  }
-  .sidebar-dashboard a {
+}
+
+.icon-dashboard-sidebar {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.sidebar-dashboard a {
     padding: 10px 0;
     display: flex;
     align-items: center;
@@ -112,51 +180,79 @@ a.link-profile {
     font-size: 20px;
     color: #333;
     text-decoration: none;
-  }
-  .sidebar-dashboard a i {
+}
+
+.sidebar-dashboard a i {
     margin-right: 10px;
     font-size: 30px;
-  }
+}
+
+.btn-share-suggestions {
+    background-color: rgba(240, 169, 15, 0.767);
+    border-radius: 15px;
+    border: none;
+    padding: 10px;
+}
+
+
+#myChart {
+    height: 300px !important;
+    width: 750px !important;
+}
+
+.reviews {
+    margin-top: 3rem;
+}
+
+
+@media screen and (max-width: 1340px) {
+    #myChart {
+        height: 300px !important;
+        width: 500px !important;
+    }
+}
+
 /** end sidebar dashboard **/
 
 
 
 /** start document dashboard **/
-.list-document-dashboard{
+.list-document-dashboard {
     display: flex;
     flex-wrap: wrap;
     padding: 5px;
 }
 
-.title-document-dashboard{
+.title-document-dashboard {
     font-size: 17px;
     margin-top: 5px;
     font-weight: 700;
     margin-bottom: 0px;
 }
 
-.container-details-document-dashboard{
+.container-details-document-dashboard {
     margin-bottom: 1.5rem;
 }
-.details-document-dashboard{
+
+.details-document-dashboard {
     margin-bottom: 0px;
     font-size: 14px;
 }
 
-.header-documents-dashboard
-{
+.header-documents-dashboard {
     display: flex;
     justify-content: space-between;
 }
 
-.num-documents{
+.num-documents {
     font-size: 21px;
 
 }
+
 /** end document dashboard **/
 
 /** start template dashboard **/
-.list-template-dashboard{
+.list-template-dashboard {
     display: flex;
     flex-wrap: wrap;
     padding: 5px;
@@ -168,7 +264,7 @@ a.link-profile {
     object-fit: cover;
 }
 
-.btn-remove-template{
+.btn-remove-template {
     background: none;
     border: none;
     display: block;
@@ -176,12 +272,14 @@ a.link-profile {
     right: 8px;
     top: -6px;
 }
-.icon-remove-template{
+
+.icon-remove-template {
     font-size: 24px;
     color: #fff;
     border: 1px solid #81807e;
     background: #81807e;
 }
+
 /** start template dashboard **/
 
 
@@ -211,29 +309,212 @@ a.link-profile {
     top: -36px;
 }
 
-.welcome-phrase-2{
+.welcome-phrase-2 {
     position: relative;
     top: 3.5rem;
     font-size: 26px;
 
 }
+
 @media screen and (max-width: 999px) {
     .welcome-phrase-1 {
         position: relative;
         top: -9px;
         left: 9px;
         font-size: 19px;
-        }
-        .welcome-phrase-2{
-            position: relative;
-            top: 14rem;
-            font-size: 20px;
+    }
 
-        }
+    .welcome-phrase-2 {
+        position: relative;
+        top: 14rem;
+        font-size: 20px;
+
+    }
+
+    .content {
+        margin-top: 10px;
+    }
 }
 
 
 /*end welcome page */
+
+
+/*** start chat dashboard **/
+.nav-dashboard{
+    color: black;
+    font-size: 21px;
+    font-weight: 400;
+}
+.nav-dashboard:hover{
+    color: black;
+    text-decoration: none;
+}
+.chat-dashboard {
+    border-radius: 15px;
+    background-color: rgb(125 125 125 / 71%);
+    padding: 20px;
+    height: 70ch;
+
+}
+
+.contact-list-dashboard {
+        overflow-y: scroll;
+        height: auto;
+        max-height: 450px;
+
+}
+
+.contact-list-dashboard .list-group-item1 {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.img-contact-dashboard
+{
+    width: 12% !important;
+    height: 12% !important;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.last-message-dashboard
+{
+    padding-left: 7% !important;
+
+}
+
+.box-profile-chat-dashboard{
+    background: none !important;
+}
+
+.card-chat-dashboard
+{
+    max-height: 423px !important;
+}
+
+.icon-group-dashboard{
+    font-size: 50px;
+    color: black;
+    margin-right: 21px;
+}
+.title-group{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 64%;
+}
+.title-name-form-chat{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+.img-message-contact{
+    border-radius: 0 !important;
+}
+.list_contact_info-dashboard{
+    display: flex;
+    justify-content: space-between;
+}
+/*** end chat dashboard **/
+
+
+/***** start join lawyer ****/
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px !important;
+}
+
+.label-inline {
+    width: 100px;
+    white-space: nowrap;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    flex: 1;
+    margin-left: 50px;
+}
+
+.file-upload {
+    margin-bottom: 20px;
+    margin-left: -10px !important;
+}
+
+.image-preview-container {
+    display: grid;
+    grid-template-columns: repeat(3, 50px);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.img-box img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.img-box-2 {
+    width: 100%;
+    position: absolute;
+    top: 40px;
+    right: 3px;
+    height: 80px;
+
+    overflow-y: scroll !important;
+}
+
+.img-box-1 {
+    width: 100%;
+    position: absolute;
+    top: 40px;
+
+    height: 80px;
+
+    overflow-y: scroll !important;
+}
+
+
+.upload-icon {
+    margin-left: -20px;
+}
+
+.input-inline {
+    display: block;
+}
+
+.Expertise {
+    color: #000;
+    font-weight: 800;
+
+    margin-left: 20px;
+}
+
+.form-check-1 {
+    color: #000;
+    font-weight: 600;
+    height: 100px;
+    overflow-y: scroll;
+}
+
+.image-preview-container-1 img {
+    width: 100px;
+    max-height: 100px;
+    margin-top: 90px;
+}
+
+/***** end join lawyer ****/
+
+
+
+
+
+
 
 
 /* ******** */
@@ -498,11 +779,7 @@ a.link-profile {
     color: black;
 }
 
-.btn-warning {
-    background-color: rgba(240, 169, 15, 0.767);
 
-    border-radius: 15px;
-}
 
 .fa-gavel {
     color: rgb(133, 73, 4);
@@ -699,11 +976,6 @@ a.link-profile {
     padding-top: 50px;
 }
 
-.box-text label {
-    color: #000;
-    font-weight: 700;
-    font-size: 25px;
-}
 
 .submit-btn {
     padding-right: 3rem;
@@ -774,11 +1046,6 @@ a.link-profile {
     display: block;
 }
 
-#contact-list {
-    overflow-y: scroll;
-
-    height: 70vh;
-}
 
 #contact-list .list-group-item1 {
     display: flex;

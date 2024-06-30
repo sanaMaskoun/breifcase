@@ -59,7 +59,7 @@
                 @endhasanyrole
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('chat') }}">
+                    <a class="nav-link active" href="{{ route('chat_dashboard') }}">
                         <i class="bx bx-chat icon-header"></i></a>
                 </li>
 
@@ -68,8 +68,8 @@
                         <i class="bx bx-bell icon-header"></i></a>
                 </li>
             </ul>
-            <a href="{{ route('show_client', $client_encoded_id) }}"> <img class="img-profile"
-                    src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__5_-removebg-preview.png') }}"
+            <a href="#"> <img class="img-profile"
+                    src="{{ Auth()->user()->getFirstMediaUrl('profile') }}"
                     alt="" /></a>
             </ul>
         </div>

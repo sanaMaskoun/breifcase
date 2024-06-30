@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserTypeEnum;
 use App\Events\chatPrivateEvent;
 use App\Events\CounterChatEvent;
 use App\Events\CounterChatGroupEvent;
@@ -12,14 +13,16 @@ use App\Models\GroupUser;
 use App\Models\Message;
 use App\Models\MessageReadStatusInGroup;
 use App\Models\User;
+use App\Traits\GetClientsForChatTrait;
+use App\Traits\GetUserGeneralChatsTrait;
+use App\Traits\GetUserGroupTrait;
 use App\Traits\GetUsersForChatTrait;
 use App\Traits\MessageTrait;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    use GetUsersForChatTrait, MessageTrait;
-   
+    use GetUsersForChatTrait, MessageTrait, GetUserGroupTrait ,GetUserGeneralChatsTrait ,GetClientsForChatTrait;
 
     public function chat()
     {
@@ -27,8 +30,28 @@ class ChatController extends Controller
         $users = $this->get_users_for_chat();
         return view('pages.chat.chat', compact('client', 'users'));
     }
+
+    public function chat_dashboard()
+    {
+        $users = $this->get_users_for_chat();
+
+        return view('pages.chat.dashboard.chat', compact('users'));
+    }
+    public function group()
+    {
+        $groups = $this->get_user_groups();
+        return view('pages.chat.dashboard.group', compact('groups'));
+
+    }
+    public function general_chat()
+    {
+        $general_chats = $this->get_user_general_chats();
+        return view('pages.chat.dashboard.generalChat', compact('general_chats'));
+
+    }
     public function chat_form($receiver_encoded_id)
     {
+
         $client = Auth()->user();
 
         $receiver_decoded_id = base64_decode($receiver_encoded_id);
@@ -38,8 +61,56 @@ class ChatController extends Controller
 
         $messages = $this->get_messages($receiver);
 
-        return view('pages.chat.formChat', compact(['client', 'receiver','messages', 'users']));
+        return view('pages.chat.formChat', compact(['client', 'receiver', 'messages', 'users']));
     }
+
+    public function chat_form_dashboard($receiver_encoded_id)
+    {
+        $receiver_decoded_id = base64_decode($receiver_encoded_id);
+        $receiver = User::find($receiver_decoded_id);
+
+        $users = $this->get_users_for_chat();
+
+        $messages = $this->get_messages($receiver);
+
+        return view('pages.chat.dashboard.formChat', compact(['receiver', 'messages', 'users']));
+    }
+    public function group_form($group_encoded_id)
+    {
+        $group_decoded_id = base64_decode($group_encoded_id);
+        $group = Group::find($group_decoded_id);
+        MessageReadStatusInGroup::where('user_id', Auth()->user()->id)
+            ->update(['is_read' => true]);
+
+        // $admin_group = User::whereHas('groups', function ($query) use ($group) {
+        //     $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
+        // })->first();
+
+        // $admin_general_chat = User::whereHas('general_chats', function ($query) use ($group) {
+        //     $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
+
+        // })->first();
+
+        $messages = Message::where('group_id', $group->id)->get();
+        $groups = $this->get_user_groups();
+
+        return view('pages.chat.dashboard.formGroup', compact(['groups', 'messages', 'group']));
+
+    }
+    public function general_chat_form($general_chat_encoded_id)
+    {
+        $general_chat_decoded_id = base64_decode($general_chat_encoded_id);
+        $general_chat = Group::find($general_chat_decoded_id);
+        MessageReadStatusInGroup::where('user_id', Auth()->user()->id)
+            ->update(['is_read' => true]);
+
+        $messages = Message::where('group_id', $general_chat->id)->get();
+        $general_chats = $this->get_user_general_chats();
+
+        return view('pages.chat.dashboard.formGeneralChat', compact(['general_chats', 'messages', 'general_chat']));
+
+    }
+
     public function send_message_to_user(Request $request, $receiver_encoded_id)
     {
         $receiver_decoded_id = base64_decode($receiver_encoded_id);
@@ -115,100 +186,10 @@ class ChatController extends Controller
             'has_previous_chat' => $has_previous_chat->isEmpty(),
         ]);
     }
-    ///////////
-
-
-
-    public function getUserGroups()
+    public function send_message_to_group(Request $request, $group_encoded_id)
     {
-        $groups = User::find(Auth()->user()->id)->groups;
-        $groups->each(function ($group) {
-            $message_count = $this->messageCountInGroup($group->id);
-
-            $group->message_count = $message_count;
-
-        });
-
-        return $groups;
-
-    }
-    public function getUserGeneralChats()
-    {
-        $general_chats = User::find(Auth()->user()->id)->generalChats;
-        $general_chats->each(function ($general_chat) {
-            $message_count = $this->messageCountInGroup($general_chat->id);
-
-            $general_chat->message_count = $message_count;
-
-        });
-
-        return $general_chats;
-
-    }
-
-    public function messageCountInGroup($group_id)
-    {
-        return MessageReadStatusInGroup::where('user_id', Auth()->user()->id)
-            ->whereHas('message', function ($query) use ($group_id) {
-                $query->where('group_id', $group_id);
-            })
-            ->where('is_read', false)
-            ->count();
-    }
-
-    public function getLawyers()
-    {
-        return User::where('is_active', true)
-            ->where('id', '<>', Auth()->user()->id)
-            ->whereHas('roles', function ($query) {
-                $query->whereIn('name', ['lawyer', 'legalConsultant', 'typingCenter']);
-            })
-            ->get();
-    }
-
-    public function getFilteredLawyersByName($name)
-    {
-        return User::where('is_active', true)
-            ->where('id', '<>', Auth()->user()->id)
-            ->whereHas('roles', function ($query) {
-                $query->whereIn('name', ['lawyer', 'legalConsultant', 'typingCenter']);
-            })
-            ->where('name', 'like', '%' . $name . '%')
-            ->get();
-    }
-
-    public function group_form($encodedId)
-    {
-        $decodedId = base64_decode($encodedId);
-        $group = Group::find($decodedId);
-
-        MessageReadStatusInGroup::where('user_id', Auth()->user()->id)
-            ->update(['is_read' => true]);
-
-        $admin_group = User::whereHas('groups', function ($query) use ($group) {
-            $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
-        })->first();
-
-        $admin_general_chat = User::whereHas('generalChats', function ($query) use ($group) {
-            $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
-
-        })->first();
-
-        $users = session('users');
-        $groups = session('groups');
-        $lawyers = session('lawyers');
-        $general_chats = session('general_chats');
-        $messages = Message::where('group_id', $group->id)->get();
-
-        return view('pages.chat.formGroup', compact(['lawyers', 'groups', 'general_chats', 'users', 'messages', 'admin_group', 'admin_general_chat', 'group']));
-
-    }
-
-    public function send_message_to_group(Request $request, $encodedId)
-    {
-        $decodedId = base64_decode($encodedId);
-        $group = Group::find($decodedId);
-
+        $group_decoded_id = base64_decode($group_encoded_id);
+        $group = Group::find($group_decoded_id);
         if ($request->input('message') == null) {
             return redirect()->back();
 
@@ -221,16 +202,12 @@ class ChatController extends Controller
 
         if (!is_null(request()->file('attachments'))) {
             $attachments = request()->file('attachments');
-
-            foreach ($attachments as $attachment) {
-                $new_message->addMedia($attachment)
-                    ->withCustomProperties(['do_not_replace' => true])
-                    ->toMediaCollection('attachments');
-            }
+            $new_message->addMedia($attachments)
+                ->toMediaCollection('attachments');
         }
 
-        $groupMembers = GroupUser::where('group_id', $group->id)->where('user_id', '<>', auth()->user()->id)->get();
-        foreach ($groupMembers as $member) {
+        $group_members = GroupUser::where('group_id', $group->id)->where('user_id', '<>', auth()->user()->id)->get();
+        foreach ($group_members as $member) {
             MessageReadStatusInGroup::create([
                 'message_id' => $new_message->id,
                 'user_id' => $member->user_id,
@@ -240,26 +217,57 @@ class ChatController extends Controller
 
         }
 
-        $sender_profile = $new_message->sender->getFirstMediaUrl('profileUser');
+        $sender_profile = $new_message->sender->getFirstMediaUrl('profile');
         $sender_name = $new_message->sender->name;
         $sender_id_encoded = base64_encode($new_message->sender->id);
         $sender_id = $new_message->sender->id;
 
         $message = $new_message->message;
         $created_at = $new_message->created_at->diffForHumans();
-        $attachment = is_null(request()->file('attachments')) ? null : $new_message->getFirstMediaUrl('attachments');
-
+        $attachment = null;
+        if ($new_message->getFirstMediaUrl('attachments') != null) {
+            $media = $new_message->getMedia('attachments')->first();
+            $mime_type = $media->mime_type;
+            $extension = explode('/', $mime_type)[1];
+            $attachment = [
+                'url' => $media->getUrl(),
+                'extension' => $extension,
+            ];
+        }
         broadcast(new GroupEvent($sender_profile, $sender_id_encoded, $sender_id, $sender_name, $message, $attachment, $created_at, $group->id));
 
         return response()->json([
             'success' => true,
             'message' => $message,
             'created_at' => $created_at,
-            'attachment' => $attachment,
+            'attachment' => $attachment == null ? null : $attachment,
             'sender_id' => $sender_id,
         ]);
     }
 
+    public function contact()
+    {
+        $users = User::where('is_active' , true)->whereIn('type' , [UserTypeEnum::lawyer , UserTypeEnum::translation_company])->get();
+
+        return view('pages.chat.dashboard.contact', compact('users'));
+    }
+    public function contact_client()
+    {
+        $users =  $this->get_clients_for_chat();
+
+        return view('pages.chat.dashboard.chat', compact('users'));
+    }
+    public function form_contact_client($receiver_encoded_id)
+    {
+        $receiver_decoded_id = base64_decode($receiver_encoded_id);
+        $receiver = User::find($receiver_decoded_id);
+
+        $users =  $this->get_clients_for_chat();
+
+        $messages = $this->get_messages($receiver);
+
+        return view('pages.chat.dashboard.formChat', compact(['receiver', 'messages', 'users']));
+    }
     public function attachments($encodedIdReceiver)
     {
         $decodedId = base64_decode($encodedIdReceiver);
@@ -289,4 +297,5 @@ class ChatController extends Controller
 
         return view('pages.group.attachments', compact('messages'));
     }
+
 }

@@ -1,28 +1,5 @@
 
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     const roleSelect = document.getElementById('role');
-//     const memberCheckboxes = document.querySelectorAll('.member-checkbox');
-
-//     function updateFieldStates() {
-//         if (roleSelect.value) {
-//             memberCheckboxes.forEach(checkbox => {
-//                 checkbox.disabled = true;
-//                 checkbox.checked = false;
-//             });
-//         } else {
-//             memberCheckboxes.forEach(checkbox => {
-//                 checkbox.disabled = false;
-//             });
-//         }
-//     }
-
-//     roleSelect.addEventListener('change', updateFieldStates);
-
-//     updateFieldStates();
-// });
-
-
 $(document).ready(function () {
     $('#myTab a').on('click', function (e) {
         e.preventDefault();
@@ -134,6 +111,8 @@ $(document).ready(function () {
         });
     });
 });
+
+
 
 
 

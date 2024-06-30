@@ -67,4 +67,10 @@ class DocumentController extends Controller
         $lawyer_encoded_id = base64_encode($receiver->id);
         return redirect()->route('show_lawyer', $lawyer_encoded_id);
     }
+
+
+    public function reviews()
+    {
+        return view ('pages.document.reviews');
+    }
 }

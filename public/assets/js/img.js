@@ -64,3 +64,67 @@ document.querySelectorAll(".custom-file-input").forEach((inputElement) => {
     });
   });
 
+  document
+  .getElementById("licenseUpload")
+  .addEventListener("change", function (event) {
+    handleFiles(event.target.files, "licensePreviewContainer");
+  });
+
+document
+  .getElementById("certificationsUpload")
+  .addEventListener("change", function (event) {
+    handleFiles(event.target.files, "certificationsPreviewContainer");
+  });
+
+function handleFiles(files, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = ""; // Clear previous images
+
+  Array.from(files).forEach((file) => {
+    if (file.type.startsWith("image/")) {
+      const img = document.createElement("img");
+      img.src = URL.createObjectURL(file);
+      container.appendChild(img);
+    }
+  });
+}
+
+//
+
+document
+  .getElementById("licenseUpload")
+  .addEventListener("change", function () {
+    previewImages(this, "licensePreviewContainer");
+  });
+
+document
+  .getElementById("certificationsUpload")
+  .addEventListener("change", function () {
+    previewImages(this, "certificationsPreviewContainer");
+  });
+
+function previewImage(input, previewContainer) {
+  const files = input.files;
+  if (files && files[0]) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      previewContainer.innerHTML = "";
+      previewContainer.appendChild(img);
+    };
+    reader.readAsDataURL(files[0]);
+  }
+}
+
+document
+  .getElementById("licenseUploadFront")
+  .addEventListener("change", function () {
+    previewImage(this, document.getElementById("licensePreviewContainerFront"));
+  });
+
+document
+  .getElementById("licenseUploadBack")
+  .addEventListener("change", function () {
+    previewImage(this, document.getElementById("licensePreviewContainerBack"));
+  });
