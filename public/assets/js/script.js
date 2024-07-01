@@ -1,3 +1,21 @@
+// rate star
+document.addEventListener('DOMContentLoaded', function () {
+    var starContainers = document.querySelectorAll('.stars');
+
+    starContainers.forEach(function (container) {
+        var rating = parseFloat(container.getAttribute('data-rating'));
+        var stars = container.querySelectorAll('.star');
+
+        stars.forEach(function (star, index) {
+            if (rating >= index + 1) {
+                star.classList.add('filled');
+            } else if (rating > index && rating < index + 1) {
+                star.classList.add('half-filled');
+            }
+        });
+    });
+});
+
 document.getElementById("fullscreen-button").addEventListener("click", function () {
     var chatArea = document.getElementById("chat-area");
     chatArea.classList.add("fullscreen");
@@ -58,6 +76,8 @@ document.querySelectorAll('.toggle-password').forEach(item => {
         }
     });
 });
+
+
 
 
 

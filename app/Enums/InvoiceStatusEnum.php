@@ -10,6 +10,6 @@ final class InvoiceStatusEnum extends Enum
 {
     const pending = 1;
 
-    const accepte = 1;
-    const refund = 2;
+    const accepte = 2;
+    const refund = 3;
 }

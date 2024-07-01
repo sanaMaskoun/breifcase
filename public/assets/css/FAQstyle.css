@@ -1,0 +1,53 @@
+.container-about {
+  position: relative;
+  background-image: var(--background-url);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: direction 0.3s ease, text-align 0.3s ease;
+  overflow-x: hidden !important;
+  width: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5); /* اللون الأبيض مع شفافية 50% */
+  pointer-events: none; /* لمنع التفاعل مع الطبقة */
+  z-index: 1; /* الطبقة الشفافة تكون تحت */
+}
+.faq-content {
+  position: relative;
+  z-index: 2; /* محتوى .faq-header و .faq-content يظهر فوق الشفافية */
+}
+.faq-content h2 {
+  font-weight: 800 !important;
+  font-size: 25px;
+}
+.faq-header {
+  position: relative;
+  z-index: 2; /* محتوى .faq-header و .faq-content يظهر فوق الشفافية */
+  text-align: center;
+  padding: 20px;
+}
+
+.faq-header img {
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+.footer-about {
+  color: black;
+  font-size: 30px;
+  margin-left: 2rem;
+  text-decoration: none;
+  outline: none;
+}
+.footer-about:hover {
+  color: black;
+  font-size: 30px;
+  text-decoration: none;
+  outline: none;
+}

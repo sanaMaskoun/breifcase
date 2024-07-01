@@ -73,6 +73,7 @@ Route::group(['prefix' => 'general-question', 'middleware' => 'auth:sanctum'], f
     // Route::get('/{question_encoded_id}/show', [GeneralQuestionController::class, 'show'])->name('show_general_question');
 
 });
+Route::get('general-question', [GeneralQuestionController::class, 'home'])->name('home_general_questions');
 
 
 
@@ -104,6 +105,8 @@ Route::group(['prefix' => 'invoice', 'middleware' => 'auth:sanctum'], function (
     Route::get('/', [InvoiceController::class, 'index'])->name('list_invoices');
 
 });
+Route::get('bills', [InvoiceController::class, 'bills_dashbord'])->name('bills_dashbord')->middleware('auth:sanctum');
+
 
 Route::group(['prefix' => 'document', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [DocumentController::class, 'index'])->name('list_documents');
@@ -125,8 +128,8 @@ Route::group(['prefix' => 'template', 'middleware' => 'auth:sanctum'], function 
     Route::get('/delete/{template}', [TemplateController::class, 'destroy'])->name('delete_template');
 });
 
-Route::group(['prefix' => 'frequently-question', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/', [FrequentlyQuestionController::class, 'index'])->name('list_frequently_question');
+Route::group(['prefix' => 'frequently-question'], function () {
+    Route::get('/', [FrequentlyQuestionController::class, 'page'])->name('page_frequently_question');
 });
 
 Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
@@ -151,6 +154,7 @@ Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/attachments/group/{encodedIdGroup}', [ChatController::class, 'attachments_group'])->name('attachments_group');
 
 });
+
 Route::get('/dashboard-contact', [ChatController::class, 'contact'])->name('contact_dashboard')->middleware('auth:sanctum');;
 Route::get('/contact-client', [ChatController::class, 'contact_client'])->name('contact_client')->middleware('auth:sanctum');;
 Route::get('/contact-client/{receiver_encoded_id}', [ChatController::class, 'form_contact_client'])->name('form_contact_client')->middleware('auth:sanctum');;

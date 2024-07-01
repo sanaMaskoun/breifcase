@@ -30,4 +30,9 @@ class Invoice extends Model
         return $this->belongsTo(Document::class , 'document_id')->where('type' , DocumentTypeEnum::case);
 
     }
+    public function document()
+    {
+        return $this->belongsTo(Document::class , 'document_id');
+
+    }
 }

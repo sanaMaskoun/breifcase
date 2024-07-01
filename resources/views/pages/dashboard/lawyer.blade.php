@@ -1,26 +1,64 @@
 @extends('pages.dashboard.sidebar')
 @section('dashboard')
+
+
     <div class="col-lg-9 col-md-12 col-sm-12 ">
         <div class="sidebar-dashboard">
-        <h2>Revenue: **,*** AED</h2>
-        <h3>Profit: **,*** AED</h3>
+
+            <div class="container">
+                <div class="row ">
+                    <div class="col-12">
+                        <p class="p-dash">Revenue: {{ $revenues }} AED <br> Profit: {{ $profits }} AED</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div>
+                            <div>
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="legend mt-3">
+                                    <span class="span-1">&#9679;</span> Cases {{ $cases }} <br>
+                                    <span class="span-2">&#9679; </span>Consultation {{ $consultations }} <br>
+                                    <span class="span-3">&#9679; </span>General Question {{ $replies }} <br>
+                                </div>
+                                <a href="{{ route('bills_dashbord') }}" id="billsButton" >Bills and Receipts</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-dash mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Profit Margin Analysis</h5>
+                                <canvas id="profitMarginChart" class="canvas"></canvas>
+                                <p class="mt-2">Gross Profit Margin: {{ 100 - number_format( $percentage_of_profits ,1) }}%<br>Net Profit Margin: {{ number_format( $percentage_of_profits ,1) }}%</p>
+                            </div>
+
+                        </div>
+                        <div class=" mb-4 card-dash">
+                            <div class="card-body">
+                                <h5 class="card-title">Monthly Revenue</h5>
+                                <p>Highest Revenue Trend Over Time:{{ $max_revenue }} ({{ $max_revenue_month }})</p>
+                            </div>
+                        </div>
 
 
-        <div class="container myChart">
-            <canvas id="myChart"></canvas>
-        </div>
-
-        <div class="row reviews ">
-            <div class="col-8">
-                <h5>Reviwes : </h5>
-                <div class="stars">★★★★☆</div>
-                <span>4.5</span>
-            </div>
-
-            <div class="col-4">
-                <button class="btn-share-suggestions">Share Suggestions</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </div>
+    <script>
+        window.repliesData = @json($replies_data);
+        window.casesData = @json($cases_data);
+        window.consultationsData = @json($consultations_data);
+        var profits = {
+            {{--  gross: <?php echo $revenues; ?>,  --}}
+            net: <?php echo $percentage_of_profits; ?>,
+        };
+    </script>
 @endsection

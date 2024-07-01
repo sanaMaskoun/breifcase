@@ -25,7 +25,7 @@
 
                             <div class="box-Questions-1">
                                 <p class="link-questions-1">General Questions</p>
-                                <a href="{{ route('list_general_questions') }}"> <img
+                                <a href="{{ route('home_general_questions') }}"> <img
                                         src="{{ asset('assets/img/reply_general_question.png') }}"
                                         alt="" class="img_1" /></a>
                             </div>
@@ -46,7 +46,7 @@
 
                             <div class="box-Questions-1">
                                 <p class="link-questions-1">FAQ</p>
-                                <a href="{{ route('list_frequently_question') }}"> <img src="{{ asset('assets/img/FAQ.png') }}" alt=""
+                                <a href="{{ route('page_frequently_question') }}"> <img src="{{ asset('assets/img/FAQ.png') }}" alt=""
                                         class="img_1" /></a>
                             </div>
                         </div>

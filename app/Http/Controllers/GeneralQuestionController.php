@@ -44,6 +44,12 @@ class GeneralQuestionController extends Controller
 
     }
 
+    public function home()
+    {
+        $questions = GeneralQuestion::all();
+        return view('pages.generalQuestion.list', compact('questions'));
+
+    }
     public function create()
     {
         $client = Auth()->user();

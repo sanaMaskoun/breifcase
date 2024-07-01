@@ -63,10 +63,12 @@
                     Reviews
                 </a>
 
-                <a href="#">
-                    <i class="fas fa-chart-bar"></i>
-                    Statistics
+                <a href="{{ route('bills_dashbord') }}">
+                    <img alt="" src="{{ asset('assets/img/invoice.png') }}" class="icon-dashboard-sidebar">
+                    Bills and Receipts
                 </a>
+
+
 
             </div>
 

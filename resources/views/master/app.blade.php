@@ -16,6 +16,7 @@
     <style>
         :root {
             --background-url: url('{{ asset('assets/img/screen.webp') }}');
+            --logo-url: url('{{ asset('img/user_icon.png') }}');
         }
     </style>
 </head>
@@ -184,6 +185,7 @@
     <script src="{{ asset('assets/js/file.js') }}"></script>
     <script src="{{ asset('assets/js/dash-1.js') }}"></script>
     <script src="{{ asset('assets/js/dash.js') }}"></script>
+    <script src="{{ asset('assets/js/img-join-lawyer.js') }}"></script>
 </body>
 
 </html>

@@ -12,18 +12,21 @@
                     <div class="profile-card_1">
 
                         @hasanyrole('lawyer|translation_company')
-                            <a href="{{ route('reply_general_question' , base64_encode($question->id)) }}" class="link-reply-question"> <img
-                                    src="{{ $question->user->getFirstMediaUrl('profile') }}" alt="Profile" />
-                                <p>{{ $question->user->name }}</p>
-                                <p>{{ $question->title }}</p>
-                            </a>
-                        @endhasanyrole
-
-                        @role('client')
+                            <a href="{{ route('reply_general_question', base64_encode($question->id)) }}"
+                                class="link-reply-question">
+                            @endhasanyrole
                             <img src="{{ $question->user->getFirstMediaUrl('profile') }}" alt="Profile" />
                             <p>{{ $question->user->name }}</p>
                             <p>{{ $question->title }}</p>
-                        @endrole
+                            @hasanyrole('lawyer|translation_company')
+                            </a>
+                        @endhasanyrole
+
+                        {{--  @role('client')  --}}
+                        {{--  <img src="{{ $question->user->getFirstMediaUrl('profile') }}" alt="Profile" />
+                        <p>{{ $question->user->name }}</p>
+                        <p>{{ $question->title }}</p>  --}}
+                        {{--  @endrole  --}}
 
                     </div>
                 </div>

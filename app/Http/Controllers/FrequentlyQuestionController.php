@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class FrequentlyQuestionController extends Controller
 {
-    public function index()
+
+    public function page()
     {
-        $frequently_questions = FrequentlyQuestion::all();
-        return view('pages.frequentlyQuestion.list' , compact('frequently_questions'));
+        return view('pages.frequentlyQuestion.content');
     }
 
 }
