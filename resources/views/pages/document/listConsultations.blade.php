@@ -10,7 +10,7 @@
 
             <div class="list-document-dashboard">
                 @foreach ($consultations as $consultation)
-                    <div class="col-lg-3 col-md-6 col-sm-12 ">
+                    <div class="col-lg-3 col-md-6 col-sm-12  mt-4">
                         <img src="{{ asset('assets/img/consultation.png') }}" alt="Consultation Image" class="img-doc">
                         <h5 class="title-document-dashboard">{{ $consultation->title }}</h5>
                         <div class="container-details-document-dashboard">

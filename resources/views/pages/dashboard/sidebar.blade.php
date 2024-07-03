@@ -3,14 +3,25 @@
     <div class="container">
         <div class="row ">
             <div class="col-lg-3 col-md-12 col-sm-12 sidebar-dashboard ">
-                <a href="{{ route('lawyer_dashboard') }}">
-                    <img alt="" src="{{ asset('assets/img/dashboard.png') }}" class="icon-dashboard-sidebar">
-                    Dashboard
-                </a>
 
-                @hasanyrole('lawyer|translation_company')
+                @role('lawyer')
+                    <a href="{{ route('lawyer_dashboard') }}">
+                        <img alt="" src="{{ asset('assets/img/dashboard.png') }}" class="icon-dashboard-sidebar">
+                        Dashboard
+                    </a>
+                @endrole
+                @role('translation_company')
+                    <a href="{{ route('company_dashboard') }}">
+                        <img alt="" src="{{ asset('assets/img/dashboard.png') }}" class="icon-dashboard-sidebar">
+                        Dashboard
+                    </a>
+                @endrole
+
+
+                @role('lawyer')
                     <a href="{{ route('list_consultations', base64_encode(Auth()->user()->id)) }}">
-                        <img alt="" src="{{ asset('assets/img/consultation-dashboard.png') }}" class="icon-dashboard-sidebar">
+                        <img alt="" src="{{ asset('assets/img/consultation-dashboard.png') }}"
+                            class="icon-dashboard-sidebar">
                         Consultations
                     </a>
 
@@ -18,11 +29,12 @@
                         <i class="fas fa-gavel"></i>
                         Cases
                     </a>
-                @endhasanyrole
+                @endrole
 
                 @role('admin')
                     <a href="{{ route('list_consultations') }}">
-                        <img alt="" src="{{ asset('assets/img/consultation-dashboard.png') }}" class="icon-dashboard-sidebar">
+                        <img alt="" src="{{ asset('assets/img/consultation-dashboard.png') }}"
+                            class="icon-dashboard-sidebar">
                         Consultations
                     </a>
 
@@ -32,10 +44,22 @@
                     </a>
                 @endrole
 
-                <a href="{{ route('list_template') }}">
-                    <img alt="" src="{{ asset('assets/img/template-dashboard.png') }}" class="icon-dashboard-sidebar">
-                    Templates
-                </a>
+                @hasanyrole('lawyer|admin')
+                    <a href="{{ route('list_template') }}">
+                        <img alt="" src="{{ asset('assets/img/template-dashboard.png') }}"
+                            class="icon-dashboard-sidebar">
+                        Templates
+                    </a>
+                @endhasanyrole
+
+                @role('translation_company')
+                    <a href="{{ route('list_requests', base64_encode(Auth()->user()->id)) }}">
+                        <img alt="" src="{{ asset('assets/img/template-dashboard.png') }}"
+                            class="icon-dashboard-sidebar">
+                        Requests
+                    </a>
+                @endrole
+
 
 
                 @hasanyrole('lawyer|translation_company')
@@ -52,14 +76,22 @@
                     </a>
                 @endrole
 
+                @role('lawyer')
+                    <a href="{{ route('chat_lawyer_dashboard') }}">
+                        <img alt="" src="{{ asset('assets/img/chat-dashboard.png') }}" class="icon-dashboard-sidebar">
+                        Chat
+                    </a>
+                @endrole
 
-                <a href="{{ route('chat_dashboard') }}">
-                    <img alt="" src="{{ asset('assets/img/chat-dashboard.png') }}" class="icon-dashboard-sidebar">
-                    Chat
-                </a>
-
+                @role('translation_company')
+                    <a href="{{ route('chat_company_dashboard') }}">
+                        <img alt="" src="{{ asset('assets/img/chat-dashboard.png') }}" class="icon-dashboard-sidebar">
+                        Chat
+                    </a>
+                @endrole
                 <a href="{{ route('reviews') }}">
-                    <img alt="" src="{{ asset('assets/img/reviews_dashboard.png') }}" class="icon-dashboard-sidebar">
+                    <img alt="" src="{{ asset('assets/img/reviews_dashboard.png') }}"
+                        class="icon-dashboard-sidebar">
                     Reviews
                 </a>
 

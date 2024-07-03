@@ -13,5 +13,6 @@ final class DocumentTypeEnum extends Enum
 {
     const consultation = 1;
     const case = 2;
+    const translate = 3;
 
 }

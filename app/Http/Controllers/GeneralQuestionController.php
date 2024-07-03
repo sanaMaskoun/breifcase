@@ -25,10 +25,19 @@ class GeneralQuestionController extends Controller
                 return view('pages.generalQuestion.profileList', compact('questions', 'client'));
             }
 
-            if ($user->type == UserTypeEnum::lawyer || $user->type == UserTypeEnum::translation_company) {
+            if ($user->type == UserTypeEnum::lawyer ) {
                 $general_questions = GeneralQuestion::whereHas('replies', function ($query) {
                     return $query->where('user_id', Auth()->user()->id);
                 });
+
+                $questions = $general_questions->get();
+                $num_questions = $general_questions->count();
+
+                return view('pages.generalQuestion.dashboardList', compact('questions','num_questions'));
+
+            }
+            if ( $user->type == UserTypeEnum::translation_company ) {
+                $general_questions = GeneralQuestion::where('sender_id', Auth()->user()->id);
 
                 $questions = $general_questions->get();
                 $num_questions = $general_questions->count();
@@ -52,8 +61,12 @@ class GeneralQuestionController extends Controller
     }
     public function create()
     {
-        $client = Auth()->user();
-        return view('pages.generalQuestion.create', compact('client'));
+        if(Auth()->user()->type == UserTypeEnum::client)
+       { $client = Auth()->user();
+        return view('pages.generalQuestion.create', compact('client'));}
+        else{
+           return view('pages.generalQuestion.company.create');
+        }
     }
 
     public function store(GeneralQuestionRequest $request)

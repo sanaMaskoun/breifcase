@@ -10,7 +10,7 @@
 
             <div class="list-document-dashboard">
                 @foreach ($questions as $question)
-                    <div class="col-lg-3 col-md-6 col-sm-12 ">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mt-4">
                         <img src="{{ asset('assets/img/generalQuestion.png') }}" alt="question Image" class="img-doc">
                         <h5 class="title-document-dashboard">{{ $question->title }}</h5>
                         <div class="container-details-document-dashboard">
@@ -20,8 +20,11 @@
                     </div>
                 @endforeach
             </div>
-
+            @role('translation_company')
+            <div class="d-flex justify-content-end">
+                <a href="{{ route('create_general_question') }}" class="btn-post-GQ-company">post a question</a>
+            </div>
+            @endrole
         </div>
     </div>
 @endsection
-

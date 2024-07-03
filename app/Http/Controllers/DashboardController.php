@@ -53,7 +53,7 @@ class DashboardController extends Controller
 
         $profits = $profits_consultations + $profits_cases;
 
-        $percentage_of_profits = ($profits / $revenues)*100 ;
+        $revenues == 0 ? $percentage_of_profits = 0 : $percentage_of_profits = ($profits / $revenues) * 100;
 
         $documents = Document::where('receiver_id', Auth()->user()->id)
             ->where('answer', '<>', null)
@@ -75,9 +75,9 @@ class DashboardController extends Controller
         $max_revenue_month_key = $monthly_revenues->keys()->firstWhere(function ($key) use ($monthly_revenues) {
             return $monthly_revenues[$key] == $monthly_revenues->max();
         });
-        $max_revenue_month = Carbon::parse($max_revenue_month_key . '-01')->format('F Y');
 
-        $max_revenue = $monthly_revenues[$max_revenue_month_key];
+        $max_revenue_month_key == null ? $max_revenue_month = '' : $max_revenue_month = Carbon::parse($max_revenue_month_key . '-01')->format('F Y');
+        $max_revenue_month_key == null ? $max_revenue = 0 : $max_revenue = $monthly_revenues[$max_revenue_month_key];
 
         $consultations = Document::where('receiver_id', Auth()->user()->id)
             ->where('status', DocumentStatusEnum::closed)
@@ -100,7 +100,7 @@ class DashboardController extends Controller
             ->toArray();
 
         $num_cases_month = Document::where('receiver_id', Auth()->user()->id)
-            ->where('type', DocumentTypeEnum::case)
+            ->where('type', DocumentTypeEnum::case )
             ->where('status', DocumentStatusEnum::closed)
             ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
             ->groupBy('month')
@@ -129,5 +129,82 @@ class DashboardController extends Controller
             'max_revenue_month', 'max_revenue',
             'replies', 'cases', 'consultations',
             'replies_data', 'cases_data', 'consultations_data'));
+    }
+    public function company_dashboard()
+    {
+
+        $profits = Document::where('receiver_id', Auth()->user()->id)
+            ->where('answer', '<>', null)
+            ->where('status', DocumentStatusEnum::closed)
+            ->with('receiver')
+            ->get()
+            ->reduce(function ($total, $consultation) {
+                $price = $consultation->receiver->lawyer->consultation_price;
+                $discounted_price = $price - ($price * 0.05);
+                return $total + $discounted_price;
+            }, 0);
+
+        $revenues = Document::where('receiver_id', Auth()->user()->id)
+            ->where('answer', '<>', null)
+            ->where('status', DocumentStatusEnum::closed)
+            ->with('receiver')
+            ->get()
+            ->reduce(function ($total, $revenue) {
+                $price = $revenue->receiver->lawyer->consultation_price;
+                return $total + $price;
+            }, 0);
+
+        $revenues == 0 ? $percentage_of_profits = 0 : $percentage_of_profits = ($profits / $revenues) * 100;
+
+        $documents = Document::where('receiver_id', Auth()->user()->id)
+            ->where('answer', '<>', null)
+            ->where('status', DocumentStatusEnum::closed)
+            ->with('receiver')
+            ->get()
+            ->map(function ($document) {
+                $price = $document->receiver->lawyer->consultation_price;
+                return [
+                    'profit' => $price,
+                    'month' => Carbon::parse($document->created_at)->format('Y-m'),
+                ];
+            });
+
+        $monthly_revenues = $documents->groupBy('month')->map(function ($items) {
+            return $items->sum('profit');
+        });
+
+        $max_revenue_month_key = $monthly_revenues->keys()->firstWhere(function ($key) use ($monthly_revenues) {
+            return $monthly_revenues[$key] == $monthly_revenues->max();
+        });
+
+        $max_revenue_month_key == null ? $max_revenue_month = '' : $max_revenue_month = Carbon::parse($max_revenue_month_key . '-01')->format('F Y');
+        $max_revenue_month_key == null ? $max_revenue = 0 : $max_revenue = $monthly_revenues[$max_revenue_month_key];
+
+        $num_clients = Document::where('receiver_id', Auth()->user()->id)
+            ->where('status', DocumentStatusEnum::closed)
+            ->where('type', DocumentTypeEnum::translate)
+            ->count();
+
+        $num_clients_month = Document::where('receiver_id', Auth()->user()->id)
+            ->where('type', DocumentTypeEnum::translate )
+            ->where('status', DocumentStatusEnum::closed)
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
+            ->groupBy('month')
+            ->get()
+            ->pluck('count', 'month')
+            ->toArray();
+
+
+
+        $clients_data = [];
+
+        for ($i = 1; $i <= 12; $i++) {
+            $clients_data[] = $num_clients_month[$i] ?? 0;
+
+        }
+        return view('pages.dashboard.company', compact('profits', 'revenues', 'percentage_of_profits',
+            'max_revenue_month', 'max_revenue',
+            'num_clients',
+            'clients_data'));
     }
 }

@@ -33,7 +33,7 @@ class SendRequestToCompanyRequest extends FormRequest
             'sender_id'           => Auth()->user()->id,
             'receiver_id'         => base64_decode($this->company_encoded_id),
             'status'              => DocumentStatusEnum::pending,
-            'type'                => DocumentTypeEnum::consultation
+            'type'                => DocumentTypeEnum::translate
         ];
     }
 }

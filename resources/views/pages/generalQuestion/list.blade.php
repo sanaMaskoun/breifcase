@@ -11,14 +11,14 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="profile-card_1">
 
-                        @hasanyrole('lawyer|translation_company')
+                        @hasanyrole('lawyer')
                             <a href="{{ route('reply_general_question', base64_encode($question->id)) }}"
                                 class="link-reply-question">
                             @endhasanyrole
                             <img src="{{ $question->user->getFirstMediaUrl('profile') }}" alt="Profile" />
                             <p>{{ $question->user->name }}</p>
                             <p>{{ $question->title }}</p>
-                            @hasanyrole('lawyer|translation_company')
+                            @hasanyrole('lawyer')
                             </a>
                         @endhasanyrole
 

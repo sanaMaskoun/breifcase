@@ -15,15 +15,13 @@
                     <div class="col-md-8">
                         <div>
                             <div>
-                                <canvas id="myChartLawyer"></canvas>
+                                <canvas id="myChartCompany"></canvas>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="legend mt-3">
-                                    <span class="span-1">&#9679;</span> Cases {{ $cases }} <br>
-                                    <span class="span-2">&#9679; </span>Consultation {{ $consultations }} <br>
-                                    <span class="span-3">&#9679; </span>General Question {{ $replies }} <br>
+                                    <span class="span-2">&#9679; </span>clients {{ $num_clients }} <br>
                                 </div>
                                 <a href="{{ route('bills_dashbord') }}" id="billsButton" >Bills and Receipts</a>
                             </div>
@@ -53,9 +51,8 @@
         </div>
     </div>
     <script>
-        window.repliesData = @json($replies_data);
-        window.casesData = @json($cases_data);
-        window.consultationsData = @json($consultations_data);
+        window.clientsData = @json($clients_data);
+
         var profits = {
             {{--  gross: <?php echo $revenues; ?>,  --}}
             net: <?php echo $percentage_of_profits; ?>,

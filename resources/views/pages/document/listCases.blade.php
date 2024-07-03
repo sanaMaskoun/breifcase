@@ -10,7 +10,7 @@
 
             <div class="list-document-dashboard">
                 @foreach ($cases as $case)
-                    <div class="col-lg-3 col-md-6 col-sm-12 ">
+                    <div class="col-lg-3 col-md-6 col-sm-12  mt-4">
                         <img src="{{ asset('assets/img/case.png') }}" alt="case Image" class="img-doc">
                         <h5 class="title-document-dashboard">{{ $case->title }}</h5>
                         <div class="container-details-document-dashboard">

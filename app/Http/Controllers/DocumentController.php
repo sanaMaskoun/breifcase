@@ -49,6 +49,18 @@ class DocumentController extends Controller
         return view('pages.document.listCases', compact('cases', 'num_cases'));
     }
 
+
+    public function index_requests($receiver_encoded_id)
+    {
+
+            $receiver_decoded_id = base64_decode($receiver_encoded_id);
+            $company = User::find($receiver_decoded_id);
+
+            $requests = Document::where('receiver_id', $company->id)->get();
+            $num_requests = Document::where('receiver_id', $company->id)->count();
+
+        return view('pages.document.listRequest', compact('requests', 'num_requests'));
+    }
     public function create($receiver_encoded_id)
     {
         $receiver_decoded_id = base64_decode($receiver_encoded_id);

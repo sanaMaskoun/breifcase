@@ -26,22 +26,10 @@
                             <div class="box-Questions-1">
                                 <p class="link-questions-1">General Questions</p>
                                 <a href="{{ route('list_general_questions') }}"> <img
-                                        src="{{ asset('assets/img/reply_general_question.png') }}"
-                                        alt="" class="img_1" /></a>
-                            </div>
-
-                            <div class="box-Questions-1">
-                                <p class="link-questions-1">The Forum</p>
-                                <a href="{{ route('general_chat') }}"> <img src="{{ asset('assets/img/forum.png') }}" alt=""
+                                        src="{{ asset('assets/img/reply_general_question.png') }}" alt=""
                                         class="img_1" /></a>
                             </div>
                         </div>
-
-
-
-
-
-
                     </div>
                 </div>
 

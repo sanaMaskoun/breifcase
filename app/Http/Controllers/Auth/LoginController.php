@@ -43,8 +43,11 @@ class LoginController extends Controller
                 return redirect()->route('home_client');
             }
 
-            if (in_array("lawyer", $roles) || in_array("translation_company", $roles)) {
+            if (in_array("lawyer", $roles)) {
                 return redirect()->route('home_lawyer');
+            }
+            if (in_array("translation_company", $roles)) {
+                return redirect()->route('home_company');
             }
 
         }

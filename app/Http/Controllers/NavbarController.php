@@ -23,6 +23,11 @@ class NavbarController extends Controller
         $news = News::all();
         return view('pages.navbar.homeLawyer', compact('news'));
     }
+    public function home_Company()
+    {
+        $news = News::all();
+        return view('pages.navbar.homeCompany', compact('news'));
+    }
 
     public function explore_lawyer(Request $request)
     {

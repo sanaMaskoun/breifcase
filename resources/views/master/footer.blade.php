@@ -25,6 +25,11 @@ $client_encoded_id = base64_encode(Auth()->user()->id);
                 <i class="bx bx-home" style="font-size: 25px"></i>Home
             </a>
             @endrole
+            @role('translation_company')
+            <a href="{{ route('home_company') }}" class="footer">
+                <i class="bx bx-home" style="font-size: 25px"></i>Home
+            </a>
+            @endrole
 
 
             <a href="{{ route('edit_client' , $client_encoded_id ) }}" class="footer"><i class="bx bx-cog" style="font-size: 25px"></i>Settings</a>

@@ -10,7 +10,7 @@
 
             <div class="list-document-dashboard">
                 @foreach ($bills as $bill)
-                    <div class="col-lg-3 col-md-6 col-sm-12 ">
+                    <div class="col-lg-3 col-md-6 col-sm-12  mt-4 ">
                         <img src="{{ asset('assets/img/invoice.png') }}" alt="bills Image" class="img-doc">
                         <h5 class="title-document-dashboard">{{ $bill->document->title }}</h5>
                         <div class="container-details-document-dashboard">

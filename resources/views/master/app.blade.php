@@ -30,7 +30,7 @@
         @if (Auth()->user() != null && Auth()->user()->is_active == true)
             @if (Auth::user()->type == UserTypeEnum::client)
                 @include('master.header_auth_client')
-            @elseif (Auth::user()->type == UserTypeEnum::lawyer)
+            @elseif (Auth::user()->type == UserTypeEnum::lawyer ||  Auth::user()->type == UserTypeEnum::translation_company )
                 @include('master.header_auth_lawyer')
             @endif
         @else

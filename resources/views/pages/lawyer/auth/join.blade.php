@@ -2,6 +2,7 @@
 @section('content')
     <div class="container box-sign mt-5">
         <form method="POST" action="{{ route('store_join_lawyer') }}" enctype="multipart/form-data">
+
             @csrf
 
             <div class="profile-photo-sign">
@@ -61,6 +62,8 @@
                 </div>
             </div>
 
+
+
             <div class="row">
                 <div class="form-group-sign col-md-5">
                     <label class="label-inline">Gender</label>
@@ -72,25 +75,26 @@
                         <input class="form-check-input input-inline" type="radio" name="gender" id="female" value=2 />
                         <label class="form-check-label" for="female">Female</label>
                     </div>
-                    @error('gender')
-                        <small class="form-text text-danger">{{ $message }}</small>
-                    @enderror
                 </div>
+                @error('gender')
+                    <small class="form-text text-danger">{{ $message }}</small>
+                @enderror
 
                 <div class="form-group-sign col-md-5">
                     <label for="consultationPrice" class="label-inline">Consultation Price</label>
                     <input type="text" class="form-control-sign input-inline" id="consultationPrice"
-                        name="consultation_price" placeholder="500" />
+                        name="consultation_price" placeholder="500 aed" />
                     @error('consultation_price')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
             </div>
 
+
             <div class="row">
                 <div class="form-group-sign col-md-5">
                     <label for="birth" class="label-inline">Birth</label>
-                    <input type="text" class="form-control-sign input-inline" id="birth" name="birth"
+                    <input type="text" class="form-control form-control-sign input-inline" id="email" name="birth"
                         placeholder="00-00-0000" />
                     @error('birth')
                         <small class="form-text text-danger">{{ $message }}</small>
@@ -101,10 +105,11 @@
                     <label for="licenseUpload" class="label-inline">
                         Upload License <i class="fas fa-upload icon-upload-sign"></i>
                     </label>
-                    <input type="file" id="licenseUpload" name="licenses[]" class="form-control-file" multiple />
+                    <input type="file" id="licenseUpload" class="form-control-file" name="licenses[]" multiple />
                     @error('licenses')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
+
                     <div class="container img-box-2 col-12">
                         <div class="img-box">
                             <div id="licensePreviewContainer" class="image-preview-container"></div>
@@ -130,6 +135,7 @@
                 </div>
             </div>
 
+
             <div class="row">
                 <div class="form-group-sign col-md-5 email-1">
                     <label for="email" class="label-inline">Email</label>
@@ -142,9 +148,9 @@
             </div>
 
             <div class="row">
-                <div class="form-group-sign col-md-5">
+                <div class="form-group-sign col-md-5 mobile-1">
                     <label for="mobile" class="label-inline">Mobile Number</label>
-                    <input type="text" class="form-control-sign input-inline" id="phone" name="phone"
+                    <input type="text" class="form-control-sign input-inline" id="mobile" name="phone"
                         placeholder="05xxxxxxx" />
                     @error('phone')
                         <small class="form-text text-danger">{{ $message }}</small>
@@ -195,10 +201,12 @@
                 </div>
             </div>
 
+
+
             <div class="row">
-                <div class="form-group-sign col-md-5 country-1">
+                <div class="form-group form-group-sign col-md-5 country-1">
                     <label for="country" class="label-inline">Country</label>
-                    <select class="form-control-sign" name="country" onchange="updateCities()">
+                    <select class="form-control-sign" name="country" id="country" onchange="updateCities()">
                         <option>Select country</option>
                         <option value="1">Saudi Arabia</option>
                         <option value="2">United Arab Emirates</option>
@@ -209,8 +217,9 @@
                 </div>
             </div>
 
+
             <div class="row">
-                <div class="form-group-sign col-md-5 city-1">
+                <div class="form-group form-group-sign col-md-5 city-1">
                     <label for="city" class="label-inline">City</label>
                     <select class="form-control-sign" id="city" name="city">
                         <option>Select city</option>
@@ -241,15 +250,15 @@
                     @enderror
                 </div>
 
-
-                <div class="form-group-sign col-md-6" style="margin-top: 10px">
+                <div class="form-group-sign col-md-6 bio" style="margin-top: 10px">
                     <label for="biography">Biography</label>
-                    <textarea class="form-control-sign" id="biography" name="bio" rows="3" placeholder="Biography"></textarea>
+                    <textarea class="form-control-sign" id="biography" rows="3" name="bio" placeholder="Biography"></textarea>
                     @error('bio')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
             </div>
+
 
             <div class="row">
                 <div class="form-group-sign col-md-5 location-1">
@@ -265,7 +274,7 @@
             <div class="row">
                 <div class="form-group-sign col-md-5 id-1">
                     <label for="emiratesId" class="label-inline">Emirates ID</label>
-                    <input type="text" class="form-control-sign input-inline" id="emirates_id" name="emirates_id"
+                    <input type="text" class="form-control-sign input-inline" id="emiratesId" name="emirates_id"
                         placeholder="784xxxxxxx" />
                     @error('emirates_id')
                         <small class="form-text text-danger">{{ $message }}</small>
@@ -273,13 +282,16 @@
                 </div>
             </div>
 
+
+
+
             <div class="row">
                 <div class="form-group-sign file-upload col-md-5 id-front">
                     <label for="front" class="label-inline">
                         Upload Emirates ID front
                         <i class="fas fa-upload icon-upload-sign"></i>
                     </label>
-                    <input type="file" id="front" class="form-control-file input-inline" name="front_emirates_id"
+                    <input type="file" id="front" name="front_emirates_id" class="form-control-file input-inline"
                         accept="image/*" />
                     @error('front_emirates_id')
                         <small class="form-text text-danger">{{ $message }}</small>
@@ -288,14 +300,14 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row id-back">
                 <div class="form-group-sign file-upload col-md-5" style="height: 50px">
                     <label for="back" class="label-inline">
                         Upload Emirates ID back
                         <i class="fas fa-upload icon-upload-sign"></i>
                     </label>
-                    <input type="file" id="back" class="form-control-file input-inline" name="back_emirates_id"
-                        accept="image/*" />
+                    <input type="file" id="back" class="form-control-file input-inline" accept="image/*"
+                        name="back_emirates_id" accept="image/*" />
                     @error('back_emirates_id')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -315,9 +327,11 @@
                     </div>
                 </div>
             </div>
+
             <div class="submit-btn">
                 <button type="submit">Sign Up</button>
             </div>
         </form>
+
     </div>
 @endsection

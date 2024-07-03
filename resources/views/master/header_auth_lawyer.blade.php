@@ -5,11 +5,21 @@
 <header id="header">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex align-items-center my-5 container">
 
-        <a class="navbar-brand" href="{{ route('home_lawyer') }}">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="logo__img img-fluid" />
-            <br />
-            <span class="logo__name">The legal platform</span>
-        </a>
+        @role('lawyer')
+            <a class="navbar-brand" href="{{ route('home_lawyer') }}">
+                <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="logo__img img-fluid" />
+                <br />
+                <span class="logo__name">The legal platform</span>
+            </a>
+        @endrole
+
+        @role('translation_company')
+            <a class="navbar-brand" href="{{ route('home_company') }}">
+                <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="logo__img img-fluid" />
+                <br />
+                <span class="logo__name">The legal platform</span>
+            </a>
+        @endrole
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,26 +60,42 @@
                     <a class="nav-link active" href="{{ route('about') }}">About Us</a>
                 </li>
 
-                @hasanyrole('lawyer|translation_companyF')
+                @role('lawyer')
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ route('lawyer_dashboard') }}">
                             <i class='bx bxs-dashboard icon-header'></i>
                         </a>
                     </li>
-                @endhasanyrole
+                @endrole
 
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('chat_dashboard') }}">
-                        <i class="bx bx-chat icon-header"></i></a>
-                </li>
+                @role('translation_company')
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('company_dashboard') }}">
+                            <i class='bx bxs-dashboard icon-header'></i>
+                        </a>
+                    </li>
+                @endrole
+
+                @role('lawyer')
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('chat_lawyer_dashboard') }}">
+                            <i class="bx bx-chat icon-header"></i></a>
+                    </li>
+                @endrole
+                
+                @role('translation_company')
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('chat_company_dashboard') }}">
+                            <i class="bx bx-chat icon-header"></i></a>
+                    </li>
+                @endrole
 
                 <li class="nav-item">
                     <a class="nav-link active" href="#">
                         <i class="bx bx-bell icon-header"></i></a>
                 </li>
             </ul>
-            <a href="#"> <img class="img-profile"
-                    src="{{ Auth()->user()->getFirstMediaUrl('profile') }}"
+            <a href="#"> <img class="img-profile" src="{{ Auth()->user()->getFirstMediaUrl('profile') }}"
                     alt="" /></a>
             </ul>
         </div>

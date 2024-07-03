@@ -1,22 +1,40 @@
-function previewImage(input, previewContainer) {
+function previewImage(input, previewContainerId) {
+    const previewContainer = document.getElementById(previewContainerId);
+    previewContainer.innerHTML = "";
+
     if (input.files && input.files[0]) {
-      var reader = new FileReader();
+      const reader = new FileReader();
+
       reader.onload = function (e) {
-        var img = document.createElement("img");
+        const imagePreview = document.createElement("div");
+        imagePreview.className = "image-preview";
+
+        const img = document.createElement("img");
         img.src = e.target.result;
-        previewContainer.innerHTML = "";
-        previewContainer.appendChild(img);
+        imagePreview.appendChild(img);
+
+        const deleteIcon = document.createElement("button");
+        deleteIcon.className = "delete-icon";
+        deleteIcon.innerHTML = "&times;";
+        deleteIcon.onclick = function () {
+          previewContainer.innerHTML = "";
+          input.value = ""; // Clear the input value
+        };
+        imagePreview.appendChild(deleteIcon);
+
+        previewContainer.appendChild(imagePreview);
       };
+
       reader.readAsDataURL(input.files[0]);
     }
   }
 
   document.getElementById("front").addEventListener("change", function () {
-    previewImage(this, document.getElementById("front-1"));
+    previewImage(this, "front-1");
   });
 
   document.getElementById("back").addEventListener("change", function () {
-    previewImage(this, document.getElementById("back-1"));
+    previewImage(this, "back-1");
   });
 
   //
@@ -35,15 +53,28 @@ function previewImage(input, previewContainer) {
   function handleFiles(files, containerId) {
     const container = document.getElementById(containerId);
     for (const file of files) {
+      const imgContainer = document.createElement("div");
+      imgContainer.classList.add("uploaded-image-container");
+
       const img = document.createElement("img");
       img.classList.add("uploaded-image");
       img.file = file;
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.classList.add("delete-icon-1");
+      deleteBtn.innerText = "X";
+      deleteBtn.addEventListener("click", function () {
+        imgContainer.remove();
+      });
+
+      imgContainer.appendChild(img);
+      imgContainer.appendChild(deleteBtn);
+      container.appendChild(imgContainer);
 
       const reader = new FileReader();
       reader.onload = (function (aImg) {
         return function (e) {
           aImg.src = e.target.result;
-          container.appendChild(aImg); // أضف الصورة بعد تعيين src
         };
       })(img);
       reader.readAsDataURL(file);

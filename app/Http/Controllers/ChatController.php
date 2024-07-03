@@ -31,12 +31,20 @@ class ChatController extends Controller
         return view('pages.chat.chat', compact('client', 'users'));
     }
 
-    public function chat_dashboard()
+    public function chat_lawyer_dashboard()
     {
         $users = $this->get_users_for_chat();
 
-        return view('pages.chat.dashboard.chat', compact('users'));
+        return view('pages.chat.dashboard.lawyer.chat', compact('users'));
     }
+    public function chat_company_dashboard()
+    {
+        $users = $this->get_users_for_chat();
+
+        return view('pages.chat.dashboard.company.chat', compact('users'));
+    }
+
+
     public function group()
     {
         $groups = $this->get_user_groups();
@@ -247,7 +255,7 @@ class ChatController extends Controller
 
     public function contact()
     {
-        $users = User::where('is_active' , true)->whereIn('type' , [UserTypeEnum::lawyer , UserTypeEnum::translation_company])->get();
+        $users = User::where('is_active' , true)->where('type' , UserTypeEnum::lawyer )->get();
 
         return view('pages.chat.dashboard.contact', compact('users'));
     }
