@@ -16,8 +16,18 @@ class SuggestionController extends Controller
     public function index()
     {
         $suggestions = Suggestion::paginate(config('constants.PAGINATION_COUNT'));
-        return view('pages.suggestion', compact('suggestions'));
+        $num_suggestions = Suggestion::count();
+        return view('pages.suggestion.list', compact('suggestions','num_suggestions'));
 
     }
-   
+
+
+    public function show($suggestion_encode_id)
+    {
+
+        $suggestion_decode_id = base64_decode($suggestion_encode_id);
+        $suggestion = Suggestion::find($suggestion_decode_id);
+        return view('pages.suggestion.show', compact('suggestion'));
+    }
+
 }

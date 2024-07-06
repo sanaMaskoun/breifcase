@@ -227,7 +227,7 @@ a.link-profile {
 }
 
 .sidebar-dashboard a {
-    padding: 10px 0;
+    padding: 8px 0;
     display: flex;
     align-items: center;
     margin: 10px 0;
@@ -235,6 +235,11 @@ a.link-profile {
     font-size: 20px;
     color: #333;
     text-decoration: none;
+}
+
+.sidebar-dashboard-admin{
+    margin:0 !important;
+
 }
 
 .sidebar-dashboard a i {
@@ -473,7 +478,6 @@ a.link-profile {
 
 /***** start join lawyer ****/
 
-/*sign**/
 
 .box-sign {
     background-color: rgb(125 125 125 / 71%);
@@ -935,6 +939,115 @@ a.link-profile {
 
 /***** end join lawyer ****/
 
+
+/**** start join translation company ***/
+
+/*sign**/
+
+.box-sign-2 {
+    background-color: rgb(125 125 125 / 71%);
+    height: 45rem;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+  }
+
+  .box-sign-2 h2 {
+    color: #000000;
+    font-weight: 700;
+    text-align: center;
+    position: relative;
+    right: 10rem;
+  }
+
+  .email-2 {
+    position: relative;
+    bottom: 40px;
+  }
+  .mobile-2 {
+    position: relative;
+    bottom: 40px;
+  }
+  .land-2 {
+    position: relative;
+    bottom: 35px;
+    height: 20px;
+  }
+  .country-2 {
+    position: relative;
+    bottom: 30px;
+  }
+  .city-2 {
+    position: relative;
+    bottom: 25px;
+    height: 20px;
+  }
+  .location-2 {
+    position: relative;
+    bottom: 20px;
+  }
+  .password-1 {
+    position: relative;
+    bottom: 20px;
+  }
+  .re-password-1 {
+    position: relative;
+    bottom: 20px;
+  }
+  .id-back-1 {
+    position: relative;
+    bottom: 15px;
+    height: 20px;
+  }
+
+  @media screen and (max-width: 755px) {
+    .box-sign-2 {
+      min-height: 85rem;
+    }
+    .form-group-sign {
+      margin-top: 30px;
+    }
+    .img-box-2 {
+      height: 50px;
+    }
+
+    .submit-btn {
+      display: flex;
+      justify-content: right;
+      position: relative;
+      top: 80px;
+    }
+    .file-upload {
+      position: relative;
+      bottom: 50px;
+    }
+    .file-upload-1 {
+      position: relative;
+      top: 22rem !important;
+    }
+    .id-back-1 {
+      position: relative;
+      bottom: 20px;
+    }
+    .image-preview-container {
+      height: 50px;
+    }
+  }
+  .lang-1 {
+    font-weight: 900;
+    color: #000;
+    display: flex;
+    justify-content: center;
+  }
+  @media screen and (max-width: 555px) {
+    .box-sign-2 h2 {
+      position: relative;
+      left: 1px;
+    }
+  }
+
+/**** end join translation company ***/
 
 /** start review    **/
 .commet-review {
@@ -1500,7 +1613,6 @@ a.link-profile {
     font-weight: 600;
     display: flex;
     justify-content: center;
-    width: 60%;
     border-radius: 15px;
 }
 

@@ -40,7 +40,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 box-news-2 ">
                             <div class="box-Questions-1">
                                 <p class="  link-questions-1">Lawyer Practioners</p>
-                                <a href="{{ route('explore_lawyer') }}"> <img src="{{ asset('assets/img/translation.png') }}" alt=""
+                                <a href="{{ route('explore_lawyer') }}"> <img src="{{ asset('assets/img/lawyer_icon.png') }}" alt=""
                                         class="img_1" /></a>
                             </div>
 

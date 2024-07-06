@@ -1,0 +1,407 @@
+/** start suggestion **/
+.img-user-suggestion {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.img-user-suggestion-details{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+
+.title-suggestion {
+    color: black;
+}
+
+.title-suggestion:hover {
+    color: black;
+    text-decoration: none;
+}
+.name-user-suggestion{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.body-suggestion{
+    background-color: #ffffff30;
+    border-radius: 15px;
+}
+
+.description-suggestion{
+    font-size: 25px;
+}
+
+
+/** end suggestion **/
+
+/** start details consultaion **/
+.title-details{
+    display: block;
+    color: black;
+    font-weight: bold;
+}
+.title-details:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.title-consultation-details{
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.description-consultation-details{
+    font-size: 20px;
+}
+/** end details consultaion **/
+
+
+/*cases*/
+
+
+.content-Admin {
+    border-radius: 15px;
+    background-color: rgb(125 125 125 / 71%);
+    padding: 20px;
+    height: 70ch;
+    margin-left: 30px;
+}
+
+.nav-dash {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.sidebar a i {
+    font-size: 40px !important;
+}
+
+.fa-gavel {
+    color: rgb(133, 73, 4);
+}
+
+.content-Admin h2 {
+    color: #000000;
+    position: relative;
+    bottom: 3rem;
+}
+
+.btn-admin {
+    background-color: rgb(125 125 125 / 71%);
+    color: #fff !important;
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    border-radius: 15px;
+    margin-left: 17px;
+    /* margin-top: 5px; */
+    padding: 7px;
+}
+
+.content-Admin-1 {
+    height: 40ch;
+    background-color: rgba(73, 70, 70, 0.505);
+    border-radius: 15px;
+}
+
+.content-Admin-1 h6 {
+    color: #000;
+    font-weight: 700;
+    padding: 10px;
+}
+
+.content-Admin-1 h3 {
+    color: #000;
+    font-weight: 700;
+    padding: 30px;
+}
+
+.content-Admin-1 img {
+    height: 75px;
+    width: 75px;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+/*lawyers*/
+
+.lawyer-card {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lawyer-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+.toggle-switch {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bg-custom {
+    background: url("background-image-url.jpg") no-repeat center center;
+    background-size: cover;
+    padding: 40px 0;
+}
+
+.custom-switch {
+    display: flex;
+    align-items: center;
+}
+
+.custom-switch input[type="checkbox"] {
+    display: none;
+}
+
+.custom-switch input[type="checkbox"]+label {
+    position: relative;
+    width: 50px;
+    height: 20px;
+    background: rgb(125 125 125 / 71%);
+    border-radius: 10px;
+    cursor: pointer;
+    bottom: 20px;
+    right: 20px;
+    transition: background 0.3s;
+}
+
+.custom-switch input[type="checkbox"]+label:before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #050505;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: left 0.3s;
+}
+
+.custom-switch input[type="checkbox"]:checked+label {
+    background: #ffffff;
+}
+
+.custom-switch input[type="checkbox"]:checked+label:before {
+    left: 23px;
+}
+
+/*lawyersprofile*/
+.form-group-law input {
+    border-radius: 15px;
+    color: #000;
+}
+
+.form-group-law {
+    position: relative;
+    bottom: 50px;
+}
+
+.image-upload {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 50px;
+}
+
+.image-upload-1 {
+    overflow-y: hidden;
+    display: flex;
+    position: relative;
+    left: 110px;
+}
+
+.image-upload img {
+    flex: 0 0 50%;
+    height: 50px;
+    width: 50px;
+    padding: 10px;
+}
+
+.lastName-1 {
+    position: relative;
+    bottom: 6.5rem;
+}
+
+.brith-law {
+    position: relative;
+    bottom: 9rem;
+}
+
+.email-law {
+    position: relative;
+    bottom: 9.5rem;
+}
+
+.mobile-law {
+    position: relative;
+    bottom: 10rem;
+}
+
+.landline-law {
+    position: relative;
+    bottom: 10.5rem;
+}
+
+.Expertise-law {
+    position: relative;
+    bottom: 10.5rem;
+}
+
+.Nationality-1 {
+    position: relative;
+    bottom: 15.5rem;
+}
+
+.City-law {
+    position: relative;
+    bottom: 16rem;
+}
+
+.Location-law {
+    position: relative;
+    bottom: 16.5rem;
+}
+
+.bio-law {
+    position: relative;
+    bottom: 18rem;
+}
+
+.id-law {
+    position: relative;
+    bottom: 19.8rem;
+}
+
+#Biography {
+    height: 80px;
+}
+
+.col-form-label {
+    font-weight: 700;
+}
+
+.upload-1 {
+    position: relative;
+    bottom: 1.8rem;
+}
+
+@media screen and (max-width: 815px) {
+    .content-Admin {
+        height: auto;
+    }
+}
+
+.content-Admin label {
+    font-size: 15px;
+    font-weight: 900;
+}
+
+/*client*/
+.row-client-1 {
+    position: relative;
+    bottom: 7rem;
+}
+
+.row-client-2 {
+    position: relative;
+    bottom: 7rem;
+}
+
+.row-client-3 {
+    position: relative;
+    bottom: 7rem;
+}
+
+.row-client-4 {
+    position: relative;
+    bottom: 7rem;
+}
+
+.row-client-5 {
+    position: relative;
+    bottom: 7rem;
+}
+
+/*Library*/
+.Library {
+    border-radius: 15px;
+    background-color: rgb(125 125 125 / 71%);
+    padding: 20px;
+    height: 70ch;
+}
+
+.Library-1 {
+    max-width: 1200px;
+}
+
+.Library h2 {
+    padding-left: 30px;
+    color: #000;
+    font-weight: 700;
+}
+
+.Library-part-1 {
+    padding-left: 50px;
+}
+
+.Library-part-2 {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    border-radius: 15px;
+    overflow-y: scroll;
+}
+
+/*qus*/
+.question-section {
+    border-radius: 10px;
+}
+
+.question-section h4 {
+    color: #000;
+    font-weight: 800;
+    position: relative;
+    bottom: 2rem;
+}
+
+.question-section p {
+    color: #000;
+    font-weight: 800;
+}
+
+.question-section-1 {
+    background-color: white;
+    height: 15rem;
+    padding: 15px;
+    border-radius: 15px;
+    overflow-y: scroll;
+}
+
+.lawyer {
+    text-align: center;
+}
+
+.lawyer img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.lawyer p {
+    margin: 5px 0 0;
+}
+
+.lawyer-img {
+    overflow-y: scroll;
+    height: 25rem;
+}

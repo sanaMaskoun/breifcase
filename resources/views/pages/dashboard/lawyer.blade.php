@@ -25,7 +25,7 @@
                                     <span class="span-2">&#9679; </span>Consultation {{ $consultations }} <br>
                                     <span class="span-3">&#9679; </span>General Question {{ $replies }} <br>
                                 </div>
-                                <a href="{{ route('bills_dashbord') }}" id="billsButton" >Bills and Receipts</a>
+                                <a href="{{ route('bills_dashboard') }}" id="billsButton" >Bills and Receipts</a>
                             </div>
 
                         </div>

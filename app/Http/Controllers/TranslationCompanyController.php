@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\DB;
 class TranslationCompanyController extends Controller
 {
     use  MessageTrait;
+
+    public function index()
+    {
+        
+    }
     public function show($company_encoded_id)
     {
         $company_decoded_id = base64_decode($company_encoded_id);

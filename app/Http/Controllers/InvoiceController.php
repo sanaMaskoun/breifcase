@@ -20,7 +20,7 @@ class InvoiceController extends Controller
 
     }
 
-    public function bills_dashbord()
+    public function bills_dashboard()
     {
         $bills = Invoice::where('receiver_id', Auth()->user()->id)->where('status' , InvoiceStatusEnum::accepte)->get();
         $num_bills = Invoice::where('receiver_id', Auth()->user()->id)->where('status' , InvoiceStatusEnum::accepte)->count();

@@ -22,21 +22,30 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    use GetUsersForChatTrait, MessageTrait, GetUserGroupTrait ,GetUserGeneralChatsTrait ,GetClientsForChatTrait;
+    use GetUsersForChatTrait, MessageTrait, GetUserGroupTrait, GetUserGeneralChatsTrait, GetClientsForChatTrait;
 
-    public function chat()
+    public function chat_client()
     {
         $client = Auth()->user();
         $users = $this->get_users_for_chat();
-        return view('pages.chat.chat', compact('client', 'users'));
+        return view('pages.chat.client.chat', compact('client', 'users'));
     }
 
-    public function chat_lawyer_dashboard()
+    public function chat_client_form($receiver_encoded_id)
     {
+
+        $client = Auth()->user();
+
+        $receiver_decoded_id = base64_decode($receiver_encoded_id);
+        $receiver = User::find($receiver_decoded_id);
+
         $users = $this->get_users_for_chat();
 
-        return view('pages.chat.dashboard.lawyer.chat', compact('users'));
+        $messages = $this->get_messages($receiver);
+
+        return view('pages.chat.client.formChat', compact(['client', 'receiver', 'messages', 'users']));
     }
+
     public function chat_company_dashboard()
     {
         $users = $this->get_users_for_chat();
@@ -44,45 +53,45 @@ class ChatController extends Controller
         return view('pages.chat.dashboard.company.chat', compact('users'));
     }
 
+    public function chat_company_form($client_encoded_id)
+    {
+        $client_decoded_id = base64_decode($client_encoded_id);
+        $receiver = User::find($client_decoded_id);
+
+        $users = $this->get_users_for_chat();
+
+        $messages = $this->get_messages($receiver);
+
+        return view('pages.chat.dashboard.company.formChat', compact(['receiver', 'messages', 'users']));
+    }
+
+
+    public function chat_lawyer_dashboard()
+    {
+        $users = $this->get_users_for_chat();
+
+        return view('pages.chat.dashboard.lawyer.chat', compact('users'));
+    }
+
+    public function lawyer_form_dashboard($receiver_encoded_id)
+    {
+        $receiver_decoded_id = base64_decode($receiver_encoded_id);
+        $receiver = User::find($receiver_decoded_id);
+
+        $users = $this->get_users_for_chat();
+
+        $messages = $this->get_messages($receiver);
+
+        return view('pages.chat.dashboard.lawyer.formChat', compact(['receiver', 'messages', 'users']));
+    }
 
     public function group()
     {
         $groups = $this->get_user_groups();
-        return view('pages.chat.dashboard.group', compact('groups'));
+        return view('pages.chat.dashboard.lawyer.group', compact('groups'));
 
     }
-    public function general_chat()
-    {
-        $general_chats = $this->get_user_general_chats();
-        return view('pages.chat.dashboard.generalChat', compact('general_chats'));
 
-    }
-    public function chat_form($receiver_encoded_id)
-    {
-
-        $client = Auth()->user();
-
-        $receiver_decoded_id = base64_decode($receiver_encoded_id);
-        $receiver = User::find($receiver_decoded_id);
-
-        $users = $this->get_users_for_chat();
-
-        $messages = $this->get_messages($receiver);
-
-        return view('pages.chat.formChat', compact(['client', 'receiver', 'messages', 'users']));
-    }
-
-    public function chat_form_dashboard($receiver_encoded_id)
-    {
-        $receiver_decoded_id = base64_decode($receiver_encoded_id);
-        $receiver = User::find($receiver_decoded_id);
-
-        $users = $this->get_users_for_chat();
-
-        $messages = $this->get_messages($receiver);
-
-        return view('pages.chat.dashboard.formChat', compact(['receiver', 'messages', 'users']));
-    }
     public function group_form($group_encoded_id)
     {
         $group_decoded_id = base64_decode($group_encoded_id);
@@ -102,9 +111,18 @@ class ChatController extends Controller
         $messages = Message::where('group_id', $group->id)->get();
         $groups = $this->get_user_groups();
 
-        return view('pages.chat.dashboard.formGroup', compact(['groups', 'messages', 'group']));
+        return view('pages.chat.dashboard.lawyer.formGroup', compact(['groups', 'messages', 'group']));
 
     }
+    public function general_chat()
+    {
+        $general_chats = $this->get_user_general_chats();
+        return view('pages.chat.dashboard.lawyer.generalChat', compact('general_chats'));
+
+    }
+
+
+
     public function general_chat_form($general_chat_encoded_id)
     {
         $general_chat_decoded_id = base64_decode($general_chat_encoded_id);
@@ -115,7 +133,7 @@ class ChatController extends Controller
         $messages = Message::where('group_id', $general_chat->id)->get();
         $general_chats = $this->get_user_general_chats();
 
-        return view('pages.chat.dashboard.formGeneralChat', compact(['general_chats', 'messages', 'general_chat']));
+        return view('pages.chat.dashboard.lawyer.formGeneralChat', compact(['general_chats', 'messages', 'general_chat']));
 
     }
 
@@ -255,26 +273,26 @@ class ChatController extends Controller
 
     public function contact()
     {
-        $users = User::where('is_active' , true)->where('type' , UserTypeEnum::lawyer )->get();
+        $users = User::where('is_active', true)->where('type', UserTypeEnum::lawyer)->get();
 
-        return view('pages.chat.dashboard.contact', compact('users'));
+        return view('pages.chat.dashboard.lawyer.contact', compact('users'));
     }
     public function contact_client()
     {
-        $users =  $this->get_clients_for_chat();
+        $users = $this->get_clients_for_chat();
 
-        return view('pages.chat.dashboard.chat', compact('users'));
+        return view('pages.chat.dashboard.lawyer.ContactClient', compact('users'));
     }
     public function form_contact_client($receiver_encoded_id)
     {
         $receiver_decoded_id = base64_decode($receiver_encoded_id);
         $receiver = User::find($receiver_decoded_id);
 
-        $users =  $this->get_clients_for_chat();
+        $users = $this->get_clients_for_chat();
 
         $messages = $this->get_messages($receiver);
 
-        return view('pages.chat.dashboard.formChat', compact(['receiver', 'messages', 'users']));
+        return view('pages.chat.dashboard.lawyer.formContactClient', compact(['receiver', 'messages', 'users']));
     }
     public function attachments($encodedIdReceiver)
     {

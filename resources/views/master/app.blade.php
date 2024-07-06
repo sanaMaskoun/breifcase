@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/ClientStyles.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/LawyerStyles.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/AdminStyes.css') }}" />
     <title>Briefcase - The Legal Platform</title>
     <style>
         :root {
@@ -30,7 +31,7 @@
         @if (Auth()->user() != null && Auth()->user()->is_active == true)
             @if (Auth::user()->type == UserTypeEnum::client)
                 @include('master.header_auth_client')
-            @elseif (Auth::user()->type == UserTypeEnum::lawyer ||  Auth::user()->type == UserTypeEnum::translation_company )
+            @elseif (Auth::user()->type == UserTypeEnum::lawyer ||  Auth::user()->type == UserTypeEnum::translation_company || Auth::user()->type == UserTypeEnum::admin )
                 @include('master.header_auth_lawyer')
             @endif
         @else
@@ -183,8 +184,10 @@
     <script src="{{ asset('assets/js/script.js') }}"></script>
     <script src="{{ asset('assets/js/oldScript.js') }}"></script>
     <script src="{{ asset('assets/js/file.js') }}"></script>
-    <script src="{{ asset('assets/js/dash-1.js') }}"></script>
-    <script src="{{ asset('assets/js/dash.js') }}"></script>
+    <script src="{{ asset('assets/js/chartAdmin.js') }}"></script>
+    <script src="{{ asset('assets/js/chartCompany.js') }}"></script>
+    <script src="{{ asset('assets/js/chartLawyer.js') }}"></script>
+    <script src="{{ asset('assets/js/doughnutChart.js') }}"></script>
     <script src="{{ asset('assets/js/img-join-lawyer.js') }}"></script>
 </body>
 

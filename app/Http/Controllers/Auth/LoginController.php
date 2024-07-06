@@ -36,7 +36,7 @@ class LoginController extends Controller
             $roles = Auth()->user()->roles->pluck('name')->toArray();
 
             if (in_array("admin", $roles)) {
-                // return redirect()->route('dashboard');
+                 return redirect()->route('admin_dashboard');
             }
 
             if (in_array("client", $roles)) {

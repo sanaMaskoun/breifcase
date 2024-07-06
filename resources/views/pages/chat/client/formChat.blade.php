@@ -1,54 +1,7 @@
-@extends('pages.chat.navChat')
-@section('content_chat')
+@extends('pages.client.details')
+@section('profile_content')
 
-    <head>
-        <style>
-            #chat-header_1 .btn {
-                margin-left: 10px;
-            }
-
-            .img-icon-template{
-                width: 35px !important;
-                height: 35px !important;
-            }
-
-            .btn-dropdown-toggle {
-                padding: 0;
-                /* Remove any padding */
-                width: 50px !important;
-                /* Set the width */
-                height: 50px !important;
-                /* Set the height */
-                border: none;
-                /* Remove border */
-                background: none;
-                /* Remove background */
-
-            }
-
-            .dropdown-toggle::after {
-                content: none;
-            }
-
-            .dropdown-menu.show
-            {
-                overflow-y: scroll;
-                height: 160px;            }
-            .btn-dropdown-toggle img {
-                font-size: 24px;
-                /* Adjust the size of the icon */
-                height: 100%;
-                width: 100%;
-                border-radius: 0px !important;
-            }
-
-            .dropdown-menu {
-                min-width: 100px;
-                /* Adjust as needed */
-            }
-        </style>
-    </head>
-    <div class="box-profile-chat box-profile-chat-dashboard">
+    <div class="box-profile-chat">
 
 
         <div class="container-fluid">
@@ -56,12 +9,13 @@
                 <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat" id="contact-list">
                     <div class="list-group">
                         @foreach ($users as $user)
-                            <a href="{{ route('chat_form_dashboard', base64_encode($user->id)) }}" class="list-group-item1"
+
+                            <a href="{{ route('chat_client_form', base64_encode($user->id)) }}" class="list-group-item1"
                                 onclick="openChat('Jamie Chastain')">
                                 <div class="contact-info">
-                                    <img src="{{ $user->getFirstMediaUrl('profile') }}" alt="User Image">
+                                    <img src="{{ $user->getFirstMediaUrl('profile') }}"  alt="User Image">
                                     <div>
-                                        <div class="user-name title-group">{{ $user->name }}</div>
+                                        <div class="user-name">{{ $user->name }}</div>
                                         <div class="last-message  last_msg_form_chat" id="last_message_{{ $user->id }}">
                                             {{ $user->latest_message?->message }}</div>
                                         <div class="last-seen"> {{ $user->latest_message?->created_at->diffForHumans() }}
@@ -79,45 +33,15 @@
 
 
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                    <div id="chat-area" class="card card_form_chat card-chat-dashboard">
+                    <div id="chat-area" class="card card_form_chat">
                         <div id="chat-header_1">
                             <img src="{{ $receiver->getFirstMediaUrl('profile') }}" class="img_contact">
-                            <span class="title-name-form-chat">{{ $receiver->name }}</span>
-
-                            <div class="dropdown">
-
-                                <button id="fullscreen-button" class="btn">
-                                    <i id="fullscreen-icon" class="fas fa-expand fullscreen-icon"></i>
-                                </button>
-
-                                <button id="exit-fullscreen-button" class="btn" style="display: none;">
-                                    <i id="exit-fullscreen-icon" class="fas fa-compress fullscreen-icon"></i>
-                                </button>
-                                <button class="btn btn-dropdown-toggle dropdown-toggle" type="button"
-                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    <img class="img-icon-template" alt="" src="{{ asset('assets/img/template-dashboard.png') }}">
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#" data-file-name="document1.pdf">Document 1</a>
-                                    <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                    <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                    <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                    <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                    <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                    <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                    <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                    <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                    <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                    <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                    <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                    <a class="dropdown-item" href="#" data-file-name="presentation3.pptx">Presentation
-                                        3</a>
-                                </div>
-                            </div>
-
-
-
+                            <button id="fullscreen-button" class="btn">
+                                <i id="fullscreen-icon" class="fas fa-expand fullscreen-icon"></i>
+                            </button>
+                            <button id="exit-fullscreen-button" class="btn" style="display: none;">
+                                <i id="exit-fullscreen-icon" class="fas fa-compress fullscreen-icon"></i>
+                            </button>
                         </div>
 
 
@@ -188,16 +112,14 @@
 
 
                         <div class="chat-footer">
-
-                            <form id="messageForm"
-                                action="{{ route('send_message_to_user', base64_encode($receiver->id)) }}" method="POST"
-                                enctype="multipart/form-data" class="form_chat_profile">
+                            <form id="messageForm" action="{{ route('send_message_to_user', base64_encode($receiver->id)) }}"
+                                method="POST" enctype="multipart/form-data" class="form_chat_profile">
                                 @csrf
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-lg-10 d-flex align-items-center">
                                             <textarea name="message" class="form-control message-input" placeholder="@lang('pages.type_message')"></textarea>
-                                            <button class="btn  send-button" type="submit"><i
+                                            <button class="btn send-button" type="submit"><i
                                                     class="fas fa-paper-plane"></i></button>
                                         </div>
 
@@ -205,8 +127,7 @@
                                             <label for="fileInput" class="send_file_chat">
                                                 <i class="fas fa-paperclip"></i>
                                             </label>
-                                            <input id="fileInput" type="file" name="attachments"
-                                                style="display: none;">
+                                            <input id="fileInput" type="file" name="attachments" style="display: none;">
 
                                             <a href="{{ route('attachments', base64_encode($receiver->id)) }}"
                                                 id="openAllAttachments" class="btn ">
@@ -238,4 +159,6 @@
 
 
     </div>
+
+
 @endsection

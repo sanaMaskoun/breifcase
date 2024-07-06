@@ -47,12 +47,12 @@ $client_encoded_id = base64_encode(Auth()->user()->id);
 
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('about') }}">About Us</a>
+                    <a class="nav-link active " href="{{ route('about') }}">About Us</a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('chat') }}">
+                    <a class="nav-link active" href="{{ route('chat_client') }}">
                         <i class="bx bx-chat icon-header"></i></a>
                 </li>
 

@@ -9,7 +9,7 @@
                             <div class="col-md-12 col-lg-12 p-0 contact-list-dashboard">
                                 <div class="list-group">
                                     @foreach ($users as $user)
-                                        <a href="{{ route('chat_form_dashboard', base64_encode($user->id)) }}" class="list-group-item1"
+                                        <a href="{{ route('lawyer_form_dashboard', base64_encode($user->id)) }}" class="list-group-item1"
                                             onclick="openChat('Jamie Chastain')">
                                             <div class="contact-info">
                                                 <img src="{{ $user->getFirstMediaUrl('profile') }}" class="img-contact-dashboard" alt="User Image">

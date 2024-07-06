@@ -20,6 +20,13 @@
                 <span class="logo__name">The legal platform</span>
             </a>
         @endrole
+        @role('admin')
+            <a class="navbar-brand" href="{{ route('home_client') }}">
+                <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="logo__img img-fluid" />
+                <br />
+                <span class="logo__name">The legal platform</span>
+            </a>
+        @endrole
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,6 +82,13 @@
                         </a>
                     </li>
                 @endrole
+                @role('admin')
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('admin_dashboard') }}">
+                            <i class='bx bxs-dashboard icon-header'></i>
+                        </a>
+                    </li>
+                @endrole
 
                 @role('lawyer')
                     <li class="nav-item">
@@ -82,10 +96,17 @@
                             <i class="bx bx-chat icon-header"></i></a>
                     </li>
                 @endrole
-                
+
                 @role('translation_company')
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ route('chat_company_dashboard') }}">
+                            <i class="bx bx-chat icon-header"></i></a>
+                    </li>
+                @endrole
+
+                @role('admin')
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('chat_admin') }}">
                             <i class="bx bx-chat icon-header"></i></a>
                     </li>
                 @endrole

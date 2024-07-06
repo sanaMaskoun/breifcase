@@ -82,7 +82,7 @@
                             <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                                 <img src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__7_-removebg-preview.png') }}"
                                     alt="" class="img_4" />
-                                <a href="{{ route('chat') }}" class="link-profile">Chat</a>
+                                <a href="{{ route('chat_client') }}" class="link-profile">Chat</a>
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
+use App\Http\Requests\CompanyRequest;
 use App\Http\Requests\LawyerRequest;
 use App\Models\Language;
 use App\Models\Practice;
@@ -70,10 +71,32 @@ class JoinController extends Controller
 
     public function join_translation_company()
     {
+        $languages = Language::all();
+
+        return view('pages.company.auth.join' ,compact('languages'));
 
     }
-    public function store_join_translation_company()
+    public function store_join_translation_company(CompanyRequest $request)
     {
+        $user = User::create($request->userValidated());
+        $user->lawyer()->create($request->companyValidated());
 
+        $user->languages()->sync($request->languages);
+
+        if (!empty($request->file('profile'))) {
+            $user->addMedia($request->file('profile'))->toMediaCollection('profile');
+        }
+
+
+
+        foreach ($request->file('certifications') as $certification) {
+            $user->lawyer->addMedia($certification)->toMediaCollection('certification');
+        }
+        foreach ($request->file('licenses') as $license) {
+            $user->lawyer->addMedia($license)->toMediaCollection('license');
+        }
+
+
+        return view('pages.welcome');
     }
 }

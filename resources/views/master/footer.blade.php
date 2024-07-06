@@ -14,11 +14,12 @@ $client_encoded_id = base64_encode(Auth()->user()->id);
                 <i class="bx bx-log-out" style="font-size: 25px"></i>Logout
             </a>
 
-            @role('client')
+            @hasanyrole('client|admin')
             <a href="{{ route('home_client') }}" class="footer">
                 <i class="bx bx-home" style="font-size: 25px"></i>Home
             </a>
-            @endrole
+            @endhasanyrole
+
 
             @role('lawyer')
             <a href="{{ route('home_lawyer') }}" class="footer">
@@ -31,8 +32,9 @@ $client_encoded_id = base64_encode(Auth()->user()->id);
             </a>
             @endrole
 
-
+@role('client')
             <a href="{{ route('edit_client' , $client_encoded_id ) }}" class="footer"><i class="bx bx-cog" style="font-size: 25px"></i>Settings</a>
+            @endrole
         </div>
     </div>
 </div>

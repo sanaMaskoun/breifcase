@@ -89,4 +89,13 @@ class DocumentController extends Controller
         return view('pages.document.reviews', compact('rates'));
 
     }
+
+
+    public function show($consultaion_encode_id)
+    {
+        $consultaion_decode_id = base64_decode($consultaion_encode_id);
+        $consultaion = Document::find( $consultaion_decode_id);
+
+        return view('pages.document.consultaion.show',compact('consultaion'));
+    }
 }
