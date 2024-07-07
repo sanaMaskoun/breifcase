@@ -27,8 +27,7 @@ class Document extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('case_template');
-        $this->addMediaCollection('translateFile')
-            ->singleFile();
+        $this->addMediaCollection('case_template')->singleFile();
+        $this->addMediaCollection('translateFile')->singleFile();
     }
 }

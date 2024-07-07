@@ -9,6 +9,7 @@
     border: none;
     background: none;
     padding: 0;
+    font-size: 17px;
 }
 
 .btn_download_book:focus {
@@ -150,7 +151,7 @@ a.link-profile {
     width: 80%;
 }
 
-.btn-post-GQ-company{
+.btn-post-GQ-company {
     border: none;
     padding: 5px;
     border-radius: 15px;
@@ -162,14 +163,16 @@ a.link-profile {
     text-align: center;
 }
 
-.btn-post-GQ-company:hover{
+.btn-post-GQ-company:hover {
     text-decoration: none;
     color: white;
 }
-.container-title-company{
+
+.container-title-company {
     height: 88px;
 }
-.title-post-company{
+
+.title-post-company {
     text-align: center;
     font-size: 22px;
     color: black;
@@ -177,18 +180,18 @@ a.link-profile {
     border: none;
 }
 
-.title-post-company::placeholder{
+.title-post-company::placeholder {
     color: black;
     font-weight: 800;
     font-size: 40px;
 }
 
-.paragraph-post-company{
+.paragraph-post-company {
     font-size: 20px;
     font-weight: 600;
 }
 
-.paragraph-2-post-company{
+.paragraph-2-post-company {
     text-align: center;
     font-size: 19px;
     font-weight: bold;
@@ -196,7 +199,7 @@ a.link-profile {
 
 }
 
-.btn-post-comapny{
+.btn-post-comapny {
     width: 100px;
     height: 45px;
     border-radius: 15px;
@@ -208,6 +211,7 @@ a.link-profile {
     font-weight: bold;
 
 }
+
 /*** end general question **/
 
 
@@ -237,8 +241,8 @@ a.link-profile {
     text-decoration: none;
 }
 
-.sidebar-dashboard-admin{
-    margin:0 !important;
+.sidebar-dashboard-admin {
+    margin: 0 !important;
 
 }
 
@@ -313,8 +317,21 @@ a.link-profile {
     width: 100%;
     height: 150px;
     object-fit: cover;
+    border-radius: 15px;
 }
 
+.title-template {
+    color: black;
+}
+
+.title-template:hover {
+    color: black;
+    text-decoration: none;
+}
+.icon-file-template{
+    font-size: 150px;
+    color: whitesmoke;
+}
 .btn-remove-template {
     background: none;
     border: none;
@@ -331,6 +348,36 @@ a.link-profile {
     background: #81807e;
 }
 
+.btn-upload-template {
+    margin-right: 16px;
+    font-size: 17px;
+}
+
+.upload-icon-template {
+    padding-right: 7px;
+}
+
+.btn-store-template{
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    border-radius: 15px;
+}
+
+.form-title-template {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.form-container-template {
+    background: #49464640;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
 /** start template dashboard **/
 
 
@@ -645,7 +692,7 @@ a.link-profile {
     margin-left: 50px;
     border: none;
     height: 30px;
-  }
+}
 
 .file-upload {
     margin-bottom: 20px;
@@ -951,101 +998,117 @@ a.link-profile {
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 1200px;
-  }
+}
 
-  .box-sign-2 h2 {
+.box-sign-2 h2 {
     color: #000000;
     font-weight: 700;
     text-align: center;
     position: relative;
     right: 10rem;
-  }
+}
 
-  .email-2 {
+.email-2 {
     position: relative;
     bottom: 40px;
-  }
-  .mobile-2 {
+}
+
+.mobile-2 {
     position: relative;
     bottom: 40px;
-  }
-  .land-2 {
+}
+
+.land-2 {
     position: relative;
     bottom: 35px;
     height: 20px;
-  }
-  .country-2 {
+}
+
+.country-2 {
     position: relative;
     bottom: 30px;
-  }
-  .city-2 {
+}
+
+.city-2 {
     position: relative;
     bottom: 25px;
     height: 20px;
-  }
-  .location-2 {
+}
+
+.location-2 {
     position: relative;
     bottom: 20px;
-  }
-  .password-1 {
+}
+
+.password-1 {
     position: relative;
     bottom: 20px;
-  }
-  .re-password-1 {
+}
+
+.re-password-1 {
     position: relative;
     bottom: 20px;
-  }
-  .id-back-1 {
+}
+
+.id-back-1 {
     position: relative;
     bottom: 15px;
     height: 20px;
-  }
+}
 
-  @media screen and (max-width: 755px) {
+@media screen and (max-width: 755px) {
     .box-sign-2 {
-      min-height: 85rem;
+        min-height: 85rem;
     }
+
     .form-group-sign {
-      margin-top: 30px;
+        margin-top: 30px;
     }
+
     .img-box-2 {
-      height: 50px;
+        height: 50px;
     }
 
     .submit-btn {
-      display: flex;
-      justify-content: right;
-      position: relative;
-      top: 80px;
+        display: flex;
+        justify-content: right;
+        position: relative;
+        top: 80px;
     }
+
     .file-upload {
-      position: relative;
-      bottom: 50px;
+        position: relative;
+        bottom: 50px;
     }
+
     .file-upload-1 {
-      position: relative;
-      top: 22rem !important;
+        position: relative;
+        top: 22rem !important;
     }
+
     .id-back-1 {
-      position: relative;
-      bottom: 20px;
+        position: relative;
+        bottom: 20px;
     }
+
     .image-preview-container {
-      height: 50px;
+        height: 50px;
     }
-  }
-  .lang-1 {
+}
+
+.lang-1 {
     font-weight: 900;
     color: #000;
     display: flex;
     justify-content: center;
-  }
-  @media screen and (max-width: 555px) {
+}
+
+@media screen and (max-width: 555px) {
     .box-sign-2 h2 {
-      position: relative;
-      left: 1px;
+        position: relative;
+        left: 1px;
     }
-  }
+}
 
 /**** end join translation company ***/
 
@@ -1324,7 +1387,7 @@ a.link-profile {
     border-radius: 15px;
     background-color: rgb(125 125 125 / 71%);
     padding: 20px;
-    height: 70ch;
+    height: 72ch;
     overflow-y: scroll;
 }
 

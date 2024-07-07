@@ -12,6 +12,7 @@ use App\Models\Group;
 use App\Models\GroupUser;
 use App\Models\Message;
 use App\Models\MessageReadStatusInGroup;
+use App\Models\Template;
 use App\Models\User;
 use App\Traits\GetClientsForChatTrait;
 use App\Traits\GetUserGeneralChatsTrait;
@@ -81,8 +82,10 @@ class ChatController extends Controller
         $users = $this->get_users_for_chat();
 
         $messages = $this->get_messages($receiver);
+        $templates = Template::all();
 
-        return view('pages.chat.dashboard.lawyer.formChat', compact(['receiver', 'messages', 'users']));
+
+        return view('pages.chat.dashboard.lawyer.formChat', compact(['receiver', 'messages', 'users','templates']));
     }
 
     public function group()

@@ -14,19 +14,23 @@ class TemplateController extends Controller
         return view('pages.template.list' ,compact('templates'));
     }
 
+public function create()
+{
 
+    return view('pages.template.create');
+}
     public function store(TemplateRequest $request)
     {
 
         $template =Template::create($request->validated());
         $template->addMediaFromRequest('template')->toMediaCollection('template');
-        return redirect()->back();
+        return redirect()->route('list_template');
     }
 
 
     public function destroy(Template $template)
     {
-         $template->clearMediaCollection('template');
+        $template->clearMediaCollection('template');
         $template->delete();
 
         return  redirect()->back();

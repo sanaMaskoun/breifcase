@@ -13,13 +13,15 @@ class TemplateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'template' => ['required', 'mimes:pdf,docx,doc,png,jpg,webp', 'max:1024'],
+            'title'   => ['required' ,'max:50'],
+            'template' => ['required', 'mimes:pdf,docx,doc,png,jpg,webp', 'max:6144'],
         ];
     }
 
     public function validated($key = null, $default = null)
     {
         return [
+            'title'     => $this->title,
             'user_id'  => Auth()->user()->id,
 
         ];

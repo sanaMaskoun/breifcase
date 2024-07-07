@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CaseController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FrequentlyQuestionController;
@@ -33,7 +35,13 @@ Route::group(['prefix' => 'explore'], function () {
 });
 
 Route::get('/library', [NavbarController::class, 'library'])->name('library');
-Route::post('/download', [NavbarController::class, 'download_book'])->name('download_book')->middleware('auth:sanctum');
+Route::group(['prefix' => 'book', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/create' , [NavbarController::class, 'create_book'])->name('create_book');
+    Route::post('/download', [NavbarController::class, 'download_book'])->name('download_book');
+    Route::get('/delete/{book}' , [NavbarController::class, 'delete_book'])->name('delete_book');
+
+
+});
 
 Route::get('/about-us', function () {
     return view('pages.about');
@@ -60,6 +68,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function
 Route::group(['prefix' => 'client', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [ClientController::class, 'index'])->name('list_clients');
     Route::get('/{client_encoded_id}/show', [ClientController::class, 'show'])->name('show_client');
+    Route::get('/{client_encoded_id}/details', [ClientController::class, 'details'])->name('details_client');
+
     Route::get('/edit/{client_encoded_id}', [ClientController::class, 'edit'])->name('edit_client');
     Route::post('/update/{client}', [ClientController::class, 'update'])->name('update_client');
 
@@ -77,21 +87,22 @@ Route::group(['prefix' => 'general-question', 'middleware' => 'auth:sanctum'], f
 Route::get('general-question', [GeneralQuestionController::class, 'home'])->name('home_general_questions');
 
 Route::group(['prefix' => 'lawyer', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/{lawyer_encoded_id}/show', [LawyerController::class, 'show'])->name('show_lawyer');
-    Route::get('contact/{receiver_encoded_id}', [LawyerController::class, 'contact'])->name('contact_lawyer');
-
     Route::get('/', [LawyerController::class, 'index'])->name('list_lawyers');
-    // Route::get('/create', [LawyerController::class, 'create'])->name('add_lawyer');
-    // Route::post('/store', [LawyerController::class, 'store'])->name('store_lawyer');
+
+    Route::get('/{lawyer_encoded_id}/show', [LawyerController::class, 'show'])->name('show_lawyer');
+    Route::get('/{lawyer_encoded_id}/details', [LawyerController::class, 'details'])->name('details_lawyer');
+    Route::get('contact/{receiver_encoded_id}', [LawyerController::class, 'contact'])->name('contact_lawyer');
+    Route::post('{lawyer_encode_id}/toggle-status', [LawyerController::class, 'toggle_status'])->name('toggle_status');
+
     // Route::get('/edit/{encodedId}', [LawyerController::class, 'edit'])->name('edit_lawyer');
     // Route::post('/update/{lawyer}', [LawyerController::class, 'update'])->name('update_lawyer');
-    // Route::get('/delete/{lawyer}', [LawyerController::class, 'destroy'])->name('delete_lawyer');
-    // Route::post('{lawyer}/toggle-status', [LawyerController::class, 'toggleStatus'])->name('toggleStatus');
 });
 
 Route::group(['prefix' => 'translation-company', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/' , [TranslationCompanyController::class , 'index'])->name('list_companies');
+    Route::get('/', [TranslationCompanyController::class, 'index'])->name('list_companies');
     Route::get('/{company_encoded_id}/show', [TranslationCompanyController::class, 'show'])->name('show_company');
+    Route::get('/{company_encoded_id}/details', [TranslationCompanyController::class, 'details'])->name('details_company');
+
 
     Route::get('/{company_encoded_id}/send_request', [TranslationCompanyController::class, 'send_request'])->name('send_request');
     Route::post('/{company_encoded_id}/store_request', [TranslationCompanyController::class, 'store_request'])->name('store_request');
@@ -106,23 +117,31 @@ Route::group(['prefix' => 'invoice', 'middleware' => 'auth:sanctum'], function (
 });
 Route::get('bills', [InvoiceController::class, 'bills_dashboard'])->name('bills_dashboard')->middleware('auth:sanctum');
 
+Route::group(['prefix' => 'consultation', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('list/{receiver_encoded_id?}', [ConsultationController::class, 'index'])->name('list_consultations');
+    Route::get('create/{receiver_encoded_id}', [ConsultationController::class, 'create'])->name('create_consultation');
+    Route::post('store/{receiver}', [ConsultationController::class, 'store'])->name('store_consultation');
+    Route::get('reviews', [ConsultationController::class, 'reviews'])->name('reviews');
+    Route::get('{consultaion_encode_id}/details', [ConsultationController::class, 'show'])->name('details_consultaion');
+});
+
+Route::group(['prefix' => 'case', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('list/{receiver_encoded_id?}', [CaseController::class, 'index'])->name('list_cases');
+    Route::get('{case_encode_id}/details', [CaseController::class, 'show'])->name('details_case');
+    Route::get('/create/{template_encode_id}/{receiver_encode_id}', [CaseController::class , 'create'])->name('create_case');
+    Route::post('/store/{template_encode_id}/{receiver_encode_id}', [CaseController::class , 'store'])->name('store_case');
+
+});
+
 Route::group(['prefix' => 'document', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [DocumentController::class, 'index'])->name('list_documents');
-    Route::get('list-consultations/{receiver_encoded_id?}', [DocumentController::class, 'index_consultations'])->name('list_consultations');
-    Route::get('list-cases/{receiver_encoded_id?}', [DocumentController::class, 'index_cases'])->name('list_cases');
     Route::get('list-requests/{receiver_encoded_id}', [DocumentController::class, 'index_requests'])->name('list_requests');
-
-    Route::get('create/{receiver_encoded_id}', [DocumentController::class, 'create'])->name('create_document');
-    Route::post('store/{receiver}', [DocumentController::class, 'store'])->name('store_document');
-
-    Route::get('reviews', [DocumentController::class, 'reviews'])->name('reviews');
-    // Route::get('/{encodedId}/show', [ConsultationController::class, 'show'])->name('show_consultation');
-    Route::get('{consultaion_encode_id}/details', [DocumentController::class, 'show'])->name('details_consultaion');
 
 });
 
 Route::group(['prefix' => 'template', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [TemplateController::class, 'index'])->name('list_template');
+    Route::get('/create', [TemplateController::class, 'create'])->name('create_template');
     Route::post('/', [TemplateController::class, 'store'])->name('store_template');
     Route::get('/delete/{template}', [TemplateController::class, 'destroy'])->name('delete_template');
 });
@@ -131,13 +150,11 @@ Route::group(['prefix' => 'frequently-question'], function () {
     Route::get('/', [FrequentlyQuestionController::class, 'page'])->name('page_frequently_question');
 });
 
-
 Route::group(['prefix' => 'chat/dashboard/group', 'middleware' => 'auth:sanctum'], function () {
 
     Route::get('/', [ChatController::class, 'group'])->name('group');
     Route::get('/{group_encoded_id}', [ChatController::class, 'group_form'])->name('group_form');
 });
-
 
 Route::group(['prefix' => 'chat/dashboard/forum', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [ChatController::class, 'general_chat'])->name('general_chat');
@@ -152,13 +169,10 @@ Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/dashboard/translation-company', [ChatController::class, 'chat_company_dashboard'])->name('chat_company_dashboard');
     Route::get('/dashboard/translation-company/{client_encoded_id}', [ChatController::class, 'chat_company_form'])->name('chat_company_form');
 
-
-    Route::get('/dashboard/admin' , [ChatController::class , 'chat_admin'])->name('chat_admin');
-
+    Route::get('/dashboard/admin', [ChatController::class, 'chat_admin'])->name('chat_admin');
 
     Route::get('/dashboard/lawyer', [ChatController::class, 'chat_lawyer_dashboard'])->name('chat_lawyer_dashboard');
     Route::get('/dashboard/{receiver_encoded_id}', [ChatController::class, 'lawyer_form_dashboard'])->name('lawyer_form_dashboard');
-
 
     Route::post('{receiver_encoded_id}', [ChatController::class, 'send_message_to_user'])->name('send_message_to_user');
     Route::post('/group/{group_encoded_id}', [ChatController::class, 'send_message_to_group'])->name('send_message_to_group');

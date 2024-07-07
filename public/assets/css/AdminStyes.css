@@ -102,29 +102,27 @@
     padding: 7px;
 }
 
-.content-Admin-1 {
+.case-details-content {
     height: 40ch;
-    background-color: rgba(73, 70, 70, 0.505);
+    background-color: #49464640;
     border-radius: 15px;
-}
-
-.content-Admin-1 h6 {
-    color: #000;
-    font-weight: 700;
     padding: 10px;
 }
 
-.content-Admin-1 h3 {
+.case-details-content h6 {
     color: #000;
     font-weight: 700;
-    padding: 30px;
 }
 
-.content-Admin-1 img {
-    height: 75px;
-    width: 75px;
-    border-radius: 10px;
-    margin-left: 20px;
+.case-details-content h5 {
+    color: #000;
+    font-weight: 700;
+}
+
+.case-details-content img {
+    height: 100px;
+    width: 100px;
+    border-radius: 15px
 }
 
 /*lawyers*/
@@ -197,7 +195,69 @@
 }
 
 /*lawyersprofile*/
-.form-group-law input {
+.form-control-lawyer-details{
+    border: 1px solid #ddd;
+    box-shadow: none;
+    font-size: 15px;
+    height: 35px;
+    width: 100%;
+    border-radius: 15px;
+    background-color: #e9ecef;
+    padding-left: 4px;
+    text-align: center;
+}
+
+.form-control-lawyer-details:focus {
+    box-shadow: none;
+    border-color: #9b3d00;
+    box-shadow: none;
+    outline: 0;
+}
+.label-lawyer-details{
+    font-weight: bold;
+    font-size: inherit;
+
+}
+.image-upload {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 80px;
+}
+
+
+
+.container-img-details-lawyer{
+    justify-content: space-evenly
+}
+
+.emirates-img-details{
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+}
+
+.certification-img-details{
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
+
+}
+
+.practices-languages-details{
+    height: 70px;
+    overflow-y: scroll;
+}
+
+.title-details-lawyer{
+    margin: 0;
+}
+
+.bio-details-lawyer{
+    height: 100% !important;
+    width: 100% !important;
+}
+/* .form-group-law input {
     border-radius: 15px;
     color: #000;
 }
@@ -289,12 +349,12 @@
 
 .col-form-label {
     font-weight: 700;
-}
+} */
 
-.upload-1 {
+/* .upload-1 {
     position: relative;
     bottom: 1.8rem;
-}
+} */
 
 @media screen and (max-width: 815px) {
     .content-Admin {

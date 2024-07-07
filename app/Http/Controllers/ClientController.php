@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserTypeEnum;
 use App\Http\Requests\ClientUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -10,13 +11,9 @@ class ClientController extends Controller
 {
     public function index(Request $request)
     {
-        $name = $request->query('name');
-
-        $clients = User::where('name', 'like', '%' . $name . '%')
-        ->whereHas('roles', function ($query) {
-            $query->where('name','client');
-        })
-        ->paginate(config('constants.PAGINATION_COUNT'));
+        $clients = User::where('type', UserTypeEnum::client)
+            ->where('is_active', true)
+            ->paginate(config('constants.PAGINATION_COUNT'));
 
         return view('pages.client.list', compact('clients'));
     }
@@ -25,9 +22,15 @@ class ClientController extends Controller
         $client_decoded_id = base64_decode($client_encoded_id);
         $client = User::find($client_decoded_id);
 
-         return view('pages.client.details',compact(['client']));
+         return view('pages.client.show',compact('client'));
     }
 
+    public function details($client_encoded_id)
+    {
+        $client_decoded_id = base64_decode($client_encoded_id);
+        $client = User::find($client_decoded_id);
+        return view('pages.client.details', compact('client'));
+    }
 
     public function edit($client_encoded_id)
     {
@@ -49,7 +52,6 @@ class ClientController extends Controller
         $client_encoded_id = base64_encode($client->id);
 
         return redirect()->route('show_client', $client_encoded_id);
-        // ->with('success', __('message.edit'));
 
     }
 }

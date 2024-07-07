@@ -2,50 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserTypeEnum;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use App\Traits\MessageTrait;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LawyerController extends Controller
 {
-    use  MessageTrait;
-    // public function index(Request $request)
+    use MessageTrait;
+    public function index()
+    {
+        $lawyers = User::where('type', UserTypeEnum::lawyer)
+            ->where('is_active', true)
+            ->paginate(config('constants.PAGINATION_COUNT'));
 
-
-    // {
-    //     $name = $request->query('name');
-    //     $location = $request->query('location');
-    //     $practice = $request->query('practice');
-
-    //     $practices = Practice::all();
-
-    //     $lawyers = QueryBuilder::for(User::class)
-    //         ->with('practices')
-    //         ->allowedFilters([
-    //             'name', 'location',
-    //             AllowedFilter::partial('name', 'practices.id'),
-    //         ])
-    //         ->where('name', 'like', '%' . $name . '%')
-    //         ->when($location, function ($query) use ($location) {
-    //             return $query->where('location', $location);
-    //         })
-    //         ->when($practice, function ($query) use ($practice) {
-    //             return $query->whereHas('practices', function ($query) use ($practice) {
-    //                 $query->where('practices.id', $practice);
-    //             });
-    //         })
-    //         ->where('is_active', true)
-    //         ->whereHas('roles', function ($query) {
-    //             $query->whereIn('name', ['lawyer', 'legalConsultant', 'typingCenter']);
-    //         })
-    //         ->paginate(config('constants.PAGINATION_COUNT'));
-
-    //     return view('pages.lawyer.list', compact(['lawyers', 'practices']));
-    // }
-
-
-    
+        return view('pages.lawyer.list', compact('lawyers'));
+    }
 
     public function show($lawyer_encoded_id)
     {
@@ -57,7 +30,13 @@ class LawyerController extends Controller
         $get_notify = DB::table('notifications')->where('data->user_id', $lawyer->id)->where('notifiable_id', Auth()->user()->id)->first();
         if ($get_notify != null) {DB::table('notifications')->where('id', $get_notify->id)->update(['read_at' => now()]);}
 
-        return view('pages.lawyer.details', compact(['lawyer', 'practices','languages']));
+        return view('pages.lawyer.show', compact(['lawyer', 'practices', 'languages']));
+    }
+    public function details($lawyer_encoded_id)
+    {
+        $lawyer_decoded_id = base64_decode($lawyer_encoded_id);
+        $lawyer = User::find($lawyer_decoded_id);
+        return view('pages.lawyer.details', compact('lawyer'));
     }
 
     public function contact($receiver_encoded_id)
@@ -67,6 +46,19 @@ class LawyerController extends Controller
         $lawyer = User::find($receiver_encoded_id);
         $messages = $this->get_messages($lawyer);
         return view('pages.lawyer.contact', compact('lawyer', 'messages'));
+    }
+
+
+    public function toggle_status($lawyer_encode_id)
+    {
+
+        $lawyer_decode_id = base64_decode($lawyer_encode_id);
+        $lawyer = User::find( $lawyer_decode_id);
+        $lawyer->is_active = !$lawyer->is_active;
+        $lawyer->save();
+
+        return redirect()->back();
+
     }
     // public function edit($encodedId)
     // {
@@ -103,15 +95,7 @@ class LawyerController extends Controller
 
     // }
 
-    // public function toggleStatus(Request $request, User $lawyer)
-    // {
 
-    //     $lawyer->is_active = !$lawyer->is_active;
-    //     $lawyer->save();
-
-    //     return redirect()->back()->with('success', __('message.status'));
-
-    // }
 
     // public function clear_all()
     // {

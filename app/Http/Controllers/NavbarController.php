@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserTypeEnum;
+use App\Http\Requests\LibraryRequest;
 use App\Models\Language;
 use App\Models\Library;
 use App\Models\News;
@@ -112,24 +113,28 @@ class NavbarController extends Controller
     public function library()
     {
         $books = Library::all();
-        return view('pages.navbar.library', compact('books'));
+        return view('pages.navbar.library.list', compact('books'));
 
     }
 
-    public function download_book(Request $request)
+    public function create_book()
     {
-        $request->validate([
-            'book' => 'required|file|mimes:pdf,doc,docx|max:10240',
-        ]);
+        return view('pages.navbar.library.create');
+    }
+    public function download_book(LibraryRequest $request)
+    {
 
-        $tilte = $request->file('book')->getClientOriginalName();
-
-        $book = Library::create(['title' => $tilte,
-            'user_id' => Auth()->user()->id,
-        ]);
+        $book = Library::create($request->validated());
 
         $book->addMediaFromRequest('book')->toMediaCollection('library');
-        return redirect()->back();
+        return redirect()->route('library');
     }
 
+    public function delete_book(Library $book)
+    {
+        $book->clearMediaCollection('library');
+        $book->delete();
+
+        return  redirect()->back();
+    }
 }
