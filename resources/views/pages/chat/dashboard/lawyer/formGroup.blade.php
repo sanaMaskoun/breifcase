@@ -33,13 +33,24 @@
                     <div id="chat-area" class="card card_form_chat card-chat-dashboard">
                         <div id="chat-header_1">
                             <i class="fas fa-users icon-group-dashboard"></i>
-                            <span class="title-name-form-chat">{{ $group->name }}</span>
+                            <span class="title-name-form-chat d-flex">{{ $group->name }}
+                                @if($admin_group <> null)
+                                <form action="{{ route('edit_group', base64_encode($group->id)) }}" method="GET">
+                                    <button class="btn d-flex">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </form>
+                                @endif
+
+                            </span>
                             <button id="fullscreen-button" class="btn">
                                 <i id="fullscreen-icon" class="fas fa-expand fullscreen-icon"></i>
                             </button>
                             <button id="exit-fullscreen-button" class="btn" style="display: none;">
                                 <i id="exit-fullscreen-icon" class="fas fa-compress fullscreen-icon"></i>
                             </button>
+
+
                         </div>
 
                         <div class="card-body pb-0" style="max-height: 450px; overflow-y: auto;" id="group_div">
@@ -92,20 +103,21 @@
 
                                                 <div class="text-content">
                                                     @if ($message->getFirstMediaUrl('attachments') != null)
-                                                    @if (  $message->getMedia('attachments')->first()->extension == 'jpg' ||
-                                                            $message->getMedia('attachments')->first()->extension == 'png')
-                                                        <img class=" img_group clickable"
-                                                            src="{{ asset($message->getFirstMediaUrl('attachments')) }}">
-                                                        <span class="message">{{ $message->message }}</span>
+                                                        @if (
+                                                            $message->getMedia('attachments')->first()->extension == 'jpg' ||
+                                                                $message->getMedia('attachments')->first()->extension == 'png')
+                                                            <img class=" img_group clickable"
+                                                                src="{{ asset($message->getFirstMediaUrl('attachments')) }}">
+                                                            <span class="message">{{ $message->message }}</span>
+                                                        @else
+                                                            <a href="{{ $message->getFirstMediaUrl('attachments') }}"
+                                                                target="_blank">
+                                                                <p class="message">{{ $message->message }}</p>
+                                                            </a>
+                                                        @endif
                                                     @else
-                                                        <a href="{{ $message->getFirstMediaUrl('attachments') }}"
-                                                            target="_blank">
-                                                            <p class="message">{{ $message->message }}</p>
-                                                        </a>
+                                                        <span class="message">{{ $message->message }}</span>
                                                     @endif
-                                                @else
-                                                    <span class="message">{{ $message->message }}</span>
-                                                @endif
                                                     <time class="time">{{ $message->created_at->diffForHumans() }}</time>
                                                 </div>
                                             </div>
@@ -181,7 +193,7 @@
                 ${data.attachment ?
                 (extension === 'jpg' || extension === 'png' ?
                 `<img class="img_group clickable" src="${data.attachment.url}">
-                 <span class="message">${data.message}</span>` :
+                     <span class="message">${data.message}</span>` :
                 `<a href="${data.attachment.url}" target="_blank"><p class="message">${data.message}</p></a>`) :
             `<p class="message">${data.message}</p>`}
                 <time class="time">${data.created_at}</time>
@@ -196,7 +208,7 @@
             ${data.attachment ?
                 (extension === 'jpg' || extension === 'png' ?
                     `<img class="img_group clickable" src="${data.attachment.url}">
-                     <span class="message">${data.message}</span>` :
+                         <span class="message">${data.message}</span>` :
                     `<a href="${data.attachment.url}" target="_blank"><p class="message">${data.message}</p></a>`) :
                 `<p class="message">${data.message} </p>`}
            <time class="time">${data.created_at}</time>

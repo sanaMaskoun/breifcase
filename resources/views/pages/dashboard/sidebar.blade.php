@@ -64,7 +64,7 @@
 
                     <a class="sidebar-dashboard-admin" href="{{ route('list_clients') }}">
                         <i class="fas fa-users"></i>
-                       clients
+                        clients
                     </a>
                 @endrole
 
@@ -101,7 +101,7 @@
                 @endhasanyrole
 
                 @role('admin')
-                    <a  class="sidebar-dashboard-admin" href="{{ route('list_admin_general_questions') }}">
+                    <a class="sidebar-dashboard-admin" href="{{ route('list_admin_general_questions') }}">
                         <i class="fas fa-question-circle"></i>
                         General Questions
                     </a>
@@ -136,6 +136,10 @@
                         <img alt="" src="{{ asset('assets/img/invoice.png') }}" class="icon-dashboard-sidebar">
                         Bills and Receipts
                     </a>
+                    <a class="sidebar-dashboard-admin" href="{{ route('request_to_join') }}">
+                        <i class="fas fa-user-plus"></i>
+                        Request to join
+                    </a>
                 @endrole
 
                 @hasanyrole('lawyer|translation_company')
@@ -149,12 +153,12 @@
                         <img alt="" src="{{ asset('assets/img/invoice.png') }}" class="icon-dashboard-sidebar">
                         Bills and Receipts
                     </a>
-                    @endhasanyrole
+                @endhasanyrole
 
 
-                    </div>
-
-                    @yield('dashboard')
-                </div>
             </div>
-        @endsection
+
+            @yield('dashboard')
+        </div>
+    </div>
+@endsection

@@ -208,8 +208,9 @@
 }
 
 .details-profile-img{
-    width: 150px;
-    height: 150px;
+    max-height: 150px;
+    width: auto;
+    aspect-ratio: 1;
 }
 .form-control-lawyer-details:focus {
     box-shadow: none;
@@ -430,4 +431,68 @@
     background-color: #343a40;
     color: #ffffff;
     padding: 10px 20px;
+}
+
+
+
+/**  create group   **/
+.add-member {
+    font-size: 20px;
+}
+
+
+.user-list-create-group,
+.group-list {
+    list-style: none;
+    padding: 0;
+    max-height: 380px;
+    overflow-y: auto;
+    font-size: 22px;
+
+}
+
+.user-list-create-group li,
+.group-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.user-list-create-group li:hover,
+.group-list li:hover {
+    background-color: #f0f0f0;
+    border-radius: 15px
+}
+
+.user-list-create-group li i,
+.group-list li i {
+    margin-right: 10px;
+}
+
+.group-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.group-name-create {
+    border: none;
+    border-bottom: 1px solid #000;
+    margin-right: 10px;
+    background: none;
+    font-size: 20px;
+    text-align: center;
+}
+
+.group-name-create::placeholder {
+    color: black;
+}
+
+.create-button {
+    text-align: center;
+    background-color: #646262;
+    border-radius: 15px;
+    width: 50%;
+    font-weight: bold;
 }

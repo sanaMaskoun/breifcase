@@ -118,6 +118,7 @@
                             @endif
                         </div>
 
+                        @role('admin')
                         <div class="chat-footer">
 
                             <form id="messageForm" action="{{ route('send_message_to_group', base64_encode($general_chat->id)) }}"
@@ -151,6 +152,7 @@
                             </form>
 
                         </div>
+                        @endrole
                     </div>
                 </div>
 

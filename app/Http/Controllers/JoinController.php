@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserTypeEnum;
 use App\Http\Requests\ClientRequest;
 use App\Http\Requests\CompanyRequest;
 use App\Http\Requests\LawyerRequest;
@@ -98,5 +99,17 @@ class JoinController extends Controller
 
 
         return view('pages.welcome');
+    }
+
+
+
+
+    public function request_to_join()
+    {
+        $users = User::whereIn('type', [UserTypeEnum::lawyer , UserTypeEnum::translation_company])
+        ->where('is_active', false)
+        ->paginate(config('constants.PAGINATION_COUNT'));
+
+    return view('pages.dashboard.requestToJoin', compact('users'));
     }
 }

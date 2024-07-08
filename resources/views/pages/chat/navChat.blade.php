@@ -23,9 +23,11 @@
                         </li>
                     </ul>
                     <div>
-                        <button class="btn btn-outline-secondary">
+                        @role('lawyer|admin')
+                        <a href="{{ route('add_group') }}" class="btn btn-outline-secondary">
                             <img src="{{ asset('assets/img/create_group.png') }}">
-                        </button>
+                        </a>
+                        @endrole
                     </div>
                 </div>
 

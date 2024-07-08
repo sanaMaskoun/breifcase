@@ -63,13 +63,7 @@
             </div>
         </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <a href="{{ route('home_client') }}" class="footer-about"> <i class="bx bx-home"></i></a>
-                </div>
-            </div>
-        </div>
+
 
     </section>
     <section class="container-about mt-3">
@@ -117,17 +111,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12">
 
-                    <a href="{{ route('home_client') }}" class="footer-about"> <i class="bx bx-home"></i></a>
-
-
-
-                </div>
-            </div>
-        </div>
     </section>
 
     <section class="container-about mt-3">
@@ -180,17 +164,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12">
 
-                    <a href="{{ route('home_client') }}" class="footer-about"> <i class="bx bx-home"></i></a>
-
-
-
-                </div>
-            </div>
-        </div>
     </section>
 
     <section class="container-about mt-3">
@@ -244,15 +218,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12">
 
-                        <a href="{{ route('home_client') }}" class="footer-about"> <i class="bx bx-home"></i></a>
-
-                </div>
-            </div>
-        </div>
     </section>
 
     <section class="container-about mt-3">
@@ -305,15 +271,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12">
 
-                    <a href="{{ route('home_client') }}" class="footer-about"> <i class="bx bx-home"></i></a>
-
-                </div>
-            </div>
-        </div>
     </section>
 
     <section class="container-about mt-3">
@@ -364,15 +322,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12">
-
-                    <a href="{{ route('home_client') }}" class="footer-about"> <i class="bx bx-home"></i></a>
-
-                </div>
-            </div>
-        </div>
+       
     </section>
 
     <section class="container-about mt-3">

@@ -102,9 +102,9 @@ class ChatController extends Controller
         MessageReadStatusInGroup::where('user_id', Auth()->user()->id)
             ->update(['is_read' => true]);
 
-        // $admin_group = User::whereHas('groups', function ($query) use ($group) {
-        //     $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
-        // })->first();
+        $admin_group = User::whereHas('groups', function ($query) use ($group) {
+            $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
+        })->first();
 
         // $admin_general_chat = User::whereHas('general_chats', function ($query) use ($group) {
         //     $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
@@ -114,7 +114,7 @@ class ChatController extends Controller
         $messages = Message::where('group_id', $group->id)->get();
         $groups = $this->get_user_groups();
 
-        return view('pages.chat.dashboard.lawyer.formGroup', compact(['groups', 'messages', 'group']));
+        return view('pages.chat.dashboard.lawyer.formGroup', compact(['groups', 'messages', 'group','admin_group']));
 
     }
     public function general_chat()

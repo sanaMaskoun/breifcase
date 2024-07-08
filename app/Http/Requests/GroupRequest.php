@@ -17,7 +17,7 @@ class GroupRequest extends FormRequest
     {
         return [
             'name'          => ['required','max:30', ],
-            'members'       => ['array','exists:users,id']
+            'members'       => ['nullable', 'string']
         ];
     }
 

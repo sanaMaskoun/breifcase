@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FrequentlyQuestionController;
 use App\Http\Controllers\GeneralQuestionController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\JoinController;
 use App\Http\Controllers\LangController;
@@ -58,6 +59,9 @@ Route::group(['prefix' => 'join'], function () {
     Route::get('/translation-company', [JoinController::class, 'join_translation_company'])->name('join_translation_company');
     Route::post('/translation-company', [JoinController::class, 'store_join_translation_company'])->name('store_join_translation_company');
 });
+
+Route::get('/request-to-join', [JoinController::class, 'request_to_join'])->name('request_to_join');
+
 
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/lawyer', [DashboardController::class, 'lawyer_dashboard'])->name('lawyer_dashboard');
@@ -203,12 +207,12 @@ Route::group(['prefix' => 'practice', 'middleware' => 'auth:sanctum'], function 
     Route::get('/delete/{practice}', [PracticeController::class, 'destroy'])->name('delete_practiece');
 });
 
-// Route::group(['prefix' => 'group', 'middleware' => 'auth:sanctum'], function () {
-//     Route::get('/create', [GroupController::class, 'create'])->name('add_group');
-//     Route::post('/store', [GroupController::class, 'store'])->name('store_group');
-//     Route::get('/edit/{encodedId}', [GroupController::class, 'edit'])->name('edit_group');
-//     Route::post('/update/{group}', [GroupController::class, 'update'])->name('update_group');
-// });
+Route::group(['prefix' => 'group', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/create', [GroupController::class, 'create'])->name('add_group');
+    Route::post('/store', [GroupController::class, 'store'])->name('store_group');
+    Route::get('/edit/{group_encoded_id}', [GroupController::class, 'edit'])->name('edit_group');
+    Route::post('/update/{group}', [GroupController::class, 'update'])->name('update_group');
+});
 
 // Route::group(['prefix' => 'general-chat', 'middleware' => 'auth:sanctum'], function () {
 //     Route::get('/', [GeneralChatController::class, 'create'])->name('add_general_chat');
@@ -217,11 +221,10 @@ Route::group(['prefix' => 'practice', 'middleware' => 'auth:sanctum'], function 
 //     Route::post('{general_chat}', [GeneralChatController::class, 'update'])->name('update_general_chat');
 // });
 
-// Route::get('/invoice', [InvoiceController::class, 'index'])->name('list_invoice')->middleware('auth:sanctum');
 // Route::get('/notification/clear-all', [LawyerController::class, 'clear_all'])->name('notification_clear_all')->middleware('auth:sanctum');
 
 // Route::get('error', function () {
-return 'payment failed';
+// return 'payment failed';
 // });
 
 

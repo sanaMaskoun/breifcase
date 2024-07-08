@@ -10,9 +10,13 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 
+
     <link rel="stylesheet" href="{{ asset('assets/css/ClientStyles.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/LawyerStyles.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/AdminStyes.css') }}" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
     <title>Briefcase - The Legal Platform</title>
     <style>
         :root {
@@ -31,7 +35,9 @@
         @if (Auth()->user() != null && Auth()->user()->is_active == true)
             @if (Auth::user()->type == UserTypeEnum::client)
                 @include('master.header_auth_client')
-            @elseif (Auth::user()->type == UserTypeEnum::lawyer ||  Auth::user()->type == UserTypeEnum::translation_company || Auth::user()->type == UserTypeEnum::admin )
+            @elseif (Auth::user()->type == UserTypeEnum::lawyer ||
+                    Auth::user()->type == UserTypeEnum::translation_company ||
+                    Auth::user()->type == UserTypeEnum::admin)
                 @include('master.header_auth_lawyer')
             @endif
         @else
@@ -50,6 +56,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
@@ -58,9 +65,7 @@
     {{--  pusher  --}}
     <input type="hidden" id="projectUrl" value="{{ url('/') }}"></div>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-
     <script src="{{ url('/assets/js/pusher.js') }}"></script>
-    {{--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  --}}
 
     @if (Auth()->user()?->id != null)
         <script>
@@ -189,6 +194,9 @@
     <script src="{{ asset('assets/js/chartLawyer.js') }}"></script>
     <script src="{{ asset('assets/js/doughnutChart.js') }}"></script>
     <script src="{{ asset('assets/js/img-join-lawyer.js') }}"></script>
+    <script src="{{ asset('assets/js/membersGroup.js') }}"></script>
+
+
 </body>
 
 </html>

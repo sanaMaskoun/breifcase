@@ -222,6 +222,8 @@ a.link-profile {
     background-color: rgb(125 125 125 / 71%);
     padding: 20px;
     border-radius: 15px;
+    /* height: 603px;
+    overflow-y: scroll; */
 }
 
 .icon-dashboard-sidebar {
@@ -243,10 +245,7 @@ a.link-profile {
 
 .sidebar-dashboard-admin {
     margin: 0 !important;
-    padding: 6px 0 !important;
-
-
-
+    /* padding: 6px 0 !important; */
 }
 
 .sidebar-dashboard a i {
