@@ -2,6 +2,7 @@
     $client_encoded_id = base64_encode(Auth()->user()->id);
 
 @endphp
+
 <header id="header">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex align-items-center my-5 container">
 
@@ -90,7 +91,7 @@
                     </li>
                 @endrole
 
-                @role('lawyer')
+                @role('lawyer|admin')
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ route('chat_lawyer_dashboard') }}">
                             <i class="bx bx-chat icon-header"></i></a>
@@ -104,16 +105,25 @@
                     </li>
                 @endrole
 
-                @role('admin')
+                {{--  @role('admin')
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ route('chat_admin') }}">
                             <i class="bx bx-chat icon-header"></i></a>
                     </li>
-                @endrole
+                @endrole  --}}
 
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">
-                        <i class="bx bx-bell icon-header"></i></a>
+                <li class="nav-item dropdown notification">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bx bx-bell icon-header"></i>
+                        <span class="badge">50</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-header">Notifications</div>
+                        <a class="dropdown-item" href="#">Notification 1</a>
+                        <a class="dropdown-item" href="#">Notification 2</a>
+                        <a class="dropdown-item" href="#">Notification 3</a>
+                        <a class="dropdown-item text-center" href="#">View All</a>
+                    </div>
                 </li>
             </ul>
             <a href="#"> <img class="img-profile" src="{{ Auth()->user()->getFirstMediaUrl('profile') }}"

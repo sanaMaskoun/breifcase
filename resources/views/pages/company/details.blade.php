@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-2 text-center">
                         <img src="{{ $company->getFirstMediaUrl('profile') }}" alt="Profile"
-                            class="img-fluid rounded-circle mb-3">
+                            class="img-fluid rounded-circle details-profile-img">
                     </div>
 
                     <div class="col-md-7">

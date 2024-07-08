@@ -11,17 +11,14 @@ class PracticeController extends Controller
 {
     public function index(Request $request)
     {
-        $name = $request->query('name');
 
         $practices = Practice::query();
 
-        if ($name) {
-            $practices->where('name', 'like', '%' . $name . '%');
-        }
 
         $practices = $practices->paginate(config('constants.PAGINATION_COUNT'));
+        $num_practices = Practice::count();
 
-        return view('pages.practices.list', compact('practices'));
+        return view('pages.practices.list', compact(['practices','num_practices']));
     }
 
 
@@ -34,7 +31,7 @@ class PracticeController extends Controller
     public function store(PracticeRequest $request)
     {
          Practice::create($request->validated());
-         return redirect()->route('list_practieces')->with('success', __('message.success'));
+         return redirect()->route('list_practieces');
 
 
     }

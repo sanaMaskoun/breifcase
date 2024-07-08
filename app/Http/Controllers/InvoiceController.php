@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DocumentStatusEnum;
 use App\Enums\InvoiceStatusEnum;
 use App\Http\Requests\InvoiceRequest;
 use App\Http\Resources\InvoiceResource;
@@ -27,6 +28,21 @@ class InvoiceController extends Controller
         return view('pages.lawyer.bills' , compact('bills' ,'num_bills'));
 
     }
+    public function bills_admin()
+    {
+        $bills = Invoice::all();
+        $num_bills = Invoice::count();
+        $status_texts = [
+            DocumentStatusEnum::pending => 'Pending',
+            DocumentStatusEnum::ongoing => 'Ongoing',
+            DocumentStatusEnum::closed => 'Closed',
+            DocumentStatusEnum::rejected => 'Rejected',
+        ];
+        return view('pages.admin.bills' , compact('bills' ,'num_bills' ,'status_texts'));
+
+    }
+
+
     public function store(InvoiceRequest $request)
     {
 

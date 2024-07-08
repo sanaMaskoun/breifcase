@@ -24,7 +24,9 @@
                         </form>
                     @endif
                     <div>
-                        <img src="{{ asset('assets/img/book.png') }}" alt="" class="book">
+                        <a href="{{ route('show_book', base64_encode($book->id)) }}">
+                            <img src="{{ asset('assets/img/book.png') }}" alt="" class="book">
+                        </a>
                     </div>
 
                     <p>{{ $book->title }}

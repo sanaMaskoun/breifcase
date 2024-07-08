@@ -11,11 +11,11 @@
             <div class="list-document-dashboard">
                 @foreach ($cases as $case)
                     <div class="col-lg-3 col-md-6 col-sm-12  mt-4">
-                        <a class="title-details" href="{{ route('details_case', base64_encode($case->id)) }}">
-                             <img src="{{ asset('assets/img/case.png') }}" alt="case Image" class="img-doc">
+                        <a class="title-details text-center" href="{{ route('details_case', base64_encode($case->id)) }}">
+                             <img src="{{ asset('assets/img/case.png') }}" alt="case Image" class="icon-dasbboard-admin">
                             <h5 class="title-document-dashboard">{{ $case->title }}</h5>
                         </a>
-                        <div class="container-details-document-dashboard">
+                        <div class="container-details-document-dashboard text-center">
                             <p class="details-document-dashboard">{{ $case->sender->name }}</p>
                             <p class="details-document-dashboard">{{ $case->created_at->format('Y/m/d') }}</p>
                         </div>

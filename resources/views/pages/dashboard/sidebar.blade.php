@@ -21,6 +21,10 @@
                         <img alt="" src="{{ asset('assets/img/dashboard.png') }}" class="icon-dashboard-sidebar">
                         Dashboard
                     </a>
+                    <a class="sidebar-dashboard-admin" href="{{ route('list_practieces') }}">
+                        <i class="fas fa-balance-scale fa-2x"></i>
+                        Practices
+                    </a>
                 @endrole
 
 
@@ -97,7 +101,7 @@
                 @endhasanyrole
 
                 @role('admin')
-                    <a  class="sidebar-dashboard-admin" href="{{ route('list_general_questions') }}">
+                    <a  class="sidebar-dashboard-admin" href="{{ route('list_admin_general_questions') }}">
                         <i class="fas fa-question-circle"></i>
                         General Questions
                     </a>
@@ -118,17 +122,17 @@
                 @endrole
 
                 @role('admin')
-                    <a class="sidebar-dashboard-admin" href="{{ route('chat_admin') }}">
+                    <a class="sidebar-dashboard-admin" href="{{ route('chat_lawyer_dashboard') }}">
                         <img alt="" src="{{ asset('assets/img/chat-dashboard.png') }}" class="icon-dashboard-sidebar">
                         Chat
                     </a>
-                    <a class="sidebar-dashboard-admin" href="{{ route('reviews') }}">
+                    <a class="sidebar-dashboard-admin" href="{{ route('list_reviews') }}">
                         <img alt="" src="{{ asset('assets/img/reviews_dashboard.png') }}"
                             class="icon-dashboard-sidebar">
                         Reviews
                     </a>
 
-                    <a class="sidebar-dashboard-admin" href="{{ route('bills_dashboard') }}">
+                    <a class="sidebar-dashboard-admin" href="{{ route('bills_admin') }}">
                         <img alt="" src="{{ asset('assets/img/invoice.png') }}" class="icon-dashboard-sidebar">
                         Bills and Receipts
                     </a>

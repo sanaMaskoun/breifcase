@@ -14,6 +14,7 @@ class ContactResource extends JsonResource
             'id'       => $this->id,
             'name'     => $this->name,
             'type'     => $this->type,
+            'profile'  => $this->getFirstMediaUrl('profile')
         ];
     }
 }

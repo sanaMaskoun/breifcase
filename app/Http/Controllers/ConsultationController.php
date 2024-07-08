@@ -61,6 +61,17 @@ class ConsultationController extends Controller
 
         return view('pages.document.consultation.reviews', compact('rates'));
     }
+
+    public function reviews_list_admin()
+    {
+        $rates = Rate::select(
+            'comment', 'client_id','lawyer_id', 'document_id',
+            DB::raw('(understanding + problem_solving + response_time + communication) / 4 as average_rate')
+        )->get();
+
+    return view('pages.document.consultation.listReviews', compact('rates'));
+}
+
     public function answer(ConsultationAnswerRequest $request, Consultation $consultation)
     {
         $get_notify = DB::table('notifications')->where('data->consultation_id', $consultation->id)->where('notifiable_id', Auth()->user()->id)->first();

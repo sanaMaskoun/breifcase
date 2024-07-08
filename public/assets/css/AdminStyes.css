@@ -207,6 +207,10 @@
     text-align: center;
 }
 
+.details-profile-img{
+    width: 150px;
+    height: 150px;
+}
 .form-control-lawyer-details:focus {
     box-shadow: none;
     border-color: #9b3d00;
@@ -257,104 +261,6 @@
     height: 100% !important;
     width: 100% !important;
 }
-/* .form-group-law input {
-    border-radius: 15px;
-    color: #000;
-}
-
-.form-group-law {
-    position: relative;
-    bottom: 50px;
-}
-
-.image-upload {
-    display: flex;
-    flex-wrap: wrap;
-    overflow-y: scroll;
-    height: 50px;
-}
-
-.image-upload-1 {
-    overflow-y: hidden;
-    display: flex;
-    position: relative;
-    left: 110px;
-}
-
-.image-upload img {
-    flex: 0 0 50%;
-    height: 50px;
-    width: 50px;
-    padding: 10px;
-}
-
-.lastName-1 {
-    position: relative;
-    bottom: 6.5rem;
-}
-
-.brith-law {
-    position: relative;
-    bottom: 9rem;
-}
-
-.email-law {
-    position: relative;
-    bottom: 9.5rem;
-}
-
-.mobile-law {
-    position: relative;
-    bottom: 10rem;
-}
-
-.landline-law {
-    position: relative;
-    bottom: 10.5rem;
-}
-
-.Expertise-law {
-    position: relative;
-    bottom: 10.5rem;
-}
-
-.Nationality-1 {
-    position: relative;
-    bottom: 15.5rem;
-}
-
-.City-law {
-    position: relative;
-    bottom: 16rem;
-}
-
-.Location-law {
-    position: relative;
-    bottom: 16.5rem;
-}
-
-.bio-law {
-    position: relative;
-    bottom: 18rem;
-}
-
-.id-law {
-    position: relative;
-    bottom: 19.8rem;
-}
-
-#Biography {
-    height: 80px;
-}
-
-.col-form-label {
-    font-weight: 700;
-} */
-
-/* .upload-1 {
-    position: relative;
-    bottom: 1.8rem;
-} */
 
 @media screen and (max-width: 815px) {
     .content-Admin {
@@ -367,30 +273,13 @@
     font-weight: 900;
 }
 
-/*client*/
-.row-client-1 {
-    position: relative;
-    bottom: 7rem;
+/*** practices **/
+.icon-practice{
+    font-size: 80px;
 }
 
-.row-client-2 {
-    position: relative;
-    bottom: 7rem;
-}
-
-.row-client-3 {
-    position: relative;
-    bottom: 7rem;
-}
-
-.row-client-4 {
-    position: relative;
-    bottom: 7rem;
-}
-
-.row-client-5 {
-    position: relative;
-    bottom: 7rem;
+.name-practice{
+    font-size: 25px;
 }
 
 /*Library*/
@@ -416,52 +305,129 @@
 }
 
 .Library-part-2 {
-    background-color: rgb(255, 255, 255);
+    background-color:#eae7e74a;
     width: 100%;
     border-radius: 15px;
     overflow-y: scroll;
 }
+.description-book{
+    font-size: 23px;
+}
+/*general question*/
+.icon-dasbboard-admin{
+    width: 50%;
+    height: 50%;
+}
 
-/*qus*/
+.title-details-question{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
 .question-section {
-    border-radius: 10px;
-}
-
-.question-section h4 {
-    color: #000;
-    font-weight: 800;
-    position: relative;
-    bottom: 2rem;
-}
-
-.question-section p {
-    color: #000;
-    font-weight: 800;
-}
-
-.question-section-1 {
-    background-color: white;
-    height: 15rem;
+    background-color: #eae7e74a;
+    height: 12rem;
     padding: 15px;
     border-radius: 15px;
     overflow-y: scroll;
+}
+
+.question-details-question{
+    font-size: 18px;
+
+}
+.img-client-question{
+    width: 150px;
+    height: 150px;
+}
+.name-client-question{
+    font-size: 22px;
+}
+
+.img-lawyer-question{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+
+}
+
+.name-lawyer-question{
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .lawyer {
     text-align: center;
 }
 
-.lawyer img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-}
 
 .lawyer p {
     margin: 5px 0 0;
 }
 
-.lawyer-img {
+.card-lawyer-question {
     overflow-y: scroll;
-    height: 25rem;
+    height: 30rem;
+}
+
+
+/* bills **/
+.status-bills {
+    margin-top: 2px;
+    font-weight: bold;
+}
+.status-bills.pending {
+    color:rgba(240, 169, 15, 0.767);
+    text-align: center;
+}
+.status-bills.ongoing {
+    color:rgb(2, 113, 2);
+    text-align: center;
+}
+.status-bills.closed {
+    color: rgb(133, 73, 4);
+    text-align: center;
+}
+.status-bills.rejected {
+    color: #dc3545;
+    text-align: center;
+}
+
+
+
+/** notifications **/
+
+.notification {
+    position: relative;
+    display: inline-block;
+}
+.notification .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+}
+.dropdown-menu {
+    background-color: #f8f9fa;
+    min-width: 300px;
+}
+.dropdown-menu .dropdown-item {
+    color: #343a40;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+}
+.dropdown-menu .dropdown-item:last-child {
+    border-bottom: none;
+}
+.dropdown-menu .dropdown-item:hover {
+    background-color: #ddd;
+}
+.dropdown-header {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 10px 20px;
 }

@@ -130,6 +130,15 @@ class NavbarController extends Controller
         return redirect()->route('library');
     }
 
+    public function show_book($book_encode_id)
+    {
+        $book_decode_id = base64_decode($book_encode_id);
+        $book = Library::find($book_decode_id);
+
+        return view('pages.navbar.library.show',compact('book'));
+    }
+
+
     public function delete_book(Library $book)
     {
         $book->clearMediaCollection('library');
