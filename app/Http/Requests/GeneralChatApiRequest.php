@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Enums\GroupTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class GeneralChatRequest extends FormRequest
+class GeneralChatApiRequest extends FormRequest
 {
 
     public function authorize(): bool
@@ -17,9 +17,8 @@ class GeneralChatRequest extends FormRequest
     {
         return [
             'name'          => ['required','max:30', ],
-            'members'       => ['nullable', 'string']
+            'members'       => ['required_if:role,null','array','exists:users,id'],
         ];
-       
     }
 
 

@@ -13,11 +13,11 @@
         </div>
 
         <div class="col-md-6">
-            <form method="POST" action="{{ route('update_group', $group->id) }}">
+            <form method="POST" action="{{ route('update_general_chat', $general_chat->id) }}">
                 @csrf
 
                 <div class="group-header mb-3">
-                    <input class="group-name-create" type="text" id="name" name="name" value="{{ $group->name }}">
+                    <input class="group-name-create" type="text" id="name" name="name" value="{{ $general_chat->name }}">
                     @error('name')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror

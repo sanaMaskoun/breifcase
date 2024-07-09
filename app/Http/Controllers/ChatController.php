@@ -66,7 +66,6 @@ class ChatController extends Controller
         return view('pages.chat.dashboard.company.formChat', compact(['receiver', 'messages', 'users']));
     }
 
-
     public function chat_lawyer_dashboard()
     {
         $users = $this->get_users_for_chat();
@@ -84,8 +83,7 @@ class ChatController extends Controller
         $messages = $this->get_messages($receiver);
         $templates = Template::all();
 
-
-        return view('pages.chat.dashboard.lawyer.formChat', compact(['receiver', 'messages', 'users','templates']));
+        return view('pages.chat.dashboard.lawyer.formChat', compact(['receiver', 'messages', 'users', 'templates']));
     }
 
     public function group()
@@ -106,15 +104,10 @@ class ChatController extends Controller
             $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
         })->first();
 
-        // $admin_general_chat = User::whereHas('general_chats', function ($query) use ($group) {
-        //     $query->where('groups.id', $group->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
-
-        // })->first();
-
         $messages = Message::where('group_id', $group->id)->get();
         $groups = $this->get_user_groups();
 
-        return view('pages.chat.dashboard.lawyer.formGroup', compact(['groups', 'messages', 'group','admin_group']));
+        return view('pages.chat.dashboard.lawyer.formGroup', compact(['groups', 'messages', 'group', 'admin_group']));
 
     }
     public function general_chat()
@@ -123,8 +116,6 @@ class ChatController extends Controller
         return view('pages.chat.dashboard.lawyer.generalChat', compact('general_chats'));
 
     }
-
-
 
     public function general_chat_form($general_chat_encoded_id)
     {
@@ -136,7 +127,11 @@ class ChatController extends Controller
         $messages = Message::where('group_id', $general_chat->id)->get();
         $general_chats = $this->get_user_general_chats();
 
-        return view('pages.chat.dashboard.lawyer.formGeneralChat', compact(['general_chats', 'messages', 'general_chat']));
+        $admin_general_chat = User::whereHas('general_chats', function ($query) use ($general_chat) {
+            $query->where('groups.id', $general_chat->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
+
+        })->first();
+        return view('pages.chat.dashboard.lawyer.formGeneralChat', compact(['general_chats', 'admin_general_chat', 'messages', 'general_chat']));
 
     }
 

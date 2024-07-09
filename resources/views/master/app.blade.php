@@ -128,9 +128,9 @@
                     var newNotificationHtml = `
                     <li class="notification-message">
                         <div class="media d-flex">
-                            <div class="media-body flex-grow-1">
+                         <div class="media-body flex-grow-1 notification-item">
                         <a>  <span>these user request to join :</span></a>
-                            <a href="${data.encodedId}">
+                            <a href="${data.user_encoded_id}">
                             <p class="noti-details"> <span style="float: right;  font-size:12px;"
                             class="noti-title">${data.user_name} </span>
                             </p>

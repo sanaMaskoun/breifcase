@@ -4,7 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Enums\UserTypeEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GeneralChatRequest;
+use App\Http\Requests\GeneralChatApiRequest;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
 use App\Models\User;
@@ -19,7 +19,7 @@ class GeneralChatApiController extends Controller
         return GroupResource::collection($general_chats->load(['members', 'admin']));
 
     }
-    public function store(GeneralChatRequest $request)
+    public function store(GeneralChatApiRequest $request)
     {
         if (Auth()->user()->type != UserTypeEnum::admin) {
 
@@ -48,7 +48,7 @@ class GeneralChatApiController extends Controller
         }
     }
 
-    public function update(GeneralChatRequest $request, Group $general_chat)
+    public function update(GeneralChatApiRequest $request, Group $general_chat)
     {
 
         if (Auth()->user()->type != UserTypeEnum::admin) {

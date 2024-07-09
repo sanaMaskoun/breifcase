@@ -7,6 +7,7 @@ use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FrequentlyQuestionController;
+use App\Http\Controllers\GeneralChatController;
 use App\Http\Controllers\GeneralQuestionController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\InvoiceController;
@@ -214,14 +215,14 @@ Route::group(['prefix' => 'group', 'middleware' => 'auth:sanctum'], function () 
     Route::post('/update/{group}', [GroupController::class, 'update'])->name('update_group');
 });
 
-// Route::group(['prefix' => 'general-chat', 'middleware' => 'auth:sanctum'], function () {
-//     Route::get('/', [GeneralChatController::class, 'create'])->name('add_general_chat');
-//     Route::post('/', [GeneralChatController::class, 'store'])->name('store_general_chat');
-//     Route::get('{encoded_general_chat}', [GeneralChatController::class, 'edit'])->name('edit_general_chat');
-//     Route::post('{general_chat}', [GeneralChatController::class, 'update'])->name('update_general_chat');
-// });
+Route::group(['prefix' => 'general-chat', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [GeneralChatController::class, 'create'])->name('add_general_chat');
+    Route::post('/', [GeneralChatController::class, 'store'])->name('store_general_chat');
+    Route::get('{general_chat_encoded_id}', [GeneralChatController::class, 'edit'])->name('edit_general_chat');
+    Route::post('{general_chat}', [GeneralChatController::class, 'update'])->name('update_general_chat');
+});
 
-// Route::get('/notification/clear-all', [LawyerController::class, 'clear_all'])->name('notification_clear_all')->middleware('auth:sanctum');
+Route::get('/notification/clear-all', [LawyerController::class, 'clear_all'])->name('notification_clear_all')->middleware('auth:sanctum');
 
 // Route::get('error', function () {
 // return 'payment failed';

@@ -5,21 +5,20 @@ namespace App\Http\Requests;
 use App\Enums\GroupTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class GeneralChatRequest extends FormRequest
+class GroupApiRequest extends FormRequest
 {
-
     public function authorize(): bool
     {
         return true;
     }
 
+
     public function rules(): array
     {
         return [
             'name'          => ['required','max:30', ],
-            'members'       => ['nullable', 'string']
+            'members'       => ['nullable', 'exists:users,id']
         ];
-       
     }
 
 
@@ -27,7 +26,7 @@ class GeneralChatRequest extends FormRequest
     {
         return [
             'name'   => $this->name,
-            'type' => GroupTypeEnum::general_chat
+            'type' => GroupTypeEnum::group
         ];
     }
 }

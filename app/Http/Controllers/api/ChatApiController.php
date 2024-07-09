@@ -5,7 +5,6 @@ namespace App\Http\Controllers\api;
 use App\Events\chatPrivateEvent;
 use App\Events\GroupEvent;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GroupRequest;
 use App\Http\Resources\ChatResource;
 use App\Http\Resources\GroupMessagesResource;
 use App\Http\Resources\GroupResource;
@@ -133,6 +132,6 @@ class ChatApiController extends Controller
 
     }
 
-   
+
 
 }

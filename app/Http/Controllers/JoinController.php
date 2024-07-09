@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserTypeEnum;
+use App\Events\NotificationEvent;
 use App\Http\Requests\ClientRequest;
 use App\Http\Requests\CompanyRequest;
 use App\Http\Requests\LawyerRequest;
 use App\Models\Language;
 use App\Models\Practice;
 use App\Models\User;
+use App\Notifications\RequestToJoin;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class JoinController extends Controller
 {
@@ -43,6 +46,23 @@ class JoinController extends Controller
         foreach ($request->file('licenses') as $license) {
             $user->lawyer->addMedia($license)->toMediaCollection('license');
         }
+        $admins = User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->get();
+
+        $joined_user = $user->name;
+        $email = $user->email;
+        $user_encoded_id = base64_encode($user->id);
+
+        Notification::send($admins, new RequestToJoin($user->id, $joined_user, $email));
+        $data = [
+            'user_id' => $user->id,
+            'user_name' => $request->name,
+            'email' => $request->email,
+            'profile_image' => $user->getFirstMediaUrl('profile'),
+
+        ];
+        event(new NotificationEvent($data, $user_encoded_id));
 
 
         return view('pages.welcome');

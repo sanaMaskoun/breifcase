@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GroupRequest;
+use App\Http\Requests\GroupApiRequest;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
 use App\Models\User;
@@ -17,7 +17,7 @@ class GroupApiController extends Controller
         return GroupResource::collection($groups->load(['members', 'admin']));
 
     }
-    public function store(GroupRequest $request)
+    public function store(GroupApiRequest $request)
     {
         $group = Group::create($request->validated());
 
@@ -32,7 +32,7 @@ class GroupApiController extends Controller
 
     }
 
-    public function update(GroupRequest $request, Group $group)
+    public function update(GroupApiRequest $request, Group $group)
     {
         $group->update($request->validated());
         if ($request->members) {

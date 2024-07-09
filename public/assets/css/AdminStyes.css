@@ -1,3 +1,38 @@
+.notification-list{
+    max-height: 300px;
+    overflow-y: scroll;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.notification-item{
+    border-bottom: 1px solid;
+    margin-bottom: 10px;
+}
+
+.notification-title{
+    color: black;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.notification-link:hover{
+    color: black;
+    text-decoration: none   ;
+}
+
+.notification-time{
+    font-size: 10px;
+    display: flex;
+    justify-content: end;
+}
+.notification-clear{
+    color: black;
+}
+.notification-clear:hover{
+    color: black;
+    text-decoration: none;
+}
 /** start suggestion **/
 .img-user-suggestion {
     width: 100%;
@@ -5,7 +40,7 @@
     border-radius: 50%;
 }
 
-.img-user-suggestion-details{
+.img-user-suggestion-details {
     width: 250px;
     height: 250px;
     border-radius: 50%;
@@ -19,18 +54,19 @@
     color: black;
     text-decoration: none;
 }
-.name-user-suggestion{
+
+.name-user-suggestion {
     text-align: center;
     font-size: 25px;
     font-weight: bold;
 }
 
-.body-suggestion{
+.body-suggestion {
     background-color: #ffffff30;
     border-radius: 15px;
 }
 
-.description-suggestion{
+.description-suggestion {
     font-size: 25px;
 }
 
@@ -38,25 +74,27 @@
 /** end suggestion **/
 
 /** start details consultaion **/
-.title-details{
+.title-details {
     display: block;
     color: black;
     font-weight: bold;
 }
-.title-details:hover{
+
+.title-details:hover {
     color: black;
     text-decoration: none;
 }
 
-.title-consultation-details{
+.title-consultation-details {
     font-size: 25px;
     text-align: center;
     font-weight: bold;
 }
 
-.description-consultation-details{
+.description-consultation-details {
     font-size: 20px;
 }
+
 /** end details consultaion **/
 
 
@@ -195,7 +233,7 @@
 }
 
 /*lawyersprofile*/
-.form-control-lawyer-details{
+.form-control-lawyer-details {
     border: 1px solid #ddd;
     box-shadow: none;
     font-size: 15px;
@@ -207,22 +245,25 @@
     text-align: center;
 }
 
-.details-profile-img{
+.details-profile-img {
     max-height: 150px;
     width: auto;
     aspect-ratio: 1;
 }
+
 .form-control-lawyer-details:focus {
     box-shadow: none;
     border-color: #9b3d00;
     box-shadow: none;
     outline: 0;
 }
-.label-lawyer-details{
+
+.label-lawyer-details {
     font-weight: bold;
     font-size: inherit;
 
 }
+
 .image-upload {
     display: flex;
     flex-wrap: wrap;
@@ -232,33 +273,33 @@
 
 
 
-.container-img-details-lawyer{
+.container-img-details-lawyer {
     justify-content: space-evenly
 }
 
-.emirates-img-details{
+.emirates-img-details {
     width: 100px;
     height: 100px;
     border-radius: 15px;
 }
 
-.certification-img-details{
+.certification-img-details {
     width: 80px;
     height: 80px;
     border-radius: 15px;
 
 }
 
-.practices-languages-details{
+.practices-languages-details {
     height: 70px;
     overflow-y: scroll;
 }
 
-.title-details-lawyer{
+.title-details-lawyer {
     margin: 0;
 }
 
-.bio-details-lawyer{
+.bio-details-lawyer {
     height: 100% !important;
     width: 100% !important;
 }
@@ -275,11 +316,11 @@
 }
 
 /*** practices **/
-.icon-practice{
+.icon-practice {
     font-size: 80px;
 }
 
-.name-practice{
+.name-practice {
     font-size: 25px;
 }
 
@@ -306,21 +347,23 @@
 }
 
 .Library-part-2 {
-    background-color:#eae7e74a;
+    background-color: #eae7e74a;
     width: 100%;
     border-radius: 15px;
     overflow-y: scroll;
 }
-.description-book{
+
+.description-book {
     font-size: 23px;
 }
+
 /*general question*/
-.icon-dasbboard-admin{
+.icon-dasbboard-admin {
     width: 50%;
     height: 50%;
 }
 
-.title-details-question{
+.title-details-question {
     font-size: 25px;
     font-weight: bold;
 }
@@ -334,26 +377,28 @@
     overflow-y: scroll;
 }
 
-.question-details-question{
+.question-details-question {
     font-size: 18px;
 
 }
-.img-client-question{
+
+.img-client-question {
     width: 150px;
     height: 150px;
 }
-.name-client-question{
+
+.name-client-question {
     font-size: 22px;
 }
 
-.img-lawyer-question{
+.img-lawyer-question {
     width: 90px;
     height: 90px;
     border-radius: 50%;
 
 }
 
-.name-lawyer-question{
+.name-lawyer-question {
     font-size: 20px;
     font-weight: bold;
 }
@@ -378,18 +423,22 @@
     margin-top: 2px;
     font-weight: bold;
 }
+
 .status-bills.pending {
-    color:rgba(240, 169, 15, 0.767);
+    color: rgba(240, 169, 15, 0.767);
     text-align: center;
 }
+
 .status-bills.ongoing {
-    color:rgb(2, 113, 2);
+    color: rgb(2, 113, 2);
     text-align: center;
 }
+
 .status-bills.closed {
     color: rgb(133, 73, 4);
     text-align: center;
 }
+
 .status-bills.rejected {
     color: #dc3545;
     text-align: center;
@@ -403,6 +452,7 @@
     position: relative;
     display: inline-block;
 }
+
 .notification .badge {
     position: absolute;
     top: -10px;
@@ -412,21 +462,26 @@
     background-color: red;
     color: white;
 }
+
 .dropdown-menu {
     background-color: #f8f9fa;
     min-width: 300px;
 }
+
 .dropdown-menu .dropdown-item {
     color: #343a40;
     padding: 10px 20px;
     border-bottom: 1px solid #ddd;
 }
+
 .dropdown-menu .dropdown-item:last-child {
     border-bottom: none;
 }
+
 .dropdown-menu .dropdown-item:hover {
     background-color: #ddd;
 }
+
 .dropdown-header {
     background-color: #343a40;
     color: #ffffff;
@@ -436,6 +491,11 @@
 
 
 /**  create group   **/
+.icon-forum {
+    color: black;
+    font-size: 25px;
+}
+
 .add-member {
     font-size: 20px;
 }

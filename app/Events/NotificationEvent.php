@@ -21,16 +21,16 @@ class NotificationEvent implements ShouldBroadcast
     public $profile_image;
 
     public $date;
-    public $encodedUserId;
+    public $user_encoded_id;
     public $time;
 
-    public function __construct($data = [] , $encodedUserId)
+    public function __construct($data = [] , $user_encoded_id)
     {
         $this->user_id = $data['user_id'];
         $this->user_name = $data['user_name'];
         $this->profile_image = $data['profile_image'];
         $this->email = $data['email'];
-        $this->encodedUserId =$encodedUserId;
+        $this->user_encoded_id =$user_encoded_id;
         $this->date = date("j M Y", strtotime(Carbon::now()));
         $this->time = date("h:i A", strtotime(Carbon::now()));
 

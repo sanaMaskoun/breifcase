@@ -123,7 +123,7 @@ class AuthApiController extends Controller
 
         $joined_user = $request->name;
         $email = $request->email;
-        $encodedUserId = base64_encode($user->id);
+        $user_encoded_id = base64_encode($user->id);
 
         Notification::send($admins, new RequestToJoin($user->id, $joined_user, $email));
         $data = [
@@ -133,7 +133,7 @@ class AuthApiController extends Controller
             'profile_image' => $user->getFirstMediaUrl('profile'),
 
         ];
-        event(new NotificationEvent($data, $encodedUserId));
+        event(new NotificationEvent($data, $user_encoded_id));
 
             if ($user->type == UserTypeEnum::client) {
                 $user->load('client');

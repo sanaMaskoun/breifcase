@@ -8,7 +8,7 @@
                 <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat" id="contact-list">
                     <div class="list-group">
                         @foreach ($general_chats as $object)
-                            <a href="{{ route('group_form', base64_encode($object->id)) }}" class="list-group-item1"
+                            <a href="{{ route('general_chat_form', base64_encode($object->id)) }}" class="list-group-item1"
                                 onclick="openChat('Jamie Chastain')">
                                 <div class="contact-info">
                                     <i class="fas fa-users icon-group-dashboard"></i>
@@ -34,7 +34,16 @@
                     <div id="chat-area" class="card card_form_chat card-chat-dashboard">
                         <div id="chat-header_1">
                             <i class="fas fa-users icon-group-dashboard"></i>
-                            <span class="title-name-form-chat">{{ $general_chat->name }}</span>
+                            <span class="title-name-form-chat d-flex">{{ $general_chat->name }}
+                                @if($admin_general_chat <> null)
+                                <form action="{{ route('edit_general_chat', base64_encode($general_chat->id)) }}" method="GET">
+                                    <button class="btn d-flex">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </form>
+                                @endif
+
+                            </span>
 
                             <button id="fullscreen-button" class="btn">
                                 <i id="fullscreen-icon" class="fas fa-expand fullscreen-icon"></i>

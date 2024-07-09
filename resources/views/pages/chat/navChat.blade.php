@@ -28,6 +28,12 @@
                             <img src="{{ asset('assets/img/create_group.png') }}">
                         </a>
                         @endrole
+
+                        @role('admin')
+                        <a href="{{ route('add_general_chat') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-landmark ml-auto icon-forum"></i>
+                        </a>
+                        @endrole
                     </div>
                 </div>
 
