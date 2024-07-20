@@ -7,6 +7,7 @@ use App\Enums\DocumentStatusEnum;
 use App\Enums\InvoiceStatusEnum;
 use App\Events\RefundConsultationEvent;
 use App\Models\Consultation;
+use App\Models\Document;
 use App\Models\User;
 use App\Notifications\RefundConsultationNotification;
 use Illuminate\Bus\Queueable;
@@ -22,7 +23,7 @@ class RefundConsultationJob implements ShouldQueue
 
     protected $consultation;
 
-    public function __construct(Consultation $consultation)
+    public function __construct(Document $consultation)
     {
         $this->consultation = $consultation;
     }
@@ -38,16 +39,16 @@ class RefundConsultationJob implements ShouldQueue
             "title"             =>  $this->consultation->title
         ];
 
-        $encodedId = base64_encode( $this->consultation->id);
+        $consultation_encoded_id = base64_encode( $this->consultation->id);
 
         Notification::send($admins, new RefundConsultationNotification($data));
-        event(new RefundConsultationEvent($data, $encodedId));
+        event(new RefundConsultationEvent($data, $consultation_encoded_id));
 
 
         $this->consultation->update([
             'status' => DocumentStatusEnum::rejected,
         ]);
-        $this->consultation->invoice->update([
+        $this->consultation->invoice()->update([
             'status' => InvoiceStatusEnum::refund,
         ]);
     }

@@ -17,11 +17,10 @@ use Illuminate\Support\Facades\Notification;
 class JoinController extends Controller
 {
     public function join_lawyer()
-
     {
         $practices = Practice::all();
         $languages = Language::all();
-        return view('pages.lawyer.auth.join' , compact('practices' ,'languages'));
+        return view('pages.lawyer.auth.join', compact('practices', 'languages'));
 
     }
     public function store_join_lawyer(LawyerRequest $request)
@@ -31,6 +30,8 @@ class JoinController extends Controller
 
         $user->languages()->sync($request->languages);
         $user->practices()->sync($request->practices);
+
+        $user->assignRole('lawyer');
 
         if (!empty($request->file('profile'))) {
             $user->addMedia($request->file('profile'))->toMediaCollection('profile');
@@ -64,7 +65,6 @@ class JoinController extends Controller
         ];
         event(new NotificationEvent($data, $user_encoded_id));
 
-
         return view('pages.welcome');
     }
     public function join_client()
@@ -72,6 +72,7 @@ class JoinController extends Controller
 
         return view('pages.client.auth.join');
     }
+
     public function store_join_client(ClientRequest $request)
     {
         $user = User::create($request->userValidated());
@@ -83,7 +84,7 @@ class JoinController extends Controller
         $user->addMedia($request->file('front_emirates_id'))->toMediaCollection('front_emirates_id');
 
         $user->addMedia($request->file('back_emirates_id'))->toMediaCollection('back_emirates_id');
-        $user->assingRole('client');
+        $user->assignRole('client');
 
         Auth::login($user);
 
@@ -94,7 +95,7 @@ class JoinController extends Controller
     {
         $languages = Language::all();
 
-        return view('pages.company.auth.join' ,compact('languages'));
+        return view('pages.company.auth.join', compact('languages'));
 
     }
     public function store_join_translation_company(CompanyRequest $request)
@@ -104,32 +105,44 @@ class JoinController extends Controller
 
         $user->languages()->sync($request->languages);
 
+        $user->assignRole('translation_company');
+
         if (!empty($request->file('profile'))) {
             $user->addMedia($request->file('profile'))->toMediaCollection('profile');
         }
-
-
-
         foreach ($request->file('certifications') as $certification) {
             $user->lawyer->addMedia($certification)->toMediaCollection('certification');
         }
         foreach ($request->file('licenses') as $license) {
             $user->lawyer->addMedia($license)->toMediaCollection('license');
         }
+        
+        $admins = User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->get();
+        $joined_user = $user->name;
+        $email = $user->email;
+        $user_encoded_id = base64_encode($user->id);
 
+        Notification::send($admins, new RequestToJoin($user->id, $joined_user, $email));
+        $data = [
+            'user_id' => $user->id,
+            'user_name' => $request->name,
+            'email' => $request->email,
+            'profile_image' => $user->getFirstMediaUrl('profile'),
+
+        ];
+        event(new NotificationEvent($data, $user_encoded_id));
 
         return view('pages.welcome');
     }
 
-
-
-
     public function request_to_join()
     {
-        $users = User::whereIn('type', [UserTypeEnum::lawyer , UserTypeEnum::translation_company])
-        ->where('is_active', false)
-        ->paginate(config('constants.PAGINATION_COUNT'));
+        $users = User::whereIn('type', [UserTypeEnum::lawyer, UserTypeEnum::translation_company])
+            ->where('is_active', false)
+            ->paginate(config('constants.PAGINATION_COUNT'));
 
-    return view('pages.dashboard.requestToJoin', compact('users'));
+        return view('pages.dashboard.requestToJoin', compact('users'));
     }
 }

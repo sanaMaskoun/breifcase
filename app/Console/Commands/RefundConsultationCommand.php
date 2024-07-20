@@ -20,8 +20,9 @@ class RefundConsultationCommand extends Command
 
     public function handle()
     {
-        $consultations = Document::where('status', DocumentStatusEnum::pending)->where('type' , DocumentTypeEnum::consultation)
-        ->where('created_at', '<=', Carbon::now()->subHours(72))
+        $consultations = Document::where('status', DocumentStatusEnum::pending)
+        ->where('type', DocumentTypeEnum::consultation)
+        ->where('created_at', '<=', Carbon::now()->subMinute())
         ->get();
         foreach ($consultations as $consultation) {
             dispatch(new RefundConsultationJob($consultation));

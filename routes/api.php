@@ -157,5 +157,5 @@ Route::group(['prefix' => 'general-chat', 'middleware' => 'auth:sanctum'], funct
 
 
 //test
-Route::post('checkout/{lawyer}', [FatoorahController::class, 'checkout']);
+Route::post('checkout/{lawyer}', [FatoorahController::class, 'checkout'])->middleware('auth:sanctum');
 Route::get('callback', [FatoorahController::class, 'callback']);

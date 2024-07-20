@@ -289,8 +289,9 @@ class ChatController extends Controller
         $users = $this->get_clients_for_chat();
 
         $messages = $this->get_messages($receiver);
+        $templates = Template::all();
 
-        return view('pages.chat.dashboard.lawyer.formContactClient', compact(['receiver', 'messages', 'users']));
+        return view('pages.chat.dashboard.lawyer.formContactClient', compact(['receiver','templates', 'messages', 'users']));
     }
     public function attachments($encodedIdReceiver)
     {

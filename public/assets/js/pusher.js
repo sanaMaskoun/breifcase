@@ -17,37 +17,83 @@ var pusherPrivate = new Pusher('21c93d7ae9ded5a63591', {
         }
     }
 });
-var notificationsWrapper = $('.dropdown-notifications');
-var notificationsToggle = notificationsWrapper.find('a[data-bs-toggle]');
-var notificationsCountElem = notificationsToggle.find('span[data-count]');
-var notificationsCount = parseInt(notificationsCountElem.data('count'));
-var notifications = notificationsWrapper.find('ul.notification-list');
 
+
+var notificationsWrapper = $('.nav-item.dropdown.notification');
+var notificationsToggle = notificationsWrapper.find('a.nav-link.dropdown-toggle');
+var notificationsCountElem = notificationsToggle.find('span.badge');
+var notificationsCount = parseInt(notificationsCountElem.data('count'));
+var notifications = notificationsWrapper.find('div.notification-list');
 
 var channelConsultation = pusherPrivate.subscribe('private-consultation-channel-' + localStorage.getItem('user_id'));
-var channelReplayRate = pusherPrivate.subscribe('private-rate-channel-' + localStorage.getItem('user_id'));
+var channelCase = pusherPrivate.subscribe('private-case-channel-' + localStorage.getItem('user_id'));
 
 
 
-//counter chat in group
-var channelPrivateCounterChatGroup = pusherPrivate.subscribe('private-counter-chat-group-channel-'+localStorage.getItem('user_id'));
-channelPrivateCounterChatGroup.bind('counterChatGroup', function (data) {
 
-    var userId = localStorage.getItem('user_id');
-      if (data.member_id == userId) {
 
-    var counterElement = $('#counter_chat_group_' + data.group_id);
+channelConsultation.bind('App\\Events\\ConsultationEvent', function(data) {
+    var newConsultation = `
+    <li class="notification-message">
+        <div class="media d-flex">
+            <div class="media-body flex-grow-1 notification-item">
+                <p class="notification-title">A consultation has been sent by
+                    <span class="details_notification">${data.client_name} :</span>
+                    <span>
+                        <a class="notification-link" href="/consultation/${data.consultation_encoded_id}/details">
+                            <span class="notification-title">${data.consultation_title}</span>
+                        </a>
+                    </span>
+                </p>
+                <span class="notification-time">${new Date().toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                })}</span>
+            </div>
+        </div>
+    </li>
+    `;
 
-    var counterText = counterElement.text().trim();
-    if (counterText !== '') {
-        var count = parseInt(counterText);
-        count++;
-        counterElement.text(count.toString());
-    } else {
-        counterElement.text('1');
-    }
-     }
+    notifications.prepend(newConsultation);
+    notificationsCount += 1;
+    notificationsCountElem.text(notificationsCount);
+
+    notificationsWrapper.find('.notif-count').text(notificationsCount);
+    notificationsWrapper.show();
 });
+
+channelCase.bind('App\\Events\\CaseEvent', function(data) {
+    var newCase = `
+    <li class="notification-message">
+        <div class="media d-flex">
+            <div class="media-body flex-grow-1 notification-item">
+                <p class="notification-title">A case has been sent by
+                    <span class="details_notification">${data.lawyer_name} :</span>
+                    <span>
+                        <a class="notification-link" href="/case/${data.case_encoded_id}/details">
+                            <span class="notification-title">${data.case_title}</span>
+                        </a>
+                    </span>
+                </p>
+                <span class="notification-time">${new Date().toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                })}</span>
+            </div>
+        </div>
+    </li>
+    `;
+
+    notifications.prepend(newCase);
+    notificationsCount += 1;
+    notificationsCountElem.text(notificationsCount);
+
+    notificationsWrapper.find('.notif-count').text(notificationsCount);
+    notificationsWrapper.show();
+});
+
 
 
 
@@ -101,98 +147,6 @@ channelPivateNewChat.bind('newChatMessage', function (data) {
     // $("#new_chat_div").append(newChatMessage);
 });
 
-//counter chat
-var channelPrivateCounterChat = pusherPrivate.subscribe('private-counter-chat-channel-' + localStorage.getItem('user_id'));
-channelPrivateCounterChat.bind('counterChat', function (data) {
-
-    var userId = localStorage.getItem('user_id');
-
-    var isSender = (data.sender_id == userId);
-    if (data.receiver_id == userId) {
-        var lastMessage = data.message;
-        $('#last_message_' + data.sender_id).text(lastMessage);
-
-        var counterElement = $('#counter_chat_' + data.sender_id);
-
-        var counterText = counterElement.text().trim();
-        if (counterText !== '') {
-            var count = parseInt(counterText);
-            count++;
-            counterElement.text(count.toString());
-        } else {
-            counterElement.text('1');
-        }
-    } else if (isSender) {
-        var lastMessage = data.message;
-        $('#last_message_' + data.receiver_id).text(lastMessage);
-    }
-});
-
-
-
-channelConsultation.bind('App\\Events\\ConsultationEvent', function (data) {
-
-    var newConsultation = `
-    <li class="notification-message">
-     <div class="media d-flex">
-
-        <div class="media-body flex-grow-1 row_notification">
-                <p> A consultation has been sent by :
-                <span class="details_notification">${data.client_name}</span>
-                <span>
-                        <a class="link_notification" href="/consultation/${data.encodedId}/show">
-                        ${data.consultation_title}
-                        </a>
-
-                    </span>
-                </p>
-
-                <p class="noti-time"><span class="notification-time">${data.date}</span></p>
-
-        </div>
-     </div>
-    </li>
-`;
-    notifications.prepend(newConsultation);
-    notificationsCount += 1;
-    notificationsCountElem.text(notificationsCount);
-
-    notificationsWrapper.find('.notif-count').text(notificationsCount);
-    notificationsWrapper.show();
-});
-
-channelReplayRate.bind('App\\Events\\ReplyRateEvent', function (data) {
-    var newReplyRateHtml = `
-    <li class="notification-message">
-    <div class="media d-flex">
-
-       <div class="media-body flex-grow-1 row_notification">
-       <p> Your reply to the  general question has been evaluated by :
-       <span class="details_notification">${data.client_name}</span>
-               <span>
-               <a class="link_notification" href="/general_question/${data.encodedId}/show">
-               ${data.question}
-                       </a>
-
-                   </span>
-               </p>
-
-               <p class="noti-time"><span class="notification-time">${data.date}</span></p>
-
-       </div>
-    </div>
-   </li>
-`;
-
-    notifications.prepend(newReplyRateHtml);
-    notificationsCount += 1;
-    notificationsCountElem.text(notificationsCount);
-
-    notificationsWrapper.find('.notif-count').text(notificationsCount);
-    notificationsWrapper.show();
-});
-
-
 //chat
 var channelPivateChat = pusherPrivate.subscribe('private-chat-channel-' + localStorage.getItem('user_id'));
 channelPivateChat.bind('chatMessage', function (data) {
@@ -244,66 +198,49 @@ channelPivateChat.bind('chatMessage', function (data) {
 });
 
 
+//counter chat
+var channelPrivateCounterChat = pusherPrivate.subscribe('private-counter-chat-channel-' + localStorage.getItem('user_id'));
+channelPrivateCounterChat.bind('counterChat', function (data) {
 
+    var userId = localStorage.getItem('user_id');
 
+    var isSender = (data.sender_id == userId);
+    if (data.receiver_id == userId) {
+        var lastMessage = data.message;
+        $('#last_message_' + data.sender_id).text(lastMessage);
 
+        var counterElement = $('#counter_chat_' + data.sender_id);
 
-//chat group
-// var channelChat = pusher.subscribe('group-channel');
-// channelChat.bind('groupMessage', function (data) {
-//     var extension = data.attachment ? data.attachment.split('.').pop().toLowerCase() : null;
-//     message_group = "";
+        var counterText = counterElement.text().trim();
+        if (counterText !== '') {
+            var count = parseInt(counterText);
+            count++;
+            counterElement.text(count.toString());
+        } else {
+            counterElement.text('1');
+        }
+    } else if (isSender) {
+        var lastMessage = data.message;
+        $('#last_message_' + data.receiver_id).text(lastMessage);
+    }
+});
 
-//     let receiverMessage = `
-//     <div class="media media-chat" id="group_area_receiver">
-//         <div class="media-body img-groups">
-//         <a href="/lawyer/${data.sender_id_encoded}/show">
-//         <img class="rounded-circle img_group" src="${data.sender_profile}">
-//         <span>${data.sender_name}</span>
-//         </a>
-//             <div class="text-content">
-//                 ${data.attachment ?
-//             (extension === 'jpg' || extension === 'png' ?
-//                 `<img class="img_group" src="${data.attachment}">` :
-//                 `<a href="${data.attachment}" target="_blank"><p class="message">${data.message}</p></a>`) :
-//             `<p class="message">${data.message} </p>`}
-//                 <time class="time">${data.created_at}</time>
-//             </div>
-//         </div>
-//     </div>`;
+//counter chat in group
+var channelPrivateCounterChatGroup = pusherPrivate.subscribe('private-counter-chat-group-channel-'+localStorage.getItem('user_id'));
+channelPrivateCounterChatGroup.bind('counterChatGroup', function (data) {
 
-//     let senderMessage = `
-//     <div class="media media-chat media-chat-right" id="group_area_sender">
-//     <div class="media-body">
-//     <div class="text-content">
-//     ${data.attachment ?
-//             (extension === 'jpg' || extension === 'png' ?
-//                 `<img class="img_group" src="${data.attachment}">` :
-//                 `<a href="${data.attachment}" target="_blank"><p class="message">${data.message}</p></a>`) :
-//             `<p class="message">${data.message} </p>`}
-//     <time class="time">${data.created_at}</time>
-// </div>
-//     <a href="/lawyer/${data.sender_id_encoded}/show">
-//     <img class="rounded-circle img_group" src="${data.sender_profile}">
-//     </a>
+    var userId = localStorage.getItem('user_id');
+      if (data.member_id == userId) {
 
-//     </div>
-//     </div>`;
+    var counterElement = $('#counter_chat_group_' + data.group_id);
 
-//     if (data.sender_id == localStorage.getItem('user_id')) {
-//         message_group = senderMessage;
-//     }
-//     else {
-//         message_group = receiverMessage;
-//     }
-//     if (message_group != "") {
-//         $('.empty-messages').remove();
-//     }
-
-
-//     $("#group_div").append(message_group);
-
-
-// });
-
-
+    var counterText = counterElement.text().trim();
+    if (counterText !== '') {
+        var count = parseInt(counterText);
+        count++;
+        counterElement.text(count.toString());
+    } else {
+        counterElement.text('1');
+    }
+     }
+});

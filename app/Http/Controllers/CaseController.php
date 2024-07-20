@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Enums\DocumentTypeEnum;
+use App\Events\CaseEvent;
 use App\Http\Requests\CaseRequest;
 use App\Models\Document;
 use App\Models\Template;
 use App\Models\User;
+use App\Notifications\CaseNotification;
+use Illuminate\Support\Facades\Notification;
 
 class CaseController extends Controller
 {
@@ -49,6 +52,19 @@ class CaseController extends Controller
 
         $case= Document::create($request->validated());
         $case->addMedia($media_items->getPath())->toMediaCollection('case_template');
+
+        $notificationData = [
+            'lawyer_id'       => Auth()->user()->id,
+            'lawyer_name'     => Auth()->user()->name,
+            'case_id'         => $case->id,
+            'case_title'      => $case->title,
+        ];
+        $receiver = User::find($case->receiver_id);
+        Notification::send($receiver, new CaseNotification($notificationData));
+
+        event(new CaseEvent($notificationData, base64_encode($case->id), $case->receiver_id));
+
+
 
         return redirect()->route('lawyer_form_dashboard' ,$receiver_encode_id );
 

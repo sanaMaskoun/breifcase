@@ -9,7 +9,8 @@ return [
     'suggestion_title_notification'          => 'suggestion title:',
     'person_suggestion_notification'         => 'By :' ,
     'evaluted_question_notification'         => 'Your reply to the general question has been evaluated by :',
-    'sent_consultation_notification'         => 'A consultation has been sent by :',
+    'sent_consultation_notification'         => 'A consultation has been sent by ',
+    'sent_case_notification'                 => 'A case has been sent by ',
 
 
     'profile'                                => 'Profile',

@@ -10,7 +10,8 @@ return [
     'suggestion_title_notification'    => 'عنوان الإقتراح:',
     'person_suggestion_notification'   => 'بواسطة',
     'evaluted_question_notification'   => 'تم تقييم ردك على السؤال العام بواسطة:',
-    'sent_consultation_notification'   => 'تم إرسال الاستشارة بواسطة :',
+    'sent_consultation_notification'   => 'تم إرسال الاستشارة بواسطة ',
+    'sent_case_notification'           => 'تم إرسال قضية بواسطة ',
 
     'profile'                          => 'الملف الشخصي',
     'logout'                           => 'تسجيل الخروج',

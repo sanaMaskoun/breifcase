@@ -80,6 +80,12 @@
     font-weight: bold;
 }
 
+.answer-consultation{
+    width: 150px;
+    border: none;
+    border-radius: 15px;
+    padding: 5px;
+}
 .title-details:hover {
     color: black;
     text-decoration: none;

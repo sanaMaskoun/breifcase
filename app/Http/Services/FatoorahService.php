@@ -31,18 +31,16 @@ class FatoorahService
 
         if (!$data) {
             return false;
-
         }
 
         $response = $this->request_client->send($request, ['json' => $data]);
 
         if ($response->getStatusCode() != 200) {
-
             return false;
         }
 
         $response = json_decode($response->getBody(), true);
-        return $response;
+        return  $response;
     }
 
     public function sendPayment($data)
@@ -58,36 +56,35 @@ class FatoorahService
         return $response;
     }
 
-    public function refundPayment($paymentId)
-    {
-        $url = 'https://apitest.myfatoorah.com/v2/RefundPayment';
+    // public function refundPayment($paymentId)
+    // {
+    //     $url = 'https://apitest.myfatoorah.com/v2/RefundPayment';
 
-        $requestData = [
-            'paymentId' => $paymentId,
-        ];
+    //     $requestData = [
+    //         'paymentId' => $paymentId,
+    //     ];
 
+    //     $headers = [
+    //         "Content-Type" => 'application/json',
+    //         "authorization" => 'Bearer ' . env('fatoorah_token'),
+    //     ];
 
-        $headers = [
-            "Content-Type" => 'application/json',
-            "authorization" => 'Bearer ' . env('fatoorah_token'),
-        ];
+    //     $client = new Client();
 
-        $client = new Client();
+    //     try {
+    //         $response = $client->post($url, [
+    //             'headers' => $headers,
+    //             'json' => $requestData,
+    //         ]);
 
-        try {
-            $response = $client->post($url, [
-                'headers' => $headers,
-                'json' => $requestData,
-            ]);
+    //         $data = $response->getBody()->getContents();
 
-            $data = $response->getBody()->getContents();
+    //         return response()->json($data);
 
-            return response()->json($data);
-
-        } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-    }
+    //     } catch (Exception $e) {
+    //         return response()->json(['error' => $e->getMessage()], 500);
+    //     }
+    // }
     // function callAPI($endpointURL, $apiKey, $postFields = [])
     // {
     //     $curl = curl_init($endpointURL);

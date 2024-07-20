@@ -24,7 +24,11 @@ class Document extends Model implements HasMedia
     {
         return $this->belongsTo(User::class, 'receiver_id');
     }
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class , 'document_id');
 
+    }
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('case_template')->singleFile();

@@ -132,6 +132,8 @@ Route::group(['prefix' => 'consultation', 'middleware' => 'auth:sanctum'], funct
     Route::post('store/{receiver}', [ConsultationController::class, 'store'])->name('store_consultation');
     Route::get('reviews', [ConsultationController::class, 'reviews'])->name('reviews');
     Route::get('{consultaion_encode_id}/details', [ConsultationController::class, 'show'])->name('details_consultaion');
+    Route::post('{consultaion_encode_id}/answer', [ConsultationController::class, 'answer'])->name('answer_consultaion');
+
 });
 Route::get('list/reviews', [ConsultationController::class, 'reviews_list_admin'])->name('list_reviews')->middleware('auth:sanctum');
 
@@ -173,8 +175,9 @@ Route::group(['prefix' => 'chat/dashboard/forum', 'middleware' => 'auth:sanctum'
 
 });
 
+Route::get('chat/client', [ChatController::class, 'chat_client'])->name('chat_client');
+
 Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/', [ChatController::class, 'chat_client'])->name('chat_client');
     Route::get('{receiver_encoded_id}', [ChatController::class, 'chat_client_form'])->name('chat_client_form');
 
     Route::get('/dashboard/translation-company', [ChatController::class, 'chat_company_dashboard'])->name('chat_company_dashboard');
@@ -194,6 +197,7 @@ Route::group(['prefix' => 'chat', 'middleware' => 'auth:sanctum'], function () {
 Route::get('/dashboard-contact', [ChatController::class, 'contact'])->name('contact_dashboard')->middleware('auth:sanctum');
 Route::get('/contact-client', [ChatController::class, 'contact_client'])->name('contact_client')->middleware('auth:sanctum');
 Route::get('/contact-client/{receiver_encoded_id}', [ChatController::class, 'form_contact_client'])->name('form_contact_client')->middleware('auth:sanctum');
+
 
 Route::group(['prefix' => 'suggestions', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [SuggestionController::class, 'index'])->name('list_suggestions');

@@ -7,7 +7,7 @@
                 margin-left: 10px;
             }
 
-            .img-icon-template{
+            .img-icon-template {
                 width: 35px !important;
                 height: 35px !important;
             }
@@ -30,10 +30,11 @@
                 content: none;
             }
 
-            .dropdown-menu.show
-            {
+            .dropdown-menu.show {
                 overflow-y: scroll;
-                height: 160px;            }
+                height: 160px;
+            }
+
             .btn-dropdown-toggle img {
                 font-size: 24px;
                 /* Adjust the size of the icon */
@@ -96,8 +97,17 @@
                                 <button class="btn btn-dropdown-toggle dropdown-toggle" type="button"
                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    <img class="img-icon-template" alt="" src="{{ asset('assets/img/template-dashboard.png') }}">
+                                    <img class="img-icon-template" alt=""
+                                        src="{{ asset('assets/img/template-dashboard.png') }}">
                                 </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @foreach ($templates as $template)
+                                        <a class="dropdown-item"
+                                            href="{{ route('create_case', [base64_encode($template->id), base64_encode($receiver->id)]) }}"
+                                            data-file-name="document1.pdf">{{ $template->title }}</a>
+                                    @endforeach
+
+                                </div>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="#" data-file-name="document1.pdf">Document 1</a>
                                     <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
@@ -149,7 +159,8 @@
                                                     @else
                                                         <span class="message">{{ $message->message }}</span>
                                                     @endif
-                                                    <time class="time">{{ $message->created_at->diffForHumans() }}</time>
+                                                    <time
+                                                        class="time">{{ $message->created_at->diffForHumans() }}</time>
                                                 </div>
                                             </div>
                                         </div>
@@ -175,7 +186,8 @@
                                                     @else
                                                         <span class="message">{{ $message->message }}</span>
                                                     @endif
-                                                    <time class="time">{{ $message->created_at->diffForHumans() }}</time>
+                                                    <time
+                                                        class="time">{{ $message->created_at->diffForHumans() }}</time>
                                                 </div>
                                             </div>
                                         </div>

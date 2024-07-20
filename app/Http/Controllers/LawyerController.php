@@ -59,6 +59,15 @@ class LawyerController extends Controller
 
         return redirect()->back();
 
+
+    }
+
+    public function clear_all()
+    {
+        foreach (Auth()->user()->unreadNotifications as $notification) {
+            $notification->markAsRead();
+        }
+        return redirect()->back();
     }
     // public function edit($encodedId)
     // {
@@ -97,11 +106,5 @@ class LawyerController extends Controller
 
 
 
-    // public function clear_all()
-    // {
-    //     foreach (Auth()->user()->unreadNotifications as $notification) {
-    //         $notification->markAsRead();
-    //     }
-    //     return redirect()->back();
-    // }
+
 }

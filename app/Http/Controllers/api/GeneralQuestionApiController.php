@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Events\ReplyRateEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GeneralQuestionRequest;
 use App\Http\Requests\RateReplyGeneralQuestionRequest;
@@ -47,19 +46,6 @@ class GeneralQuestionApiController extends Controller
     public function rate(RateReplyGeneralQuestionRequest $request , QuestionReply $reply)
     {
          $reply->update(['rate' => $request->rate]);
-
-         $lawyer =User::where('id', $reply->user_id )->first();
-         $general_question_encoded_id = base64_encode($reply->general_question->id);
-
-         $data = [
-             'client_id'          => Auth()->user()->id,
-             'client_name'        => Auth()->user()->name,
-             'question_id'        => $reply->general_question->id,
-             'question'           => $reply->general_question->question,
-
-         ];
-         Notification::send($lawyer, new ReplyRateNotification($data));
-         event(new ReplyRateEvent($data,$general_question_encoded_id ,$lawyer->id));
 
         return response()->json((new RepliesResource($reply->load(['general_question','user']))));
 

@@ -1,5 +1,5 @@
 @php
-$client_encoded_id = base64_encode(Auth()->user()->id);
+    $client_encoded_id = base64_encode(Auth()->user()->id);
 
 @endphp
 <header id="header">
@@ -57,20 +57,46 @@ $client_encoded_id = base64_encode(Auth()->user()->id);
                 </li>
 
                 <li class="nav-item dropdown notification">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="bx bx-bell icon-header"></i>
-                        <span class="badge">3</span>
+                        <span class="badge"
+                            data-count="{{ Auth()->user()->unreadNotifications->count() }}">{{ Auth()->user()->unreadNotifications->count() }}</span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <div class="dropdown-header">Notifications</div>
-                        <a class="dropdown-item" href="#">Notification 1</a>
-                        <a class="dropdown-item" href="#">Notification 2</a>
-                        <a class="dropdown-item" href="#">Notification 3</a>
-                        <a class="dropdown-item text-center" href="#">View All</a>
+
+                    <div class="dropdown-menu dropdown-menu-right notification-list" aria-labelledby="navbarDropdown">
+
+                        @foreach (Auth()->user()->unreadNotifications as $notification)
+                            @if ($notification->type === 'App\Notifications\CaseNotification')
+                                <div class="media-body flex-grow-1 notification-item">
+                                    <p class="notification-title"> @lang('pages.sent_case_notification')
+                                        <span class="details_notification">{{ $notification->data['lawyer_name'] }}
+                                            :</span>
+                                        <span>
+                                            <a class="notification-link"
+                                                href="{{ route('details_case', base64_encode($notification->data['case_id'])) }}">
+                                                <span class="notification-title">
+                                                    {{ $notification->data['case_title'] }}</span>
+                                            </a>
+                                        </span>
+                                    </p>
+                                    <span class="notification-time">{{ $notification->created_at?->format('j M Y') }}
+                                    </span>
+                                </div>
+                            @endif
+                        @endforeach
+
+                        <div class="topnav-dropdown-header d-flex justify-content-end" id="notificationCount">
+                            <a href="{{ route('notification_clear_all') }}"
+                                class="notification-clear">@lang('pages.clear_all')</a>
+                        </div>
                     </div>
                 </li>
             </ul>
-           <a href="{{ route('show_client' , $client_encoded_id ) }}"> <img class="img-profile" src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__5_-removebg-preview.png') }}" alt="" /></a>
+
+            <a href="{{ route('show_client', $client_encoded_id) }}"> <img class="img-profile"
+                    src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__5_-removebg-preview.png') }}"
+                    alt="" /></a>
             </ul>
         </div>
     </nav>

@@ -105,38 +105,64 @@
                     </li>
                 @endrole
 
-                {{--  @role('admin')
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('chat_admin') }}">
-                            <i class="bx bx-chat icon-header"></i></a>
-                    </li>
-                @endrole  --}}
-
                 <li class="nav-item dropdown notification">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="bx bx-bell icon-header"></i>
-                        <span class="badge" data-count="{{ Auth()->user()->unreadNotifications->count() }}">{{ Auth()->user()->unreadNotifications->count() }}</span>
+                        <span class="badge"
+                            data-count="{{ Auth()->user()->unreadNotifications->count() }}">{{ Auth()->user()->unreadNotifications->count() }}</span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right notification-list" aria-labelledby="navbarDropdown">
-                        <div class="topnav-dropdown-header d-flex justify-content-end " id="notificationCount">
-                            <a href="{{ route('notification_clear_all') }}" class="notification-clear">@lang('pages.clear_all') </a>
-                        </div>
+
                         @foreach (Auth()->user()->unreadNotifications as $notification)
                             @if ($notification->type === 'App\Notifications\RequestToJoin')
                                 <div class="media-body flex-grow-1 notification-item">
-                                    <a class="notification-link"
-                                        href="{{ route('details_lawyer', base64_encode($notification->data['user_id'])) }}">
+                                    <a class="notification-link" href="{{ route('request_to_join') }}">
                                         <span class="notification-title">@lang('pages.request_join_notification')
-                                            {{ $notification->data['joined_user'] }} </span>
+                                            {{ $notification->data['joined_user'] }}</span>
                                     </a>
-                                    <span class="notification-time">{{ $notification->created_at?->format('j M Y') }}</span>
+                                    <span class="notification-time">{{ $notification->created_at?->format('j M Y') }}
+                                    </span>
                                 </div>
+                            @elseif ($notification->type === 'App\Notifications\RefundConsultationNotification')
+                                <div class="media-body flex-grow-1 notification-item">
+                                    <a class="notification-link"
+                                        href="{{ route('details_consultaion', base64_encode($notification->data['consultation_id'])) }}">
+                                        <span class="notification-title">@lang('pages.refund_consultation_notification') :
+                                            {{ $notification->data['title'] }}</span>
+                                    </a>
+                                    <span class="notification-time">{{ $notification->created_at?->format('j M Y') }}
+                                    </span>
+                                </div>
+
+                            @elseif ($notification->type === 'App\Notifications\ConsultationNotification')
+                                <div class="media-body flex-grow-1 notification-item">
+                                    <p class="notification-title"> @lang('pages.sent_consultation_notification')
+                                        <span
+                                            class="details_notification">{{ $notification->data['client_name'] }} :</span>
+                                        <span>
+                                            <a class="notification-link"
+                                                href="{{ route('details_consultaion', base64_encode($notification->data['consultation_id'])) }}">
+                                                <span class="notification-title">
+                                                    {{ $notification->data['consultation_title'] }}</span>
+                                            </a>
+                                        </span>
+                                    </p>
+                                    <span class="notification-time">{{ $notification->created_at?->format('j M Y') }}
+                                    </span>
+                                </div>
+
                             @endif
                         @endforeach
+
+                        <div class="topnav-dropdown-header d-flex justify-content-end" id="notificationCount">
+                            <a href="{{ route('notification_clear_all') }}"
+                                class="notification-clear">@lang('pages.clear_all')</a>
+                        </div>
                     </div>
                 </li>
+
             </ul>
             <a href="#"> <img class="img-profile" src="{{ Auth()->user()->getFirstMediaUrl('profile') }}"
                     alt="" /></a>

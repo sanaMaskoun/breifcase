@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\FatoorahService;
+use App\Models\Document;
+use App\Models\Invoice;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FatoorahController extends Controller
 {
@@ -16,57 +19,52 @@ class FatoorahController extends Controller
 
     }
 
-    public function checkout(Request $request, User $lawyer)
-    {
+//     public function checkout(Request $request, User $lawyer)
+//     {
 
-        $data = [
-            "CustomerName" => $lawyer->name,
-            "Notificationoption" => "LNK",
-            "Invoicevalue" => $lawyer->consultation_price,
-            "CustomerEmail" => $lawyer->email,
-            "CallBackUrl" => env('success_url'),
-            "ErrorUrl" => env('error_url'),
-            "Languagn" => 'en',
-            "DisplayCurrencyIna" => 'KWD',
-        ];
+//         $data = [
+//             "CustomerName" => $lawyer->name,
+//             "Notificationoption" => "LNK",
+//             "Invoicevalue" => $lawyer->lawyer->consultation_price,
+//             "CustomerEmail" => $lawyer->email,
+//             "CallBackUrl" => env('success_url'),
+//             "ErrorUrl" => env('error_url'),
+//             "Languagn" => 'en',
+//             "DisplayCurrencyIna" => 'KWD',
+//         ];
 
-        return  $this->fatoorahService->sendPayment($data);
-        
-  }
+//         return  $this->fatoorahService->sendPayment($data);
 
-    public function callback(Request $request)
-    {
-        $data = [
-            'Key' => $request->paymentId,
-            'KeyType' => 'paymentId',
-        ];
-        return $this->fatoorahService->getPaymentStatus($data);
-        // $apiKey = 'your_token';
+//   }
 
-        // $response =$this->fatoorhServices->callAPI("https://apitest.myfatoorah.com/v2/getPaymentStatus", $apiKey, $postFields);
-        // $response = json_decode($response);
-        // if (!isset($response->Data->InvoiceId)) {
-        //     return response()->json(["error" => 'error', 'status' => false], 404);
-        // }
+public function callback(Request $request)
+{
+    $data = [
+        'Key' => $request->paymentId,
+        'KeyType' => 'paymentId',
+    ];
 
-        // $InvoiceId = $response->Data->InvoiceId; // get your order by payment_id
-        // if ($response->IsSuccess == true) {
-        //     if ($response->Data->InvoiceStatus == "Paid") //||$response->Data->InvoiceStatus=='Pending'
-        //     {
-        //         if ($your_order_total_price == $response->Data->InvoiceValue) {
+    $response = $this->fatoorahService->getPaymentStatus($data);
+    $InvoiceId = $response['Data']['InvoiceId'];
 
-        //             /**
-        //              *
-        //              * The payment has been completed successfully. You can change the status of the order
-        //              *
-        //              */
+    $invoice = Invoice::where('invoiceId', $InvoiceId)->first();
 
-        //         }
-        //     }
+    if ($invoice) {
+        $document = Document::find($invoice->document_id);
+        $user = User::find($document->sender_id );
 
-        // }
+        if ($user) {
 
-        // return response()->json(["error" => 'error', 'status' => false], 404);
+            Auth::login($user);
+
+            return redirect()->route('show_lawyer', base64_encode($invoice->receiver_id));
+        } else {
+            return redirect()->route('home_client')->with('error', 'User not found');
+        }
+    } else {
+        return redirect()->route('home_client')->with('error', 'Invoice not found');
     }
+}
+
 
 }

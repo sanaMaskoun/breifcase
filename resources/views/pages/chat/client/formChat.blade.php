@@ -1,4 +1,4 @@
-@extends('pages.client.details')
+@extends('pages.client.show')
 @section('profile_content')
 
     <div class="box-profile-chat">

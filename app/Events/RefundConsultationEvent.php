@@ -16,12 +16,14 @@ class RefundConsultationEvent implements ShouldBroadcast
 
     public $consultation_id ;
     public $title;
-    public $encodedId;
-       public function __construct($data =[] , $encodedId)
+    public $consultation_encoded_id;
+    // public $date;
+       public function __construct($data =[] , $consultation_encoded_id )
     {
-       $this->consultation_id = $data['consultation_id'];
-       $this->title           = $data['title'];
-       $this->encodedId       = $encodedId;
+       $this->consultation_id               = $data['consultation_id'];
+       $this->title                         = $data['title'];
+    //    $this->date                          = $date;
+       $this->consultation_encoded_id       = $consultation_encoded_id;
     }
 
 

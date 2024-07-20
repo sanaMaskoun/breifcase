@@ -1,5 +1,5 @@
-@
-@extends('pages.lawyer.details')
+
+@extends('pages.lawyer.show')
 @section('form_document')
     <div class="col-lg-6 col-md-12 col-sm-12">
         <div class="card box  card-1 card_send_consultation">
