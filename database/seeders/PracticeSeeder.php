@@ -15,17 +15,21 @@ class PracticeSeeder extends Seeder
     {
         Practice::create(
             [
-                'name' => 'tax'
+                'name' => 'tax',
+                'description' => 'Describes tax issues'
             ]
         );
         Practice::create(
             [
-                'name' => 'family'
+                'name' => 'family',
+                'description' => 'Describes family issues'
             ]
         );
         Practice::create(
             [
                 'name' => 'fraud'
+                ,
+                'description' => 'Describes fraud issues'
             ]
         );
     }
