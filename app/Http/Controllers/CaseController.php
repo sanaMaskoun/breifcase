@@ -56,7 +56,7 @@ class CaseController extends Controller
             DocumentStatusEnum::rejected => 'Rejected',
         ];
 
-        return view('pages.document.case.list', compact('cases', 'status_texts','num_cases'));
+        return view('pages.document.case.list', compact('cases', 'status_texts', 'num_cases'));
     }
 
     public function show($case_encode_id)
@@ -69,9 +69,25 @@ class CaseController extends Controller
             DocumentStatusEnum::closed => 'Closed',
             DocumentStatusEnum::rejected => 'Rejected',
         ];
-        return view('pages.document.case.show', compact('case','status_texts'));
+        $status_invoice = InvoiceStatusEnum::getKey($case->invoice->status);
+
+        return view('pages.document.case.show', compact('case', 'status_texts', 'status_invoice'));
     }
 
+    public function show_client($case_encode_id)
+    {
+        $case_decode_id = base64_decode($case_encode_id);
+        $case = Document::find($case_decode_id);
+        $status_texts = [
+            DocumentStatusEnum::pending => 'Pending',
+            DocumentStatusEnum::ongoing => 'Ongoing',
+            DocumentStatusEnum::closed => 'Closed',
+            DocumentStatusEnum::rejected => 'Rejected',
+        ];
+        // $status_invoice = InvoiceStatusEnum::getKey($case->invoice->status);
+        $client = Auth()->user();
+        return view('pages.document.case.Clienrshow', compact('case', 'status_texts', 'client'));
+    }
     public function details($case_encode_id)
     {
         $case_decode_id = base64_decode($case_encode_id);
@@ -114,7 +130,7 @@ class CaseController extends Controller
     public function accept_case(AcceptCaseRequest $request, $case_encode_id)
     {
         $case = Document::find(base64_decode($case_encode_id));
-        $admin=User::where('type' , UserTypeEnum::admin)->first();
+        $admin = User::where('type', UserTypeEnum::admin)->first();
         $data = [
             "CustomerName" => $admin->name,
             "Notificationoption" => "LNK",
@@ -151,8 +167,7 @@ class CaseController extends Controller
 
         Notification::send($lawyer, new AcceptCaseNotification($notificationData));
 
-        event(new AcceptCaseEvent($notificationData, base64_encode($case->id) ,$case->sender_id));
-
+        event(new AcceptCaseEvent($notificationData, base64_encode($case->id), $case->sender_id));
 
         return redirect($payment_response['Data']['InvoiceURL']);
     }
@@ -172,8 +187,7 @@ class CaseController extends Controller
 
         Notification::send($lawyer, new RejectCaseNotification($notificationData));
 
-        event(new RejectCaseEvent($notificationData, base64_encode($case->id) ,$case->sender_id));
-
+        event(new RejectCaseEvent($notificationData, base64_encode($case->id), $case->sender_id));
 
         return redirect()->back();
     }

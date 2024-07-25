@@ -1,5 +1,6 @@
 @extends('master.app')
 @section('content')
+
     <div class="container">
         <div class="row ">
             <div class="col-lg-3 col-md-12 col-sm-12 sidebar-dashboard ">
@@ -30,6 +31,11 @@
                         Language
 
                     </a>
+                    <a class="sidebar-dashboard-admin" href="{{ route('list_news') }}">
+                        <img src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__3_-removebg-preview.png') }}" class="icon-dashboard-sidebar" >
+                        News
+
+                    </a>
                 @endrole
 
 
@@ -56,6 +62,12 @@
                     <a class="sidebar-dashboard-admin" href="{{ route('list_cases') }}">
                         <i class="fas fa-gavel"></i>
                         Cases
+                    </a>
+
+                    <a href="{{ route('list_requests') }}">
+                        <img alt="" src="{{ asset('assets/img/template-dashboard.png') }}"
+                            class="icon-dashboard-sidebar">
+                        Requests
                     </a>
                     <a class="sidebar-dashboard-admin" href="{{ route('list_lawyers') }}">
                         <img alt="" src="{{ asset('assets/img/lawyer_icon.png') }}" class="icon-dashboard-sidebar">

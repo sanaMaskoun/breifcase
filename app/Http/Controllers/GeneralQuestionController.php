@@ -72,7 +72,7 @@ class GeneralQuestionController extends Controller
         if (Auth()->user()->type == UserTypeEnum::client) {
             $client = Auth()->user();
             return view('pages.generalQuestion.create', compact('client'));
-            
+
         } else {
             return view('pages.generalQuestion.company.create');
         }
@@ -103,5 +103,13 @@ class GeneralQuestionController extends Controller
         $question_decoded_id = base64_decode($question_encoded_id);
         $question = GeneralQuestion::find($question_decoded_id);
         return view('pages.generalQuestion.details', compact('question'));
+    }
+    public function show_client($question_encoded_id)
+    {
+        $question_decoded_id = base64_decode($question_encoded_id);
+        $question = GeneralQuestion::find($question_decoded_id);
+        $client = Auth()->user();
+
+        return view('pages.generalQuestion.clientShow', compact('question','client'));
     }
 }

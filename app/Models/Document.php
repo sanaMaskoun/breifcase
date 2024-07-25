@@ -29,6 +29,12 @@ class Document extends Model implements HasMedia
         return $this->hasOne(Invoice::class , 'document_id');
 
     }
+    public function rating()
+    {
+        return $this->hasOne(Rate::class , 'document_id');
+
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('case_template')->singleFile();

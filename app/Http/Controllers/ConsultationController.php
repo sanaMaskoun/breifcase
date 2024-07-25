@@ -115,7 +115,24 @@ class ConsultationController extends Controller
             DocumentStatusEnum::closed => 'Closed',
             DocumentStatusEnum::rejected => 'Rejected',
         ];
-        return view('pages.document.consultation.show', compact('consultation', 'status_texts'));
+        $status_invoice = InvoiceStatusEnum::getKey($consultation->invoice->status);
+
+        return view('pages.document.consultation.show', compact('consultation', 'status_texts','status_invoice'));
+    }
+    public function show_client($consultation_encode_id)
+    {
+        $consultation_decode_id = base64_decode($consultation_encode_id);
+        $consultation = Document::find($consultation_decode_id);
+        $status_texts = [
+            DocumentStatusEnum::pending => 'Pending',
+            DocumentStatusEnum::ongoing => 'Ongoing',
+            DocumentStatusEnum::closed => 'Closed',
+            DocumentStatusEnum::rejected => 'Rejected',
+        ];
+        $status_invoice = InvoiceStatusEnum::getKey($consultation->invoice->status);
+        $client = Auth()->user();
+
+        return view('pages.document.consultation.Clientshow', compact('consultation', 'status_texts','status_invoice','client'));
     }
     public function reviews()
     {

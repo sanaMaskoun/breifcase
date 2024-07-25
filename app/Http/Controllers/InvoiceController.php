@@ -16,8 +16,12 @@ class InvoiceController extends Controller
     {
         $client = Auth()->user();
         $invoices = Invoice::where('sender_id', Auth()->user()->id)->get();
-
-        return view('pages.invoice.list', compact('invoices', 'client'));
+        $status_texts = [
+            InvoiceStatusEnum::pending => 'Pending',
+            InvoiceStatusEnum::accepte => 'Accepte',
+            InvoiceStatusEnum::refund => 'Refund',
+        ];
+        return view('pages.invoice.list', compact('invoices', 'client' ,'status_texts'));
 
     }
 
@@ -56,6 +60,18 @@ class InvoiceController extends Controller
             InvoiceStatusEnum::refund => 'Refund',
         ];
         return view('pages.admin.bills.show',compact('bill','status_texts'));
+    }
+    public function show_client($invoice_encode_id)
+    {
+        $invoice = Invoice::find(base64_decode($invoice_encode_id));
+        $status_texts = [
+            InvoiceStatusEnum::pending => 'Pending',
+            InvoiceStatusEnum::accepte => 'Accepte',
+            InvoiceStatusEnum::refund => 'Refund',
+        ];
+        $client =Auth()->user();
+
+        return view('pages.invoice.show',compact('invoice','status_texts','client'));
     }
 
 

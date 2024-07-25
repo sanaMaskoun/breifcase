@@ -32,9 +32,38 @@ var channelRejectCase = pusherPrivate.subscribe('private-reject-channel-' + loca
 var channelClosedConsultation = pusherPrivate.subscribe('private-closed-consultation-client-channel-' + localStorage.getItem('user_id'));
 
 var channelClosedCase = pusherPrivate.subscribe('private-closed-case-client-channel-' + localStorage.getItem('user_id'));
-var channelClosedRequest = pusherPrivate.subscribe('closed-request-client-channel-' + localStorage.getItem('user_id'));
+var channelClosedRequest = pusherPrivate.subscribe('private-closed-request-client-channel-' + localStorage.getItem('user_id'));
+var channelRequest = pusherPrivate.subscribe('private-request-channel-' + localStorage.getItem('user_id'));
 
 
+channelRequest.bind('App\\Events\\RequestEvent', function(data) {
+    var newRequest = `
+
+            <div class="media-body flex-grow-1 notification-item">
+                <p class="notification-title">A Request has been sent by
+                    <span class="details_notification">${data.client_name} :</span>
+                    <span>
+                        <a class="notification-link" href="/document/request/${data.document_encoded_id}/show">
+                            <span class="notification-title">${data.document_title}</span>
+                        </a>
+                    </span>
+                </p>
+                <span class="notification-time">${new Date().toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                })}</span>
+            </div>
+
+    `;
+
+    notifications.prepend(newRequest);
+    notificationsCount += 1;
+    notificationsCountElem.text(notificationsCount);
+
+    notificationsWrapper.find('.notif-count').text(notificationsCount);
+    notificationsWrapper.show();
+});
 channelClosedConsultation.bind('closedConsultationClient', function(data) {
     var newClosedConsultation = `
    <li class="notification-message">

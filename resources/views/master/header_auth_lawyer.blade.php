@@ -209,6 +209,35 @@
                                     </p>
                                     <span class="notification-time">{{ $notification->data['created_at'] }} </span>
                                 </div>
+                            @elseif($notification->type === 'App\Notifications\ClosedRequestAdminNotification')
+                                <div class="media-body flex-grow-1 notification-item">
+                                    <p class="notification-title"> @lang('pages.closed_request_notification')
+                                        <span>
+                                            <a class="notification-link"
+                                                href="{{ route('show_requests', $notification->data['request_encode_id']) }}">
+                                                <span class="notification-title">
+                                                    {{ $notification->data['request_title'] }}</span>
+                                            </a>
+                                        </span>
+                                    </p>
+                                    <span class="notification-time">{{ $notification->data['created_at'] }} </span>
+                                </div>
+                            @elseif($notification->type === 'App\Notifications\RequestNotification')
+                            <div class="media-body flex-grow-1 notification-item">
+                                <p class="notification-title"> @lang('pages.sent_request_notification')
+                                    <span class="details_notification">{{ $notification->data['client_name'] }}
+                                        :</span>
+                                    <span>
+                                        <a class="notification-link"
+                                            href="{{ route('show_requests', base64_encode($notification->data['document_id'])) }}">
+                                            <span class="notification-title">
+                                                {{ $notification->data['document_title'] }}</span>
+                                        </a>
+                                    </span>
+                                </p>
+                                <span class="notification-time">{{ $notification->created_at?->format('j M Y') }}
+                                </span>
+                            </div>
                             @endif
                         @endforeach
 

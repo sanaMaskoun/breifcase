@@ -1,4 +1,4 @@
-@extends('pages.company.details')
+@extends('pages.company.show')
 @section('form_document')
     <div class="col-lg-6 col-md-12 col-sm-12">
         <div id="chat-area" class="card" >

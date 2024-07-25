@@ -109,7 +109,7 @@
                 var channelRefundConsultation = pusherPrivate.subscribe('private-refund-consultation-channel');
                 var channelClosedCase = pusherPrivate.subscribe('private-closed-case-admin-channel');
                 var channelClosedConsultation = pusherPrivate.subscribe('private-closed-consultation-admin-channel');
-                var channelClosedRequest = pusherPrivate.subscribe('closed-request-admin-channel');
+                var channelClosedRequest = pusherPrivate.subscribe('private-closed-request-admin-channel');
 
 
                 $(document).ready(function() {
@@ -132,6 +132,31 @@
                     });
                 });
 
+                channelClosedRequest.bind('closedRequestAdmin', function(data) {
+                    var newClosedRequest = `
+
+                            <div class="media-body flex-grow-1 notification-item">
+                                  <p class="notification-title">This request has been closed
+                                      <span>
+                                          <a class="notification-link"
+                                              href="/document/request/${data.request_encode_id}/show">
+                                               <span class="notification-title">
+                                                   ${data.request_title}</span>
+                                           </a>
+                                     </span>
+                                </p>
+                                <span class="notification-time">${data.created_at} </span>
+                             </div>
+
+                    `;
+
+                    notifications.prepend(newClosedRequest);
+                    notificationsCount += 1;
+                    notificationsCountElem.text(notificationsCount);
+
+                    notificationsWrapper.find('.notif-count').text(notificationsCount);
+                    notificationsWrapper.show();
+                });
 
                 channelClosedConsultation.bind('closedConsultationAdmin', function(data) {
                     var newClosedConsultation = `
@@ -185,32 +210,7 @@
                     notificationsWrapper.find('.notif-count').text(notificationsCount);
                     notificationsWrapper.show();
                 });
-                
-                channelClosedRequest.bind('closedRequestAdmin', function(data) {
-                    var newClosedRequest = `
 
-                            <div class="media-body flex-grow-1 notification-item">
-                                  <p class="notification-title">This request has been closed
-                                      <span>
-                                          <a class="notification-link"
-                                              href="/document/request/${data.request_encode_id}/show">
-                                               <span class="notification-title">
-                                                   ${data.request_title}</span>
-                                           </a>
-                                     </span>
-                                </p>
-                                <span class="notification-time">${data.created_at} </span>
-                             </div>
-
-                    `;
-
-                    notifications.prepend(newClosedRequest);
-                    notificationsCount += 1;
-                    notificationsCountElem.text(notificationsCount);
-
-                    notificationsWrapper.find('.notif-count').text(notificationsCount);
-                    notificationsWrapper.show();
-                });
 
                 channelRefundConsultation.bind('App\\Events\\RefundConsultationEvent', function(data) {
                     const now = new Date();
@@ -245,6 +245,7 @@
     <script src="{{ asset('assets/js/searchCompany.js') }}"></script>
     <script src="{{ asset('assets/js/searchInvoice.js') }}"></script>
     <script src="{{ asset('assets/js/searchContact.js') }}"></script>
+    <script src="{{ asset('assets/js/rating.js') }}"></script>
     <script src="{{ asset('assets/js/index.js') }}"></script>
     <script src="{{ asset('assets/js/tab.js') }}"></script>
     <script src="{{ asset('assets/js/img.js') }}"></script>

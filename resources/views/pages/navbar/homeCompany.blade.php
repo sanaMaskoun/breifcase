@@ -44,7 +44,8 @@
                                 <div class="row">
                                     @foreach ($news as $object)
                                         <div class="col-lg-8 news-item mb-4 p-2 border-bottom">
-                                            <p class="news-text">{{ $object->news }}</p>
+                                            <p class="news-text">{{ $object->title }}</p>
+                                            <span >{{ $object->short_description }}</span>
 
                                         </div>
 

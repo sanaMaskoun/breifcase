@@ -22,6 +22,8 @@ class News extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('news')
+        ->useFallbackUrl(config('app.url') . '/img/news.png')
+
             ->singleFile();
 
     }

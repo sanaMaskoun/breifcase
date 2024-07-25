@@ -11,10 +11,12 @@ return [
     'evaluted_question_notification'         => 'Your reply to the general question has been evaluated by :',
     'sent_consultation_notification'         => 'A consultation has been sent by ',
     'sent_case_notification'                 => 'A case has been sent by ',
+    'sent_request_notification'                 => 'A Request has been sent by ',
 'accept_case_notification'                   => 'The case has been accepted before',
 'reject_case_notification'                   =>'The case was rehected dismissed',
 'closed_consultation_notification'           => 'This consultation has been closed',
 'closed_case_notification'           => 'This case has been closed',
+'closed_request_notification'           => 'This request has been closed',
 
     'profile'                                => 'Profile',
     'logout'                                 => 'Logout',

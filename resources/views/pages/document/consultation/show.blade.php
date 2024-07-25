@@ -53,21 +53,37 @@
                 </div>
 
             </div>
-            {{--  {{ dd($consultation->invoice) }}  --}}
             <div class="d-flex justify-content-between">
                 <a href="{{ route('bill_show', base64_encode($consultation->invoice->id)) }}" class="btn-bill">
-                    Bill and  Receipt
+                    Bill and Receipt
                 </a>
-                @if ($status_texts[$consultation->status] === 'Ongoing')
-                <form id="close-consultation-form-{{ $consultation->id }}" method="POST" action="{{ route('closed_consultation', base64_encode($consultation->id)) }}" style="display: none;">
-                    @csrf
-                </form>
+                @role('lawyer')
+                    @if ($status_texts[$consultation->status] === 'Ongoing')
+                        <form id="close-consultation-form-{{ $consultation->id }}" method="POST"
+                            action="{{ route('closed_consultation', base64_encode($consultation->id)) }}"
+                            style="display: none;">
+                            @csrf
+                        </form>
 
-                <a href="#" class="btn-close-consultation" onclick="event.preventDefault(); document.getElementById('close-consultation-form-{{ $consultation->id }}').submit();">
-                    Close the consultation
-                </a>
+                        <a href="#" class="btn-close-consultation"
+                            onclick="event.preventDefault(); document.getElementById('close-consultation-form-{{ $consultation->id }}').submit();">
+                            Close the consultation
+                        </a>
+                    @endif
+                @endrole
+                @role('admin')
+                    @if ($status_texts[$consultation->status] === 'Closed' && $status_invoice != 'accepte')
+                        <form id="close-case-form-{{ $consultation->id }}" method="POST"
+                            action="{{ route('payment_approval', base64_encode($consultation->id)) }}" style="display: none;">
+                            @csrf
+                        </form>
 
-                @endif
+                        <a href="#" class="btn-close-document"
+                            onclick="event.preventDefault(); document.getElementById('close-case-form-{{ $consultation->id }}').submit();">
+                            Payment approval
+                        </a>
+                    @endif
+                @endrole
             </div>
 
         </div>

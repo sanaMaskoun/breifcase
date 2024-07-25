@@ -109,6 +109,19 @@
                                     </p>
                                     <span class="notification-time">{{ $notification->data['created_at'] }} </span>
                                 </div>
+                                @elseif($notification->type === 'App\Notifications\ClosedRequestClientNotification')
+                                <div class="media-body flex-grow-1 notification-item">
+                                    <p class="notification-title"> @lang('pages.closed_request_notification')
+                                        <span>
+                                            <a class="notification-link"
+                                                href="{{ route('show_requests', $notification->data['request_encode_id']) }}">
+                                                <span class="notification-title">
+                                                    {{ $notification->data['request_title'] }}</span>
+                                            </a>
+                                        </span>
+                                    </p>
+                                    <span class="notification-time">{{ $notification->data['created_at'] }} </span>
+                                </div>
                             @endif
                         @endforeach
 

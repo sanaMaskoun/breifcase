@@ -12,10 +12,12 @@ return [
     'evaluted_question_notification'   => 'تم تقييم ردك على السؤال العام بواسطة:',
     'sent_consultation_notification'   => 'تم إرسال الاستشارة بواسطة ',
     'sent_case_notification'           => 'تم إرسال قضية بواسطة ',
+    'sent_request_notification'           => 'تم إرسال طلب بواسطة ',
 'accept_case_notification'                   => 'تم قبول القضية من قبل ',
 'reject_case_notification'                   =>'تم رفض القضية من قبل ',
 'closed_consultation_notification'           => 'تم إغلاق هذه الاستشارة',
 'closed_case_notification'           => 'تم إغلاق هذه القضية',
+'closed_request_notification'           => 'تم إغلاق هذا الطلب',
 
 
     'profile'                          => 'الملف الشخصي',

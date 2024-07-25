@@ -5,7 +5,9 @@
         <div class="details">
             @foreach ($questions as $question)
                 <div class="col-lg-4 col-md-6 col-sm-12 mt-3 consultation-card">
-                    <img src="{{ asset('assets/img/generalQuestion.png') }}" alt="general question Image" class="img-doc">
+                    <a href="{{ route('show_client_general_question' , base64_encode($question->id)) }}">
+                        <img src="{{ asset('assets/img/generalQuestion.png') }}" alt="general question Image" class="img-doc">
+                    </a>
                     <p>{{ $question->title }}</p>
                 </div>
             @endforeach

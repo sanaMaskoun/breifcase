@@ -164,6 +164,19 @@
 
 
 /*cases*/
+
+.btn-close-document{
+    background-color: green;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 15px;
+}
+.btn-close-document:hover{
+    text-decoration: none;
+    color: white;
+}
 .details-template-case {
     position: relative;
     display: inline-block;
@@ -275,10 +288,33 @@
     font-weight: 700;
 }
 
-.case-details-content img {
+.case-details-content-img {
     height: 100px;
     width: 100px;
     border-radius: 15px
+}
+
+
+/*rating */
+.star-rating {
+    display: flex;
+    font-size: 2rem;
+}
+.star {
+    cursor: pointer;
+    color: grey;
+}
+.star.highlight {
+    color: gold;
+}
+.btn-feedback{
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+}
+.btn-feedback:hover{
+    background-color: white;
+    color: black;
 }
 
 /*lawyers*/

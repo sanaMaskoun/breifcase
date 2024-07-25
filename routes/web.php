@@ -16,6 +16,7 @@ use App\Http\Controllers\LangController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LawyerController;
 use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PracticeController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\TemplateController;
@@ -84,6 +85,7 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth:sanctum'], function ()
 Route::group(['prefix' => 'general-question', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/index', [GeneralQuestionController::class, 'list_admin'])->name('list_admin_general_questions');
     Route::get('/{question_encoded_id}/show', [GeneralQuestionController::class, 'show'])->name('show_general_question');
+    Route::get('/{question_encoded_id}/details', [GeneralQuestionController::class, 'show_client'])->name('show_client_general_question');
 
     Route::get('list/{user_encoded_id?}', [GeneralQuestionController::class, 'index'])->name('list_general_questions');
     Route::get('/create', [GeneralQuestionController::class, 'create'])->name('create_general_question');
@@ -120,6 +122,7 @@ Route::group(['prefix' => 'translation-company', 'middleware' => 'auth:sanctum']
 
 Route::group(['prefix' => 'invoice', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [InvoiceController::class, 'bills_client'])->name('list_invoices');
+    Route::get('/{invoice_encode_id}/show', [InvoiceController::class, 'show_client'])->name('show_client_invoices');
 
 });
 Route::get('bills/list', [InvoiceController::class, 'bills_admin'])->name('bills_admin')->middleware('auth:sanctum');
@@ -133,6 +136,7 @@ Route::group(['prefix' => 'consultation', 'middleware' => 'auth:sanctum'], funct
     Route::post('store/{receiver}', [ConsultationController::class, 'store'])->name('store_consultation');
     Route::get('reviews', [ConsultationController::class, 'reviews'])->name('reviews');
     Route::get('{consultation_encode_id}/details', [ConsultationController::class, 'show'])->name('details_consultation');
+    Route::get('{consultation_encode_id}/show', [ConsultationController::class, 'show_client'])->name('show_client_consultation');
     Route::post('{consultation_encode_id}/answer', [ConsultationController::class, 'answer'])->name('answer_consultation');
     Route::post('{consultation_encode_id}/closed', [ConsultationController::class, 'closed'])->name('closed_consultation');
 
@@ -142,6 +146,7 @@ Route::get('list/reviews', [ConsultationController::class, 'reviews_list_admin']
 Route::group(['prefix' => 'case', 'middleware' => 'auth:sanctum'], function () {
     Route::get('list/{receiver_encoded_id?}', [CaseController::class, 'index'])->name('list_cases');
     Route::get('{case_encode_id}/show', [CaseController::class, 'show'])->name('show_case');
+    Route::get('{case_encode_id}/show/profile', [CaseController::class, 'show_client'])->name('show_client_case');
     Route::get('{case_encode_id}/details', [CaseController::class, 'details'])->name('details_case');
     Route::post('{case_encode_id}/accept', [CaseController::class, 'accept_case'])->name('accept_case');
     Route::post('{case_encode_id}/reject', [CaseController::class, 'reject_case'])->name('reject_case');
@@ -154,9 +159,12 @@ Route::group(['prefix' => 'case', 'middleware' => 'auth:sanctum'], function () {
 
 Route::group(['prefix' => 'document', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [DocumentController::class, 'index'])->name('list_documents');
-    Route::get('list-requests/{receiver_encoded_id}', [DocumentController::class, 'index_requests'])->name('list_requests');
+    Route::get('list-requests/{receiver_encoded_id?}', [DocumentController::class, 'index_requests'])->name('list_requests');
     Route::get('request/{request_encoded_id}/show', [DocumentController::class, 'show_requests'])->name('show_requests');
+    Route::get('request/{request_encoded_id}/details', [DocumentController::class, 'show_client_request'])->name('show_client_request');
     Route::post('{request_encode_id}/closed', [DocumentController::class, 'closed'])->name('closed_request');
+    Route::post('{request_encode_id}/accept', [DocumentController::class, 'accept'])->name('accept_request');
+    Route::post('{document_encode_id}/payment', [DocumentController::class, 'payment_approval'])->name('payment_approval');
 
 
 });
@@ -227,6 +235,14 @@ Route::group(['prefix' => 'language', 'middleware' => 'auth:sanctum'], function 
     Route::get('/delete/{language}', [LanguageController::class, 'destroy'])->name('delete_language');
 });
 
+Route::group(['prefix' => 'news', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [NewsController::class, 'list'])->name('list_news');
+    Route::get('/create', [NewsController::class, 'create'])->name('add_news');
+    Route::post('/store', [NewsController::class, 'store'])->name('store_news');
+    Route::get('{news_encode_id}/show', [NewsController::class, 'show'])->name('show_news');
+    Route::get('/delete/{news}', [NewsController::class, 'destroy'])->name('delete_news');
+});
+
 Route::group(['prefix' => 'group', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/create', [GroupController::class, 'create'])->name('add_group');
     Route::post('/store', [GroupController::class, 'store'])->name('store_group');
@@ -243,6 +259,9 @@ Route::group(['prefix' => 'general-chat', 'middleware' => 'auth:sanctum'], funct
 
 Route::get('/notification/clear-all', [LawyerController::class, 'clear_all'])->name('notification_clear_all')->middleware('auth:sanctum');
 
-// Route::get('error', function () {
-// return 'payment failed';
-// });
+Route::post('rating/{document_encode_id}' , [DocumentController::class, 'rating'])->name('rating')->middleware('auth:sanctum');
+
+
+Route::get('error', function () {
+return 'payment failed';
+});
