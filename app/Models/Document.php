@@ -33,5 +33,6 @@ class Document extends Model implements HasMedia
     {
         $this->addMediaCollection('case_template')->singleFile();
         $this->addMediaCollection('translateFile')->singleFile();
+        $this->addMediaCollection('accept_case')->singleFile();
     }
 }

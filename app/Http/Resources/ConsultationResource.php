@@ -22,9 +22,7 @@ class ConsultationResource extends JsonResource
 
             'sender'          => new UserResource($this->whenLoaded('sender')),
             'receiver'        => new UserResource($this->whenLoaded('receiver')),
-            // 'translateFile'   => $this->getFirstMediaUrl('translateFile'),
-            // 'files'           =>  FileResource::collection($this->getMedia('file')) ,
-
+           
         ];
     }
 }

@@ -101,10 +101,10 @@
                                 </label>
                                 <input id="fileInput" type="file" name="attachments" style="display: none;">
 
-                                <a href="{{ route('attachments', $receiver_encoded_id) }}" id="openAllAttachments"
+                                {{--  <a href="{{ route('attachments', $receiver_encoded_id) }}" id="openAllAttachments"
                                     class="btn ">
                                     <i class="fas fa-folder-open"></i>
-                                </a>
+                                </a>  --}}
                             </div>
                         </div>
                     </div>

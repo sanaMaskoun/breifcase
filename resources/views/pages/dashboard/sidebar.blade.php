@@ -25,6 +25,11 @@
                         <i class="fas fa-balance-scale fa-2x"></i>
                         Practices
                     </a>
+                    <a class="sidebar-dashboard-admin" href="{{ route('list_languages') }}">
+                        <i class="bx bx-globe"></i>
+                        Language
+
+                    </a>
                 @endrole
 
 

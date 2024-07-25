@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Enums\DocumentStatusEnum;
 use App\Enums\DocumentTypeEnum;
 use App\Enums\InvoiceStatusEnum;
+use App\Events\ClosedConsultationAdminEvent;
+use App\Events\ClosedConsultationClientEvent;
 use App\Events\ConsultationEvent;
 use App\Http\Requests\ConsultationAnswerRequest;
 use App\Http\Requests\ConsultationRequest;
@@ -14,6 +16,8 @@ use App\Models\Document;
 use App\Models\Invoice;
 use App\Models\Rate;
 use App\Models\User;
+use App\Notifications\ClosedConsultationAdminNotification;
+use App\Notifications\ClosedConsultationClientNotification;
 use App\Notifications\ConsultationNotification;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -41,7 +45,13 @@ class ConsultationController extends Controller
             $num_consultations = Document::where('type', DocumentTypeEnum::consultation)->count();
 
         }
-        return view('pages.document.consultation.list', compact('consultations', 'num_consultations'));
+        $status_texts = [
+            DocumentStatusEnum::pending => 'Pending',
+            DocumentStatusEnum::ongoing => 'Ongoing',
+            DocumentStatusEnum::closed => 'Closed',
+            DocumentStatusEnum::rejected => 'Rejected',
+        ];
+        return view('pages.document.consultation.list', compact('consultations', 'status_texts', 'num_consultations'));
     }
     public function create($receiver_encoded_id)
     {
@@ -93,12 +103,17 @@ class ConsultationController extends Controller
 
     }
 
-    public function show($consultaion_encode_id)
+    public function show($consultation_encode_id)
     {
-        $consultaion_decode_id = base64_decode($consultaion_encode_id);
-        $consultaion = Document::find($consultaion_decode_id);
-
-        return view('pages.document.consultation.show', compact('consultaion'));
+        $consultation_decode_id = base64_decode($consultation_encode_id);
+        $consultation = Document::find($consultation_decode_id);
+        $status_texts = [
+            DocumentStatusEnum::pending => 'Pending',
+            DocumentStatusEnum::ongoing => 'Ongoing',
+            DocumentStatusEnum::closed => 'Closed',
+            DocumentStatusEnum::rejected => 'Rejected',
+        ];
+        return view('pages.document.consultation.show', compact('consultation', 'status_texts'));
     }
     public function reviews()
     {
@@ -122,10 +137,10 @@ class ConsultationController extends Controller
         return view('pages.document.consultation.listReviews', compact('rates'));
     }
 
-    public function answer(ConsultationAnswerRequest $request, $consultaion_encode_id)
+    public function answer(ConsultationAnswerRequest $request, $consultation_encode_id)
     {
-        $consultaion_decode_id = base64_decode($consultaion_encode_id);
-        $consultation = Document::find($consultaion_decode_id);
+        $consultation_decode_id = base64_decode($consultation_encode_id);
+        $consultation = Document::find($consultation_decode_id);
 
         $get_notify = DB::table('notifications')->where('data->consultation_id', $consultation->id)->where('notifiable_id', Auth()->user()->id)->first();
         if ($get_notify != null) {DB::table('notifications')->where('id', $get_notify->id)->update(['read_at' => now()]);}
@@ -142,11 +157,37 @@ class ConsultationController extends Controller
             $consultation->invoice()->update([
                 'status' => InvoiceStatusEnum::accepte,
             ]);
-            return redirect()->route('details_consultaion', base64_encode($consultation->id))
+            return redirect()->route('details_consultation', base64_encode($consultation->id))
                 ->with('success', __('message.success_answer'));
         } else {
-            return redirect()->route('details_consultaion', base64_encode($consultation->id))
+            return redirect()->route('details_consultation', base64_encode($consultation->id))
                 ->with('error', __('message.exceeded_answer_time'));
         }
+    }
+
+    public function closed($consultation_encode_id)
+    {
+        $consultation = Document::find(base64_decode($consultation_encode_id));
+        $consultation->update(['status' => DocumentStatusEnum::closed]);
+
+        $admins = User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->get();
+        $client = User::find($consultation->sender->id);
+        $data = [
+            'consultation_id' => $consultation->id,
+            'consultation_title' => $consultation->title,
+            'consultation_encode_id' => $consultation_encode_id,
+            'created_at' => Carbon::now()->format('j M Y'),
+
+        ];
+
+        Notification::send($admins, new ClosedConsultationAdminNotification($data));
+        Notification::send($client, new ClosedConsultationClientNotification($data));
+
+        event(new ClosedConsultationAdminEvent($data));
+        event(new ClosedConsultationClientEvent($data, $client->id));
+        return redirect()->back();
+
     }
 }

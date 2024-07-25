@@ -35,7 +35,7 @@ class AuthApiController extends Controller
         // if($request->request->get('channel_name') === 'private-chat') {
         return $pusher->socket_auth($request->request->get('channel_name'), $request->request->get('socket_id'));
         // }
-        return response()->json([], 400);
+        // return response()->json([], 400);
 
     }
 

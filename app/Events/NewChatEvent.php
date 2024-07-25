@@ -22,21 +22,22 @@ class NewChatEvent implements ShouldBroadcast
     public $sender_name;
     public $sender_profile;
     public $created_at;
-    public $message_count;
+    // public $message_count;
 
-    public function __construct($message, $receiver = [], $sender = [], $created_at, $message_count)
+    public function __construct($message, $receiver = [], $sender = [], $created_at)
     {
         $this->message = $message;
         $this->receiver_id = $receiver['receiver_id'];
         $this->receiver_encoded_id = $receiver['receiver_encoded_id'];
         $this->receiver_name = $receiver['name'];
         $this->receiver_profile = $receiver['profile'];
+
         $this->sender_id = $sender['sender_id'];
         $this->sender_encoded_id = $sender['sender_encoded_id'];
         $this->sender_name = $sender['name'];
         $this->sender_profile = $sender['profile'];
         $this->created_at = $created_at;
-        $this->message_count = $message_count;
+        // $this->message_count = $message_count;
 
     }
 

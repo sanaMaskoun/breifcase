@@ -127,7 +127,7 @@
                             @endif
                         </div>
 
-                        @role('admin')
+
                         <div class="chat-footer">
 
                             <form id="messageForm" action="{{ route('send_message_to_group', base64_encode($general_chat->id)) }}"
@@ -147,10 +147,10 @@
                                             </label>
                                             <input id="fileInput" type="file" name="attachments" style="display: none;">
 
-                                            <a href="{{ route('attachments', base64_encode($general_chat->id)) }}"
+                                            {{--  <a href="{{ route('attachments', base64_encode($general_chat->id)) }}"
                                                 id="openAllAttachments" class="btn ">
                                                 <i class="fas fa-folder-open"></i>
-                                            </a>
+                                            </a>  --}}
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +161,6 @@
                             </form>
 
                         </div>
-                        @endrole
                     </div>
                 </div>
 

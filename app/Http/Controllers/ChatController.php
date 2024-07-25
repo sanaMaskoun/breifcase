@@ -81,9 +81,10 @@ class ChatController extends Controller
         $users = $this->get_users_for_chat();
 
         $messages = $this->get_messages($receiver);
+        $message_count = $this->message_count($receiver->id);
         $templates = Template::all();
 
-        return view('pages.chat.dashboard.lawyer.formChat', compact(['receiver', 'messages', 'users', 'templates']));
+        return view('pages.chat.dashboard.lawyer.formChat', compact(['receiver', 'messages', 'users', 'templates' ,'message_count']));
     }
 
     public function group()
@@ -144,7 +145,6 @@ class ChatController extends Controller
             return redirect()->back();
 
         }
-
         $has_previous_chat = $this->get_messages($receiver);
 
         $new_message = Message::create([
@@ -175,6 +175,7 @@ class ChatController extends Controller
             'profile' => Auth()->user()->getFirstMediaUrl('profile'),
         ];
         $attachment = null;
+
         if ($new_message->getFirstMediaUrl('attachments') != null) {
             $media = $new_message->getMedia('attachments')->first();
             $mime_type = $media->mime_type;
@@ -186,17 +187,19 @@ class ChatController extends Controller
         }
 
         $created_at = $new_message->created_at->diffForHumans();
-        $message_count = $this->message_count($receiver->id);
+        // $message_count = $this->message_count($receiver->id);
 
         if ($has_previous_chat->isEmpty()) {
 
-            broadcast(new NewChatEvent($message, $receiver_data, $sender_data, $created_at, $message_count));
+            broadcast(new NewChatEvent($message, $receiver_data, $sender_data, $created_at));
+
+        } else {
+            broadcast(new chatPrivateEvent($receiver_data, $sender_data , $message, $attachment, $created_at));
 
         }
 
         broadcast(new CounterChatEvent(1, auth()->user()->id, $receiver->id, $message));
 
-        broadcast(new chatPrivateEvent($receiver, auth()->user()->id, $message, $attachment, $created_at));
         return response()->json([
             'success' => true,
             'message' => $message,
@@ -205,7 +208,7 @@ class ChatController extends Controller
             'sender_id' => auth()->user()->id,
             'receiver_id' => $receiver->id,
             'receiver_encoded_id' => $receiver_encoded_id,
-            'receiver_profile' => $receiver->getFirstMediaUrl('profileUser'),
+            'receiver_profile' => $receiver->getFirstMediaUrl('profile'),
             'receiver_name' => $receiver->name,
             'has_previous_chat' => $has_previous_chat->isEmpty(),
         ]);
@@ -271,7 +274,7 @@ class ChatController extends Controller
 
     public function contact()
     {
-        $users = User::where('is_active', true)->where('type', UserTypeEnum::lawyer)->get();
+        $users = User::where('is_active', true)->where('type', UserTypeEnum::lawyer)->where('id', '<>', Auth()->user()->id)->get();
 
         return view('pages.chat.dashboard.lawyer.contact', compact('users'));
     }
@@ -291,8 +294,9 @@ class ChatController extends Controller
         $messages = $this->get_messages($receiver);
         $templates = Template::all();
 
-        return view('pages.chat.dashboard.lawyer.formContactClient', compact(['receiver','templates', 'messages', 'users']));
+        return view('pages.chat.dashboard.lawyer.formContactClient', compact(['receiver', 'templates', 'messages', 'users']));
     }
+
     public function attachments($encodedIdReceiver)
     {
         $decodedId = base64_decode($encodedIdReceiver);

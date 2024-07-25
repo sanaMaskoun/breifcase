@@ -89,10 +89,10 @@
                                 </label>
                                 <input id="fileInput" type="file" name="attachments" style="display: none;">
 
-                                <a href="{{ route('attachments', base64_encode($company->id)) }}" id="openAllAttachments"
+                                {{--  <a href="{{ route('attachments', base64_encode($company->id)) }}" id="openAllAttachments"
                                     class="btn ">
                                     <i class="fas fa-folder-open"></i>
-                                </a>
+                                </a>  --}}
                             </div>
                         </div>
                     </div>

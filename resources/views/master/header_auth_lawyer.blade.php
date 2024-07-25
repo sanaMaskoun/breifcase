@@ -128,22 +128,53 @@
                             @elseif ($notification->type === 'App\Notifications\RefundConsultationNotification')
                                 <div class="media-body flex-grow-1 notification-item">
                                     <a class="notification-link"
-                                        href="{{ route('details_consultaion', base64_encode($notification->data['consultation_id'])) }}">
+                                        href="{{ route('details_consultation', base64_encode($notification->data['consultation_id'])) }}">
                                         <span class="notification-title">@lang('pages.refund_consultation_notification') :
                                             {{ $notification->data['title'] }}</span>
                                     </a>
                                     <span class="notification-time">{{ $notification->created_at?->format('j M Y') }}
                                     </span>
                                 </div>
-
+                            @elseif ($notification->type === 'App\Notifications\RejectCaseNotification')
+                                <div class="media-body flex-grow-1 notification-item">
+                                    <p class="notification-title"> @lang('pages.reject_case_notification')
+                                        <span class="details_notification">{{ $notification->data['client_name'] }}
+                                            :</span>
+                                        <span>
+                                            <a class="notification-link"
+                                                href="{{ route('show_case', base64_encode($notification->data['case_id'])) }}">
+                                                <span class="notification-title">
+                                                    {{ $notification->data['case_title'] }}</span>
+                                            </a>
+                                        </span>
+                                    </p>
+                                    <span class="notification-time">{{ $notification->created_at?->format('j M Y') }}
+                                    </span>
+                                </div>
+                            @elseif ($notification->type === 'App\Notifications\AcceptCaseNotification')
+                                <div class="media-body flex-grow-1 notification-item">
+                                    <p class="notification-title"> @lang('pages.accept_case_notification')
+                                        <span class="details_notification">{{ $notification->data['client_name'] }}
+                                            :</span>
+                                        <span>
+                                            <a class="notification-link"
+                                                href="{{ route('show_case', base64_encode($notification->data['case_id'])) }}">
+                                                <span class="notification-title">
+                                                    {{ $notification->data['case_title'] }}</span>
+                                            </a>
+                                        </span>
+                                    </p>
+                                    <span class="notification-time">{{ $notification->created_at?->format('j M Y') }}
+                                    </span>
+                                </div>
                             @elseif ($notification->type === 'App\Notifications\ConsultationNotification')
                                 <div class="media-body flex-grow-1 notification-item">
                                     <p class="notification-title"> @lang('pages.sent_consultation_notification')
-                                        <span
-                                            class="details_notification">{{ $notification->data['client_name'] }} :</span>
+                                        <span class="details_notification">{{ $notification->data['client_name'] }}
+                                            :</span>
                                         <span>
                                             <a class="notification-link"
-                                                href="{{ route('details_consultaion', base64_encode($notification->data['consultation_id'])) }}">
+                                                href="{{ route('details_consultation', base64_encode($notification->data['consultation_id'])) }}">
                                                 <span class="notification-title">
                                                     {{ $notification->data['consultation_title'] }}</span>
                                             </a>
@@ -152,7 +183,32 @@
                                     <span class="notification-time">{{ $notification->created_at?->format('j M Y') }}
                                     </span>
                                 </div>
-
+                            @elseif ($notification->type === 'App\Notifications\ClosedConsultationAdminNotification')
+                                <div class="media-body flex-grow-1 notification-item">
+                                    <p class="notification-title"> @lang('pages.closed_consultation_notification')
+                                        <span>
+                                            <a class="notification-link"
+                                                href="{{ route('details_consultation', $notification->data['consultation_encode_id']) }}">
+                                                <span class="notification-title">
+                                                    {{ $notification->data['consultation_title'] }}</span>
+                                            </a>
+                                        </span>
+                                    </p>
+                                    <span class="notification-time">{{ $notification->data['created_at'] }} </span>
+                                </div>
+                            @elseif($notification->type === 'App\Notifications\ClosedCaseAdminNotification')
+                                <div class="media-body flex-grow-1 notification-item">
+                                    <p class="notification-title"> @lang('pages.closed_case_notification')
+                                        <span>
+                                            <a class="notification-link"
+                                                href="{{ route('show_case', $notification->data['case_encode_id']) }}">
+                                                <span class="notification-title">
+                                                    {{ $notification->data['case_title'] }}</span>
+                                            </a>
+                                        </span>
+                                    </p>
+                                    <span class="notification-time">{{ $notification->data['created_at'] }} </span>
+                                </div>
                             @endif
                         @endforeach
 

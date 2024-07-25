@@ -88,20 +88,21 @@ $(document).ready(function () {
                 // إضافة محادثة جديدة إذا كانت هذه هي الرسالة الأولى
                 if (response.has_previous_chat) {
                     let newChatMessageReceiver = `
-                    <li class="mb-4 px-5 py-2" id="new_chat_div">
-                        <a href="javascript:void(0)" class="media media-message">
-                            <div class="position-relative mr-3">
-                                <a href="/chat/${response.receiver_encoded_id}">
-                                    <img class="rounded-circle img_list_chat" src="${response.receiver_profile}" alt="User Image">
-                                    <span class="username text-dark">${response.receiver_name}</span>
-                                </a>
-                                <div class="message-contents">
-                                    <p class="last-msg text-smoke">${response.message}</p>
-                                    <span class="text-smoke time_message"><em>${response.created_at}</em></span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>`;
+                    <li id="new_chat_div">
+                        <a href="/chat/dashboard/${response.receiver_encoded_id}" class="list-group-item1">
+                            <div class="contact-info">
+                                    <img  src="${response.receiver_profile}" alt="User Image">
+                                    <div>
+                                <div class="user-name title-group">${response.receiver_name}</div>
+                                <div class="last-message  last_msg_form_chat">
+                                           ${response.message}</div>
+                                        <div class="last-seen"> ${response.created_at}
+                                        </div>
+                                    </div>
+                                </div>     </a>
+                        </li>
+                    `;
+
                     $("#new_chat_div").append(newChatMessageReceiver);
                 }
             },

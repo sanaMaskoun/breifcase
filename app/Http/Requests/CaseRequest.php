@@ -38,7 +38,8 @@ class CaseRequest extends FormRequest
             'sender_id'            => auth()->user()->id,
             'receiver_id'          => $receiver ? $receiver->id : null,
             'status'               => DocumentStatusEnum::pending,
-            'type'                 => DocumentTypeEnum::case
+            'type'                 => DocumentTypeEnum::case,
+            'accept_case'           => false
         ]);
 
     }

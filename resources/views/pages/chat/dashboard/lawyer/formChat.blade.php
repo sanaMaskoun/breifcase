@@ -56,7 +56,10 @@
             <div class="row">
                 <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat" id="contact-list">
                     <div class="list-group">
+                        <ul class="card-body px-0" id="new_chat_div">
+
                         @foreach ($users as $user)
+                        <li>
                             <a href="{{ route('lawyer_form_dashboard', base64_encode($user->id)) }}" class="list-group-item1"
                                 onclick="openChat('Jamie Chastain')">
                                 <div class="contact-info">
@@ -70,10 +73,11 @@
                                     </div>
                                 </div>
                                 <span class="badge-2"
-                                    id="counter_chat_{{ $user->id }}">{{ $user->message_count }}</span>
+                                    id="counter_chat_{{ $user->id }}">{{ $message_count }}</span>
                             </a>
+                        </li>
                         @endforeach
-
+                        </ul>
                     </div>
                 </div>
 
@@ -201,10 +205,10 @@
                                             </label>
                                             <input id="fileInput" type="file" name="attachments" style="display: none;">
 
-                                            <a href="{{ route('attachments', base64_encode($receiver->id)) }}"
+                                            {{--  <a href="{{ route('attachments', base64_encode($receiver->id)) }}"
                                                 id="openAllAttachments" class="btn ">
                                                 <i class="fas fa-folder-open"></i>
-                                            </a>
+                                            </a>  --}}
                                         </div>
                                     </div>
                                 </div>

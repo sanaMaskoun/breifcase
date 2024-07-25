@@ -11,11 +11,15 @@
             <div class="list-document-dashboard">
                 @foreach ($questions as $question)
                     <div class="col-lg-3 col-md-6 col-sm-12 mt-4">
+                        <a class="title-details text-center" href="{{ route('show_general_question', base64_encode($question->id)) }}">
+
                         <img src="{{ asset('assets/img/generalQuestion.png') }}" alt="question Image" class="img-doc">
                         <h5 class="title-document-dashboard">{{ $question->title }}</h5>
                         <div class="container-details-document-dashboard">
                             <p class="details-document-dashboard">{{ $question->created_at->format('Y/m/d') }}</p>
                         </div>
+                        </a>
+
 
                     </div>
                 @endforeach

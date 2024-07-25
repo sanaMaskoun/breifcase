@@ -8,12 +8,14 @@
             <div class="row">
                 <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat" id="contact-list">
                     <div class="list-group">
-                        @foreach ($users as $user)
+                        <ul class="card-body px-0" id="new_chat_div">
 
+                        @foreach ($users as $user)
+                        <li class="mb-4 px-5 py-2 ">
                             <a href="{{ route('chat_client_form', base64_encode($user->id)) }}" class="list-group-item1"
                                 onclick="openChat('Jamie Chastain')">
                                 <div class="contact-info">
-                                    <img src="{{ $user->getFirstMediaUrl('profile') }}"  alt="User Image">
+                                    <img src="{{ $user->getFirstMediaUrl('profile') }}" alt="User Image">
                                     <div>
                                         <div class="user-name">{{ $user->name }}</div>
                                         <div class="last-message  last_msg_form_chat" id="last_message_{{ $user->id }}">
@@ -25,8 +27,9 @@
                                 <span class="badge-2"
                                     id="counter_chat_{{ $user->id }}">{{ $user->message_count }}</span>
                             </a>
+                        </li>
                         @endforeach
-
+                        </ul>
                     </div>
                 </div>
 
@@ -112,8 +115,9 @@
 
 
                         <div class="chat-footer">
-                            <form id="messageForm" action="{{ route('send_message_to_user', base64_encode($receiver->id)) }}"
-                                method="POST" enctype="multipart/form-data" class="form_chat_profile">
+                            <form id="messageForm"
+                                action="{{ route('send_message_to_user', base64_encode($receiver->id)) }}" method="POST"
+                                enctype="multipart/form-data" class="form_chat_profile">
                                 @csrf
                                 <div class="container">
                                     <div class="row">
@@ -129,10 +133,10 @@
                                             </label>
                                             <input id="fileInput" type="file" name="attachments" style="display: none;">
 
-                                            <a href="{{ route('attachments', base64_encode($receiver->id)) }}"
+                                            {{--  <a href="{{ route('attachments', base64_encode($receiver->id)) }}"
                                                 id="openAllAttachments" class="btn ">
                                                 <i class="fas fa-folder-open"></i>
-                                            </a>
+                                            </a>  --}}
                                         </div>
                                     </div>
                                 </div>

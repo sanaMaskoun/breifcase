@@ -27,9 +27,69 @@ var notifications = notificationsWrapper.find('div.notification-list');
 
 var channelConsultation = pusherPrivate.subscribe('private-consultation-channel-' + localStorage.getItem('user_id'));
 var channelCase = pusherPrivate.subscribe('private-case-channel-' + localStorage.getItem('user_id'));
+var channelAcceptCase = pusherPrivate.subscribe('private-acceppt-channel-' + localStorage.getItem('user_id'));
+var channelRejectCase = pusherPrivate.subscribe('private-reject-channel-' + localStorage.getItem('user_id'));
+var channelClosedConsultation = pusherPrivate.subscribe('private-closed-consultation-client-channel-' + localStorage.getItem('user_id'));
+
+var channelClosedCase = pusherPrivate.subscribe('private-closed-case-client-channel-' + localStorage.getItem('user_id'));
 
 
+channelClosedConsultation.bind('closedConsultationClient', function(data) {
+    var newClosedConsultation = `
+   <li class="notification-message">
+        <div class="media d-flex">
+            <div class="media-body flex-grow-1 notification-item">
+                  <p class="notification-title">This consultation has been closed
+                      <span>
+                          <a class="notification-link"
+                              href="/consultation/${data.consultation_encode_id}/details">
+                               <span class="notification-title">
+                                   ${data.consultation_title}</span>
+                           </a>
+                     </span>
+                </p>
+                <span class="notification-time">${data.created_at} </span>
+             </div>
+        </div>
+    </li>
+    `;
 
+    notifications.prepend(newClosedConsultation);
+    notificationsCount += 1;
+    notificationsCountElem.text(notificationsCount);
+
+    notificationsWrapper.find('.notif-count').text(notificationsCount);
+    notificationsWrapper.show();
+});
+
+
+channelClosedCase.bind('App\\Events\\ClosedCaseClientEvent', function(data) {
+    var newClosedCase = `
+    <li class="notification-message">
+        <div class="media d-flex">
+            <div class="media-body flex-grow-1 notification-item">
+                  <p class="notification-title">This case has been closed
+                      <span>
+                          <a class="notification-link"
+                              href="/case/${data.case_encode_id}/show">
+                               <span class="notification-title">
+                                   ${data.case_title}</span>
+                           </a>
+                     </span>
+                </p>
+                <span class="notification-time">${data.created_at} </span>
+             </div>
+        </div>
+    </li>
+    `;
+
+    notifications.prepend(newClosedCase);
+    notificationsCount += 1;
+    notificationsCountElem.text(notificationsCount);
+
+    notificationsWrapper.find('.notif-count').text(notificationsCount);
+    notificationsWrapper.show();
+});
 
 
 channelConsultation.bind('App\\Events\\ConsultationEvent', function(data) {
@@ -95,56 +155,93 @@ channelCase.bind('App\\Events\\CaseEvent', function(data) {
 });
 
 
+channelAcceptCase.bind('App\\Events\\AcceptCaseEvent', function(data) {
+    var newAcceptCase = `
+    <li class="notification-message">
+        <div class="media d-flex">
+            <div class="media-body flex-grow-1 notification-item">
+                <p class="notification-title">The case has been accepted by
+                    <span class="details_notification">${data.client_name} :</span>
+                    <span>
+                        <a class="notification-link" href="/case/${data.case_encoded_id}/show">
+                            <span class="notification-title">${data.case_title}</span>
+                        </a>
+                    </span>
+                </p>
+                <span class="notification-time">${new Date().toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                })}</span>
+            </div>
+        </div>
+    </li>
+    `;
+
+    notifications.prepend(newAcceptCase);
+    notificationsCount += 1;
+    notificationsCountElem.text(notificationsCount);
+
+    notificationsWrapper.find('.notif-count').text(notificationsCount);
+    notificationsWrapper.show();
+});
+
+
+channelRejectCase.bind('App\\Events\\RejectCaseEvent', function(data) {
+    var newRejectCase = `
+    <li class="notification-message">
+        <div class="media d-flex">
+            <div class="media-body flex-grow-1 notification-item">
+                <p class="notification-title">The case was rejected by
+                    <span class="details_notification">${data.client_name} :</span>
+                    <span>
+                        <a class="notification-link" href="/case/${data.case_encoded_id}/show">
+                            <span class="notification-title">${data.case_title}</span>
+                        </a>
+                    </span>
+                </p>
+                <span class="notification-time">${new Date().toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                })}</span>
+            </div>
+        </div>
+    </li>
+    `;
+
+    notifications.prepend(newRejectCase);
+    notificationsCount += 1;
+    notificationsCountElem.text(notificationsCount);
+
+    notificationsWrapper.find('.notif-count').text(notificationsCount);
+    notificationsWrapper.show();
+});
+
+
 
 
 //new chat
 var channelPivateNewChat = pusherPrivate.subscribe('private-new-chat-channel-' + localStorage.getItem('user_id'));
 channelPivateNewChat.bind('newChatMessage', function (data) {
-    let newChatMessageSender = `
-    <li class="mb-4 px-5 py-2" id="new_chat_div">
-        <a href="javascript:void(0)" class="media media-message">
-            <div class="position-relative mr-3">
-                <a href="/chat/${data.sender_encoded_id}">
-                    <img class="rounded-circle img_list_chat" src="${data.sender_profile}" alt="User Image">
-                    <span class="username text-dark">${data.sender_name}</span>
-                </a>
-                <span class="message-counter" id="counter_chat_${data.sender_id}">${data.message_count}</span>
 
-                <div class="message-contents">
-                    <p class="last-msg text-smoke" id="last_message_${data.sender_id}">${data.message}</p>
-                    <span class="text-smoke time_message"><em>${data.created_at}</em></span>
-                </div>
-            </div>
-        </a>
-    </li>`;
+    let newChat = ` <a href="/chat/dashboard/${data.sender_encoded_id}" class="list-group-item1"
+                                onclick="openChat('Jamie Chastain')">
+                                <div class="contact-info">
+                                    <img src="${data.sender_profile}""  alt="User Image">
+                                    <div>
+                                        <div class="user-name">${data.sender_name}</div>
+                                        <div class="last-message  last_msg_form_chat" >
+                                            ${data.message}</div>
+                                        <div class="last-seen"> ${data.created_at}
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="badge-2"> 1 </span>
+                            </a>`
 
-    let newChatMessageReceiver = `
-    <li class="mb-4 px-5 py-2" id="new_chat_div">
-        <a href="javascript:void(0)" class="media media-message">
-            <div class="position-relative mr-3">
-                <a href="/chat/${data.receiver_encoded_id}">
-                    <img class="rounded-circle img_list_chat" src="${data.receiver_profile}" alt="User Image">
-                    <span class="username text-dark">${data.receiver_name}</span>
-                </a>
-                <div class="message-contents">
-                    <p class="last-msg text-smoke">${data.message}</p>
-                    <span class="text-smoke time_message"><em>${data.created_at}</em></span>
-                </div>
-            </div>
-        </a>
-    </li>`;
-    if (data.sender_id == localStorage.getItem('user_id')) {
+        $("#new_chat_div").append(newChat);
 
-        // newMessage = newChatMessageReceiver;
-        $("#new_chat_div").append(newChatMessageReceiver);
-    }
-    else if (data.receiver_id == localStorage.getItem('user_id')) {
-        // newMessage = newChatMessageSender;
-        $("#new_chat_div").append(newChatMessageSender);
-    }
-
-
-    // $("#new_chat_div").append(newChatMessage);
 });
 
 //chat
@@ -182,9 +279,9 @@ channelPivateChat.bind('chatMessage', function (data) {
         </div>
     </div>`;
 
-    if (data.sender_id == localStorage.getItem('user_id')) {
+    if (data.sender_id === localStorage.getItem('user_id')) {
         message = senderMessage;
-    } else if (data.receiver.id == localStorage.getItem('user_id')) {
+    } else if (data.receiver_id === localStorage.getItem('user_id')) {
         message = receiverMessage;
     }
 

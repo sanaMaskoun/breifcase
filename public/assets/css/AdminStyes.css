@@ -73,7 +73,66 @@
 
 /** end suggestion **/
 
-/** start details consultaion **/
+/** start details consultation **/
+.btn-bill{
+    background-color: rgba(240, 169, 15, 0.767);
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 15px;
+}
+.btn-bill:hover{
+    text-decoration: none;
+    color: white;
+}
+.btn-close-consultation{
+    background-color: rgb(133, 73, 4);
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 15px;
+}
+.btn-close-consultation:hover{
+    text-decoration: none;
+    color: white;
+}
+.search-status
+{
+    /* width: 20%; */
+    display: flex;
+    justify-content: end;
+}
+.input-search-status{
+    width: 20%;
+}
+.status-consultation {
+    margin-top: 2px;
+    font-weight: bold;
+    /* font-size: 25px; */
+}
+
+.status-consultation.pending {
+    color: rgba(240, 169, 15, 0.767);
+    text-align: center;
+}
+
+.status-consultation.ongoing {
+    color: rgb(2, 113, 2);
+    text-align: center;
+}
+
+.status-consultation.closed {
+    color: rgb(133, 73, 4);
+    text-align: center;
+}
+
+.status-consultation.rejected {
+    color: #dc3545;
+    text-align: center;
+}
+
 .title-details {
     display: block;
     color: black;
@@ -101,12 +160,65 @@
     font-size: 20px;
 }
 
-/** end details consultaion **/
+/** end details consultation **/
 
 
 /*cases*/
+.details-template-case {
+    position: relative;
+    display: inline-block;
+}
+
+.download-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    padding: 5px;
+    text-align: center;
+    color: #000;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.download-icon:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+.form-group button {
+    margin-right: 10px;
+}
+.template-case
+{
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+}
+.card-case{
+   background-color:  rgb(125 125 125 / 71%);
+   border-radius: 15px;
+   padding: 5px;
+}
 
 
+.download-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: black;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    padding: 5px;
+    text-align: center;
+}
+.download-icon:hover
+{
+    color: black;
+}
+.details-template-case{
+    position: relative;
+}
 .content-Admin {
     border-radius: 15px;
     background-color: rgb(125 125 125 / 71%);
@@ -435,21 +547,73 @@
     text-align: center;
 }
 
-.status-bills.ongoing {
+.status-bills.accepte {
     color: rgb(2, 113, 2);
     text-align: center;
 }
 
-.status-bills.closed {
-    color: rgb(133, 73, 4);
-    text-align: center;
-}
 
-.status-bills.rejected {
+
+.status-bills.refund {
     color: #dc3545;
     text-align: center;
 }
 
+.bill-details-container {
+    background: rgb(125 125 125 / 71%);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    text-align: left;
+}
+
+.bill-details-header {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.bill-details {
+    font-size: 16px;
+    color: #333;
+}
+
+.bill-details p {
+    margin-bottom: 10px;
+}
+
+.bill-details .label {
+    font-weight: bold;
+    color: #000;
+}
+
+.status {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.status.accepte {
+    color: green;
+}
+
+@media (max-width: 768px) {
+    .bill-details-container {
+        padding: 10px;
+    }
+
+    .bill-details-header {
+        font-size: 24px;
+    }
+
+    .bill-details {
+        font-size: 14px;
+    }
+
+    .status {
+        font-size: 16px;
+    }
+}
 
 
 /** notifications **/
@@ -499,7 +663,8 @@
 /**  create group   **/
 .icon-forum {
     color: black;
-    font-size: 25px;
+    /* font-size: 25px; */
+    width: 50px;
 }
 
 .add-member {

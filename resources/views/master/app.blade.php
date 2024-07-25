@@ -107,6 +107,9 @@
 
                 var channelNotification = pusherPrivate.subscribe('private-notify-channel');
                 var channelRefundConsultation = pusherPrivate.subscribe('private-refund-consultation-channel');
+                var channelClosedCase = pusherPrivate.subscribe('private-closed-case-admin-channel');
+                var channelClosedConsultation = pusherPrivate.subscribe('private-closed-consultation-admin-channel');
+
 
                 $(document).ready(function() {
 
@@ -129,6 +132,58 @@
                 });
 
 
+                channelClosedConsultation.bind('closedConsultationAdmin', function(data) {
+                    var newClosedConsultation = `
+
+                            <div class="media-body flex-grow-1 notification-item">
+                                  <p class="notification-title">This consultation has been closed
+                                      <span>
+                                          <a class="notification-link"
+                                              href="/consultation/${data.consultation_encode_id}/details">
+                                               <span class="notification-title">
+                                                   ${data.consultation_title}</span>
+                                           </a>
+                                     </span>
+                                </p>
+                                <span class="notification-time">${data.created_at} </span>
+                             </div>
+
+                    `;
+
+                    notifications.prepend(newClosedConsultation);
+                    notificationsCount += 1;
+                    notificationsCountElem.text(notificationsCount);
+
+                    notificationsWrapper.find('.notif-count').text(notificationsCount);
+                    notificationsWrapper.show();
+                });
+
+
+                channelClosedCase.bind('closedCaseAdmin', function(data) {
+                    var newClosedCase = `
+
+                            <div class="media-body flex-grow-1 notification-item">
+                                  <p class="notification-title">This case has been closed
+                                      <span>
+                                          <a class="notification-link"
+                                              href="/case/${data.case_encode_id}/show">
+                                               <span class="notification-title">
+                                                   ${data.case_title}</span>
+                                           </a>
+                                     </span>
+                                </p>
+                                <span class="notification-time">${data.created_at} </span>
+                             </div>
+
+                    `;
+
+                    notifications.prepend(newClosedCase);
+                    notificationsCount += 1;
+                    notificationsCountElem.text(notificationsCount);
+
+                    notificationsWrapper.find('.notif-count').text(notificationsCount);
+                    notificationsWrapper.show();
+                });
 
                 channelRefundConsultation.bind('App\\Events\\RefundConsultationEvent', function(data) {
                     const now = new Date();
@@ -156,7 +211,12 @@
     @yield('scripts')
 
 
-    <script src="{{ asset('assets/js/search.js') }}"></script>
+    <script src="{{ asset('assets/js/searchLawyer.js') }}"></script>
+    <script src="{{ asset('assets/js/searchStatusDocument.js') }}"></script>
+    <script src="{{ asset('assets/js/searchClient.js') }}"></script>
+    <script src="{{ asset('assets/js/searchCompany.js') }}"></script>
+    <script src="{{ asset('assets/js/searchInvoice.js') }}"></script>
+    <script src="{{ asset('assets/js/searchContact.js') }}"></script>
     <script src="{{ asset('assets/js/index.js') }}"></script>
     <script src="{{ asset('assets/js/tab.js') }}"></script>
     <script src="{{ asset('assets/js/img.js') }}"></script>

@@ -220,10 +220,10 @@
                                             <input id="fileInput" type="file" name="attachments"
                                                 style="display: none;">
 
-                                            <a href="{{ route('attachments', base64_encode($receiver->id)) }}"
+                                            {{--  <a href="{{ route('attachments', base64_encode($receiver->id)) }}"
                                                 id="openAllAttachments" class="btn ">
                                                 <i class="fas fa-folder-open"></i>
-                                            </a>
+                                            </a>  --}}
                                         </div>
                                     </div>
                                 </div>

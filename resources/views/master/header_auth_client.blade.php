@@ -83,6 +83,32 @@
                                     <span class="notification-time">{{ $notification->created_at?->format('j M Y') }}
                                     </span>
                                 </div>
+                            @elseif($notification->type === 'App\Notifications\ClosedConsultationClientNotification')
+                                <div class="media-body flex-grow-1 notification-item">
+                                    <p class="notification-title"> @lang('pages.closed_consultation_notification')
+                                        <span>
+                                            <a class="notification-link"
+                                                href="{{ route('details_consultation', $notification->data['consultation_encode_id']) }}">
+                                                <span class="notification-title">
+                                                    {{ $notification->data['consultation_title'] }}</span>
+                                            </a>
+                                        </span>
+                                    </p>
+                                    <span class="notification-time">{{ $notification->data['created_at'] }} </span>
+                                </div>
+                            @elseif($notification->type === 'App\Notifications\ClosedCaseClientNotification')
+                                <div class="media-body flex-grow-1 notification-item">
+                                    <p class="notification-title"> @lang('pages.closed_case_notification')
+                                        <span>
+                                            <a class="notification-link"
+                                                href="{{ route('show_case', $notification->data['case_encode_id']) }}">
+                                                <span class="notification-title">
+                                                    {{ $notification->data['case_title'] }}</span>
+                                            </a>
+                                        </span>
+                                    </p>
+                                    <span class="notification-time">{{ $notification->data['created_at'] }} </span>
+                                </div>
                             @endif
                         @endforeach
 

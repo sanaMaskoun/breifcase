@@ -2,22 +2,38 @@
 @section('dashboard')
     <div class="col-lg-9 col-md-1">
         <div class="content">
+            @if ($message = Session::get('success'))
+                <div class="col-md-12">
+                    <div class="alert alert-success" role="alert">
+                        {{ $message }}
+                    </div>
+                </div>
+            @endif
+            @if (Session::has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
             <div class="header-documents-dashboard">
-                <h2>Consultaion Details</h2>
+                <h2>consultation Details </h2>
+                <div class="status-consultation {{ strtolower($status_texts[$consultation->status]) }}">
+                    {{ $status_texts[$consultation->status] }}
+                </div>
 
             </div>
 
             <div class="list-document-dashboard">
                 <div class="col-md-6 mt-5 ">
-                    <p class="title-consultation-details"> {{ $consultaion->title }}</p>
-                    <p class="description-consultation-details"> {{ $consultaion->description }} </p>
-                    <span class="d-flex justify-content-end">{{ $consultaion->sender->name }}</span>
-                    <span class="d-flex justify-content-end">{{ $consultaion->created_at->format('Y/m/d') }}</span>
+                    <p class="title-consultation-details"> {{ $consultation->title }}</p>
+                    <p class="description-consultation-details"> {{ $consultation->description }} </p>
+                    <span class="d-flex justify-content-end">{{ $consultation->sender->name }}</span>
+                    <span class="d-flex justify-content-end">{{ $consultation->created_at->format('Y/m/d') }}</span>
+
                 </div>
                 <div class="col-md-6 mt-5 body-suggestion">
-                    <p class="description-consultation-details"> {{ $consultaion->answer }}</p>
-                    @if (Auth()->user()->id == $consultaion->receiver_id && $consultaion->answer == null)
-                        <form method="POST" action="{{ route('answer_consultaion', base64_encode($consultaion->id)) }}">
+                    <p class="description-consultation-details"> {{ $consultation->answer }}</p>
+                    @if (Auth()->user()->id == $consultation->receiver_id && $consultation->answer == null)
+                        <form method="POST" action="{{ route('answer_consultation', base64_encode($consultation->id)) }}">
                             @csrf
                             <div class="d-flex justify-content-center">
                                 <textarea type="text" name="answer" class="form-control"></textarea>
@@ -32,10 +48,26 @@
                             </div>
                         </form>
                     @endif
-                    <span class="d-flex justify-content-end"> {{ $consultaion->receiver->name }} </span>
+                    <span class="d-flex justify-content-end"> {{ $consultation->receiver->name }} </span>
 
                 </div>
 
+            </div>
+            {{--  {{ dd($consultation->invoice) }}  --}}
+            <div class="d-flex justify-content-between">
+                <a href="{{ route('bill_show', base64_encode($consultation->invoice->id)) }}" class="btn-bill">
+                    Bill and  Receipt
+                </a>
+                @if ($status_texts[$consultation->status] === 'Ongoing')
+                <form id="close-consultation-form-{{ $consultation->id }}" method="POST" action="{{ route('closed_consultation', base64_encode($consultation->id)) }}" style="display: none;">
+                    @csrf
+                </form>
+
+                <a href="#" class="btn-close-consultation" onclick="event.preventDefault(); document.getElementById('close-consultation-form-{{ $consultation->id }}').submit();">
+                    Close the consultation
+                </a>
+
+                @endif
             </div>
 
         </div>

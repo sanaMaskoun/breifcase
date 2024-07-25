@@ -57,7 +57,7 @@ public function callback(Request $request)
 
             Auth::login($user);
 
-            return redirect()->route('show_lawyer', base64_encode($invoice->receiver_id));
+            return redirect()->route('home_client');
         } else {
             return redirect()->route('home_client')->with('error', 'User not found');
         }
