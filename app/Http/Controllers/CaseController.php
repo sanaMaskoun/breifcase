@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\DocumentStatusEnum;
 use App\Enums\DocumentTypeEnum;
 use App\Enums\InvoiceStatusEnum;
+use App\Enums\UserTypeEnum;
 use App\Events\AcceptCaseEvent;
 use App\Events\CaseEvent;
 use App\Events\ClosedCaseAdminEvent;
@@ -113,11 +114,12 @@ class CaseController extends Controller
     public function accept_case(AcceptCaseRequest $request, $case_encode_id)
     {
         $case = Document::find(base64_decode($case_encode_id));
+        $admin=User::where('type' , UserTypeEnum::admin)->first();
         $data = [
-            "CustomerName" => $case->sender->name,
+            "CustomerName" => $admin->name,
             "Notificationoption" => "LNK",
             "Invoicevalue" => $case->price,
-            "CustomerEmail" => $case->sender->email,
+            "CustomerEmail" => $admin->email,
             "CallBackUrl" => env('success_url'),
             "ErrorUrl" => env('error_url'),
             "Language" => 'en',

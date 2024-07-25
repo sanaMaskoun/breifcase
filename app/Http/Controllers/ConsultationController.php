@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\DocumentStatusEnum;
 use App\Enums\DocumentTypeEnum;
 use App\Enums\InvoiceStatusEnum;
+use App\Enums\UserTypeEnum;
 use App\Events\ClosedConsultationAdminEvent;
 use App\Events\ClosedConsultationClientEvent;
 use App\Events\ConsultationEvent;
@@ -65,12 +66,13 @@ class ConsultationController extends Controller
     {
 
         $consultation = Document::create($request->validated());
+        $admin=User::where('type' , UserTypeEnum::admin)->first();
 
         $data = [
-            "CustomerName" => $receiver->name,
+            "CustomerName" => $admin->name,
             "Notificationoption" => "LNK",
             "Invoicevalue" => $receiver->lawyer->consultation_price,
-            "CustomerEmail" => $receiver->email,
+            "CustomerEmail" => $admin->email,
             "CallBackUrl" => env('success_url'),
             "ErrorUrl" => env('error_url'),
             "Language" => 'en',

@@ -32,6 +32,7 @@ var channelRejectCase = pusherPrivate.subscribe('private-reject-channel-' + loca
 var channelClosedConsultation = pusherPrivate.subscribe('private-closed-consultation-client-channel-' + localStorage.getItem('user_id'));
 
 var channelClosedCase = pusherPrivate.subscribe('private-closed-case-client-channel-' + localStorage.getItem('user_id'));
+var channelClosedRequest = pusherPrivate.subscribe('closed-request-client-channel-' + localStorage.getItem('user_id'));
 
 
 channelClosedConsultation.bind('closedConsultationClient', function(data) {
@@ -62,8 +63,36 @@ channelClosedConsultation.bind('closedConsultationClient', function(data) {
     notificationsWrapper.show();
 });
 
+channelClosedRequest.bind('closedRequestClient', function(data) {
+    var newClosedRequest = `
+   <li class="notification-message">
+        <div class="media d-flex">
+            <div class="media-body flex-grow-1 notification-item">
+                  <p class="notification-title">This request has been closed
+                      <span>
+                          <a class="notification-link"
+                              href="/document/request/${data.request_encode_id}/show">
+                               <span class="notification-title">
+                                   ${data.request_title}</span>
+                           </a>
+                     </span>
+                </p>
+                <span class="notification-time">${data.created_at} </span>
+             </div>
+        </div>
+    </li>
+    `;
 
-channelClosedCase.bind('App\\Events\\ClosedCaseClientEvent', function(data) {
+    notifications.prepend(newClosedRequest);
+    notificationsCount += 1;
+    notificationsCountElem.text(notificationsCount);
+
+    notificationsWrapper.find('.notif-count').text(notificationsCount);
+    notificationsWrapper.show();
+});
+
+
+channelClosedCase.bind('closedCaseClient', function(data) {
     var newClosedCase = `
     <li class="notification-message">
         <div class="media d-flex">

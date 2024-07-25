@@ -109,6 +109,7 @@
                 var channelRefundConsultation = pusherPrivate.subscribe('private-refund-consultation-channel');
                 var channelClosedCase = pusherPrivate.subscribe('private-closed-case-admin-channel');
                 var channelClosedConsultation = pusherPrivate.subscribe('private-closed-consultation-admin-channel');
+                var channelClosedRequest = pusherPrivate.subscribe('closed-request-admin-channel');
 
 
                 $(document).ready(function() {
@@ -184,6 +185,32 @@
                     notificationsWrapper.find('.notif-count').text(notificationsCount);
                     notificationsWrapper.show();
                 });
+                
+                channelClosedRequest.bind('closedRequestAdmin', function(data) {
+                    var newClosedRequest = `
+
+                            <div class="media-body flex-grow-1 notification-item">
+                                  <p class="notification-title">This request has been closed
+                                      <span>
+                                          <a class="notification-link"
+                                              href="/document/request/${data.request_encode_id}/show">
+                                               <span class="notification-title">
+                                                   ${data.request_title}</span>
+                                           </a>
+                                     </span>
+                                </p>
+                                <span class="notification-time">${data.created_at} </span>
+                             </div>
+
+                    `;
+
+                    notifications.prepend(newClosedRequest);
+                    notificationsCount += 1;
+                    notificationsCountElem.text(notificationsCount);
+
+                    notificationsWrapper.find('.notif-count').text(notificationsCount);
+                    notificationsWrapper.show();
+                });
 
                 channelRefundConsultation.bind('App\\Events\\RefundConsultationEvent', function(data) {
                     const now = new Date();
@@ -193,7 +220,7 @@
                             <a class="notification-link" href="/consultation/${data.consultation_encoded_id}/details">
                                 <span class="notification-title">This consultation has not been responded to. Return the amount to the customer: ${data.title}</span>
                             </a>
-            <span class="notification-time">${formattedDate}</span>
+                         <span class="notification-time">${formattedDate}</span>
                         </div>
                     `;
 
@@ -204,6 +231,7 @@
                     notificationsWrapper.find('.badge').text(notificationsCount);
                     notificationsWrapper.show();
                 });
+
             </script>
         @endif
     @endif

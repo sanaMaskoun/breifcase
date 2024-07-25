@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DocumentStatusEnum;
 use App\Enums\UserTypeEnum;
 use App\Http\Requests\SendRequestToCompanyRequest;
 use App\Models\Document;
@@ -18,7 +19,7 @@ class TranslationCompanyController extends Controller
         $companies = User::where('type', UserTypeEnum::translation_company)
         ->where('is_active', true)
         ->paginate(config('constants.PAGINATION_COUNT'));
-
+       
     return view('pages.company.list', compact('companies'));
     }
     public function show($company_encoded_id)

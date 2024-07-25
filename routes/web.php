@@ -155,6 +155,9 @@ Route::group(['prefix' => 'case', 'middleware' => 'auth:sanctum'], function () {
 Route::group(['prefix' => 'document', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [DocumentController::class, 'index'])->name('list_documents');
     Route::get('list-requests/{receiver_encoded_id}', [DocumentController::class, 'index_requests'])->name('list_requests');
+    Route::get('request/{request_encoded_id}/show', [DocumentController::class, 'show_requests'])->name('show_requests');
+    Route::post('{request_encode_id}/closed', [DocumentController::class, 'closed'])->name('closed_request');
+
 
 });
 
