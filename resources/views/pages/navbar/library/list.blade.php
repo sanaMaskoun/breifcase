@@ -1,22 +1,24 @@
 @extends('master.app')
 @section('content')
-    <div class="container mt-5">
-        <div class="row">
-            <div class=" col-lg-12 col-md-12 col-sm-12  search_book">
+    <div class=" container mt-5">
 
-                <div class="form-news search-book">
-                    <i class="fa fa-search" style="color: black"></i>
-                    <input value="" type="text" class="form-control form-input search-book-1 " placeholder="" />
 
+        <div class="row text-center content-dashboard  box-book mt-3">
+
+            <div class="row search-bar-lib">
+                <div class=" col-lg-12 col-md-12 col-sm-12  search_book">
+
+                    <div class="form-news search-book">
+                        <i class="fa fa-search" style="color: black"></i>
+                        <input value="" type="text" class="form-control form-input search-book-1"
+                            placeholder="Search by title" id="searchBookInput" />
+
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="row text-center box-book mt-3">
-
             @foreach ($books as $book)
                 <div class="col-lg-2 col-md-3 mb-4 book-1">
-                    @if ($book->user_id == Auth()->user()->id)
+                    @if ($book->user_id == Auth()->user()?->id)
                         <form method="GET" action="{{ route('delete_book', $book->id) }}">
                             <button type="submit" class="btn-remove-template">
                                 <i class="bx bx-x icon-remove-template"></i>

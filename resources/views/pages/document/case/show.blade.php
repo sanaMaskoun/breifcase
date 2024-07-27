@@ -1,6 +1,6 @@
 @extends('pages.dashboard.sidebar')
 @section('dashboard')
-    <div class="col-lg-9 col-md-1">
+    {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content">
             <div class="d-flex justify-content-between">
                 <h2>{{ $case->title }}</h2>
@@ -95,5 +95,5 @@
 
 
         </div>
-    </div>
+    {{--  </div>  --}}
 @endsection

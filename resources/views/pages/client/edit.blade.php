@@ -25,31 +25,31 @@
                         </div>
                         <div class="col-lg-8 col-md-12 col-sm-12 mt-3 ">
                             <h3>{{ $client->name }}</h3>
-                            <span class="span">{{ $client->gender == 1 ? 'Male' : 'Female' }} -
-                                {{ $client->client->occupation }} - {{ $city }}</span>
+                            <span class="span">{{ $client->gender == 1 ? __('EnumFile.male') : __('EnumFile.female') }}  -
+                                {{ $client->client->occupation }} - {{ __('EnumFile.city_' . $city) }}</span>
                         </div>
                         <form action="{{ route('update_client', $client->id) }}" method="POST">
                             @csrf
                             <div class="row row1 mt-3">
                                 <div class="col-12 d-flex justify-content-center align-items-center mb-2">
-                                    <label for="name" class="me-2">Name:</label>
+                                    <label for="name" class="me-2">@lang('pages.name')</label>
 
                                     <input type="text" id="name" name="name" value="{{ $client->name }}" />
                                 </div>
 
                                 <div class="col-12 d-flex justify-content-center align-items-center mb-2">
-                                    <label for="email" class="me-2">Email:</label>
+                                    <label for="email" class="me-2">@lang('pages.email'):</label>
                                     <input type="email" id="email" name="email" value="{{ $client->email }}" />
 
                                 </div>
                                 <div class="col-12 d-flex justify-content-center align-items-center mb-2">
-                                    <label for="birth" class="me-2">Date Birth:</label>
+                                    <label for="birth" class="me-2">@lang('pages.birth'):</label>
                                     <input type="date" id="birth" name="birth"
                                         value="{{ $client->birth ? Carbon::parse($client->birth)->format('Y-m-d') : '' }}" />
 
                                 </div>
                                 <div class="col-12 mb-2 edit">
-                                    <button type="submit"class="btn_edit_profile">update Info </button>
+                                    <button type="submit"class="btn_edit_profile">@lang('pages.update_info') </button>
                                 </div>
                         </form>
                     </div>
@@ -65,21 +65,21 @@
                         <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                             <img src="{{ asset('assets/img/Full_Website_-_CLIENT_V1__1_-removebg-preview.png') }}"
                                 alt="" class="img_4" />
-                            <a href="" class="link-profile">Documents</a>
+                            <a href="" class="link-profile">@lang('pages.documents')</a>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                             <img src="{{ asset('assets/img/Full_Website_-_CLIENT_V1-removebg-preview.png') }}"
                                 alt="" class="img_4" />
-                            <a href="" class="link-profile">Bills</a>
+                            <a href="" class="link-profile">@lang('pages.bills')</a>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                             <img src="{{ asset('assets/img/generalQuestion.png') }}" alt="" class="img_4" />
-                            <a href="" class="link-profile">Questions</a>
+                            <a href="" class="link-profile">@lang('pages.questions')</a>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                             <img src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__7_-removebg-preview.png') }}"
                                 alt="" class="img_4" />
-                            <a href="" class="link-profile">Chat</a>
+                            <a href="" class="link-profile">@lang('pages.chats')</a>
                         </div>
                     </div>
                 </div>

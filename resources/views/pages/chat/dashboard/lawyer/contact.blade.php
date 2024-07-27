@@ -9,8 +9,9 @@
                             <div class="col-md-12 col-lg-12 p-0 contact-list-dashboard">
                                 <div class="search-status mt-2">
                                     <input value="{{ request('search') }}" name="search" type="text" class="form-control form-input input-search-status"
-                                        id="statusSearch" placeholder="search" />
+                                        id="statusSearch" placeholder="@lang('pages.search')" />
                                 </div>
+                                
                                 <div class="list-group" id="userList">
                                     @foreach ($users as $user)
                                         <a href="{{ route('lawyer_form_dashboard', base64_encode($user->id)) }}" class="list-group-item1 user-card"

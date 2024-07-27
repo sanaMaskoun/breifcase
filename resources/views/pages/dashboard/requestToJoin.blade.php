@@ -3,7 +3,7 @@
 @php
     use App\Enums\UserTypeEnum;
 @endphp
-    <div class="col-lg-9 col-md-1">
+    {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content">
             <h2>Users</h2>
             <div class="container">
@@ -47,5 +47,5 @@
 
 
 
-    </div>
+    {{--  </div>  --}}
 @endsection

@@ -245,6 +245,8 @@
     <script src="{{ asset('assets/js/searchCompany.js') }}"></script>
     <script src="{{ asset('assets/js/searchInvoice.js') }}"></script>
     <script src="{{ asset('assets/js/searchContact.js') }}"></script>
+    <script src="{{ asset('assets/js/searchExplore.js') }}"></script>
+    <script src="{{ asset('assets/js/searchLibrary.js') }}"></script>
     <script src="{{ asset('assets/js/rating.js') }}"></script>
     <script src="{{ asset('assets/js/index.js') }}"></script>
     <script src="{{ asset('assets/js/tab.js') }}"></script>

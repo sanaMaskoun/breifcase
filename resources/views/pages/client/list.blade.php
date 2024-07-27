@@ -1,11 +1,11 @@
 @extends('pages.dashboard.sidebar')
 @section('dashboard')
-<div class="col-lg-9 col-md-1">
+{{--  <div class="col-lg-9 col-md-1">  --}}
     <div class="content">
-        <h2>Clients</h2>
+        <h2>@lang('pages.clients')</h2>
         <div class="search-status mt-2">
             <input value="{{ request('search') }}" name="search" type="text" class="form-control form-input input-search-status"
-                id="clientSearch" placeholder="Enter name" />
+                id="clientSearch" placeholder="@lang('pages.name_search')" />
         </div>
         <div class="container">
             <div class="row">
@@ -31,6 +31,6 @@
             </div>
         </div>
     </div>
-</div>
+{{--  </div>  --}}
 
 @endsection

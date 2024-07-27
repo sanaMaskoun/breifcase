@@ -2,7 +2,7 @@
 @section('dashboard')
 
 
-<div class="col-lg-9 col-md-1">
+    {{--  <div class="col-lg-9 col-md-1">  --}}
     <div class="chat-dashboard">
         <div class="container mt-3">
             <div class="d-flex justify-content-between align-items-center pb-2 mb-3">
@@ -10,7 +10,7 @@
 
                     <li class="nav-item">
                         <a class="nav-dashboard" href="" data-target="clients"
-                            onclick="openTab(event, 'clients')">Clients</a>
+                            onclick="openTab(event, 'clients')">@lang('pages.clients')</a>
                     </li>
                 </ul>
 
@@ -19,197 +19,167 @@
 
             <div id="chats" class="tab-content active">
 
-<div class="box-profile-chat box-profile-chat-dashboard">
+                <div class="box-profile-chat box-profile-chat-dashboard">
 
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat" id="contact-list">
-                <div class="list-group">
-                    @foreach ($users as $user)
-                        <a href="{{ route('chat_company_form', base64_encode($user->id)) }}" class="list-group-item1"
-                            onclick="openChat('Jamie Chastain')">
-                            <div class="contact-info">
-                                <img src="{{ $user->getFirstMediaUrl('profile') }}" alt="User Image">
-                                <div>
-                                    <div class="user-name title-group">{{ $user->name }}</div>
-                                    <div class="last-message  last_msg_form_chat" id="last_message_{{ $user->id }}">
-                                        {{ $user->latest_message?->message }}</div>
-                                    <div class="last-seen"> {{ $user->latest_message?->created_at->diffForHumans() }}
-                                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat" id="contact-list">
+                                <div class="list-group">
+                                    @foreach ($users as $user)
+                                        <a href="{{ route('chat_company_form', base64_encode($user->id)) }}"
+                                            class="list-group-item1" onclick="openChat('Jamie Chastain')">
+                                            <div class="contact-info">
+                                                <img src="{{ $user->getFirstMediaUrl('profile') }}" alt="User Image">
+                                                <div>
+                                                    <div class="user-name title-group">{{ $user->name }}</div>
+                                                    <div class="last-message  last_msg_form_chat"
+                                                        id="last_message_{{ $user->id }}">
+                                                        {{ $user->latest_message?->message }}</div>
+                                                    <div class="last-seen">
+                                                        {{ $user->latest_message?->created_at->diffForHumans() }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span class="badge-2"
+                                                id="counter_chat_{{ $user->id }}">{{ $user->message_count }}</span>
+                                        </a>
+                                    @endforeach
+
                                 </div>
                             </div>
-                            <span class="badge-2"
-                                id="counter_chat_{{ $user->id }}">{{ $user->message_count }}</span>
-                        </a>
-                    @endforeach
-
-                </div>
-            </div>
 
 
 
-            <div class="col-lg-8 col-md-12 col-sm-12">
-                <div id="chat-area" class="card card_form_chat card-chat-dashboard">
-                    <div id="chat-header_1">
-                        <img src="{{ $receiver->getFirstMediaUrl('profile') }}" class="img_contact">
-                        <span class="title-name-form-chat">{{ $receiver->name }}</span>
+                            <div class="col-lg-8 col-md-12 col-sm-12">
+                                <div id="chat-area" class="card card_form_chat card-chat-dashboard">
+                                    <div id="chat-header_1">
+                                        <img src="{{ $receiver->getFirstMediaUrl('profile') }}" class="img_contact">
+                                        <span class="title-name-form-chat">{{ $receiver->name }}</span>
+                                        <div class="dropdown">
+                                            <button id="fullscreen-button" class="btn">
+                                                <i id="fullscreen-icon" class="fas fa-expand fullscreen-icon"></i>
+                                            </button>
 
-                        <div class="dropdown">
-
-                            <button id="fullscreen-button" class="btn">
-                                <i id="fullscreen-icon" class="fas fa-expand fullscreen-icon"></i>
-                            </button>
-
-                            <button id="exit-fullscreen-button" class="btn" style="display: none;">
-                                <i id="exit-fullscreen-icon" class="fas fa-compress fullscreen-icon"></i>
-                            </button>
-
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#" data-file-name="document1.pdf">Document 1</a>
-                                <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
-                                <a class="dropdown-item" href="#" data-file-name="presentation3.pptx">Presentation
-                                    3</a>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-
-
-                    <div class="card-body pb-0 card_body_form_chat" id="chat_div">
-                        @if ($messages->isEmpty())
-                            <div class="empty-messages">
-                                <p>@lang('pages.empty_message')</p>
-                            </div>
-                        @else
-                            @foreach ($messages as $message)
-                                @if ($message->sender_id == auth()->user()->id)
-                                    <!-- Media Chat Right -->
-                                    <div class="media media-chat media-chat-right" id="chat_area_sender">
-                                        <div class="media-body">
-                                            <div class="text-content">
-                                                @if ($message->getFirstMediaUrl('attachments') != null)
-                                                    @if (
-                                                        $message->getMedia('attachments')->first()->extension == 'jpg' ||
-                                                            $message->getMedia('attachments')->first()->extension == 'png')
-                                                        <img class=" img_group clickable"
-                                                            src="{{ asset($message->getFirstMediaUrl('attachments')) }}">
-                                                        <span class="message">{{ $message->message }}</span>
-                                                    @else
-                                                        <a href="{{ $message->getFirstMediaUrl('attachments') }}"
-                                                            target="_blank">
-                                                            <p class="message">{{ $message->message }}</p>
-                                                        </a>
-                                                    @endif
-                                                @else
-                                                    <span class="message">{{ $message->message }}</span>
-                                                @endif
-                                                <time class="time">{{ $message->created_at->diffForHumans() }}</time>
-                                            </div>
+                                            <button id="exit-fullscreen-button" class="btn" style="display: none;">
+                                                <i id="exit-fullscreen-icon" class="fas fa-compress fullscreen-icon"></i>
+                                            </button>
                                         </div>
                                     </div>
-                                @else
-                                    <!-- Media Chat Left -->
-                                    <div class="media media-chat" id="chat_area_receiver">
-                                        <div class="media-body">
 
-                                            <div class="text-content">
-                                                @if ($message->getFirstMediaUrl('attachments') != null)
-                                                    @if (
-                                                        $message->getMedia('attachments')->first()->extension == 'jpg' ||
-                                                            $message->getMedia('attachments')->first()->extension == 'png')
-                                                        <img class="img_group clickable"
-                                                            src="{{ asset($message->getFirstMediaUrl('attachments')) }}">
-                                                        <span class="message">{{ $message->message }}</span>
-                                                    @else
-                                                        <a href="{{ asset($message->getFirstMediaUrl('attachments')) }}"
-                                                            target="_blank">
-                                                            <p class="message">{{ $message->message }}</p>
-                                                        </a>
-                                                    @endif
-                                                @else
-                                                    <span class="message">{{ $message->message }}</span>
-                                                @endif
-                                                <time class="time">{{ $message->created_at->diffForHumans() }}</time>
+
+                                    <div class="card-body pb-0 card_body_form_chat" id="chat_div">
+                                        @if ($messages->isEmpty())
+                                            <div class="empty-messages">
+                                                <p>@lang('pages.empty_message')</p>
                                             </div>
-                                        </div>
+                                        @else
+                                            @foreach ($messages as $message)
+                                                @if ($message->sender_id == auth()->user()->id)
+                                                    <!-- Media Chat Right -->
+                                                    <div class="media media-chat media-chat-right" id="chat_area_sender">
+                                                        <div class="media-body">
+                                                            <div class="text-content">
+                                                                @if ($message->getFirstMediaUrl('attachments') != null)
+                                                                    @if (
+                                                                        $message->getMedia('attachments')->first()->extension == 'jpg' ||
+                                                                            $message->getMedia('attachments')->first()->extension == 'png')
+                                                                        <img class=" img_group clickable"
+                                                                            src="{{ asset($message->getFirstMediaUrl('attachments')) }}">
+                                                                        <span
+                                                                            class="message">{{ $message->message }}</span>
+                                                                    @else
+                                                                        <a href="{{ $message->getFirstMediaUrl('attachments') }}"
+                                                                            target="_blank">
+                                                                            <p class="message">{{ $message->message }}
+                                                                            </p>
+                                                                        </a>
+                                                                    @endif
+                                                                @else
+                                                                    <span class="message">{{ $message->message }}</span>
+                                                                @endif
+                                                                <time
+                                                                    class="time">{{ $message->created_at->diffForHumans() }}</time>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <!-- Media Chat Left -->
+                                                    <div class="media media-chat" id="chat_area_receiver">
+                                                        <div class="media-body">
+                                                            <div class="text-content">
+                                                                @if ($message->getFirstMediaUrl('attachments') != null)
+                                                                    @if (
+                                                                        $message->getMedia('attachments')->first()->extension == 'jpg' ||
+                                                                            $message->getMedia('attachments')->first()->extension == 'png')
+                                                                        <img class="img_group clickable"
+                                                                            src="{{ asset($message->getFirstMediaUrl('attachments')) }}">
+                                                                        <span
+                                                                            class="message">{{ $message->message }}</span>
+                                                                    @else
+                                                                        <a href="{{ asset($message->getFirstMediaUrl('attachments')) }}"
+                                                                            target="_blank">
+                                                                            <p class="message">{{ $message->message }}
+                                                                            </p>
+                                                                        </a>
+                                                                    @endif
+                                                                @else
+                                                                    <span class="message">{{ $message->message }}</span>
+                                                                @endif
+                                                                <time
+                                                                    class="time">{{ $message->created_at->diffForHumans() }}</time>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </div>
-                                @endif
-                                {{--  <br>  --}}
-                            @endforeach
-                        @endif
-                    </div>
 
 
 
-                    <div class="chat-footer">
+                                    <div class="chat-footer">
 
-                        <form id="messageForm"
-                            action="{{ route('send_message_to_user', base64_encode($receiver->id)) }}" method="POST"
-                            enctype="multipart/form-data" class="form_chat_profile">
-                            @csrf
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-10 d-flex align-items-center">
-                                        <textarea name="message" class="form-control message-input" placeholder="@lang('pages.type_message')"></textarea>
-                                        <button class="btn  send-button" type="submit"><i
-                                                class="fas fa-paper-plane"></i></button>
-                                    </div>
+                                        <form id="messageForm"
+                                            action="{{ route('send_message_to_user', base64_encode($receiver->id)) }}"
+                                            method="POST" enctype="multipart/form-data" class="form_chat_profile">
+                                            @csrf
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-lg-10 d-flex align-items-center">
+                                                        <textarea name="message" class="form-control message-input" placeholder="@lang('pages.type_message')"></textarea>
+                                                        <button class="btn  send-button" type="submit"><i
+                                                                class="fas fa-paper-plane"></i></button>
+                                                    </div>
 
-                                    <div class="col-lg-2 d-flex justify-content-center align-items-center">
-                                        <label for="fileInput" class="send_file_chat">
-                                            <i class="fas fa-paperclip"></i>
-                                        </label>
-                                        <input id="fileInput" type="file" name="attachments"
-                                            style="display: none;">
+                                                    <div class="col-lg-2 d-flex justify-content-center align-items-center">
+                                                        <label for="fileInput" class="send_file_chat">
+                                                            <i class="fas fa-paperclip"></i>
+                                                        </label>
+                                                        <input id="fileInput" type="file" name="attachments"
+                                                            style="display: none;">
 
-                                        {{--  <a href="{{ route('attachments', base64_encode($receiver->id)) }}"
+                                                        {{--  <a href="{{ route('attachments', base64_encode($receiver->id)) }}"
                                             id="openAllAttachments" class="btn ">
                                             <i class="fas fa-folder-open"></i>
                                         </a>  --}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="input-group input-group-chat">
+                                                <div class="input-group-append"></div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="input-group input-group-chat">
-                                <div class="input-group-append"></div>
-                            </div>
-                        </form>
-
+                        </div>
                     </div>
-
                 </div>
             </div>
-
-
-
-
-
         </div>
     </div>
-
-
-
-
-
-</div>
-            </div>
-
-        </div>
-    </div>
-</div>
+    {{--  </div>  --}}
 
 
 

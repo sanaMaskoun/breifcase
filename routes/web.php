@@ -42,11 +42,12 @@ Route::group(['prefix' => 'explore'], function () {
 Route::get('/library', [NavbarController::class, 'library'])->name('library');
 Route::group(['prefix' => 'book', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/create', [NavbarController::class, 'create_book'])->name('create_book');
-    Route::get('/show/{book_encode_id}', [NavbarController::class, 'show_book'])->name('show_book');
     Route::post('/download', [NavbarController::class, 'download_book'])->name('download_book');
     Route::get('/delete/{book}', [NavbarController::class, 'delete_book'])->name('delete_book');
 
 });
+Route::get('library/show/{book_encode_id}', [NavbarController::class, 'show_book'])->name('show_book');
+
 
 Route::get('/about-us', function () {
     return view('pages.about');

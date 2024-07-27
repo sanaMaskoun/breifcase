@@ -3,7 +3,20 @@
 return [
 
     // header
-    'notifications'                          => 'Notifications',
+    'explore'                                =>  'Explore',
+    'library'                                =>  'Library',
+    'Language'                               =>  'Language',
+    'about_as'                               =>  'About as',
+    'sing_in'                                =>  'Sing in',
+    'join'                                   =>  'Join',
+    'lawyers'                                => 'Lawyers',
+    'lawyer'                                 => 'Lawyer',
+    'companies'                              => 'Translation companies',
+    'company'                                => 'Translation company',
+    'client'                                 => 'Client',
+    'clients'                                => 'Clients',
+    'arabic'                                 => 'Arabic',
+    'english'                                => 'English',
     'clear_all'                              => 'Clear All',
     'request_join_notification'              => 'these user request to join :',
     'suggestion_title_notification'          => 'suggestion title:',
@@ -11,26 +24,29 @@ return [
     'evaluted_question_notification'         => 'Your reply to the general question has been evaluated by :',
     'sent_consultation_notification'         => 'A consultation has been sent by ',
     'sent_case_notification'                 => 'A case has been sent by ',
-    'sent_request_notification'                 => 'A Request has been sent by ',
-'accept_case_notification'                   => 'The case has been accepted before',
-'reject_case_notification'                   =>'The case was rehected dismissed',
-'closed_consultation_notification'           => 'This consultation has been closed',
-'closed_case_notification'           => 'This case has been closed',
-'closed_request_notification'           => 'This request has been closed',
+    'sent_request_notification'              => 'A Request has been sent by ',
+     'accept_case_notification'              => 'The case has been accepted before',
+     'reject_case_notification'              =>'The case was rehected dismissed',
+     'closed_consultation_notification'      => 'This consultation has been closed',
+     'closed_case_notification'              => 'This case has been closed',
+     'closed_request_notification'           => 'This request has been closed',
 
+
+
+    'notifications'                          => 'Notifications',
     'profile'                                => 'Profile',
-    'logout'                                 => 'Logout',
     'login'                                  => 'Login',
 
-
+    //footer
+    'logout'                                 => 'Logout',
+    'home'                                   => 'Home',
+    'settings'                               => 'Settings',
 
     // header (sidebar)
      'dashboard'                 => 'Dashboard',
      'consultation'              => 'Consultations',
      'general_question'          => 'General Questions',
      'practiece'                 => 'practieces',
-     'lawyer'                    => 'Lawyers',
-     'client'                    => 'clients',
      'requests_to_join'          => 'Requests to join',
      'suggestion'                => 'Suggestions',
      'chats'                      => 'Chat',
@@ -38,26 +54,74 @@ return [
      'translateFile'              => 'translate File',
 
 
+     //bills
+     'bills'                       => 'Bills and Receipts',
+     'total'                       => 'Total',
+     'bill_details'                =>'Bill Details',
+
+
+     //search
+     'status'                    => 'Enter status',
+     'name_search'                    => 'Enter name',
+     'search'                    => 'Search',
+
+
+     // button
+     'update_info'              =>'Update Info',
+
+
+      //chat
+      'groups'                   => 'Groups',
+      'contacts'                 => 'Contacts',
+      'forum'                    => 'Forum',
+
+
+
+      //form chat
+      'empty_message'           => 'There are no messages yet. Send a message to start the conversation.',
+      'type_message'            => 'Type a message',
+      'send'                    => 'send',
+
+
+      //join 
+      'welcome_join'            => 'Welcome to our community',
+      'name'                    => 'Name',
+      'email'                   => 'Email',
+      'password'                => 'PAssword',
+      'password_confirmation'    =>'Password Confirmation',
+      'birth'                   => 'Birth'  ,
+      'phone'                   => 'Phone',
+      'country'                 => 'Country',
+      'city'                    => 'City',
+      'select_country'          => 'Select country',
+      'select_city'             => 'Select city',
+      'emirates_id'             =>'Emirates ID',
+      'occupation'              => 'Occupation',
+      'emirates_front'          => 'Upload Emirates ID Front',
+      'emirates_back'           => 'Upload Emirates ID back',
+      'gender'                  => 'Gender',
+      'add_photo'               =>'Add photo',
+      'company_name'             =>'Company Name',
+      'bio'                     =>'Biography',
+      'upload_license'           =>'Upload License',
+      'land_line'                =>'Land Line',
+
+
+
+//nav client 
+'documents'                    =>'Documents',
+'questions'                    => 'Questions',
+
+
+
+
+
+
 
      // attachments
-
-     'file'                     => 'Files',
-
-
-     //chat
-     'search'                   => 'Search here',
-     'groups'                   => 'Groups',
-     'contacts'                 => 'Contacts',
-     'create_group'             => 'Create Group',
-     'general_chat'             => 'General Chat',
-     'create_general_chat'      => 'Create General Chat',
+'file'                     => 'Files',
 
 
-     //form chat
-     'empty_message'           => 'There are no messages yet. Send a message to start the conversation.',
-     'type_message'            => 'Type a message',
-     'send'                    => 'send',
-     'open_attachments'        => 'Open All Attachments',
 
 
       // clients details
@@ -65,8 +129,7 @@ return [
       'num_consultation'             => 'Num Consultations',
       'num_general_questions'        => 'Num General Questions',
       'personal_details'             => 'Personal Details :',
-      'name'                         => 'Name',
-      'email'                        => 'Email',
+      
       'mobile'                       => 'Mobile',
       'date_of_join'                 => 'Date of Join',
       'amount'                       => 'Amount',
@@ -88,7 +151,6 @@ return [
       'client_information'           => 'Client Information :',
       'lawyer_information'           => 'Lawyer Information :',
       'lawyer_reply'                 => 'The lawyer answer to the consultation :',
-      'status'                       => 'status',
       'refund_consultation_notification'  => 'This consultation has not been responded to. Return the amount to the customer',
 
 

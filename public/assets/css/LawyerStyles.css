@@ -330,10 +330,12 @@ a.link-profile {
     color: black;
     text-decoration: none;
 }
-.icon-file-template{
+
+.icon-file-template {
     font-size: 150px;
     color: whitesmoke;
 }
+
 .btn-remove-template {
     background: none;
     border: none;
@@ -359,7 +361,7 @@ a.link-profile {
     padding-right: 7px;
 }
 
-.btn-store-template{
+.btn-store-template {
     border: none;
     background-color: black;
     color: white;
@@ -373,6 +375,7 @@ a.link-profile {
     margin-bottom: 20px;
     text-align: center;
 }
+
 .form-container-template {
     background: #49464640;
     padding: 20px;
@@ -380,6 +383,7 @@ a.link-profile {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
 }
+
 /** start template dashboard **/
 
 
@@ -456,7 +460,7 @@ a.link-profile {
     border-radius: 15px;
     background-color: rgb(125 125 125 / 71%);
     padding: 20px;
-    height: 70ch;
+    height: 100% !important;
 
 }
 
@@ -1563,6 +1567,19 @@ a.link-profile {
     overflow-y: scroll;
 }
 
+div#company-list .col-lg-3.col-md-6.col-sm-12 {
+    width: 50%;
+    padding: 5px;
+}
+
+.row.search-bar-lib .col-lg-12.col-md-12.col-sm-12.search_book {
+    justify-content: flex-start !important;
+}
+
+.row.search-bar-lib .col-lg-12.col-md-12.col-sm-12.search_book {
+    justify-content: flex-start !important;
+}
+
 .box1 {
     display: flex;
     flex-direction: row;
@@ -1575,7 +1592,7 @@ a.link-profile {
 
     background-color: rgb(125 125 125 / 71%);
     /* margin-top: 13rem; */
-    min-height: 100vh;
+    min-height: 80vh;
     /* Ensures the box takes at least the full viewport height */
     overflow-y: scroll;
 }
@@ -1683,7 +1700,7 @@ a.link-profile {
 
 .tab-content {
     display: none;
-    height: 70ch;
+
 }
 
 .tab-content.active {

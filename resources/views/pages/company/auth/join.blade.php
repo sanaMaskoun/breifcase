@@ -9,20 +9,20 @@
                         <input type="file" id="profilePhotoInput" accept="image/*" name="profile"
                             onchange="loadProfilePhoto(event)" />
                         <div class="profile-photo" id="profilePhoto">
-                            <label for="profilePhotoInput">Add photo</label>
+                            <label for="profilePhotoInput">@lang('pages.add_photo')</label>
                         </div>
                     </div>
                 </div>
                 <div class="col-6 d-flex">
-                    <h2>Translation ​Comapnies</h2>
+                    <h2>@lang('pages.company')</h2>
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group-sign col-md-6 ">
-                    <label for="name" class="label-inline">Company Name</label>
+                    <label for="name" class="label-inline">@lang('pages.company_name')</label>
                     <input type="text" class="form-control-sign input-inline" id="name" name="name"
-                        placeholder="company Name" />
+                       />
                     @error('name')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -30,8 +30,8 @@
 
 
                 <div class="form-group-sign col-md-4" style="margin-top: 10px">
-                    <label for="biography">Biography</label>
-                    <textarea class="form-control-sign" id="biography" rows="3" name="bio" placeholder="Biography"></textarea>
+                    <label for="biography">@lang('pages.bio')</label>
+                    <textarea class="form-control-sign" id="biography" rows="3" name="bio" ></textarea>
                     @error('bio')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -39,7 +39,7 @@
 
                 <div class="form-group-sign file-upload col-md-2" style="height: 50px">
                     <label for="licenseUpload" class="label-inline">
-                        Upload License <i class="fas fa-upload icon-upload-sign"></i>
+                        @lang('pages.upload_license') <i class="fas fa-upload icon-upload-sign"></i>
                     </label>
                     <input type="file" id="licenseUpload" class="form-control-file" name="licenses[]" multiple />
 
@@ -59,9 +59,9 @@
 
             <div class="row">
                 <div class="form-group-sign col-md-6 email-2">
-                    <label for="email" class="label-inline">Email</label>
+                    <label for="email" class="label-inline">@lang('pages.email')</label>
                     <input type="email" class="form-control-sign input-inline" id="email" name="email"
-                        placeholder="xx@xxx.com" />
+                         />
                     @error('email')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -70,9 +70,9 @@
             </div>
             <div class="row">
                 <div class="form-group-sign col-md-6 email-2">
-                    <label for="password" class="label-inline">Password</label>
+                    <label for="password" class="label-inline">@lang('pages.password')</label>
                     <input type="password" class="form-control-sign input-inline" id="password" name="password"
-                        placeholder="1234qwer" />
+                         />
                     @error('password')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -81,9 +81,9 @@
             </div>
             <div class="row">
                 <div class="form-group-sign col-md-6 email-2">
-                    <label for="confirmPassword" class="label-inline">Re-type Password</label>
+                    <label for="confirmPassword" class="label-inline">@lang('pages.password_confirmation')</label>
                     <input type="password" class="form-control-sign input-inline" id="confirmPassword"
-                        name="password_confirmation" placeholder="1234qwer" />
+                        name="password_confirmation"  />
                     @error('password_confirmation')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -92,9 +92,9 @@
 
             <div class="row">
                 <div class="form-group-sign col-md-6 mobile-2">
-                    <label for="mobile" class="label-inline">Mobile Number</label>
+                    <label for="mobile" class="label-inline">@lang('pages.phone')</label>
                     <input type="text" class="form-control-sign input-inline" id="mobile" name="phone"
-                        placeholder="05xxxxxxx" />
+                         />
                     @error('phone')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -104,9 +104,9 @@
 
             <div class="row">
                 <div class="form-group-sign form-group col-md-6 land-2">
-                    <label for="landline" class="label-inline">Land Line</label>
+                    <label for="landline" class="label-inline">@lang('pages.land_line')</label>
                     <input type="text" class="form-control-sign input-inline" id="landline" name="land_line"
-                        placeholder="02xxxxxxx" />
+                         />
                     @error('land_line')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror

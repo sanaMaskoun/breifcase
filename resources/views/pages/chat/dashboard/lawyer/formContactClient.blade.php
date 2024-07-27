@@ -1,54 +1,6 @@
 @extends('pages.chat.navChat')
 @section('content_chat')
 
-    <head>
-        <style>
-            #chat-header_1 .btn {
-                margin-left: 10px;
-            }
-
-            .img-icon-template {
-                width: 35px !important;
-                height: 35px !important;
-            }
-
-            .btn-dropdown-toggle {
-                padding: 0;
-                /* Remove any padding */
-                width: 50px !important;
-                /* Set the width */
-                height: 50px !important;
-                /* Set the height */
-                border: none;
-                /* Remove border */
-                background: none;
-                /* Remove background */
-
-            }
-
-            .dropdown-toggle::after {
-                content: none;
-            }
-
-            .dropdown-menu.show {
-                overflow-y: scroll;
-                height: 160px;
-            }
-
-            .btn-dropdown-toggle img {
-                font-size: 24px;
-                /* Adjust the size of the icon */
-                height: 100%;
-                width: 100%;
-                border-radius: 0px !important;
-            }
-
-            .dropdown-menu {
-                min-width: 100px;
-                /* Adjust as needed */
-            }
-        </style>
-    </head>
     <div class="box-profile-chat box-profile-chat-dashboard">
 
 
@@ -108,7 +60,7 @@
                                     @endforeach
 
                                 </div>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                {{--  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="#" data-file-name="document1.pdf">Document 1</a>
                                     <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
                                     <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
@@ -123,7 +75,7 @@
                                     <a class="dropdown-item" href="#" data-file-name="report2.docx">Report 2</a>
                                     <a class="dropdown-item" href="#" data-file-name="presentation3.pptx">Presentation
                                         3</a>
-                                </div>
+                                </div>  --}}
                             </div>
 
 

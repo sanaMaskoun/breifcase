@@ -83,25 +83,17 @@
                                                     @endif
                                                     <time class="time">{{ $message->created_at->diffForHumans() }}</time>
                                                 </div>
-                                                {{--  <a href="{{ route('show_lawyer',base64_encode(auth()->user()->id)) }}">  --}}
                                                 <img src="{{ auth()->user()->getFirstMediaUrl('profile') }}"
                                                     class="rounded-circle img_group" alt="user_img">
-
-                                                {{--  </a>  --}}
                                             </div>
                                         </div>
                                     @else
                                         <!-- Media Chat Left -->
                                         <div class="media media-chat" id="group_area_receiver">
                                             <div class="media-body img-groups">
-
-                                                {{--  <a href="{{ route('show_lawyer',base64_encode($message->sender->id)) }}">  --}}
                                                 <img src="{{ $message->sender->getFirstMediaUrl('profile') }}"
                                                     class="rounded-circle img_group" alt="user_img">
-                                                {{--  <span>{{ $message->sender->name }}</span>  --}}
-                                                {{--  </a>  --}}
-
-                                                <div class="text-content">
+                                               <div class="text-content">
                                                     @if ($message->getFirstMediaUrl('attachments') != null)
                                                         @if (
                                                             $message->getMedia('attachments')->first()->extension == 'jpg' ||
@@ -123,7 +115,6 @@
                                             </div>
                                         </div>
                                     @endif
-                                    {{--  <br>  --}}
                                 @endforeach
                             @endif
                         </div>

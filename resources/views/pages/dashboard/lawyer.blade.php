@@ -2,7 +2,7 @@
 @section('dashboard')
 
 
-    <div class="col-lg-9 col-md-12 col-sm-12 ">
+    {{--  <div class="col-lg-9 col-md-12 col-sm-12 ">  --}}
         <div class="sidebar-dashboard">
 
             <div class="container">
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    {{--  </div>  --}}
     <script>
         window.repliesData = @json($replies_data);
         window.casesData = @json($cases_data);

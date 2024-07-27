@@ -1,6 +1,6 @@
 @extends('pages.dashboard.sidebar')
 @section('dashboard')
-    <div class="col-lg-9 col-md-1">
+    {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content">
             <div class="header-documents-dashboard">
                 <h2>Cases</h2>
@@ -30,5 +30,5 @@
                 @endforeach
             </div>
         </div>
-    </div>
+    {{--  </div>  --}}
 @endsection

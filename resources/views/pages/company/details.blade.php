@@ -13,7 +13,7 @@
             $city = UAECityEnum::getKey($company->city);
         }
     @endphp
-    <div class="col-lg-9 col-md-1">
+    {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content">
             <div class="container">
                 <div class="row">
@@ -154,6 +154,5 @@
             </div>
 
         </div>
-    </div>
-    </div>
+    {{--  </div>  --}}
 @endsection

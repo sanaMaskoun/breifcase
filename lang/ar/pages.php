@@ -3,34 +3,54 @@
 return [
 
     // header
+    'explore'                                =>  'استكشف',
+    'library'                                =>  'المكتبة',
+    'Language'                               =>  'اللغات',
+    'about_as'                               =>  'حولنا',
+    'sing_in'                                =>  'تسجيل الدخول',
+    'join'                                   =>  'الانضمام',
+    'lawyers'                                => 'المحامون',
+    'lawyer'                                 => 'المحامي',
+    'companies'                              => 'شركات الترجمة',
+    'company'                                => 'شركة الترجمة',
+    'client'                                 => 'الزبون',
+    'clients'                                => 'الزبائن',
+    'arabic'                                 => 'عربي',
+    'english'                                => 'أجنبي',
+    'clear_all'                              => 'حذف الجميع',
+    'request_join_notification'              => 'يطلب هذا المستخدم الانضمام:',
+    'suggestion_title_notification'          => 'عنوان الإقتراح:',
+    'person_suggestion_notification'         => 'بواسطة',
+    'evaluted_question_notification'         => 'تم تقييم ردك على السؤال العام بواسطة:',
+    'sent_consultation_notification'         => 'تم إرسال الاستشارة بواسطة ',
+    'sent_case_notification'                 => 'تم إرسال قضية بواسطة ',
+    'sent_request_notification'              => 'تم إرسال طلب بواسطة ',
+    'accept_case_notification'               => 'تم قبول القضية من قبل ',
+    'reject_case_notification'               =>'تم رفض القضية من قبل ',
+    'closed_consultation_notification'       => 'تم إغلاق هذه الاستشارة',
+    'closed_case_notification'              => 'تم إغلاق هذه القضية',
+    'closed_request_notification'           => 'تم إغلاق هذا الطلب',
+
+
 
     'notifications'                    => 'الإشعارات',
-    'clear_all'                        => 'حذف الجميع',
-    'request_join_notification'        => 'يطلب هذا المستخدم الانضمام:',
-    'suggestion_title_notification'    => 'عنوان الإقتراح:',
-    'person_suggestion_notification'   => 'بواسطة',
-    'evaluted_question_notification'   => 'تم تقييم ردك على السؤال العام بواسطة:',
-    'sent_consultation_notification'   => 'تم إرسال الاستشارة بواسطة ',
-    'sent_case_notification'           => 'تم إرسال قضية بواسطة ',
-    'sent_request_notification'           => 'تم إرسال طلب بواسطة ',
-'accept_case_notification'                   => 'تم قبول القضية من قبل ',
-'reject_case_notification'                   =>'تم رفض القضية من قبل ',
-'closed_consultation_notification'           => 'تم إغلاق هذه الاستشارة',
-'closed_case_notification'           => 'تم إغلاق هذه القضية',
-'closed_request_notification'           => 'تم إغلاق هذا الطلب',
-
-
     'profile'                          => 'الملف الشخصي',
-    'logout'                           => 'تسجيل الخروج',
     'login'                            => 'تسجيل الدخول',
+
+
+    //footer
+    'logout'                           => 'تسجيل الخروج',
+    'home'                             => 'الرئيسية',
+    'settings'                         => 'الإعدادات',
+
+
+
 
     // header (sidebar)
     'dashboard'                 => 'لوحة التحكم',
     'consultation'              => 'الاستشارات',
     'general_question'          => 'الأسئلة العامة',
     'practiece'                 => 'الإختصاصات',
-    'lawyer'                    => 'المحامين',
-    'client'                    => 'الزبائن',
     'requests_to_join'          => 'طلبات الانضمام',
     'suggestion'                => 'الإقتراحات',
     'chats'                      => 'المحادثات',
@@ -38,26 +58,80 @@ return [
     'translateFile'              => 'ملفات الترجمة',
 
 
+    
+     //bills
+     'bills'                       => 'الفواتير والإيصالات',
+     'total'                       => 'الكلي',
+     'bill_details'                =>'تفاصيل الفاتورة',
+
+
+     //search
+     'status'                    => 'أدخل الحالة',
+     'name_search'                    => 'أدخل الاسم',
+     'search'                    => 'البحث',
+
+
+     
+     // button
+     'update_info'              =>'تعديل البيانات',
+
+
+      //chat
+      'groups'                   => 'المجموعات',
+      'contacts'                 => 'جهات الاتصال',
+      'forum'                    => 'المنتدى',
+
+
+
+      //form chat
+      'empty_message'           => 'لا توجد رسائل بعد. أرسل رسالة لبدء المحادثة',
+      'type_message'            => 'اكتب رسالة',
+      'send'                    => 'إرسال',
+
+
+      //join 
+      'welcome_join'            => 'أهلا بك في مجتمعنا',
+      'name'                    => 'الاسم',
+      'email'                   => 'الايميل',
+      'password'                => 'كلمة المرور',
+      'password_confirmation'    =>'تأكيد كلمة المرور',
+      'birth'                   => 'الميلاد'  ,
+      'phone'                   => 'رقم الهاتف',
+      'country'                 => 'الدولة',
+      'city'                    => 'المدينة',
+      'select_country'          => 'اختر الدولة',
+      'select_city'             => 'اختر المدينة',
+      'emirates_id'             =>'الهوية الشخصية',
+      'occupation'              => 'التعليم',
+      'emirates_front'          => ' الوجه الأمامي للهوية',
+      'emirates_back'           => 'الوجه الخلفة للهوية',
+      'gender'                  => 'الجنس',
+      'add_photo'               =>'أضف صورة',
+      'company_name'             =>'اسم الشركة',
+      'bio'                     =>'السيرة الذاتية',
+      'upload_license'           =>'تحميل الترخيصات',
+      'land_line'                =>'الخط الأرضي',
+
+
+
+
+
+
+
+
+      
+//nav client 
+'documents'                    =>'المستندات',
+'questions'                    => 'الأسئلة',
+
+
+
+
     // attachments
     'file'                      => 'الملفات',
 
 
-     //chat
-     'search'                   => 'ابحث هنا',
-     'groups'                   => 'المجموعات',
-     'contacts'                 => 'جهات الاتصال',
-     'create_group'             => 'إنشاء مجموعة',
-     'general_chat'             => 'محادثة عامة',
-     'create_general_chat'      => 'إنشاء محادثة عامة',
-
-
-
-     //form chat
-     'empty_message'            => 'لا توجد رسائل بعد. أرسل رسالة لبدء المحادثة.',
-     'type_message'             => 'اكتب رسالة',
-     'send'                     => 'إرسال',
-     'open_attachments'         => 'فتح المرفقات',
-
+    
 
      // clients details
       'client_details'               => 'تفاصيل الزبون',

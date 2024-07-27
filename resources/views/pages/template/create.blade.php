@@ -1,6 +1,6 @@
 @extends('pages.dashboard.sidebar')
 @section('dashboard')
-    <div class="col-lg-9 col-md-1">
+    {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content">
             <div class="container">
                 <div class="row justify-content-center">
@@ -26,7 +26,7 @@
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                
+
                                 <button type="submit" class="btn-store-template  btn-block">Upload</button>
                             </form>
                         </div>
@@ -35,5 +35,5 @@
             </div>
 
         </div>
-    </div>
+    {{--  </div>  --}}
 @endsection

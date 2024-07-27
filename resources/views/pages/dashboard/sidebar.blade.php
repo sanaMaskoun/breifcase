@@ -1,6 +1,5 @@
 @extends('master.app')
 @section('content')
-
     <div class="container">
         <div class="row ">
             <div class="col-lg-3 col-md-12 col-sm-12 sidebar-dashboard ">
@@ -32,7 +31,8 @@
 
                     </a>
                     <a class="sidebar-dashboard-admin" href="{{ route('list_news') }}">
-                        <img src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__3_-removebg-preview.png') }}" class="icon-dashboard-sidebar" >
+                        <img src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__3_-removebg-preview.png') }}"
+                            class="icon-dashboard-sidebar">
                         News
 
                     </a>
@@ -174,8 +174,9 @@
 
 
             </div>
-
-            @yield('dashboard')
+            <div class="content-dashboard col-lg-9 col-md-1">
+                @yield('dashboard')
+            </div>
         </div>
     </div>
 @endsection

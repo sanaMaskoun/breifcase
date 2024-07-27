@@ -107,7 +107,7 @@ header {
 }
 
 .news-item img {
-    max-width: 150px;
+    max-width: 100%;
     height: auto;
     border-radius: 10px;
 }
@@ -731,6 +731,43 @@ header {
 }
 
 /*CHAT*/
+#chat-header_1 .btn {
+    margin-left: 10px;
+}
+
+.img-icon-template {
+    width: 35px !important;
+    height: 35px !important;
+}
+
+.btn-dropdown-toggle {
+    padding: 0;
+    width: 50px !important;
+    height: 50px !important;
+    border: none;
+    background: none;
+
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+
+.dropdown-menu.show {
+    overflow-y: scroll;
+    height: 160px;
+}
+
+.btn-dropdown-toggle img {
+    font-size: 24px;
+    height: 100%;
+    width: 100%;
+    border-radius: 0px !important;
+}
+
+.dropdown-menu {
+    min-width: 100px;
+}
 .message-counter {
     background-color: green;
     color: #fff;
@@ -1196,8 +1233,10 @@ p.last-msg.text-smoke {
 }
 
 nav.navbar.navbar-expand-lg.navbar-light.fixed-top.d-flex.align-items-center.my-5.container {
-    margin-top: 10px !important;
-    margin-bottom: 10px !important;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     /* margin: auto; */
 }
 
@@ -1681,6 +1720,7 @@ textarea.form-control {
     background: none;
     color: black;
 }
+
 .send-button-group:hover {
     background: none;
     color: black;
@@ -1720,6 +1760,7 @@ textarea.form-control {
     border: none;
     color: #333;
 }
+
 .send-button-group {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -1733,6 +1774,7 @@ textarea.form-control {
 .send-button i {
     font-size: 18px;
 }
+
 .send-button-group i {
     font-size: 18px;
 }

@@ -26,32 +26,32 @@
                         </div>
                         <div class="col-lg-8 col-md-12 col-sm-12 mt-3 ">
                             <h3>{{ $client->name }}</h3>
-                            <span class="span">{{ $client->gender == 1 ? 'Male' : 'Female' }} -
-                                {{ $client->client->occupation }} - {{ $city }}</span>
+                            <span class="span"> {{ $client->gender == 1 ? __('EnumFile.male') : __('EnumFile.female') }}  -
+                                {{ $client->client->occupation }} - {{ __('EnumFile.city_' . $city) }}</span>
                         </div>
                         <div class="row row1 mt-3">
                             <div class="col-12 d-flex justify-content-center align-items-center mb-2">
-                                <label for="name" class="me-2">Name:</label>
+                                <label for="name" class="me-2">@lang('pages.name')</label>
                                 <div class="info_profile">
                                     {{ $client->name }}
                                 </div>
                             </div>
 
                             <div class="col-12 d-flex justify-content-center align-items-center mb-2">
-                                <label for="email" class="me-2">Email:</label>
+                                <label for="email" class="me-2">@lang('pages.email'):</label>
                                 <div class="info_profile">
                                     {{ $client->email }}
                                 </div>
                             </div>
                             <div class="col-12 d-flex justify-content-center align-items-center mb-2">
-                                <label for="birth" class="me-2">Date Birth:</label>
+                                <label for="birth" class="me-2">@lang('pages.birth'):</label>
                                 <div class="info_profile">
                                     {{ $client->birth }}
                                 </div>
                             </div>
                             <form action="{{ route('edit_client' ,$client_encoded_id) }}" method="GET" class="form_edit">
                                 <div class="col-12 mb-2 edit">
-                                    <button type="submit"class="btn_edit_profile">Edit Info </button>
+                                    <button type="submit"class="btn_edit_profile">@lang('pages.update_info') </button>
                                 </div>
                             </form>
                         </div>
@@ -67,22 +67,22 @@
                             <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                                 <img src="{{ asset('assets/img/Full_Website_-_CLIENT_V1__1_-removebg-preview.png') }}"
                                     alt="" class="img_4" />
-                                <a href="{{ route('list_documents') }}" class="link-profile">Documents</a>
+                                <a href="{{ route('list_documents') }}" class="link-profile">@lang('pages.documents')</a>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                                 <img src="{{ asset('assets/img/Full_Website_-_CLIENT_V1-removebg-preview.png') }}"
                                     alt="" class="img_4" />
-                                <a href="{{ route('list_invoices') }}" class="link-profile">Bills</a>
+                                <a href="{{ route('list_invoices') }}" class="link-profile">@lang('pages.bills')</a>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                                 <img src="{{ asset('assets/img/generalQuestion.png') }}" alt=""
                                     class="img_4" />
-                                <a href="{{ route('list_general_questions',$client_encoded_id) }}" class="link-profile">Questions</a>
+                                <a href="{{ route('list_general_questions',$client_encoded_id) }}" class="link-profile">@lang('pages.questions')</a>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                                 <img src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__7_-removebg-preview.png') }}"
                                     alt="" class="img_4" />
-                                <a href="{{ route('chat_client') }}" class="link-profile">Chat</a>
+                                <a href="{{ route('chat_client') }}" class="link-profile">@lang('pages.chats')</a>
                             </div>
                         </div>
                     </div>

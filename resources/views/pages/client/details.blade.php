@@ -13,7 +13,7 @@
             $city = UAECityEnum::getKey($client->city);
         }
     @endphp
-    <div class="col-lg-9 col-md-1">
+    {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content">
             <div class="container">
                 <div class="row mt-5">
@@ -24,7 +24,7 @@
 
                     <div class="col-md-10">
                         <div class=" row">
-                            <label for="name" class="col-sm-3  label-lawyer-details">Name</label>
+                            <label for="name" class="col-sm-3  label-lawyer-details">@lang('pages.name')</label>
                             <div class="col-sm-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details" id="name" name="name"
                                     value="{{ $client->name }}" readonly />
@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="row">
-                            <label for="email" class="col-sm-3  label-lawyer-details">Email</label>
+                            <label for="email" class="col-sm-3  label-lawyer-details">@lang('pages.email')</label>
                             <div class="col-sm-7  mb-2">
                                 <input type="email" class="form-control-lawyer-details " id="email" name="email"
                                     value="{{ $client->email }}" readonly />
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class=" row">
-                            <label for="birth" class="col-sm-3  label-lawyer-details">Date of Birth</label>
+                            <label for="birth" class="col-sm-3  label-lawyer-details">@lang('pages.birth')</label>
                             <div class="col-sm-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details" id="birth" name="birth"
                                     value="{{ $client->birth }}" readonly />
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class=" row">
-                            <label for="occupation" class="col-sm-3  label-lawyer-details">Occupation</label>
+                            <label for="occupation" class="col-sm-3  label-lawyer-details">@lang('pages.occupation')</label>
                             <div class="col-sm-7 mb-2">
                                 <input type="text" class="form-control-lawyer-details" id="occupation"
                                     name="occupation" value="{{ $client->client->occupation }}" readonly />
@@ -57,18 +57,19 @@
 
 
 
-                        <div class=" row">
-                            <label for="gender" class="col-sm-3  label-lawyer-details">Gender</label>
-                            <div class="col-sm-7  mb-2">
+                        <div class="row">
+                            <label for="gender" class="col-sm-3 label-lawyer-details">@lang('pages.gender')</label>
+                            <div class="col-sm-7 mb-2">
                                 <input type="text" class="form-control-lawyer-details" id="gender" name="gender"
-                                    value="{{ $client->gender == 1 ? 'male' : 'female'}}" readonly />
+                                    value="{{ $client->gender == 1 ? __('EnumFile.male') : __('EnumFile.female') }}" readonly />
                             </div>
                         </div>
+                        
 
 
 
                         <div class=" row">
-                            <label for="phone" class="col-sm-3  label-lawyer-details">Phone</label>
+                            <label for="phone" class="col-sm-3  label-lawyer-details">@lang('pages.phone')</label>
                             <div class="col-sm-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="phone" name="phone"
                                     value="{{ $client->phone }}" readonly />
@@ -78,22 +79,22 @@
 
 
                         <div class=" row">
-                            <label for="country" class="col-sm-3  label-lawyer-details">Country</label>
+                            <label for="country" class="col-sm-3  label-lawyer-details">@lang('pages.country')</label>
                             <div class="col-sm-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="country" name="country"
-                                    value="{{ $country }}" readonly />
+                                value="{{ __('EnumFile.country' . $country) }}" readonly />
                             </div>
                         </div>
 
                         <div class=" row">
-                            <label for="city" class="col-sm-3  label-lawyer-details">City</label>
+                            <label for="city" class="col-sm-3  label-lawyer-details">@lang('pages.city')</label>
                             <div class="col-sm-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="city" name="city"
-                                    value="{{ $city }}" readonly />
+                                value="{{ __('EnumFile.city_' . $city) }}" readonly />
                             </div>
                         </div>
                         <div class=" row">
-                            <label for="emirates_id" class="col-sm-3  label-lawyer-details">Emirates id</label>
+                            <label for="emirates_id" class="col-sm-3  label-lawyer-details">@lang('pages.emirates_id')</label>
                             <div class="col-sm-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details" id="emirates_id"
                                     name="emirates_id" value="{{ $client->emirates_id }}" readonly />
@@ -109,9 +110,7 @@
 
                     </div>
 
-                    {{--  <div class="col-md-5">
-                    </div>
-  --}}
+
 
 
 
@@ -121,6 +120,5 @@
             </div>
 
         </div>
-    </div>
-    </div>
+    {{--  </div>  --}}
 @endsection
