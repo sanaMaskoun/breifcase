@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12 d-flex">
                 <img src="{{ asset('assets/img/reply_general_question.png') }}" class="logo_general_question" alt="">
-                <h2 class="title_general_question">General Questions</h2>
+                <h2 class="title_general_question">@lang('pages.questions')</h2>
             </div>
 
             @foreach ($questions as $question)
@@ -16,7 +16,7 @@
                                 class="link-reply-question">
                             @endhasanyrole
                             <img src="{{ $question->user->getFirstMediaUrl('profile') }}" alt="Profile" />
-                            <p>{{ $question->user->name }}</p>
+                            {{--  <p>{{ $question->user->name }}</p>  --}}
                             <p>{{ $question->title }}</p>
                             @hasanyrole('lawyer')
                             </a>

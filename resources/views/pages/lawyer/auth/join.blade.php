@@ -11,31 +11,29 @@
                         <input type="file" id="profilePhotoInput" accept="image/*" name="profile"
                             onchange="loadProfilePhoto(event)" />
                         <div class="profile-photo" id="profilePhoto">
-                            <label for="profilePhotoInput">Add photo</label>
+                            <label for="profilePhotoInput">@lang('pages.add_photo')</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-6 d-flex">
-                    <h2>Lawyer</h2>
+                    <h2>@lang('pages.lawyer')</h2>
                 </div>
 
             </div>
 
             <div class="row">
                 <div class="form-group-sign col-md-5">
-                    <label for="name" class="label-inline"> Name</label>
-                    <input type="text" class="form-control-sign input-inline" id="name" name="name"
-                        placeholder="your Name" />
+                    <label for="name" class="label-inline"> @lang('pages.name')</label>
+                    <input type="text" class="form-control-sign input-inline" id="name" name="name" />
                     @error('name')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="form-group-sign col-md-5">
-                    <label for="password" class="label-inline">Password</label>
-                    <input type="password" class="form-control-sign input-inline" id="password" name="password"
-                        placeholder="1234qwer" />
+                    <label for="password" class="label-inline">@lang('pages.password')</label>
+                    <input type="password" class="form-control-sign input-inline" id="password" name="password" />
                     @error('password')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -44,18 +42,18 @@
 
             <div class="row">
                 <div class="form-group-sign col-md-5">
-                    <label for="years_of_practice" class="label-inline">years of practice</label>
+                    <label for="years_of_practice" class="label-inline">@lang('pages.years_of_practice')</label>
                     <input type="text" class="form-control-sign input-inline" id="years_of_practice"
-                        name="years_of_practice" placeholder="5" />
+                        name="years_of_practice" />
                     @error('years_of_practice')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="form-group-sign col-md-5">
-                    <label for="confirmPassword" class="label-inline">Re-type Password</label>
+                    <label for="confirmPassword" class="label-inline">@lang('pages.password_confirmation')</label>
                     <input type="password" class="form-control-sign input-inline"id="password_confirmation"
-                        name="password_confirmation" placeholder="1234qwer" />
+                        name="password_confirmation" />
                     @error('password_confirmation')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -66,14 +64,14 @@
 
             <div class="row">
                 <div class="form-group-sign col-md-5">
-                    <label class="label-inline">Gender</label>
+                    <label class="label-inline">@lang('pages.gender')</label>
                     <div class="form-check" style="margin-left: 3.5rem">
                         <input class="form-check-input input-inline" type="radio" name="gender" id="male" value=1 />
-                        <label class="form-check-label" for="male">Male</label>
+                        <label class="form-check-label" for="male">@lang('EnumFile.male')</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input input-inline" type="radio" name="gender" id="female" value=2 />
-                        <label class="form-check-label" for="female">Female</label>
+                        <label class="form-check-label" for="female">@lang('EnumFile.female')</label>
                     </div>
                 </div>
                 @error('gender')
@@ -81,9 +79,9 @@
                 @enderror
 
                 <div class="form-group-sign col-md-5">
-                    <label for="consultationPrice" class="label-inline">Consultation Price</label>
+                    <label for="consultationPrice" class="label-inline">@lang('pages.consultation_price')</label>
                     <input type="text" class="form-control-sign input-inline" id="consultationPrice"
-                        name="consultation_price" placeholder="500 aed" />
+                        name="consultation_price" />
                     @error('consultation_price')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -93,9 +91,9 @@
 
             <div class="row">
                 <div class="form-group-sign col-md-5">
-                    <label for="birth" class="label-inline">Birth</label>
-                    <input type="text" class="form-control form-control-sign input-inline" id="email" name="birth"
-                        placeholder="00-00-0000" />
+                    <label for="birth" class="label-inline">@lang('pages.birth')</label>
+                    <input type="text" class="form-control form-control-sign input-inline" id="email"
+                        name="birth" />
                     @error('birth')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -103,7 +101,7 @@
 
                 <div class="form-group-sign file-upload col-md-3" style="height: 50px">
                     <label for="licenseUpload" class="label-inline">
-                        Upload License <i class="fas fa-upload icon-upload-sign"></i>
+                        @lang('pages.upload_license') <i class="fas fa-upload icon-upload-sign"></i>
                     </label>
                     <input type="file" id="licenseUpload" class="form-control-file" name="licenses[]" multiple />
                     @error('licenses')
@@ -119,7 +117,7 @@
 
                 <div class="form-group-sign file-upload col-md-3">
                     <label for="certificationsUpload" class="label-inline">
-                        Upload Certifications
+                        @lang('pages.upload_certificate')
                         <i class="fas fa-upload icon-upload-sign"></i>
                     </label>
                     <input type="file" id="certificationsUpload" name="certifications[]"
@@ -138,9 +136,9 @@
 
             <div class="row">
                 <div class="form-group-sign col-md-5 email-1">
-                    <label for="email" class="label-inline">Email</label>
+                    <label for="email" class="label-inline">@lang('pages.email')</label>
                     <input type="email" class="form-control-sign input-inline" id="email" name="email"
-                        placeholder="xx@xxx.com" />
+                        />
                     @error('email')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -149,9 +147,9 @@
 
             <div class="row">
                 <div class="form-group-sign col-md-5 mobile-1">
-                    <label for="mobile" class="label-inline">Mobile Number</label>
+                    <label for="mobile" class="label-inline">@lang('pages.phone')</label>
                     <input type="text" class="form-control-sign input-inline" id="mobile" name="phone"
-                        placeholder="05xxxxxxx" />
+                         />
                     @error('phone')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -160,16 +158,16 @@
 
             <div class="row">
                 <div class="form-group-sign col-md-5 land-1">
-                    <label for="landline" class="label-inline">Land Line</label>
+                    <label for="landline" class="label-inline">@lang('pages.land_line')</label>
                     <input type="text" class="form-control-sign input-inline" id="land_line" name="land_line"
-                        placeholder="0002" />
+                         />
                     @error('land_line')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="Expertise col-md-3">
-                    <label>Top Expertise/Practices</label>
+                    <label>@lang('pages.top_expertise')</label>
                     <div class="form-check-1">
                         @foreach ($practices as $practice)
                             <div class="form-check">
@@ -185,7 +183,7 @@
                 </div>
 
                 <div class="Expertise col-md-3">
-                    <label>Languages</label>
+                    <label>@lang('pages.languages')</label>
                     <div class="form-check-1">
                         @foreach ($languages as $language)
                             <div class="form-check">
@@ -205,11 +203,11 @@
 
             <div class="row">
                 <div class="form-group form-group-sign col-md-5 country-1">
-                    <label for="country" class="label-inline">Country</label>
+                    <label for="country" class="label-inline">@lang('pages.country')</label>
                     <select class="form-control-sign" name="country" id="country" onchange="updateCities()">
-                        <option>Select country</option>
-                        <option value="1">Saudi Arabia</option>
-                        <option value="2">United Arab Emirates</option>
+                        <option >@lang('pages.select_country')</option>
+                                        <option value="1">@lang('EnumFile.saudi')</option>
+                                        <option value="2">@lang('EnumFile.UAE')</option>
                     </select>
                     @error('country')
                         <small class="form-text text-danger">{{ $message }}</small>
@@ -220,30 +218,32 @@
 
             <div class="row">
                 <div class="form-group form-group-sign col-md-5 city-1">
-                    <label for="city" class="label-inline">City</label>
+                    <label for="city" class="label-inline">@lang('pages.city')</label>
                     <select class="form-control-sign" id="city" name="city">
-                        <option>Select city</option>
-                        <option value="1" class="saudi-city">Riyadh</option>
-                        <option value="2" class="saudi-city">Mecca</option>
-                        <option value="3" class="saudi-city">Medina</option>
-                        <option value="4" class="saudi-city">Dammam</option>
-                        <option value="5" class="saudi-city">Jeddah</option>
-                        <option value="6" class="saudi-city">Khobar</option>
-                        <option value="7" class="saudi-city">Abha</option>
-                        <option value="8" class="saudi-city">Tabuk</option>
-                        <option value="9" class="saudi-city">Hail</option>
-                        <option value="10" class="saudi-city">Jazan</option>
-                        <option value="11" class="saudi-city">Najran</option>
-                        <option value="12" class="saudi-city">Baha</option>
-                        <option value="13" class="saudi-city">AlJouf</option>
+                        <option>@lang('pages.select_city')</option>
+                        <option value="1" class="saudi-city">@lang('EnumFile.riyadh')</option>
+                        <option value="2" class="saudi-city">@lang('EnumFile.mecca')</option>
+                        <option value="3" class="saudi-city">@lang('EnumFile.medina')</option>
+                        <option value="4" class="saudi-city">@lang('EnumFile.dammam')</option>
+                        <option value="5" class="saudi-city">@lang('EnumFile.jeddah')</option>
+                        <option value="6" class="saudi-city">@lang('EnumFile.khobar')</option>
+                        <option value="7" class="saudi-city">@lang('EnumFile.abha')</option>
+                        <option value="8" class="saudi-city">@lang('EnumFile.tabuk')</option>
+                        <option value="9" class="saudi-city">@lang('EnumFile.hail')</option>
+                        <option value="10" class="saudi-city">@lang('EnumFile.jazan')</option>
+                        <option value="11" class="saudi-city">@lang('EnumFile.najran')</option>
+                        <option value="12" class="saudi-city">@lang('EnumFile.baha')</option>
+                        <option value="13" class="saudi-city">@lang('EnumFile.al_jouf')</option>
 
-                        <option value="100">Dubai</option>
-                        <option value="101">Abu Dhabi</option>
-                        <option value="102">Ajman</option>
-                        <option value="103">RAK</option>
-                        <option value="104">Fujairah</option>
-                        <option value="105">UM_ALQ</option>
-                        <option value="106">Sharjah</option>
+                        <option value="100">@lang('EnumFile.dubai')</option>
+                        <option value="101">@lang('EnumFile.abu_dhabi')</option>
+                        <option value="102">@lang('EnumFile.ajman')</option>
+                        <option value="103">@lang('EnumFile.rak')</option>
+                        <option value="104">@lang('EnumFile.fujairah')</option>
+                        <option value="105">@lang('EnumFile.um_alq')</option>
+                        <option value="106">@lang('EnumFile.sharjah')</option>
+
+
                     </select>
                     @error('city')
                         <small class="form-text text-danger">{{ $message }}</small>
@@ -251,8 +251,8 @@
                 </div>
 
                 <div class="form-group-sign col-md-6 bio" style="margin-top: 10px">
-                    <label for="biography">Biography</label>
-                    <textarea class="form-control-sign" id="biography" rows="3" name="bio" placeholder="Biography"></textarea>
+                    <label for="biography">@lang('pages.bio')</label>
+                    <textarea class="form-control-sign" id="biography" rows="3" name="bio" ></textarea>
                     @error('bio')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -262,9 +262,9 @@
 
             <div class="row">
                 <div class="form-group-sign col-md-5 location-1">
-                    <label for="location" class="label-inline">Location</label>
+                    <label for="location" class="label-inline">@lang('pages.location')</label>
                     <input type="text" class="form-control-sign input-inline" id="location" name="location"
-                        placeholder="Add Link" />
+                         />
                     @error('location')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -273,9 +273,9 @@
 
             <div class="row">
                 <div class="form-group-sign col-md-5 id-1">
-                    <label for="emiratesId" class="label-inline">Emirates ID</label>
+                    <label for="emiratesId" class="label-inline">@lang('pages.emirates_id')</label>
                     <input type="text" class="form-control-sign input-inline" id="emiratesId" name="emirates_id"
-                        placeholder="784xxxxxxx" />
+                         />
                     @error('emirates_id')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -288,7 +288,7 @@
             <div class="row">
                 <div class="form-group-sign file-upload col-md-5 id-front">
                     <label for="front" class="label-inline">
-                        Upload Emirates ID front
+                        @lang('pages.emirates_front')
                         <i class="fas fa-upload icon-upload-sign"></i>
                     </label>
                     <input type="file" id="front" name="front_emirates_id" class="form-control-file input-inline"
@@ -303,7 +303,7 @@
             <div class="row id-back">
                 <div class="form-group-sign file-upload col-md-5" style="height: 50px">
                     <label for="back" class="label-inline">
-                        Upload Emirates ID back
+                        @lang('pages.emirates_back')
                         <i class="fas fa-upload icon-upload-sign"></i>
                     </label>
                     <input type="file" id="back" class="form-control-file input-inline" accept="image/*"

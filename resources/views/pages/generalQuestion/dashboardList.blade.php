@@ -3,8 +3,8 @@
     {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content ">
             <div class="header-documents-dashboard">
-                <h2>General Questions</h2>
-                <span class="num-document">Total {{ $num_questions }} </span>
+                <h2>@lang('pages.questions')</h2>
+                <span class="num-document">@lang('pages.total') {{ $num_questions }} </span>
 
             </div>
 
@@ -26,7 +26,7 @@
             </div>
             @role('translation_company')
             <div class="d-flex justify-content-end">
-                <a href="{{ route('create_general_question') }}" class="btn-post-GQ-company">post a question</a>
+                <a href="{{ route('create_general_question') }}" class="btn-post-GQ-company">@lang('pages.post_question')</a>
             </div>
             @endrole
         </div>

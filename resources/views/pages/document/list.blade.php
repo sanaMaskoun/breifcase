@@ -3,13 +3,13 @@
 @section('profile_content')
 <div class="box-profile-1 ">
     <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'Consultations')">Consultations</button>
-        <button class="tablinks" onclick="openCity(event, 'Cases')">Cases</button>
-        <button class="tablinks" onclick="openCity(event, 'request')">Request</button>
+        <button class="tablinks" onclick="openCity(event, 'Consultations')">@lang('pages.consultations') </button>
+        <button class="tablinks" onclick="openCity(event, 'Cases')">@lang('pages.cases') </button>
+        <button class="tablinks" onclick="openCity(event, 'request')">@lang('pages.translateFile') </button>
     </div>
     <div class="search-status mt-2">
         <input value="{{ request('search') }}" name="search" type="text"
-            class="form-control form-input input-search-status" id="statusSearch" placeholder="Enter status" />
+            class="form-control form-input input-search-status" id="statusSearch" placeholder="@lang('pages.status')" />
     </div>
 
     <div id="Consultations" class="tabcontent">

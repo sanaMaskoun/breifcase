@@ -6,36 +6,36 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="form-container-template">
-                            <div class="form-title-template">Upload Template</div>
+                            <div class="form-title-template">@lang('pages.case_details')</div>
                             <form action="{{ route('store_case' ,[base64_encode($template->id) , $receiver_encode_id]) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="title">Case Title</label>
+                                    <label for="title">@lang('pages.case_title')</label>
                                     <input type="text" class="form-control" id="title" name="title"
-                                        placeholder="Enter template title">
+                                        placeholder="@lang('pages.enter_case_title')">
                                     @error('title')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="description">@lang('pages.description')</label>
                                     <input type="text" class="form-control" id="description" name="description"
-                                        placeholder="Enter case description">
+                                        placeholder="@lang('pages.enter_case_description')">
                                     @error('description')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="price">price</label>
+                                    <label for="price">@lang('pages.price')</label>
                                     <input type="text" class="form-control" id="price" name="price"
-                                        placeholder="Enter case price">
+                                        placeholder="@lang('pages.enter_case_price')">
                                     @error('price')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="template">Template</label>
+                                    <label for="template">@lang('pages.template')</label>
 
                                     @php
                                         $media_url = $template->getFirstMediaUrl('template');
@@ -58,7 +58,7 @@
                                     @endif
                                 </div>
 
-                                <button type="submit" class="btn-store-template  btn-block">save</button>
+                                <button type="submit" class="btn-store-template  btn-block">@lang('pages.save')</button>
                             </form>
                         </div>
                     </div>

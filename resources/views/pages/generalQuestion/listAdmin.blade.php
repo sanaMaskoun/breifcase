@@ -3,8 +3,8 @@
     {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content ">
             <div class="header-documents-dashboard">
-                <h2>General Questions</h2>
-                <span class="num-document">Total {{ $num_questions }} </span>
+                <h2>@lang('pages.questions')</h2>
+                <span class="num-document">@lang('pages.total') {{ $num_questions }} </span>
 
             </div>
 

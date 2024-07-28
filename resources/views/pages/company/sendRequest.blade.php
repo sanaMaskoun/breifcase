@@ -2,19 +2,19 @@
 @section('form_document')
     <div class="col-lg-6 col-md-12 col-sm-12">
         <div class="card box  card-1 card_send_consultation">
-            <p> Leave your requirements for the company</p>
+            <p> @lang('pages.title_page_send_request')</p>
 
             <form method="POST" action="{{ route('store_request', base64_encode($company->id)) }}"
                 enctype="multipart/form-data">
                 @csrf
                 <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
-                    <input type="text" name="title" class="title-consultation" placeholder="Title">
+                    <input type="text" name="title" class="title-consultation" placeholder="@lang('pages.title')">
                     @error('title')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center text-Questions">
-                    <textarea name="description" placeholder=" write requirements for the company"></textarea>
+                    <textarea name="description" placeholder=" @lang('pages.description_page_send_request')"></textarea>
                     @error('description')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
@@ -22,7 +22,7 @@
 
 
                 <div class="col-md-12 form-group upload-documents">
-                    <label for="upload_document">Upload Documents:</label>
+                    <label for="upload_document">@lang('pages.upload_document')</label>
                     <label for="upload_document" class="upload-icon">
                         <i class="bx bx-upload icon-sign"></i>
                     </label>
@@ -50,10 +50,10 @@
                 </div>
 
 
-                <p> in case of not recieving a reply in 72 hours your money will be refunded to your account. </p>
+                <p> @lang('pages.rejected_document') </p>
 
                 <div class="col-md-12 d-flex justify-content-center btn">
-                    <button type="submit" class="btn1">Pay & Send</button>
+                    <button type="submit" class="btn1">@lang('pages.pay_send')</button>
                 </div>
 
             </form>

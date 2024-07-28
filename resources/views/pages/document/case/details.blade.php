@@ -1,15 +1,15 @@
 @extends('master.app')
 @section('content')
 
-    
+
     <div class="container mt-5">
         <div class="card-case">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 mt-5 ">
-                        <p class="title-consultation-details">Title: {{ $case->title }}</p>
-                        <p class="description-consultation-details">Description: {{ $case->description }}</p>
-                        <p>price: {{ $case->price }} </p>
+                        <p class="title-consultation-details">@lang('pages.title') {{ $case->title }}</p>
+                        <p class="description-consultation-details">@lang('pages.description'): {{ $case->description }}</p>
+                        <p>@lang('pages.price'): {{ $case->price }} </p>
                         <p>{{ $case->sender->name }}</p>
                         <span class="d-flex justify-content-end">{{ $case->created_at->format('Y/m/d') }}</span>
 
@@ -27,14 +27,10 @@
                                 <a href="{{ $mediaUrl }}" target="_blank">
                                     <img alt="PDF file" class="template-case" src="{{ asset('assets/img/pdf.jpg') }}">
                                 </a>
-                            @elseif (
-                                $mimeType === 'application/msword' ||
-                                    $mimeType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+                            @else
                                 <a href="{{ $mediaUrl }}" target="_blank">
                                     <img alt="Word file" class="template-case" src="{{ asset('assets/img/word.png') }}">
                                 </a>
-                            @else
-                                <p>File format not supported.</p>
                             @endif
                             @role('client')
                                 @if (
@@ -59,12 +55,12 @@
                                             <small class="form-text text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-                                    <button type="submit" class="btn btn-success mr-2">Accept</button>
+                                    <button type="submit" class="btn btn-success mr-2">@lang('pages.accept')</button>
                                 </form>
                                 <form action="{{ route('reject_case', base64_encode($case->id)) }}" method="POST"
                                     class="d-inline-block">
                                     @csrf
-                                    <button type="submit" class="btn btn-danger">Reject</button>
+                                    <button type="submit" class="btn btn-danger">@lang('pages.reject')</button>
                                 </form>
                             </div>
                         @endrole

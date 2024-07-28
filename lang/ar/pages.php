@@ -48,17 +48,19 @@ return [
 
     // header (sidebar)
     'dashboard'                 => 'لوحة التحكم',
-    'consultation'              => 'الاستشارات',
-    'general_question'          => 'الأسئلة العامة',
-    'practiece'                 => 'الإختصاصات',
+    'practieces'                 => 'الإختصاصات',
     'requests_to_join'          => 'طلبات الانضمام',
-    'suggestion'                => 'الإقتراحات',
+    'news'                      => 'الأخبار',
     'chats'                      => 'المحادثات',
     'invoices'                   => 'الفواتير',
     'translateFile'              => 'ملفات الترجمة',
+    'templates'                  => 'القوالب',
+    'reviews'                    =>'التعليقات',
 
 
-    
+
+
+
      //bills
      'bills'                       => 'الفواتير والإيصالات',
      'total'                       => 'الكلي',
@@ -71,7 +73,7 @@ return [
      'search'                    => 'البحث',
 
 
-     
+
      // button
      'update_info'              =>'تعديل البيانات',
 
@@ -89,7 +91,7 @@ return [
       'send'                    => 'إرسال',
 
 
-      //join 
+      //join
       'welcome_join'            => 'أهلا بك في مجتمعنا',
       'name'                    => 'الاسم',
       'email'                   => 'الايميل',
@@ -111,6 +113,145 @@ return [
       'bio'                     =>'السيرة الذاتية',
       'upload_license'           =>'تحميل الترخيصات',
       'land_line'                =>'الخط الأرضي',
+      'languages'                =>'اللغات',
+      'upload_certifications'     =>'تحميل الشهادات',
+      'translation_price'         =>'سعر الترجمة',
+      'available'                 =>'ضع علامة في المربع إذا كان العملاء سيتمكنون من الوصول إليك 24/7',
+      'licenses'                    => 'الترخيصات',
+
+
+
+
+      //send translation file
+      'title_page_send_request'                  =>   'اترك متطلباتك للشركة',
+      'description_page_send_request'             =>   'كتابة متطلبات الشركة',
+      'upload_document'                          => 'تحميل الملف' ,
+      'rejected_document'                        =>'في حالة عدم تلقي الرد خلال 72 ساعة سيتم إرجاع أموالك إلى حسابك.',
+      'pay_send'                                 => 'الإرسال والدفع',
+
+
+       //show translation company
+       'page_price'                               => 'درهم / صفحة',
+       'send_request'                             => 'إرسال الطلب',
+       'contact'                                  => 'التواصل',
+
+
+        //dashboard
+        'profits'                         => 'الربح الصافي',
+        'AED'                            => 'درهم',
+        'suggestions'                      => 'الإقتراحات',
+        'analysis_profit'                  => 'تحليل هامش الربح',
+        'gross_profit'                     =>'هامش الربح الإجمالي',
+        'net_profit'                     =>'هامش صافي الربح',
+        'monthly_revenue'                =>'الإيرادات الشهرية',
+        'highest_revenue'                =>'أعلى اتجاه للإيرادات مع مرور الوقت',
+        'cases'                          => 'القضايا',
+        'case'                           => 'القضية',
+        'consultations'                  => 'الإستشارات',
+        'consultation'                  => 'الإستشارة',
+        'questions'                     => ' الأسئلة العامة',
+        'question'                     => 'السؤال العام',
+
+
+          //request to join
+       'persons'                     =>'الأشخاص',
+
+
+       //nav client
+       'documents'                    =>'المستندات',
+
+
+       // details case
+       'lawyer_name'                => 'اسم المحامي',
+       'client_name'                => 'اسم الزبون',
+       'description'                => 'الوصف',
+       'shared_documents'           =>'الوثائق المشاركة',
+      'communication'                => 'التواصل' ,
+      'response_time'                => 'وقت الاستجابة',
+      'problem_solving'              => 'حل المشاكل',
+      'understanding'                => 'التفهّم',
+       'comment'                      => 'التعليق',
+
+
+        //create case
+        'case_details'                  => 'تفاصيل القضية',
+        'case_title'                    =>'عنوان القضية',
+        'enter_case_title'              =>'ادخل عنوان القضية',
+        'enter_case_price'               => 'ادخل سعر القضية',
+        'enter_case_description'              =>'ادخل وصف القضية',
+
+        'template'                      =>'القالب',
+        'save'                             =>'حفظ',
+        'price'                         => 'السعر',
+
+
+
+
+        //details case
+        'reject'                      => 'رفض',
+        'accept'                      => 'قبول',
+
+
+        //show cas
+            'closed_case'                 =>'إغلاق القضية',
+            'payment_approval'            => 'الموافقة على الدفع',
+
+         //consultatin details
+         'consultation_details'        =>'تفاصيل الإستشارة',
+
+
+         //create consultation
+         'title_page_consultation'   =>'اكتب بالتفصيل ما تحتاج إلى استشارة بشأنه',
+
+
+           //show consultation
+           'answer'                    => 'الرد',
+           'closed_consultation'       =>'إغلاق الاستشارة',
+
+
+
+         //general chat
+         'add_members'         => 'إضافة اعضاء',
+         'name_forum'          =>'ادخل اسم المنتدى',
+         'create'              => 'إنشاء',
+         'update'              => 'تعديل',
+
+
+         //general question
+         //create
+         'title_write_question'                    =>'اكتب سؤالك العام هنا',
+         'write_question'                           =>'اكتب السؤال العام',
+         'first_description'                        => 'لن يظهر اسمك في صفحة الأسئلة العامة',
+         'second_description'                        => 'قد يتم الرد على سؤالك أو لا يتم الرد عليه ',
+         'btn_post'                                  => 'نشر',
+         'post_question'                             =>'نشر السؤال',
+         'answer_question'                           => 'الرد على السؤال',
+         'write_answer'                              => 'اكتب الرد هنا ...',
+
+
+
+
+           //group
+           'name_group'                                => 'ادخل اسم الكروب',
+
+
+           //invoice
+           'invoice_id'                              => 'رقم الفاتورة',
+           'invoice_value'                              => 'قيمة الفاتورة',
+           'sender'                              => 'المرسل',
+           'receiver'                              => 'المستقبل',
+           'document_title'                              => 'عنوان الملف',
+           'created_at'                                  => 'أنشئت في',
+
+         //lang
+         'add_lang'                           => 'إضافة لغة',
+
+
+         //lawyer
+         'years_of_practice'             => 'عدد سنوات الخبرة',
+         'consultation_price'            => 'سعر الاستشارة',
+         'top_expertise'                 =>'أعلى الخبرات/الممارسات',
+         'available_24'                     =>'متاح 24/7',
 
 
 
@@ -119,10 +260,22 @@ return [
 
 
 
-      
-//nav client 
-'documents'                    =>'المستندات',
-'questions'                    => 'الأسئلة',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -131,7 +284,7 @@ return [
     'file'                      => 'الملفات',
 
 
-    
+
 
      // clients details
       'client_details'               => 'تفاصيل الزبون',
@@ -202,8 +355,8 @@ return [
       'gender'                        => 'الجنس',
       'fimale'                        => 'انثى',
       'male'                          => 'ذكر',
-      'date_of_birth'                 => 'تاريخ الميلاد',
-      'consultation_price'            => 'سعر الاستشارة',
+      'date_of_birth'                 => 'تاريخ الميلاد',      'consultation_price'            => 'سعر الاستشارة',
+
       'non_active'                    => 'غير نشط',
       'active'                        => 'نشط',
       'location'                      => 'الموقع',
@@ -229,8 +382,6 @@ return [
       'practice_information'          => 'معلومات التخصص',
       'action'                        => 'العمليات',
 
-       // Suggestions
-       'list_suggestions'              => 'لائحة الإقتراحات',
 
 
        //dashboard admin

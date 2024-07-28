@@ -2,10 +2,10 @@
 @section('dashboard')
 {{--  <div class="col-lg-9 col-md-1">  --}}
     <div class="content">
-        <h2>Translation companies</h2>
+        <h2> @lang('pages.companies')</h2>
         <div class="search-status mt-2">
             <input value="{{ request('search') }}" name="search" type="text" class="form-control form-input input-search-status"
-                id="companySearch" placeholder="Enter name" />
+                id="companySearch" placeholder=" @lang('pages.name_search')" />
         </div>
         <div class="container">
             <div class="row">

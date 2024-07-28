@@ -3,8 +3,8 @@
     {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content ">
             <div class="header-documents-dashboard">
-                <h2>Languages</h2>
-                <span class="num-documents">Total {{ $num_languages }} </span>
+                <h2>@lang('pages.languages')</h2>
+                <span class="num-documents">@lang('pages.total') {{ $num_languages }} </span>
 
             </div>
 
@@ -29,7 +29,7 @@
                     @csrf
                     <button type="submit" class="btn_download_book">
                         <i class="fas fa-upload upload-icon-template"></i>
-                        add language
+                        @lang('pages.add_lang')
                     </button>
 
                 </form>

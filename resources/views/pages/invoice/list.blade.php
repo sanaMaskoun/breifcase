@@ -4,7 +4,7 @@
     <div class="box-profile-1 ">
         <div class="search-status mt-2">
             <input value="{{ request('search') }}" name="search" type="text"
-                class="form-control form-input input-search-status" id="statusSearch" placeholder="Enter status" />
+                class="form-control form-input input-search-status" id="statusSearch" placeholder="@lang('pages.status')" />
         </div>
         <div class="details">
 

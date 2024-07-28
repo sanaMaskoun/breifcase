@@ -15,9 +15,10 @@
                 </div>
             @endif
             <div class="header-documents-dashboard">
-                <h2>consultation Details </h2>
+                <h2>@lang('pages.consultation_details') </h2>
                 <div class="status-consultation {{ strtolower($status_texts[$consultation->status]) }}">
-                    {{ $status_texts[$consultation->status] }}
+                    @lang('EnumFile.' . $status_texts[$consultation->status])
+
                 </div>
 
             </div>
@@ -43,7 +44,7 @@
                             </div>
 
                             <div class="d-flex justify-content-center mt-2">
-                                <button class="answer-consultation">answer</button>
+                                <button class="answer-consultation">@lang('pages.answer')</button>
 
                             </div>
                         </form>
@@ -55,8 +56,8 @@
             </div>
             <div class="d-flex justify-content-between">
                 <a href="{{ route('bill_show', base64_encode($consultation->invoice->id)) }}" class="btn-bill">
-                    Bill and Receipt
-                </a>
+                    @lang('pages.bills')
+                            </a>
                 @role('lawyer')
                     @if ($status_texts[$consultation->status] === 'Ongoing')
                         <form id="close-consultation-form-{{ $consultation->id }}" method="POST"
@@ -67,7 +68,7 @@
 
                         <a href="#" class="btn-close-consultation"
                             onclick="event.preventDefault(); document.getElementById('close-consultation-form-{{ $consultation->id }}').submit();">
-                            Close the consultation
+                            @lang('pages.closed_consultation')
                         </a>
                     @endif
                 @endrole
@@ -80,7 +81,7 @@
 
                         <a href="#" class="btn-close-document"
                             onclick="event.preventDefault(); document.getElementById('close-case-form-{{ $consultation->id }}').submit();">
-                            Payment approval
+                            @lang('pages.payment_approval')
                         </a>
                     @endif
                 @endrole

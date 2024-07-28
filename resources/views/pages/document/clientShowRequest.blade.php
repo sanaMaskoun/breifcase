@@ -4,18 +4,18 @@
         <div class="d-flex justify-content-between">
             <h2>{{ $request->title }}</h2>
             <div class="status-consultation {{ strtolower($status_texts[$request->status]) }}">
-                {{ $status_texts[$request->status] }}
+                @lang('EnumFile.' . $status_texts[$request->status])
             </div>
         </div>
 
         <div class=" ml-3">
-            <h6>Lawyer name: <span>{{ $request->sender->name }}</span></h6>
-            <h6>Client name: {{ $request->receiver->name }}</h6>
-            <h6>Description: {{ $request->description }}</h6>
+            <h6>@lang('pages.lawyer_name') <span>{{ $request->sender->name }}</span></h6>
+            <h6>@lang('pages.client_name') : {{ $request->receiver->name }}</h6>
+            <h6>@lang('pages.description') : {{ $request->description }}</h6>
             <br>
             <br>
             <div class=" text-center">
-                <h5>Shared Documents</h5>
+                <h5>@lang('pages.shared_documents') </h5>
 
             </div>
 
@@ -48,7 +48,7 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="communication">Communication:</label>
+                            <label for="communication">@lang('pages.communication') :</label>
                             <div id="communication-rating" class="star-rating">
                                 <span class="star" data-value="1">&#9733;</span>
                                 <span class="star" data-value="2">&#9733;</span>
@@ -59,7 +59,7 @@
                             <input type="hidden" name="communication" id="communication" value="0">
                         </div>
                         <div class="form-group">
-                            <label for="response_time">Response Time:</label>
+                            <label for="response_time">@lang('pages.response_time') :</label>
                             <div id="response_time-rating" class="star-rating">
                                 <span class="star" data-value="1">&#9733;</span>
                                 <span class="star" data-value="2">&#9733;</span>
@@ -70,7 +70,7 @@
                             <input type="hidden" name="response_time" id="response_time" value="0">
                         </div>
                         <div class="form-group">
-                            <label for="problem_solving">Problem Solving:</label>
+                            <label for="problem_solving">@lang('pages.problem_solving') :</label>
                             <div id="problem_solving-rating" class="star-rating">
                                 <span class="star" data-value="1">&#9733;</span>
                                 <span class="star" data-value="2">&#9733;</span>
@@ -82,7 +82,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="understanding">Understanding:</label>
+                            <label for="understanding">@lang('pages.understanding') :</label>
                             <div id="understanding-rating" class="star-rating">
                                 <span class="star" data-value="1">&#9733;</span>
                                 <span class="star" data-value="2">&#9733;</span>
@@ -94,16 +94,16 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="comment">Comment:</label>
+                            <label for="comment">@lang('pages.comment') :</label>
                             <textarea name="comment" id="comment" rows="4" class="form-control"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-feedback ">Submit Feedback</button>
+                        <button type="submit" class="btn btn-feedback ">@lang('pages.send') </button>
                     </form>
                 </div>
             @endif
             <div class="d-flex justify-content-end">
                 <a href="{{ route('show_client_invoices', base64_encode($request->invoice?->id)) }}" class="btn-bill ">
-                    Bill and Receipt
+                    @lang('pages.bills')
                 </a>
 
 

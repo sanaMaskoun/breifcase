@@ -3,7 +3,7 @@
 
     {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content ">
-            <h1 class="my-4">Reviews</h1>
+            <h1 class="my-4">@lang('pages.reviews')</h1>
             <div class="row">
 
                 @foreach ($rates as $rate )

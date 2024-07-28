@@ -4,7 +4,7 @@
 <body>
     <div class="row">
         <div class="col-md-6">
-            <h3 class="add-member"><i class="fas fa-user-plus"></i> Add Members</h3>
+            <h3 class="add-member"><i class="fas fa-user-plus"></i> @lang('pages.add_members')</h3>
             <ul class="user-list-create-group" id="userList">
                 @foreach ($users as $user)
                     <li data-id="{{ $user->id }}" data-name="{{ $user->name }}"><i class="fas fa-user"></i>{{ $user->name }} <i class="fas fa-comment-dots ml-auto"></i></li>
@@ -36,7 +36,7 @@
 
                 <div class="d-flex justify-content-center">
                     <div class="create-button">
-                        <button type="submit" class="btn">Update</button>
+                        <button type="submit" class="btn">@lang('pages.update')</button>
                     </div>
                 </div>
             </form>

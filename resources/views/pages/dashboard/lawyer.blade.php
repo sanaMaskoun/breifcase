@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-12">
-                        <p class="p-dash">Revenue: {{ $revenues }} AED <br> Profit: {{ $profits }} AED</p>
+                        <p class="p-dash">@lang('pages.revenue'): {{ $revenues }} @lang('pages.AED') <br> @lang('pages.profits'): {{ $profits }} @lang('pages.AED') </p>
                     </div>
                 </div>
                 <div class="row">
@@ -21,11 +21,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="legend mt-3">
-                                    <span class="span-1">&#9679;</span> Cases {{ $cases }} <br>
-                                    <span class="span-2">&#9679; </span>Consultation {{ $consultations }} <br>
-                                    <span class="span-3">&#9679; </span>General Question {{ $replies }} <br>
+                                    <span class="span-1">&#9679;</span> @lang('pages.cases')  {{ $cases }} <br>
+                                    <span class="span-2">&#9679; </span>@lang('pages.consultations') {{ $consultations }} <br>
+                                    <span class="span-3">&#9679; </span>@lang('pages.questions') {{ $replies }} <br>
                                 </div>
-                                <a href="{{ route('bills_dashboard') }}" id="billsButton" >Bills and Receipts</a>
+                                <a href="{{ route('bills_dashboard') }}" id="billsButton" >@lang('pages.bills')</a>
                             </div>
 
                         </div>
@@ -33,16 +33,16 @@
                     <div class="col-md-4">
                         <div class="card-dash mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">Profit Margin Analysis</h5>
+                                <h5 class="card-title">@lang('pages.analysis_profit')</h5>
                                 <canvas id="profitMarginChart" class="canvas"></canvas>
-                                <p class="mt-2">Gross Profit Margin: {{ $percentage_of_profits == 0  ? 0 : 100 - number_format( $percentage_of_profits ,1) }}%<br>Net Profit Margin: {{ number_format( $percentage_of_profits ,1) }}%</p>
+                                <p class="mt-2">@lang('pages.gross_profit'): {{ $percentage_of_profits == 0  ? 0 : 100 - number_format( $percentage_of_profits ,1) }}%<br>@lang('pages.net_profit'): {{ number_format( $percentage_of_profits ,1) }}%</p>
                             </div>
 
                         </div>
                         <div class=" mb-4 card-dash">
                             <div class="card-body">
-                                <h5 class="card-title">Monthly Revenue</h5>
-                                <p>Highest Revenue Trend Over Time:{{ $max_revenue }} ({{ $max_revenue_month }})</p>
+                                <h5 class="card-title">@lang('pages.monthly_revenue')</h5>
+                                <p>@lang('pages.highest_revenue'):{{ $max_revenue }} ({{ $max_revenue_month }})</p>
                             </div>
                         </div>
 

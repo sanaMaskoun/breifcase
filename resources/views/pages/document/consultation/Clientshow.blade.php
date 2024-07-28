@@ -3,9 +3,10 @@
     <div class="container box-profile-1 ">
         <div class="d-flex justify-content-between">
 
-            <h2>consultation Details </h2>
+            <h2>@lang('pages.consultation_details') </h2>
             <div class="status-consultation {{ strtolower($status_texts[$consultation->status]) }}">
-                {{ $status_texts[$consultation->status] }}
+                @lang('EnumFile.' . $status_texts[$consultation->status])
+
             </div>
         </div>
 
@@ -32,7 +33,7 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="communication">Communication:</label>
+                        <label for="communication">@lang('pages.communication'):</label>
                         <div id="communication-rating" class="star-rating">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
@@ -43,7 +44,7 @@
                         <input type="hidden" name="communication" id="communication" value="0">
                     </div>
                     <div class="form-group">
-                        <label for="response_time">Response Time:</label>
+                        <label for="response_time">@lang('pages.response_time'):</label>
                         <div id="response_time-rating" class="star-rating">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
@@ -54,7 +55,7 @@
                         <input type="hidden" name="response_time" id="response_time" value="0">
                     </div>
                     <div class="form-group">
-                        <label for="problem_solving">Problem Solving:</label>
+                        <label for="problem_solving">@lang('pages.problem_solving'):</label>
                         <div id="problem_solving-rating" class="star-rating">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
@@ -66,7 +67,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="understanding">Understanding:</label>
+                        <label for="understanding">@lang('pages.understanding'):</label>
                         <div id="understanding-rating" class="star-rating">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
@@ -78,17 +79,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="comment">Comment:</label>
+                        <label for="comment">@lang('pages.comment'):</label>
                         <textarea name="comment" id="comment" rows="4" class="form-control"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-feedback ">Submit Feedback</button>
+                    <button type="submit" class="btn btn-feedback ">@lang('pages.send')</button>
                 </form>
             </div>
         @endif
         <div class="d-flex justify-content-end">
             <a href="{{ route('show_client_invoices', base64_encode($consultation->invoice->id)) }}" class="btn-bill">
-                Bill and Receipt
-            </a>
+                @lang('pages.bills')
+                        </a>
         </div>
 
 

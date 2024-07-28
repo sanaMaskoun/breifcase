@@ -26,7 +26,7 @@
                         <div class="col-lg-8 col-md-12 col-sm-12 mt-3 ">
                             <h3>{{ $client->name }}</h3>
                             <span class="span">{{ $client->gender == 1 ? __('EnumFile.male') : __('EnumFile.female') }}  -
-                                {{ $client->client->occupation }} - {{ __('EnumFile.city_' . $city) }}</span>
+                                {{ $client->client->occupation }} - {{ __('EnumFile' . $city) }}</span>
                         </div>
                         <form action="{{ route('update_client', $client->id) }}" method="POST">
                             @csrf

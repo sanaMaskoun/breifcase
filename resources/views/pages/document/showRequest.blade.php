@@ -5,18 +5,18 @@
             <div class="d-flex justify-content-between">
                 <h2>{{ $request->title }}</h2>
                 <div class="status-consultation {{ strtolower($status_texts[$request->status]) }}">
-                    {{ $status_texts[$request->status] }}
+                    @lang('EnumFile.' . $status_texts[$request->status])
                 </div>
             </div>
 
             <div class="case-details-content ml-3">
-                <h6>Lawyer name: <span>{{ $request->sender->name }}</span></h6>
-                <h6>Client name: {{ $request->receiver->name }}</h6>
-                <h6>Description: {{ $request->description }}</h6>
+                <h6>@lang('pages.lawyer_name') : <span>{{ $request->sender->name }}</span></h6>
+                <h6>@lang('pages.client_name') : {{ $request->receiver->name }}</h6>
+                <h6>@lang('pages.description') : {{ $request->description }}</h6>
                 <br>
                 <br>
                 <div class="col-md-3 text-center">
-                    <h5>Shared Documents</h5>
+                    <h5>@lang('pages.shared_documents') </h5>
 
                 </div>
 
@@ -45,8 +45,8 @@
 
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('bill_show', base64_encode($request->invoice?->id)) }}" class="btn-bill ">
-                        Bill and Receipt
-                    </a>
+                        @lang('pages.bills')
+                                      </a>
                 </div>
 
 

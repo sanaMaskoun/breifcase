@@ -25,7 +25,7 @@
                     <div class="col-md-7">
                         <div class=" row">
                             <div class="col-lg-5">
-                                <label for="name" class="label-lawyer-details">Company Name</label>
+                                <label for="name" class="label-lawyer-details">@lang('pages.company_name')</label>
                             </div>
                             <div class="col-lg-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details" id="name" name="name"
@@ -35,7 +35,7 @@
 
                         <div class="row">
                             <div class="col-lg-5">
-                                <label for="email" class="label-lawyer-details">Email</label>
+                                <label for="email" class="label-lawyer-details">@lang('pages.email')</label>
                             </div>
                             <div class="col-lg-7  mb-2">
                                 <input type="email" class="form-control-lawyer-details " id="email" name="email"
@@ -46,7 +46,7 @@
 
                         <div class=" row">
                             <div class="col-lg-5">
-                                <label for="phone" class=" label-lawyer-details">Mobile Number</label>
+                                <label for="phone" class=" label-lawyer-details">@lang('pages.phone')</label>
                             </div>
                             <div class="col-lg-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="phone" name="phone"
@@ -56,7 +56,7 @@
 
                         <div class=" row">
                             <div class="col-lg-5">
-                                <label for="land_line" class=" label-lawyer-details">Land Line</label>
+                                <label for="land_line" class=" label-lawyer-details">@lang('pages.land_line')</label>
                             </div>
                             <div class="col-lg-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="land_line" name="land_line"
@@ -66,26 +66,26 @@
 
                         <div class=" row">
                             <div class="col-lg-5">
-                                <label for="country" class=" label-lawyer-details">Country</label>
+                                <label for="country" class=" label-lawyer-details">@lang('pages.country')</label>
                             </div>
                             <div class="col-lg-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="country" name="country"
-                                    value="{{ $country }}" readonly />
+                                    value="{{ __('EnumFile' . $country) }}" readonly />
                             </div>
                         </div>
                         <div class=" row">
                             <div class="col-lg-5">
-                                <label for="city" class=" label-lawyer-details">City</label>
+                                <label for="city" class=" label-lawyer-details">@lang('pages.city')</label>
                             </div>
                             <div class="col-lg-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="city" name="city"
-                                    value="{{ $city }}" readonly />
+                                    value="{{ __('EnumFile' . $city) }}" readonly />
                             </div>
                         </div>
 
                         <div class=" row">
                             <div class="col-lg-5">
-                                <label for="location" class=" label-lawyer-details">Location</label>
+                                <label for="location" class=" label-lawyer-details">@lang('pages.location')</label>
                             </div>
                             <div class="col-lg-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details" id="location" name="location"
@@ -95,8 +95,9 @@
 
                         <div class=" row">
                             <div class="col-lg-5">
-                                <label for="consultation_price" class=" label-lawyer-details">Translation
-                                    Price</label>
+                                <label for="consultation_price" class=" label-lawyer-details">
+                                    @lang('pages.translation_price')
+                                </label>
                             </div>
                             <div class="col-lg-7 mb-2">
                                 <input type="text" class="form-control-lawyer-details" id="consultation_price"
@@ -105,7 +106,7 @@
                         </div>
 
                         <div class="mb-2">
-                            <p class="font-weight-bold title-details-lawyer"> Licenses</p>
+                            <p class="font-weight-bold title-details-lawyer"> @lang('pages.licenses')</p>
                             <div class="image-upload container-img-details-lawyer">
                                 @foreach ($company->lawyer->getMedia('license') as $license)
                                     <img src="{{ $license->getUrl() }}" alt="License"
@@ -115,7 +116,7 @@
                         </div>
 
                         <div class="mb-2">
-                            <p class="font-weight-bold title-details-lawyer"> certifications</p>
+                            <p class="font-weight-bold title-details-lawyer">  @lang('pages.certifications')</p>
                             <div class="image-upload container-img-details-lawyer">
                                 @foreach ($company->lawyer->getMedia('certification') as $certification)
                                     <img src="{{ $certification->getUrl() }}" alt="certification"
@@ -131,7 +132,7 @@
 
 
                         <div class="mb-2">
-                            <p class="font-weight-bold title-details-lawyer">Languages</p>
+                            <p class="font-weight-bold title-details-lawyer"> @lang('pages.languages')</p>
                             <ul class="list-unstyled">
                                 <div class="practices-languages-details">
                                     @foreach ($company->languages as $language)
@@ -142,7 +143,7 @@
                         </div>
 
                         <div class="mb-2">
-                            <label for="bio" class="col-sm-4 col-form-label">Biography</label>
+                            <label for="bio" class="col-sm-4 col-form-label"> @lang('pages.bio')</label>
                             <textarea readonly class="form-control bio-details-lawyer" id="bio" name="bio">{{ $company->lawyer->bio }}</textarea>
                         </div>
                     </div>

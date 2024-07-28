@@ -31,7 +31,7 @@
                         <div class="row">
 
                             <div class="col-12">
-                                <h2 class="text-center">LAWYERS</h2>
+                                <h2 class="text-center">@lang('pages.lawyers')</h2>
                             </div>
 
                             @foreach ($question->replies as $reply)

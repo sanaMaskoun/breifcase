@@ -82,7 +82,7 @@
                             <label for="country" class="col-sm-3  label-lawyer-details">@lang('pages.country')</label>
                             <div class="col-sm-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="country" name="country"
-                                value="{{ __('EnumFile.country' . $country) }}" readonly />
+                                value="{{ __('EnumFile' . $country) }}" readonly />
                             </div>
                         </div>
 
@@ -90,7 +90,7 @@
                             <label for="city" class="col-sm-3  label-lawyer-details">@lang('pages.city')</label>
                             <div class="col-sm-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="city" name="city"
-                                value="{{ __('EnumFile.city_' . $city) }}" readonly />
+                                value="{{ __('EnumFile' . $city) }}" readonly />
                             </div>
                         </div>
                         <div class=" row">

@@ -114,7 +114,7 @@
                                         <option value="100">@lang('EnumFile.dubai')</option>
                                         <option value="101">@lang('EnumFile.abu_dhabi')</option>
                                         <option value="102">@lang('EnumFile.ajman')</option>
-                                        <option value="103">RA@lang('EnumFile.rak')K</option>
+                                        <option value="103">@lang('EnumFile.rak')</option>
                                         <option value="104">@lang('EnumFile.fujairah')</option>
                                         <option value="105">@lang('EnumFile.um_alq')</option>
                                         <option value="106">@lang('EnumFile.sharjah')</option>
@@ -196,7 +196,7 @@
 
 
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <button type="submit" class="btn btn1">@lang('pages.login')</button>
+                                    <button type="submit" class="btn btn1">@lang('pages.sing_up')</button>
                                 </div>
                             </div>
                         </div>
@@ -205,5 +205,5 @@
             </div>
         </div>
     </div>
-    
+
 @endsection

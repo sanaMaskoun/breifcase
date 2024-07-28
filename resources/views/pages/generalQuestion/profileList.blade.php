@@ -15,7 +15,7 @@
         <form action="{{ route('create_general_question') }}" method="GET">
             @csrf
             <div class="col-md-12 ">
-                <button type="submit" class="btn_post_general_question">post a Questions</button>
+                <button type="submit" class="btn_post_general_question">@lang('pages.post_question')</button>
             </div>
         </form>
     </div>

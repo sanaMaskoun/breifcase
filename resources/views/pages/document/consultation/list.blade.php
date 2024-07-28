@@ -3,13 +3,13 @@
     {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content ">
             <div class="header-documents-dashboard">
-                <h2>Consultations</h2>
-                <span class="num-documents">Total {{ $num_consultations }} </span>
+                <h2>@lang('pages.consultations')</h2>
+                <span class="num-documents">@lang('pages.total') {{ $num_consultations }} </span>
 
             </div>
             <div class="search-status mt-2">
                 <input value="{{ request('search') }}" name="search" type="text"
-                    class="form-control form-input input-search-status" id="statusSearch" placeholder="Enter status" />
+                    class="form-control form-input input-search-status" id="statusSearch" placeholder="@lang('pages.status')" />
             </div>
             <div class="list-document-dashboard">
                 @foreach ($consultations as $consultation)

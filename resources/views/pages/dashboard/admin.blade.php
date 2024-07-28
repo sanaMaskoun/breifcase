@@ -18,9 +18,9 @@
                 <div class="row ">
 
                     <div class="col-12">
-                        <p class="p-dash">Profit:
+                        <p class="p-dash">@lang('pages.profits')
                             {{ $profits }}
-                            AED
+                            @lang('pages.AED')
                     </div>
                 </div>
 
@@ -34,13 +34,13 @@
                         <div class="row d-flex justify-content-between">
                             <div class="col-md-6">
                                 <div class="legend mt-3">
-                                    <span class="span-1">&#9679;</span> clients
+                                    <span class="span-1">&#9679;</span> @lang('pages.clients')
                                     {{ $num_clients }}
                                     <br>
-                                    <span class="span-2">&#9679; </span>Lawyers
+                                    <span class="span-2">&#9679; </span>@lang('pages.lawyers')
                                     {{ $num_lawyers }}
                                     <br>
-                                    <span class="span-3">&#9679; </span>translation companies
+                                    <span class="span-3">&#9679; </span>@lang('pages.companies')
                                     {{ $num_companies }}
                                     <br>
                                 </div>
@@ -48,7 +48,7 @@
                             <div>
                                 <a href="{{ route('list_suggestions') }}"> <i class="fas fa-vote-yea"></i>
 
-                                    suggestions
+                                    @lang('pages.suggestion')
                                 </a>
                             </div>
 
