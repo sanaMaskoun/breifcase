@@ -2,7 +2,7 @@
 @section('dashboard')
     {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content">
-            <h2>Template</h2>
+            <h2>@lang('pages.templates')</h2>
             <div class="list-template-dashboard">
                 @foreach ($templates as $template)
                     <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
@@ -48,8 +48,8 @@
                     @csrf
                     <button type="submit" class="btn_download_book">
                         <i class="fas fa-upload upload-icon-template"></i>
-                        Upload Template
-                    </button>
+                        @lang('pages.upload_template')
+                                       </button>
 
                 </form>
             </div>

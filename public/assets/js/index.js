@@ -1,34 +1,30 @@
 
-
-
-// تغير اللغة
 document.addEventListener("DOMContentLoaded", function () {
-  function simulateApiCall() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // هنا يمكن تغيير اللغة التي يتم تلقيها من API
-        const newLanguage = "en"; // أو 'en' لتغيير اللغة الإنجليزية
-        resolve(newLanguage);
-      }, 1000); // محاكاة تأخير API
-    });
-  }
-
-  // وظيفة لتحديث اتجاه الصفحة بناءً على اللغة
-  function updateLanguageDirection(language) {
-    if (language === "ar") {
-      document.body.setAttribute("dir", "rtl");
-      document.documentElement.setAttribute("lang", "ar");
-    } else {
-      document.body.setAttribute("dir", "ltr");
-      document.documentElement.setAttribute("lang", "en");
+    function fetchLanguageFromApi() {
+        return fetch('/api/get-current-language')
+            .then(response => response.json())
+            .then(data => data.language)
+            .catch(error => {
+                console.error('Error fetching language:', error);
+                return 'ar';
+            });
     }
-  }
 
-  // استدعاء API وتحديث الاتجاه بناءً على اللغة المستلمة
-  simulateApiCall().then((newLanguage) => {
-    updateLanguageDirection(newLanguage);
-  });
+    function updateLanguageDirection(language) {
+        if (language === "ar") {
+            document.body.setAttribute("dir", "rtl");
+            document.documentElement.setAttribute("lang", "ar");
+        } else {
+            document.body.setAttribute("dir", "ltr");
+            document.documentElement.setAttribute("lang", "en");
+        }
+    }
+
+    fetchLanguageFromApi().then((newLanguage) => {
+        updateLanguageDirection(newLanguage);
+    });
 });
+
 //
 
 //chat

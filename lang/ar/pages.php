@@ -138,6 +138,7 @@ return [
 
         //dashboard
         'profits'                         => 'الربح الصافي',
+        'revenues'                        =>'الربح الإجمالي',
         'AED'                            => 'درهم',
         'suggestions'                      => 'الإقتراحات',
         'analysis_profit'                  => 'تحليل هامش الربح',
@@ -257,7 +258,49 @@ return [
 
 
 
+          //library
+          'upload_book'              => 'تحميل كتاب',
+          'book_title'                => 'عنوان الكتاب',
+          'enter_book_title'                => 'ادخل عنوان الكتاب',
+          'enter_book_description'                => 'ادخل وصف الكتاب',
+          'upload'                      =>'تحميل',
 
+
+
+           //home
+         'find_lawyer'               => 'ابحث عن المحامي المناسب',
+         'who_looking_lawyer'        =>'على من تبحث؟ محامي الضرائب؟',
+         'lawyer_available'          => 'المحامون متاحون 24/7',
+         'FAQ'                       => 'الاسئلة المتكررة',
+
+
+          //news
+          'add_news'                => 'إضافة خبر',
+          'enter_news_title'        => 'أدخل عنوان الخبر',
+          'short_description'       => 'وصف مختصر',
+          'enter_short_description' => 'أدخل وصفًا مختصرًا للأخبار',
+          'enter_description'       => 'أدخل وصفاً للخبر',
+
+
+           //practice
+         'enter_practice_name'     => 'أدخل اسم التخصص',
+         'enter_practice_description'     => 'أدخل وصف التخصص',
+
+
+         //template
+         'upload_template'          => 'تحميل القالب',
+         'template_title'           => 'عنوان القالب',
+         'enter_template_title'           => 'أدخل عنوان القالب',
+         'upload_file'                => 'تحميل الملف',
+
+
+
+          //thank you
+          'posed_answer'              => 'لقد تم نشر إجابتك',
+
+           //welcome
+         'our_community'                    =>'إلى مجتمعنا',
+         'recieve_email'                       =>  'سوف تتلقى رسالة بريد إلكتروني قريباً',
 
 
 

@@ -3,7 +3,7 @@
     {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content">
             <div class="header-documents-dashboard">
-                <h2>Suggestions </h2>
+                <h2>@lang('pages.suggestions') </h2>
 
             </div>
 

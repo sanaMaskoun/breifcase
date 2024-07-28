@@ -8,10 +8,15 @@ use Illuminate\Support\Facades\Session;
 
 class LangController extends Controller
 {
-    public function setLang($locale)
+    // public function setLang($locale)
+    // {
+    //         App::setLocale($locale);
+    //         Session::put("locale",$locale);
+    //         return redirect()->back();
+    // }
+    public function setLang($lang)
     {
-            App::setLocale($locale);
-            Session::put("locale",$locale);
-            return redirect()->back();
-    }
+        Session::put('locale', $lang);
+        return redirect()->back();
+}
 }

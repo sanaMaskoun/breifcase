@@ -129,7 +129,7 @@ return [
        'profits'                         => 'profits',
        'AED'                            =>'AED',
        'suggestions'                      => 'suggestions',
-       'revenue'                          => 'Revenue',
+       'revenues'                          => 'Revenues',
        'analysis_profit'                  => 'Profit Margin Analysis',
        'gross_profit'                     =>'Gross Profit Margin',
        'net_profit'                     =>'Net Profit Margin',
@@ -237,6 +237,47 @@ return [
          'top_expertise'                 =>'Top Expertise/Practices',
          'available_24'                     =>'Available 24/7',
 
+
+
+         //library
+         'upload_book'              => 'Upload Book',
+         'book_title'                => 'Book Title',
+         'enter_book_title'                => 'Enter book title',
+         'enter_book_description'                => 'Enter book description',
+         'upload'                      =>'upload',
+
+
+         //home
+         'find_lawyer'               => 'Find The Right Lawyer',
+         'who_looking_lawyer'        =>'Who are you looking for? Tax Lawyer?',
+         'lawyer_available'          => 'Lawyers Available 24/7',
+         'FAQ'                       =>'FAQ',
+
+         //news
+         'add_news'                => 'Add News',
+         'enter_news_title'        => 'Enter news title',
+         'short_description'       => 'Short description',
+         'enter_short_description' => 'Enter news short description',
+         'enter_description'       => 'Enter news description',
+
+
+         //practice
+         'enter_practice_name'     => 'Enter practice name',
+         'enter_practice_description'     => 'Enter practice description',
+
+
+         //template
+         'upload_template'          => 'Upload Template',
+         'template_title'           => 'Template Title',
+         'enter_template_title'           => 'Enter template title',
+         'upload_file'                => 'Upload File',
+
+         //thank you
+         'posed_answer'              => 'YOUR ANSWER HAS BEEN POSTED',
+
+         //welcome
+         'our_community'                    =>'TO OUR COMMUNITY',
+       'recieve_email'                       =>  'You will recieve an email shorlty',
 
 
 

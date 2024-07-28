@@ -317,19 +317,19 @@
                 <div class="form-group-sign file-upload col-md-6">
                     <div class="form-check chek">
                         <label class="form-check-label" for="availability">
-                            Tick the box if clients will be able to reach you 24/7
+                            @lang('pages.available')
                         </label>
                         <br />
                         <input class="form-check-input i" type="checkbox" id="availability" name="available" />
                         <label class="form-check-label" for="availability">
-                            Available 24/7
+                            @lang('pages.available_24')
                         </label>
                     </div>
                 </div>
             </div>
 
             <div class="submit-btn">
-                <button type="submit">Sign Up</button>
+                <button type="submit">@lang('pages.sing_up')</button>
             </div>
         </form>
 

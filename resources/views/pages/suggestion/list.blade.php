@@ -3,8 +3,8 @@
     {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content">
             <div class="header-documents-dashboard">
-                <h2>Suggestions </h2>
-                <span class="num-documents">Total {{ $num_suggestions }} </span>
+                <h2>@lang('pages.suggestions') </h2>
+                <span class="num-documents">@lang('pages.total') {{ $num_suggestions }} </span>
 
             </div>
 

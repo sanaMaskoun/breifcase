@@ -24,7 +24,7 @@
                             {{--  <p class="details-document-dashboard">{{ $consultation->sender->name }}</p>  --}}
                             <p class="details-document-dashboard">{{ $consultation->created_at->format('Y/m/d') }}</p>
                             <div class="status-consultation {{ strtolower($status_texts[$consultation->status]) }}">
-                                {{ $status_texts[$consultation->status] }}
+                                @lang('EnumFile.' . $status_texts[$consultation->status])
                             </div>
                         </div>
 

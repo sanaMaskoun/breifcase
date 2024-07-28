@@ -3,8 +3,8 @@
     {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content ">
             <div class="header-documents-dashboard">
-                <h2>Practices</h2>
-                <span class="num-documents">Total {{ $num_practices }} </span>
+                <h2>@lang('pages.practieces')</h2>
+                <span class="num-documents">@lang('pages.total') {{ $num_practices }} </span>
 
             </div>
 
@@ -31,7 +31,7 @@
                     @csrf
                     <button type="submit" class="btn_download_book">
                         <i class="fas fa-upload upload-icon-template"></i>
-                        add practice
+                        @lang('pages.add_Practice')
                     </button>
 
                 </form>

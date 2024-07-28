@@ -28,6 +28,9 @@ Auth::routes();
 
 Route::get('locale/{lang}', [LangController::class, 'setLang'])->name('lang');
 
+Route::get('/api/get-current-language', function () {
+    return response()->json(['language' => session('locale', 'en')]);
+});
 Route::get('/', [NavbarController::class, 'home_client'])->name('home_client');
 Route::get('/lawyer/home', [NavbarController::class, 'home_lawyer'])->name('home_lawyer')->middleware('auth:sanctum');
 Route::get('/company/home', [NavbarController::class, 'home_company'])->name('home_company')->middleware('auth:sanctum');

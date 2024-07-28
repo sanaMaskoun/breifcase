@@ -11,7 +11,7 @@
                     <div class="form-news search-book">
                         <i class="fa fa-search" style="color: black"></i>
                         <input value="" type="text" class="form-control form-input search-book-1"
-                            placeholder="Search by title" id="searchBookInput" />
+                            placeholder="@lang('pages.search')" id="searchBookInput" />
 
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         @csrf
                         <button type="submit" class="btn_download_book">
                             <i class="fas fa-upload upload-icon-template"></i>
-                            Upload book
+                            @lang('pages.upload_book')
                         </button>
                     </form>
                 </div>

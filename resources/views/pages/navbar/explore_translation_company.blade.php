@@ -6,7 +6,7 @@
                 <div class="col-12 d-flex header_lang">
 
                     <div class="col-3">
-                        <p class="language_company"> Language</p>
+                        <p class="language_company"> @lang('pages.languages')</p>
                     </div>
 
                     <div class="card-language col-9">

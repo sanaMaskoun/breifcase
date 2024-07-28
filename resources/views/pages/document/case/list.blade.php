@@ -23,7 +23,7 @@
                             {{--  <p class="details-document-dashboard">{{ $case->receiver->name }}</p>  --}}
                             <p class="details-document-dashboard">{{ $case->created_at->format('Y/m/d') }}</p>
                             <div class="status-consultation {{ strtolower($status_texts[$case->status]) }}">
-                                {{ $status_texts[$case->status] }}
+                                @lang('EnumFile.' . $status_texts[$case->status])
                             </div>
                         </div>
                     </div>

@@ -33,13 +33,13 @@
 
                                     <h4> {{ $lawyer->name }} <i class="bx bx-check-circle"></i> </h4>
                                     <p> {{ $role }} &nbsp; &nbsp; &nbsp; &nbsp; Firm: ABCD</p>
-                                    <p>Location: {{ $location }}</p>
+                                    <p>@lang('pages.location'): {{ $location }}</p>
                                     <div class="rating">
                                         <span class="badge">
                                             <i class="fa fa-star"></i>{{ $lawyer->geta_average_rate() }}
                                         </span>
 
-                                        <span class="ml-2">Consultation price:
+                                        <span class="ml-2">@lang('pages.consultation_price'):
                                             {{ $lawyer->lawyer?->consultation_price }} AED
                                         </span>
 
@@ -59,7 +59,7 @@
 
                         <div class="row">
                             <div class="certifications col-md-6">
-                                <h5>Certifications:</h5>
+                                <h5>@lang('pages.certifications'):</h5>
                                 <div class="row">
                                     @foreach ($lawyer->lawyer?->getMedia('certification') as $certification)
                                         <div class="col-4">
@@ -73,7 +73,7 @@
 
 
                             <div class="col-md-6">
-                                <h5>Top Expertise:</h5>
+                                <h5>@lang('pages.top_expertise'):</h5>
                                 <ul>
                                     @foreach ($lawyer->practices as $practice)
                                         <li>{{ $practice->name }}</li>
@@ -84,7 +84,7 @@
 
 
                         <div class="license">
-                            <h5>License:</h5>
+                            <h5>@lang('pages.licenses'):</h5>
                             <div class="row">
                                 @foreach ($lawyer->lawyer?->getMedia('license') as $license)
                                     <div class="col-4">
@@ -98,9 +98,9 @@
 
                         <div class="text-right">
                             <a href="{{ route('create_consultation', $receiver_encoded_id) }}"
-                                class=" btn1">Consultation</a>
+                                class=" btn1">@lang('pages.consultation')</a>
                             <a href="{{ route('contact_lawyer', $receiver_encoded_id) }}" class="btn">
-                                Contact <br />
+                                @lang('pages.contact') <br />
                                 <i class="bx bx-chat bx-chat-1"></i>
                             </a>
                         </div>

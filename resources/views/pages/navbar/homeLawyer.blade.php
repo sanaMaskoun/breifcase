@@ -6,32 +6,32 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                    <h2 class="text_4">Find The Right Lawyer</h2>
+                    <h2 class="text_4">@lang('pages.find_lawyer')</h2>
                     <div class="height">
 
                         <form action="{{ route('explore_lawyer') }}" method="GET">
                             <div class="form-news">
                                 <i class="fa fa-search" style="color: black"></i>
                                 <input value="{{ request('search') }}" name="search" type="text"
-                                    class="form-control form-input" placeholder="Who are you looking for? Tax Lawyer?" />
+                                    class="form-control form-input" placeholder="@lang('pages.who_looking_lawyer')" />
                             </div>
                         </form>
 
                         <div class="col-md-12 link-home">
-                            <a href="{{ route('explore_lawyer', ['available' => 1]) }}"> Lawyers Available 24/7</a>
+                            <a href="{{ route('explore_lawyer', ['available' => 1]) }}"> @lang('pages.lawyer_available')</a>
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12 box-news-2 ">
 
                             <div class="box-Questions-1">
-                                <p class="link-questions-1">General Questions</p>
+                                <p class="link-questions-1">@lang('pages.questions')</p>
                                 <a href="{{ route('list_general_questions') }}"> <img
                                         src="{{ asset('assets/img/reply_general_question.png') }}"
                                         alt="" class="img_1" /></a>
                             </div>
 
                             <div class="box-Questions-1">
-                                <p class="link-questions-1">The Forum</p>
+                                <p class="link-questions-1">@lang('pages.forum')</p>
                                 <a href="{{ route('general_chat') }}"> <img src="{{ asset('assets/img/forum.png') }}" alt=""
                                         class="img_1" /></a>
                             </div>
@@ -47,7 +47,7 @@
 
 
                 <div class="col-lg-6 col-md-12 col-sm-12">
-                    <h1 class="text_5">NEWS</h1>
+                    <h1 class="text_5">@lang('pages.news')</h1>
                     <div class="box-news mt-3">
                         <img src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__3_-removebg-preview.png') }}"
                             alt="" class="img-news" />

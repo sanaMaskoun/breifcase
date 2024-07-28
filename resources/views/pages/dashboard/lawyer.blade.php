@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-12">
-                        <p class="p-dash">@lang('pages.revenue'): {{ $revenues }} @lang('pages.AED') <br> @lang('pages.profits'): {{ $profits }} @lang('pages.AED') </p>
+                        <p class="p-dash">@lang('pages.revenues'): {{ $revenues }} @lang('pages.AED') <br> @lang('pages.profits'): {{ $profits }} @lang('pages.AED') </p>
                     </div>
                 </div>
                 <div class="row">

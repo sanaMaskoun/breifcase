@@ -4,13 +4,13 @@
     {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content ">
             <div class="header-documents-dashboard">
-                <h2>Bills and Receipts</h2>
-                <span class="num-document">Total {{ $num_bills }} </span>
+                <h2>@lang('pages.bills')</h2>
+                <span class="num-document">@lang('pages.total') {{ $num_bills }} </span>
 
             </div>
             <div class="search-status mt-2">
                 <input value="{{ request('search') }}" name="search" type="text" class="form-control form-input input-search-status"
-                    id="statusSearch" placeholder="Enter status" />
+                    id="statusSearch" placeholder="@lang('pages.status')" />
             </div>
             <div class="list-document-dashboard">
                 @foreach ($bills as $bill)
@@ -23,7 +23,7 @@
                             <p class="details-document-dashboard">{{ $bill->sender->name }}</p>
                             <p class="details-document-dashboard">{{ $bill->created_at->format('Y/m/d') }}</p>
                             <div class="status-bills {{ strtolower($status_texts[$bill->status]) }}">
-                                {{ $status_texts[$bill->status] }}
+                                @lang('EnumFile.' . $status_texts[$bill->status])
                             </div>
                         </div>
 
