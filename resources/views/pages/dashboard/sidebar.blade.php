@@ -31,7 +31,7 @@
 
                     </a>
                     <a class="sidebar-dashboard-admin" href="{{ route('list_news') }}">
-                        <img src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__3_-removebg-preview.png') }}"
+                        <img src="{{ asset('assets/img/news.png') }}"
                             class="icon-dashboard-sidebar">
                             @lang('pages.news')
 

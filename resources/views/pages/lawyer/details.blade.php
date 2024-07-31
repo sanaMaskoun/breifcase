@@ -67,14 +67,14 @@
                             <label for="country" class="col-sm-5  label-lawyer-details">@lang('pages.country')</label>
                             <div class="col-sm-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="country" name="country"
-                                    value="{{ __('EnumFile' . $country) }}" readonly />
+                                    value="{{ __('EnumFile.' . $country) }}" readonly />
                             </div>
                         </div>
                         <div class=" row">
                             <label for="city" class="col-sm-5  label-lawyer-details">@lang('pages.city')</label>
                             <div class="col-sm-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="city" name="city"
-                                    value="{{ __('EnumFile' . $city) }}" readonly />
+                                    value="{{ __('EnumFile.' . $city) }}" readonly />
                             </div>
                         </div>
 

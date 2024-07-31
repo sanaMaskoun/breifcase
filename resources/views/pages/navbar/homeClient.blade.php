@@ -26,28 +26,28 @@
                             <div class="box-Questions-1">
                                 <p class="link-questions-1">@lang('pages.questions')</p>
                                 <a href="{{ route('home_general_questions') }}"> <img
-                                        src="{{ asset('assets/img/reply_general_question.png') }}"
-                                        alt="" class="img_1" /></a>
+                                        src="{{ asset('assets/img/reply_general_question.png') }}" alt=""
+                                        class="img_1" /></a>
                             </div>
 
                             <div class="box-Questions-1">
                                 <p class="link-questions-1">@lang('pages.companies')</p>
-                                <a href="{{ route('explore_translation_company') }}"> <img src="{{ asset('assets/img/translation.png') }}" alt=""
-                                        class="img_1" /></a>
+                                <a href="{{ route('explore_translation_company') }}"> <img
+                                        src="{{ asset('assets/img/translation.png') }}" alt="" class="img_1" /></a>
                             </div>
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12 box-news-2 ">
                             <div class="box-Questions-1">
                                 <p class="  link-questions-1">@lang('pages.lawyers')</p>
-                                <a href="{{ route('explore_lawyer') }}"> <img src="{{ asset('assets/img/lawyer_icon.png') }}" alt=""
-                                        class="img_1" /></a>
+                                <a href="{{ route('explore_lawyer') }}"> <img
+                                        src="{{ asset('assets/img/lawyer_icon.png') }}" alt="" class="img_1" /></a>
                             </div>
 
                             <div class="box-Questions-1">
                                 <p class="link-questions-1">@lang('pages.FAQ')</p>
-                                <a href="{{ route('page_frequently_question') }}"> <img src="{{ asset('assets/img/FAQ.png') }}" alt=""
-                                        class="img_1" /></a>
+                                <a href="{{ route('page_frequently_question') }}"> <img
+                                        src="{{ asset('assets/img/FAQ.png') }}" alt="" class="img_1" /></a>
                             </div>
                         </div>
 
@@ -61,26 +61,25 @@
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <h1 class="text_5">@lang('pages.news')</h1>
                     <div class="box-news mt-3">
-                        <img src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__3_-removebg-preview.png') }}"
-                            alt="" class="img-news" />
+                        <img src="{{ asset('assets/img/news.png') }}" alt="" class="img-news" />
                         <div>
                             <div class="container">
                                 <div class="row">
                                     @foreach ($news as $object)
-                                        <div class="col-lg-8 news-item mb-4 p-2 border-bottom">
-                                            <p class="news-text">{{ $object->title }}</p>
-                                            <span >{{ $object->short_description }}</span>
+                                        <a class="link-show-news" href="{{ route('show_news', base64_encode($object->id)) }}">
+                                            <div class="col-lg-8 news-item mb-4 p-2 border-bottom">
+                                                <p class="news-text">{{ $object->title }}</p>
+                                                <span>{{ $object->short_description }}</span>
 
-                                        </div>
+                                            </div>
 
-                                        <div class="col-lg-4 news-item mb-4 p-2 border-bottom">
-                                            @if ($object->getFirstMediaUrl('news'))
-                                                <img src="{{ $object->getFirstMediaUrl('news') }}" alt="News Image"
-                                                    class="img-fluid rounded img_news" />
-                                            @endif
-
-
-                                        </div>
+                                            <div class="col-lg-4 news-item mb-4 p-2 border-bottom">
+                                                @if ($object->getFirstMediaUrl('news'))
+                                                    <img src="{{ $object->getFirstMediaUrl('news') }}" alt="News Image"
+                                                        class="img-fluid rounded img_news" />
+                                                @endif
+                                            </div>
+                                        </a>
                                     @endforeach
                                 </div>
                             </div>

@@ -70,7 +70,7 @@
                             </div>
                             <div class="col-lg-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="country" name="country"
-                                    value="{{ __('EnumFile' . $country) }}" readonly />
+                                    value="{{ __('EnumFile.' . $country) }}" readonly />
                             </div>
                         </div>
                         <div class=" row">
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-lg-7  mb-2">
                                 <input type="text" class="form-control-lawyer-details " id="city" name="city"
-                                    value="{{ __('EnumFile' . $city) }}" readonly />
+                                    value="{{ __('EnumFile.' . $city) }}" readonly />
                             </div>
                         </div>
 

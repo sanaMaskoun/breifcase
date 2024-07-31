@@ -243,9 +243,10 @@ Route::group(['prefix' => 'news', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [NewsController::class, 'list'])->name('list_news');
     Route::get('/create', [NewsController::class, 'create'])->name('add_news');
     Route::post('/store', [NewsController::class, 'store'])->name('store_news');
-    Route::get('{news_encode_id}/show', [NewsController::class, 'show'])->name('show_news');
     Route::get('/delete/{news}', [NewsController::class, 'destroy'])->name('delete_news');
 });
+Route::get('news/{news_encode_id}/show', [NewsController::class, 'show'])->name('show_news');
+Route::get('news/{news_encode_id}/details', [NewsController::class, 'details'])->name('details_news_client');
 
 Route::group(['prefix' => 'group', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/create', [GroupController::class, 'create'])->name('add_group');

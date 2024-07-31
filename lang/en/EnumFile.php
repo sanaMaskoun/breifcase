@@ -11,17 +11,17 @@ return [
 
 
 //country enum
-'saudi'              => 'Saudi Arabia',
+'Saudi'              => 'Saudi Arabia',
 'UAE'                =>'United Arab Emirates',
 
 // city enum
 'dubai'               => 'Dubai',
-'abu_dhabi'           => 'Abu_Dhabi',
+'Abu_Dhabi'           => 'Abu Dhabi',
 'ajman'               => 'Ajman',
 'rak'                 => 'rak',
 'fujairah'            => 'Fujairah',
-'um_alq'              => 'UM_ALQ',
-'al_ain'              => 'al_ain',
+'um_alq'              => 'UM ALQ',
+'al_ain'              => 'al ain',
 'sharjah'             => 'Sharjah',
 
 'riyadh'               => 'Riyadh',
@@ -42,7 +42,7 @@ return [
 //gender
 'male'                 => 'MALE',
 'female'               =>'FEMALE',
- 
+
 
 //invoice enum
 'Refund'            => 'refund',

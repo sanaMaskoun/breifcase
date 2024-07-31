@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserTypeEnum;
 use App\Http\Requests\NewsRequest;
 use App\Http\Resources\NewsResource;
 use App\Models\News;
@@ -24,7 +25,13 @@ class NewsController extends Controller
     public function show($news_encode_id)
     {
         $news = News::find(base64_decode($news_encode_id));
-        return view ('pages.news.show' , compact('news'));
+
+        if (Auth()->user()?->id == UserTypeEnum::lawyer || Auth()->user()?->id == UserTypeEnum::admin || Auth()->user()?->id == UserTypeEnum::translation_company) {
+            return view('pages.news.show', compact('news'));
+        } else {
+            return view('pages.news.showClient', compact('news'));
+        }
+
     }
     public function create()
     {

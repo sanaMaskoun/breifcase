@@ -10,7 +10,7 @@
             @endif
             <div class="col-lg-6 col-md-6 col-sm-12">
 
-                <h2 class="text_7">Welcome to our community</h2>
+                <h2 class="text_7">@lang('pages.welcome_join')</h2>
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-12 ">
@@ -20,7 +20,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12 form-group-Sign">
-                                    <label for="email">Email:</label>
+                                    <label for="email">@lang('pages.email'):</label>
                                     <div class="input-group form_login">
                                         <input type="email" id="email" name="email" class="form-control" />
                                         <div class="input-group-append">
@@ -34,7 +34,7 @@
                                 </div>
 
                                 <div class="col-md-12 form-group-Sign">
-                                    <label for="password">Password:</label>
+                                    <label for="password">@lang('pages.password'):</label>
                                     <div class="input-group form_login">
                                         <input type="password" id="password" name="password" class="form-control" />
                                         <div class="input-group-append">
@@ -50,7 +50,7 @@
                                 </div>
 
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <button type="submit" class="btn_login">Log In</button>
+                                    <button type="submit" class="btn_login">@lang('pages.login')</button>
                                 </div>
                             </div>
                         </div>

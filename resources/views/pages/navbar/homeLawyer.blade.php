@@ -26,14 +26,14 @@
                             <div class="box-Questions-1">
                                 <p class="link-questions-1">@lang('pages.questions')</p>
                                 <a href="{{ route('list_general_questions') }}"> <img
-                                        src="{{ asset('assets/img/reply_general_question.png') }}"
-                                        alt="" class="img_1" /></a>
+                                        src="{{ asset('assets/img/reply_general_question.png') }}" alt=""
+                                        class="img_1" /></a>
                             </div>
 
                             <div class="box-Questions-1">
                                 <p class="link-questions-1">@lang('pages.forum')</p>
-                                <a href="{{ route('general_chat') }}"> <img src="{{ asset('assets/img/forum.png') }}" alt=""
-                                        class="img_1" /></a>
+                                <a href="{{ route('general_chat') }}"> <img src="{{ asset('assets/img/forum.png') }}"
+                                        alt="" class="img_1" /></a>
                             </div>
                         </div>
 
@@ -49,15 +49,16 @@
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <h1 class="text_5">@lang('pages.news')</h1>
                     <div class="box-news mt-3">
-                        <img src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__3_-removebg-preview.png') }}"
-                            alt="" class="img-news" />
+                        <img src="{{ asset('assets/img/news.png') }}" alt="" class="img-news" />
                         <div>
                             <div class="container">
                                 <div class="row">
                                     @foreach ($news as $object)
+                                    <a class="link-show-news" href="{{ route('show_news', base64_encode($object->id)) }}">
+
                                         <div class="col-lg-8 news-item mb-4 p-2 border-bottom">
                                             <p class="news-text">{{ $object->title }}</p>
-                                            <span >{{ $object->short_description }}</span>
+                                            <span>{{ $object->short_description }}</span>
 
                                         </div>
 
@@ -69,6 +70,7 @@
 
 
                                         </div>
+                                    </a>
                                     @endforeach
                                 </div>
                             </div>

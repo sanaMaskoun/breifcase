@@ -9,7 +9,9 @@ return [
 'Pending'             => 'قيد الانتظار',
 'Rejected'            => 'مرفوضة',
 
-'saudi'              => 'السعودية',
+
+//country
+'Saudi'              => 'السعودية',
 'UAE'                =>'الإمارات',
 
 // city enum
