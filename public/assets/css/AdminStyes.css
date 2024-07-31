@@ -1,12 +1,4 @@
-.link-show-news {
-    color: black;
-    display: contents;
-}
 
-.link-show-news:hover {
-    color: black;
-    text-decoration: none;
-}
 
 @media (max-width:768px) {
     .sidebar-dashboard a i {
