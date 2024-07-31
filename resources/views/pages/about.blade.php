@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="line-1"></div>
                             <div class="col-md-12">
-                                <h1>@lang('pages.second_title_about')</h1>
+                                <h1 >@lang('pages.second_title_about')</h1>
                             </div>
                         </div>
                     </div>

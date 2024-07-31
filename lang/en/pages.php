@@ -78,7 +78,7 @@ return [
     'welcome_join' => 'Welcome to our community',
     'name' => 'Name',
     'email' => 'Email',
-    'password' => 'PAssword',
+    'password' => 'Password',
     'password_confirmation' => 'Password Confirmation',
     'birth' => 'Birth',
     'phone' => 'Phone',
@@ -349,6 +349,175 @@ return [
                     Together, we can achieve excellence, drive innovation,
                     and make a meaningful impact on the legal practices worldwide.',
     'footer_final_page' => 'Welcome aboard!',
+
+ //FAQ
+ 'question1'      =>'What is Briefcase?',
+ 'answer1'        =>' Briefcase is a platform that connects legal practitioners with
+                         clients and other legal professionals. Our mission is to
+                         streamline legal practice by providing advanced tools and
+                         resources to enhance your reach and efficiency.',
+ 'question2'      =>'How do I register on Briefcase?',
+ 'answer2'        =>' Registration is simple and free. Just click on the "Sign Up"
+                         button on our homepage, fill in your details, and follow the
+                         instructions to complete your registration.',
+ 'question3'      =>'Is there a cost to use Briefcase? ',
+ 'answer3'        =>'No, registering and using the basic features of Briefcase is
+                         completely free. We offer premium features at a competitive
+                         price for those who want to take their practice to the next
+                         level.',
+ 'question4'      =>'What tools and resources does Briefcase offer?',
+ 'answer4'        =>' Briefcase offers a variety of tools and resources including case
+                         management, document sharing, client communication, and a
+                         network of legal professionals to enhance collaboration and
+                         knowledge sharing.',
+ 'question5'      =>'How can Briefcase help my legal practice?',
+ 'answer5'        =>' Briefcase helps you manage your practice more efficiently by
+                         providing tools for case management, client communication, and
+                         networking. It also increases your visibility to potential
+                         clients and allows you to collaborate with other legal
+                         professionals',
+
+ 'question6'      =>'Can I access Briefcase from my mobile device?',
+ 'answer6'        =>' Yes, Briefcase is accessible from any device with an internet
+                         connection, including smartphones and tablets. This allows you
+                         to manage your practice on the go.',
+
+ 'question7'      =>'How secure is my information on Briefcase?',
+ 'answer7'        =>'We take security very seriously. All your data is encrypted and
+                         stored securely. We comply with the highest standards of data
+                         protection and privacy to ensure your information is safe.',
+
+ 'question8'      =>'How do I contact support if I have a problem?',
+ 'answer8'        =>' You can reach our support team by emailing us at
+                         Info@BriefcasePlatform.com. We are here to assist you with any
+                         issues or questions you may have',
+
+ 'question9'      =>' Can I network with other legal professionals on Briefcase?',
+ 'answer9'        =>' Yes, as a lawyer, Briefcase offers a networking feature that
+                         allows you to connect with legal professionals. You can share
+                         knowledge, seek advice, and collaborate on cases.',
+
+ 'question10'      =>'What makes Briefcase different from other legal platforms?
+',
+ 'answer10'        =>' Briefcase stands out due to its free registration and
+                         comprehensive suite of tools designed specifically for legal
+                         practitioners. Our focus on connecting legal professionals and
+                         providing high-quality resources sets us apart. We are currently
+                         operating in the UAE, with plans to expand globally in the near
+                         future.',
+
+ 'question11'      =>'How secure is my information on Briefcase?',
+ 'answer11'        =>' We take security very seriously. All your data is encrypted and
+                         stored securely. We comply with the highest standards of data
+                         protection and privacy to ensure your information is safe',
+
+ 'question12'      =>'How do I contact support if I have a problem?',
+ 'answer12'        =>' You can reach our support team by emailing us at
+                         Info@BriefcasePlatform.com. We are here to assist you with any
+                         issues or questions you may have',
+
+ 'question13'      =>'Can I customize my profile on Briefcase?',
+ 'answer13'        =>'Yes, you can customize your profile to showcase your expertise,
+                         experience, and specializations. This helps potential clients
+                         understand your skills and qualifications better.',
+
+ 'question14'      =>'How do I manage my cases on Briefcase?',
+ 'answer14'        =>'Briefcase offers a comprehensive case management system where
+                         you can create, update, and track your cases. You can organize
+                         documents, set reminders for deadlines, and communicate with
+                         clients and colleagues within the platform',
+
+ 'question15'      =>'How do I ensure my profile stands out to potential clients?',
+ 'answer15'        =>'To make your profile stand out, ensure it is complete and
+                         up-to-date, including detailed descriptions of your expertise
+                         and experience. Adding client testimonials and case studies can
+                         also enhance your profile’s attractiveness.',
+
+ 'question16'      =>' What is the process for handling client payments through
+                         Briefcase?',
+ 'answer16'        =>' Briefcase offers secure payment processing features that allow
+                         clients to pay for your services directly through the platform.
+                         You can manage invoices, track payments, and ensure timely
+                         transactions within your account settings.',
+
+ 'question17'      =>'How does Briefcase help with client acquisition?',
+ 'answer17'        =>'Briefcase increases your visibility to potential clients through
+                         its search and matching algorithms. By maintaining an updated
+                         and detailed profile, you improve your chances of being matched
+                         with clients seeking your specific expertise.',
+
+ 'question18'      =>'Can I collaborate with other lawyers on Briefcase?',
+ 'answer18'        =>'Yes, for you as a lawyer, Briefcase supports collaboration with
+                         other legal professionals. You can share documents, communicate
+                         securely, and even co-manage cases, making teamwork seamless and
+                         efficient',
+
+ 'question19'      =>'What security measures are in place to protect my data?',
+ 'answer19'        =>' Briefcase employs advanced security measures, including
+                         encryption, secure data storage, and regular security audits to
+                         protect your sensitive information. We comply with international
+                         data protection standards to ensure your data is safe.',
+
+ 'question20'      =>' How can I provide feedback or suggest improvements for
+                         Briefcase?',
+ 'answer20'        =>' We welcome feedback and suggestions from our users. You can
+                         provide feedback directly through the platform’s feedback form
+                         or by contacting our support team. We continuously strive to
+                         improve our services based on user input',
+
+ 'question21'      =>'How do I find a legal practitioner on Briefcase?',
+ 'answer21'        =>'You can search for legal practitioners using various filters
+                         such as area of law, location, and experience. Our advanced
+                         search functionality helps you find the best match for your
+                         legal needs.',
+
+ 'question22'      =>'Is there a cost to use Briefcase to find a lawyer?',
+ 'answer22'        =>' No, using Briefcase to search for and connect with legal
+                         practitioners is free for clients. You may only need to pay for
+                         the legal services you choose to engage.',
+ 'question23'      =>' How can I be sure that the legal practitioners on Briefcase are
+                         qualified?',
+ 'answer23'        =>' All legal practitioners on Briefcase go through a verification
+                         process to ensure they are qualified and in good standing. We
+                         review their credentials, experience, and client reviews to
+                         maintain a high standard of service.',
+ 'question24'      =>'Can I read reviews and ratings of legal practitioners?',
+ 'answer24'        =>' Yes, Briefcase allows clients to read reviews and ratings from
+                         other clients. This helps you make an informed decision when
+                         choosing a legal practitioner.',
+
+ 'question25'      =>'How do I contact a legal practitioner on Briefcase?',
+ 'answer25'        =>' Once you find a legal practitioner that fits your needs, you can
+                         contact them directly through the platform using our secure
+                         messaging system.',
+
+ 'question26'      => 'How does Briefcase save me time and effort?',
+ 'answer26'        =>'Briefcase simplifies the process of finding and contacting legal
+                         practitioners by providing a centralized platform with advanced
+                         search and communication tools. This saves you time and effort
+                         compared to traditional methods.',
+
+ 'question27'      => 'Can I get legal advice directly through Briefcase?',
+ 'answer27'        =>'You can communicate with legal practitioners through Briefcase,
+                         but direct legal advice will be provided by the practitioners
+                         during these interactions.',
+
+ 'question28'      => 'How do I leave a review for a legal practitioner?',
+ 'answer28'        =>'After your interaction with a legal practitioner, you can leave
+                         a review and rate their services on their profile page. This
+                         feedback helps other clients and maintains the quality of our
+                         platform.',
+
+
+
+
+
+
+
+
+
+
+
 
     // attachments
     'file' => 'Files',

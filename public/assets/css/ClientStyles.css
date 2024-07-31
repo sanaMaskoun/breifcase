@@ -10,6 +10,45 @@ body {
     overflow-x: hidden !important;
 }
 
+.col-lg-4.news-item.mb-4.p-2.border-bottom {
+    width: max-content;
+    display: flex;
+    justify-content: end;
+}
+
+.col-lg-4.news-item.mb-4.p-2.border-bottom {
+    display: flex;
+    justify-content: end;
+}
+
+img.img-fluid.rounded.img_news {
+    max-height: 60px;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+img.img-news {
+    max-height: 80px;
+}
+
+.input-group.form_login .input-group-append {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 1234;
+}
+
+
+
+.form-news i.fa.fa-search {
+    position: absolute;
+    right: 40px;
+}
+
+.form-news {
+    position: relative;
+}
+
 body[dir="rtl"] {
     direction: rtl;
     text-align: right;
@@ -105,6 +144,7 @@ header {
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 15px;
 }
+
 .link-show-news {
     color: black;
     display: contents;
@@ -656,13 +696,17 @@ header {
     width: 300px;
 }
 
+
 .text_explore_lawyer {
     margin-top: 15px;
     font-weight: 700;
-    font-size: 40px;
+    font-size: 30px;
 }
 
-
+.box1.container {
+    overflow-y: scroll;
+    max-height: 80vh;
+}
 
 .sidebar .col-lg-6 {
     display: flex;
@@ -769,6 +813,19 @@ header {
 .dropdown-menu.show {
     overflow-y: scroll;
     height: 160px;
+}
+
+div#navbarNavDropdown .dropdown-menu.show {
+    overflow-y: scroll;
+    height: max-content;
+    background: rgb(125 125 125 / 81%);
+    color: #000 ! IMPORTANT;
+}
+
+
+.dropdown-menu.show a {
+
+    color: #000 ! IMPORTANT;
 }
 
 .btn-dropdown-toggle img {

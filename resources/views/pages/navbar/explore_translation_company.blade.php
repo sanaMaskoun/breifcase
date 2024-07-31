@@ -5,13 +5,14 @@
             <div class="row">
                 <div class="col-12 d-flex header_lang">
 
-                    <div class="col-3">
+                    <div class="col-12">
                         <p class="language_company"> @lang('pages.languages')</p>
                     </div>
 
-                    <div class="card-language col-9">
+
+                    <div class="card-language col-12">
                         @foreach ($languages as $language)
-                            <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="col-lg-2 col-md-6 col-sm-6">
                                 <div class="form-row">
                                     <div class="custom-control custom-checkbox col">
                                         <input type="checkbox" class="custom-control-input language-filter"
@@ -29,11 +30,12 @@
 
         <div id="company-list" class="row filter-translation-companies">
             @foreach ($translation_companies as $translation_company)
-                <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="col-lg-2 col-md-6 col-sm-12">
                     <div class="profile-card_1">
-                        <a class="link-in-explore-page" href="{{ route('show_company' , base64_encode($translation_company->id) ) }}">
-                           <img src="{{ $translation_company->getFirstMediaUrl('profile') }}" alt="Profile" />
-                           <p class="name-in-explore-page">{{ $translation_company->name }}</p>
+                        <a class="link-in-explore-page"
+                            href="{{ route('show_company', base64_encode($translation_company->id)) }}">
+                            <img src="{{ $translation_company->getFirstMediaUrl('profile') }}" alt="Profile" />
+                            <p class="name-in-explore-page">{{ $translation_company->name }}</p>
                         </a>
                     </div>
                 </div>

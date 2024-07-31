@@ -17,7 +17,7 @@
                             <div class="row">
                                 <div class="col-md-6 form-group-Sign">
                                     <label for="name">@lang('pages.name')</label>
-                                    <input type="text" id="name" name="name" class="form-control" />
+                                    <input type="text" id="name" name="name" value="{{ old('name')}}" class="form-control" />
                                     @error('name')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -26,7 +26,7 @@
 
                                 <div class="col-md-6 form-group-Sign">
                                     <label for="email">@lang('pages.email'):</label>
-                                    <input type="email" id="email" name="email" class="form-control" />
+                                    <input type="email" id="email" name="email" value="{{ old('email')}}" class="form-control" />
                                     @error('email')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -65,7 +65,7 @@
 
                                 <div class="col-md-6 form-group-Sign">
                                     <label for="birth"> @lang('pages.birth')</label>
-                                    <input type="text" id="birth" name="birth" class="form-control" />
+                                    <input type="text" id="birth" name="birth" value="{{ old('birth')}}" class="form-control" />
                                     @error('birth')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -74,7 +74,7 @@
 
                                 <div class="col-md-6 form-group-Sign">
                                     <label for="phone">@lang('pages.phone')</label>
-                                    <input type="tel" id="phone" name="phone" class="form-control" />
+                                    <input type="tel" id="phone" name="phone" value="{{ old('phone')}}" class="form-control" />
                                     @error('phone')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -83,9 +83,9 @@
 
                                 <div class="col-md-6 form-group-Sign">
                                     <label for="country">@lang('country')</label>
-                                    <select id="country" name="country" class="form-control" onchange="updateCities()">
+                                    <select id="country" name="country" value="{{ old('country')}}" class="form-control" onchange="updateCities()">
                                         <option >@lang('pages.select_country')</option>
-                                        <option value="1">@lang('EnumFile.saudi')</option>
+                                        <option value="1">@lang('EnumFile.Saudi')</option>
                                         <option value="2">@lang('EnumFile.UAE')</option>
                                     </select>
                                     @error('country')
@@ -95,7 +95,7 @@
 
                                 <div class="col-md-6 form-group-Sign">
                                     <label for="city">@lang('pages.city')</label>
-                                    <select id="city" name="city" class="form-control">
+                                    <select id="city" name="city" value="{{ old('city')}}" class="form-control">
                                         <option>@lang('pages.select_city')</option>
                                         <option value="1" class="saudi-city">@lang('EnumFile.riyadh')</option>
                                         <option value="2" class="saudi-city">@lang('EnumFile.mecca')</option>
@@ -128,7 +128,7 @@
 
                                 <div class="col-md-6 form-group-Sign">
                                     <label for="emirates_id">@lang('pages.emirates_id')</label>
-                                    <input type="text" id="emirates_id" name="emirates_id" class="form-control" />
+                                    <input type="text" id="emirates_id" name="emirates_id" value="{{ old('emirates_id')}}" class="form-control" />
                                     @error('emirates_id')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -137,7 +137,7 @@
 
                                 <div class="col-md-6 form-group-Sign">
                                     <label for="occupation">@lang('pages.occupation')</label>
-                                    <input type="text" id="occupation" name="occupation" class="form-control" />
+                                    <input type="text" id="occupation" name="occupation" value="{{ old('occupation')}}" class="form-control" />
                                     @error('occupation')
                                         <small class="form-text text-danger">{{ $message }}</small>
                                     @enderror
@@ -148,7 +148,7 @@
                                     <label for="front_emirates_id">@lang('pages.emirates_front')</label>
                                     <label for="front_emirates_id" class="upload-icon"><i
                                             class="bx bx-upload icon-sign"></i></label>
-                                    <input type="file" id="front_emirates_id" name="front_emirates_id"
+                                    <input type="file" id="front_emirates_id" value="{{ old('front_emirates_id')}}" name="front_emirates_id"
                                         class="custom-file-input" />
                                     <div id="upload_front_preview" style="margin-top: 10px">
                                         <!-- The image will be displayed here -->
@@ -162,7 +162,7 @@
                                     <label for="back_emirates_id">@lang('pages.emirates_back')</label>
                                     <label for="back_emirates_id" class="upload-icon"><i
                                             class="bx bx-upload icon-sign"></i></label>
-                                    <input type="file" id="back_emirates_id" name="back_emirates_id"
+                                    <input type="file" id="back_emirates_id" name="back_emirates_id" value="{{ old('back_emirates_id')}}"
                                         class="custom-file-input" />
                                     <div id="upload_back_preview" style="margin-top: 10px">
                                         <!-- The image will be displayed here -->
@@ -177,23 +177,23 @@
                                     <div class="d-flex">
 
                                         <div class="gender-label">
-                                            <input type="checkbox" id="gender" name="gender" value=1
-                                                class="gender-checkbox" />
-                                            <label for="gender">@lang('EnumFile.male')</label>
+                                            <input type="radio" id="gender_male" name="gender" value="1" class="gender-checkbox"
+                                                   {{ old('gender') == 1 ? 'checked' : '' }} />
+                                            <label for="gender_male">@lang('EnumFile.male')</label>
                                         </div>
 
                                         <div class="gender-label">
-                                            <input type="checkbox" id="gender" name="gender" value=2
-                                                class="gender-checkbox" />
-                                            <label for="gender">@lang('EnumFile.female')</label>
+                                            <input type="radio" id="gender_female" name="gender" value="2" class="gender-checkbox"
+                                                   {{ old('gender') == 2 ? 'checked' : '' }} />
+                                            <label for="gender_female">@lang('EnumFile.female')</label>
                                         </div>
+
                                         @error('gender')
                                             <small class="form-text text-danger">{{ $message }}</small>
                                         @enderror
 
                                     </div>
                                 </div>
-
 
                                 <div class="col-md-12 d-flex justify-content-center">
                                     <button type="submit" class="btn btn1">@lang('pages.sing_up')</button>

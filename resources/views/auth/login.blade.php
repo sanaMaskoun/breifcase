@@ -22,7 +22,7 @@
                                 <div class="col-md-12 form-group-Sign">
                                     <label for="email">@lang('pages.email'):</label>
                                     <div class="input-group form_login">
-                                        <input type="email" id="email" name="email" class="form-control" />
+                                        <input type="email" id="email" name="email" value="{{ old('email')}}" class="form-control" />
                                         <div class="input-group-append">
                                             <span>
                                                 <i class="fas fa-user-circle"></i> </span>
