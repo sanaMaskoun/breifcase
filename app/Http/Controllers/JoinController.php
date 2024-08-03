@@ -116,7 +116,7 @@ class JoinController extends Controller
         foreach ($request->file('licenses') as $license) {
             $user->lawyer->addMedia($license)->toMediaCollection('license');
         }
-        
+
         $admins = User::whereHas('roles', function ($query) {
             $query->where('name', 'admin');
         })->get();
@@ -143,6 +143,7 @@ class JoinController extends Controller
             ->where('is_active', false)
             ->paginate(config('constants.PAGINATION_COUNT'));
 
+            
         return view('pages.dashboard.requestToJoin', compact('users'));
     }
 }

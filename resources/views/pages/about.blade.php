@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+{{--  <html lang="en">  --}}
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="UTF-8" />
@@ -29,7 +30,7 @@
                         <div class="row">
                             <div class="line-1"></div>
                             <div class="col-md-12">
-                                <h1 >@lang('pages.second_title_about')</h1>
+                                <h1>@lang('pages.second_title_about')</h1>
                             </div>
                         </div>
                     </div>
@@ -63,7 +64,7 @@
                     <div class="col-md-12">
                         <h2>@lang('pages.title_first_page_about')</h2>
                         <p>
-                           @lang('pages.description_first_page_about')
+                            @lang('pages.description_first_page_about')
                         </p>
                     </div>
                 </div>
@@ -191,7 +192,7 @@
                         <div>
                             <h5>@lang('pages.title4_third_page_about')</h5>
                             <p>@lang('pages.description4_third_page_about')</p>
-                         </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -240,7 +241,8 @@
                         </div>
                     </div>
                     <div class="col-md-6 feature">
-                        <img src= "{{ asset('assets/img/6d521eb08e4ce4c4e5316c96d8e99ed3.png') }}" alt="Accessibility">
+                        <img src= "{{ asset('assets/img/6d521eb08e4ce4c4e5316c96d8e99ed3.png') }}"
+                            alt="Accessibility">
                         <div>
                             <h5>@lang('pages.title4_four_page_about')</h5>
                             <p>@lang('pages.description4_four_page_about')</p>

@@ -40,6 +40,18 @@ img.img-news {
 
 
 
+[dir="rtl"] .form_login {
+    right: -89px !important;
+}
+
+[dir="rtl"] .logo__name {
+    left: 0 !important;
+}
+
+[dir="rtl"] div#navbarNavDropdown .dropdown-menu.show {
+    text-align: right;
+}
+
 .form-news i.fa.fa-search {
     position: absolute;
     right: 40px;

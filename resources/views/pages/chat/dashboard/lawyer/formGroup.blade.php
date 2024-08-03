@@ -34,7 +34,7 @@
                         <div id="chat-header_1">
                             <i class="fas fa-users icon-group-dashboard"></i>
                             <span class="title-name-form-chat d-flex">{{ $group->name }}
-                                @if($admin_group <> null)
+                                @if( $admin_group <> null|| Auth()->user()->type == 1)
                                 <form action="{{ route('edit_group', base64_encode($group->id)) }}" method="GET">
                                     <button class="btn d-flex">
                                         <i class="fas fa-edit"></i>

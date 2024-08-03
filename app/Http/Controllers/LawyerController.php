@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\GroupTypeEnum;
 use App\Enums\UserTypeEnum;
+use App\Models\Group;
 use App\Models\User;
 use App\Traits\MessageTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class LawyerController extends Controller
@@ -48,17 +49,31 @@ class LawyerController extends Controller
         return view('pages.lawyer.contact', compact('lawyer', 'messages'));
     }
 
-
     public function toggle_status($lawyer_encode_id)
     {
 
         $lawyer_decode_id = base64_decode($lawyer_encode_id);
-        $lawyer = User::find( $lawyer_decode_id);
+        $lawyer = User::find($lawyer_decode_id);
         $lawyer->is_active = !$lawyer->is_active;
         $lawyer->save();
 
-        return redirect()->back();
+        if ($lawyer->type === UserTypeEnum::lawyer ) {
 
+
+            $forum = Group::where('type', GroupTypeEnum::general_chat)->first();
+
+            if ($forum && $lawyer->is_active) {
+                if (!$lawyer->groups->contains($forum->id)) {
+
+                    $lawyer->groups()->attach($forum->id);
+                }
+            }
+            else{
+                $lawyer->groups()->detach($forum->id);
+            }
+        }
+
+        return redirect()->back();
 
     }
 
@@ -103,8 +118,5 @@ class LawyerController extends Controller
     //     return redirect()->route('show_lawyer', $encodedId)->with('success', __('message.edit'));
 
     // }
-
-
-
 
 }

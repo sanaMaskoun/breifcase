@@ -23,10 +23,10 @@
                                     <label for="email">@lang('pages.email'):</label>
                                     <div class="input-group form_login">
                                         <input type="email" id="email" name="email" value="{{ old('email')}}" class="form-control" />
-                                        <div class="input-group-append">
+                                        {{--  <div class="input-group-append">
                                             <span>
                                                 <i class="fas fa-user-circle"></i> </span>
-                                        </div>
+                                        </div>  --}}
                                     </div>
                                     @error('email')
                                         <small class="form-text text-danger">{{ $message }}</small>
@@ -37,11 +37,11 @@
                                     <label for="password">@lang('pages.password'):</label>
                                     <div class="input-group form_login">
                                         <input type="password" id="password" name="password" class="form-control" />
-                                        <div class="input-group-append">
+                                        {{--  <div class="input-group-append">
                                             <span class="toggle-password" style="cursor: pointer;">
                                                 <i class="fas fa-eye"></i>
                                             </span>
-                                        </div>
+                                        </div>  --}}
                                     </div>
 
                                     @error('password')
@@ -49,7 +49,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md-12 d-flex justify-content-center">
+                                <div class="col-md-12 d-flex justify-content-center mt-3">
                                     <button type="submit" class="btn_login">@lang('pages.login')</button>
                                 </div>
                             </div>

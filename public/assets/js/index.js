@@ -1,29 +1,29 @@
 
-document.addEventListener("DOMContentLoaded", function () {
-    function fetchLanguageFromApi() {
-        return fetch('/api/get-current-language')
-            .then(response => response.json())
-            .then(data => data.language)
-            .catch(error => {
-                console.error('Error fetching language:', error);
-                return 'ar';
-            });
-    }
+// document.addEventListener("DOMContentLoaded", function () {
+//     function fetchLanguageFromApi() {
+//         return fetch('/api/get-current-language')
+//             .then(response => response.json())
+//             .then(data => data.language)
+//             .catch(error => {
+//                 console.error('Error fetching language:', error);
+//                 return 'ar';
+//             });
+//     }
 
-    function updateLanguageDirection(language) {
-        if (language === "ar") {
-            document.body.setAttribute("dir", "rtl");
-            document.documentElement.setAttribute("lang", "ar");
-        } else {
-            document.body.setAttribute("dir", "ltr");
-            document.documentElement.setAttribute("lang", "en");
-        }
-    }
+//     function updateLanguageDirection(language) {
+//         if (language === "ar") {
+//             document.body.setAttribute("dir", "rtl");
+//             document.documentElement.setAttribute("lang", "ar");
+//         } else {
+//             document.body.setAttribute("dir", "ltr");
+//             document.documentElement.setAttribute("lang", "en");
+//         }
+//     }
 
-    fetchLanguageFromApi().then((newLanguage) => {
-        updateLanguageDirection(newLanguage);
-    });
-});
+//     fetchLanguageFromApi().then((newLanguage) => {
+//         updateLanguageDirection(newLanguage);
+//     });
+// });
 
 //
 

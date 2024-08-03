@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             PracticeSeeder::class,
             LanguageSeeder::class,
+            ForumSeeder::class,
         ]);
     }
 }

@@ -48,7 +48,7 @@
                             <div>
                                 <a href="{{ route('list_suggestions') }}"> <i class="fas fa-vote-yea"></i>
 
-                                    @lang('pages.suggestion')
+                                    @lang('pages.suggestions')
                                 </a>
                             </div>
 

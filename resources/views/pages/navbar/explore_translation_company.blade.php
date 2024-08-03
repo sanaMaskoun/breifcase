@@ -16,7 +16,7 @@
                                 <div class="form-row">
                                     <div class="custom-control custom-checkbox col">
                                         <input type="checkbox" class="custom-control-input language-filter"
-                                            id="language_{{ $language->id }}" data-id="{{ $language->id }}">
+                                            id="language_{{ $language->id }}" style="display: none" data-id="{{ $language->id }}">
                                         <label class="custom-control-label"
                                             for="language_{{ $language->id }}">{{ $language->name }}</label>
                                     </div>
@@ -30,7 +30,7 @@
 
         <div id="company-list" class="row filter-translation-companies">
             @foreach ($translation_companies as $translation_company)
-                <div class="col-lg-2 col-md-6 col-sm-12">
+                <div class="col-lg-2 col-md-6 col-sm-4  card-company">
                     <div class="profile-card_1">
                         <a class="link-in-explore-page"
                             href="{{ route('show_company', base64_encode($translation_company->id)) }}">
