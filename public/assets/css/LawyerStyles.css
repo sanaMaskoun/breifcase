@@ -955,6 +955,7 @@ ul.navbar-nav {
     padding: 5px;
 }
 
+/*
 @media screen and (max-width: 755px) {
     .box-sign {
         min-height: 100%;
@@ -1025,13 +1026,16 @@ ul.navbar-nav {
         position: relative;
         top: 70px;
     }
-}
+
+}*/
 
 
 
 
 /***** end join lawyer ****/
-
+.form-group-sign.col-md-6.bio {
+    text-align: justify;
+}
 
 /**** start join translation company ***/
 
@@ -1043,9 +1047,12 @@ ul.navbar-nav {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 1200px;
+    max-width: 1000px !important;
+    max-height: 80vh;
+    overflow-y: scroll;
 }
 
+/*
 .box-sign-2 h2 {
     color: #000000;
     font-weight: 700;
@@ -1101,26 +1108,26 @@ ul.navbar-nav {
     bottom: 15px;
     height: 20px;
 }
-
+*/
 @media screen and (max-width: 755px) {
     .box-sign-2 {
         min-height: auto;
     }
 
-    .form-group-sign {
-        margin-top: 30px;
-    }
+
 
     .img-box-2 {
         height: 50px;
     }
 
+    /*
     .submit-btn {
         display: flex;
         justify-content: right;
         position: relative;
         top: 80px;
     }
+        */
 
     /*
     .file-upload {
@@ -1218,6 +1225,23 @@ ul.navbar-nav {
 
 .box h1 {
     color: #000000;
+}
+
+h1.text_5 {
+    text-align: justify;
+}
+
+.form-group-sign.file-upload.available-24.col-md-12 {
+    padding: 20px;
+}
+
+label.form-check-label.available-text {
+    color: #000;
+    font-weight: 900;
+}
+
+.submit-btn {
+    text-align: justify;
 }
 
 .form-group {

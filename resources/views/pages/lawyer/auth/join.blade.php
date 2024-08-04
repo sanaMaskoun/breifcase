@@ -167,49 +167,6 @@
                     @error('land_line')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
-                </div>
-
-                <div class="Expertise col-md-3">
-                    <label>@lang('pages.top_expertise')</label>
-                    <div class="form-check-1">
-                        @foreach ($practices as $practice)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="expertise1" name="practices[]"
-                                    value="{{ $practice->id }}" @if (is_array(old('practices')) && in_array($practice->id, old('practices'))) checked @endif />
-
-                                {{ $practice->name }}
-                                @error('practices')
-                                    <small class="form-text text-danger">{{ $message }}</small>
-                                @enderror
-                                {{--  <label class="form-check-label" for="expertise1">Expertise 1</label>  --}}
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-
-                <div class="Expertise col-md-3">
-                    <label>@lang('pages.languages')</label>
-                    <div class="form-check-1">
-                        @foreach ($languages as $language)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="languages" name="languages[]"
-                                    value="{{ $language->id }}" @if (is_array(old('languages')) && in_array($language->id, old('languages'))) checked @endif />
-
-                                {{ $language->name }}
-                                @error('languages')
-                                    <small class="form-text text-danger">{{ $message }}</small>
-                                @enderror
-                                {{--  <label class="form-check-label" for="expertise1">Expertise 1</label>  --}}
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="row">
-                <div class="form-group form-group-sign col-md-6 country-1">
                     <label for="country" class="label-inline">@lang('pages.country')</label>
                     <select class="form-control-sign" name="country" id="country" onchange="updateCities()">
                         <option value="">@lang('pages.select_country')</option>
@@ -219,12 +176,6 @@
                     @error('country')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="form-group form-group-sign col-md-6 city-1">
                     <label for="city" class="label-inline">@lang('pages.city')</label>
                     <select class="form-control-sign" id="city" name="city">
                         <option value="">@lang('pages.select_city')</option>
@@ -277,6 +228,68 @@
                     @enderror
                 </div>
 
+                <div class="Expertise col-md-3">
+                    <label>@lang('pages.top_expertise')</label>
+                    <div class="form-check-1">
+                        @foreach ($practices as $practice)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="expertise1" name="practices[]"
+                                    value="{{ $practice->id }}" @if (is_array(old('practices')) && in_array($practice->id, old('practices'))) checked @endif />
+
+                                {{ $practice->name }}
+                                @error('practices')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                @enderror
+                                {{--  <label class="form-check-label" for="expertise1">Expertise 1</label>  --}}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="Expertise col-md-3">
+                    <label>@lang('pages.languages')</label>
+                    <div class="form-check-1">
+                        @foreach ($languages as $language)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="languages" name="languages[]"
+                                    value="{{ $language->id }}" @if (is_array(old('languages')) && in_array($language->id, old('languages'))) checked @endif />
+
+                                {{ $language->name }}
+                                @error('languages')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                @enderror
+                                {{--  <label class="form-check-label" for="expertise1">Expertise 1</label>  --}}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="form-group form-group-sign col-md-6 country-1">
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group form-group-sign col-md-6 location-1">
+                    <label for="location" class="label-inline">@lang('pages.location')</label>
+                    <input type="text" class="form-control-sign input-inline" id="location" name="location"
+                        value="{{ old('location') }}" />
+                    @error('location')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                    @enderror
+                    <label for="emiratesId" class="label-inline">@lang('pages.emirates_id')</label>
+                    <input type="text" class="form-control-sign input-inline" id="emiratesId" name="emirates_id"
+                        value="{{ old('emirates_id') }}" />
+                    @error('emirates_id')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
                 <div class="form-group-sign col-md-6 bio" style="margin-top: 10px">
                     <label for="biography">@lang('pages.bio')</label>
                     <textarea class="form-control-sign" id="biography" rows="3" name="bio" value="{{ old('bio') }}"></textarea>
@@ -287,33 +300,12 @@
             </div>
 
 
-            <div class="row">
-                <div class="form-group-sign col-md-6 location-1">
-                    <label for="location" class="label-inline">@lang('pages.location')</label>
-                    <input type="text" class="form-control-sign input-inline" id="location" name="location"
-                        value="{{ old('location') }}" />
-                    @error('location')
-                        <small class="form-text text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group-sign col-md-6 id-1">
-                    <label for="emiratesId" class="label-inline">@lang('pages.emirates_id')</label>
-                    <input type="text" class="form-control-sign input-inline" id="emiratesId" name="emirates_id"
-                        value="{{ old('emirates_id') }}" />
-                    @error('emirates_id')
-                        <small class="form-text text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-            </div>
 
 
 
 
             <div class="row">
-                <div class="form-group-sign file-upload col-md-6 id-front">
+                <div class="form-group-sign file-upload  id-front">
                     <label for="front" class="label-inline">
                         @lang('pages.emirates_front')
                         <i class="fas fa-upload icon-upload-sign"></i>
@@ -325,10 +317,7 @@
                     @enderror
                     <div id="front-1" class="image-preview-container-1"></div>
                 </div>
-            </div>
-
-            <div class="row id-back">
-                <div class="form-group-sign file-upload col-md-6" style="height: 50px">
+                <div class="form-group-sign file-upload " style="height: 50px">
                     <label for="back" class="label-inline">
                         @lang('pages.emirates_back')
                         <i class="fas fa-upload icon-upload-sign"></i>
@@ -341,9 +330,9 @@
                     <div id="back-1" class="image-preview-container-1"></div>
                 </div>
 
-                <div class="form-group-sign file-upload col-md-6">
+                <div class="form-group-sign file-upload available-24  col-md-12">
                     <div class="form-check chek">
-                        <label class="form-check-label" for="availability">
+                        <label class="form-check-label available-text" for="availability">
                             @lang('pages.available')
                         </label>
                         <br />

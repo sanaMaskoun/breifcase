@@ -7,6 +7,11 @@
 
 }
 
+.box-sign {
+    margin-bottom: 20px !important;
+    padding-bottom: 40px !important;
+}
+
 .list_contact_info:lang(ar) {
     text-align: justify;
     margin-left: 10px;

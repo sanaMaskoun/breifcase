@@ -396,12 +396,47 @@ header {
 }
 
 /*sign*/
+.client-sign .col-md-6.form-group-Sign {
+    display: block;
+    text-align: justify;
+}
 
 .box_1 {
     background-color: rgb(125 125 125 / 71%);
     height: auto;
-    width: 800px;
+
+
     border-radius: 15px;
+}
+
+.col-md-6.form-group {
+    text-align: justify;
+}
+
+button.btn.btn1.submit-client {
+    margin-top: 35px ! IMPORTANT;
+}
+
+.form-group-sign.col-md-6 {
+    text-align: justify !important;
+}
+
+.avv-company {
+    font-weight: 900;
+    color: #000 !important;
+}
+
+.bx-upload:before {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.box_1 {
+    padding: 20px 30px;
+    max-width: 1000px;
+    margin: auto;
+    max-height: 80vh;
+    overflow-y: scroll;
 }
 
 .text_7 {
