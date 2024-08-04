@@ -3,7 +3,7 @@
 
 @endphp
 <header id="header">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex align-items-center my-5 container">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex align-items-center  container">
 
         <a class="navbar-brand" href="{{ route('home_client') }}">
             <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="logo__img img-fluid" />
@@ -119,7 +119,6 @@
                                         {{ $notification->data['created_at'] }}
                                     </span>
                                 </div>
-
                             @elseif($notification->type === 'App\Notifications\ClosedRequestClientNotification')
                                 <div class="media-body flex-grow-1 notification-item">
                                     <p class="notification-title"> @lang('pages.closed_request_notification')
@@ -148,9 +147,10 @@
             </ul>
 
             <a href="{{ route('show_client', $client_encoded_id) }}">
-                <img class="img-profile"  src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__5_-removebg-preview.png') }}" alt="" />
+                <img class="img-profile"
+                    src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__5_-removebg-preview.png') }}" alt="" />
             </a>
-            
+
             </ul>
         </div>
     </nav>

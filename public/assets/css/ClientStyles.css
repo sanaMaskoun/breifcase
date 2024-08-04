@@ -421,6 +421,10 @@ button.btn.btn1.submit-client {
     text-align: justify !important;
 }
 
+.col-md-8.mt-5.body-suggestion {
+    text-align: initial !important;
+}
+
 .avv-company {
     font-weight: 900;
     color: #000 !important;

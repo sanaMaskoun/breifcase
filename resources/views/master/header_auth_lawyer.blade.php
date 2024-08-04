@@ -4,7 +4,7 @@
 @endphp
 
 <header id="header">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex align-items-center my-5 container">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top d-flex align-items-center  container">
 
         @role('lawyer')
             <a class="navbar-brand" href="{{ route('home_lawyer') }}">
@@ -257,7 +257,6 @@
                                     </p>
                                     <span class="notification-time">{{ $notification->data['created_at'] }} </span>
                                 </div>
-
                             @elseif($notification->type === 'App\Notifications\RequestNotification')
                                 <div class="media-body flex-grow-1 notification-item">
                                     <p class="notification-title">

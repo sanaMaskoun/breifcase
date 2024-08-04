@@ -267,11 +267,6 @@
 
 
 
-            <div class="row">
-                <div class="form-group form-group-sign col-md-6 country-1">
-
-                </div>
-            </div>
 
 
             <div class="row">
@@ -330,7 +325,7 @@
                     <div id="back-1" class="image-preview-container-1"></div>
                 </div>
 
-                <div class="form-group-sign file-upload available-24  col-md-12">
+                <div class="form-group-sign  available-24  col-md-12">
                     <div class="form-check chek">
                         <label class="form-check-label available-text" for="availability">
                             @lang('pages.available')

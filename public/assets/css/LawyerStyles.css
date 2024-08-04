@@ -316,8 +316,10 @@ ul.navbar-nav {
     margin-bottom: 0px;
 }
 
-.container-details-document-dashboard {
-    margin-bottom: 1.5rem;
+.list-document-dashboard.suggestion-page .row {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
 }
 
 .details-document-dashboard {
