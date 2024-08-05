@@ -36,11 +36,82 @@ var channelClosedRequest = pusherPrivate.subscribe('private-closed-request-clien
 var channelRequest = pusherPrivate.subscribe('private-request-channel-' + localStorage.getItem('user_id'));
 
 
+
+//chat
+var channelPivateChat = pusherPrivate.subscribe('private-chat-channel-' + localStorage.getItem('user_id'));
+channelPivateChat.bind('chatMessage', function (data) {
+        var chatDiv = document.getElementById('chat_div');
+        var isSender = data.sender_id === localStorage.getItem('user_id');
+
+        var messageDiv = document.createElement('div');
+        messageDiv.classList.add('media', 'media-chat');
+        if (isSender) {
+            messageDiv.classList.add('media-chat-right');
+        }
+
+        var messageBodyDiv = document.createElement('div');
+        messageBodyDiv.classList.add('media-body');
+
+        var textContentDiv = document.createElement('div');
+        textContentDiv.classList.add('text-content');
+
+        if (data.attachment) {
+            var extension = data.attachment.extension.toLowerCase();
+
+            if (['jpg', 'png', 'jpeg', 'gif'].includes(extension)) {
+
+
+                var imgElement = document.createElement('img');
+                imgElement.classList.add('img_group', 'clickable');
+                imgElement.src = data.attachment.url;
+
+                textContentDiv.appendChild(imgElement);
+                if (data.message) {
+                    var messageSpan = document.createElement('span');
+                    messageSpan.classList.add('message');
+                    messageSpan.textContent = data.message;
+                    textContentDiv.appendChild(messageSpan);
+                }
+            } else {
+                var attachmentLink = document.createElement('a');
+                attachmentLink.href = data.attachment.url;
+                attachmentLink.target = "_blank";
+                attachmentLink.innerHTML = `<p class="message">${data.message}</p>`;
+                textContentDiv.appendChild(attachmentLink);
+            }
+        } else {            console.log(789);
+
+            var messageSpan = document.createElement('span');
+            messageSpan.classList.add('message');
+            messageSpan.textContent = data.message;
+            textContentDiv.appendChild(messageSpan);
+        }
+
+        // إضافة الوقت
+        var timeElement = document.createElement('time');
+        timeElement.classList.add('time');
+        timeElement.textContent = new Date(data.created_at).toLocaleString();
+        textContentDiv.appendChild(timeElement);
+
+        // تجميع الهيكل
+        messageBodyDiv.appendChild(textContentDiv);
+        messageDiv.appendChild(messageBodyDiv);
+        chatDiv.appendChild(messageDiv);
+
+        // التمرير التلقائي إلى الأسفل
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+
+        // إضافة وظيفة عرض الصور الكبيرة
+        const newImages = document.querySelectorAll(".img_group.clickable");
+        newImages.forEach(addModalFunctionality);
+    });
+
+
 channelRequest.bind('App\\Events\\RequestEvent', function(data) {
     var newRequest = `
 
             <div class="media-body flex-grow-1 notification-item">
-                <p class="notification-title">A Request has been sent by
+                <p class="notification-title">${translatedSendRequest}
                     <span class="details_notification">${data.client_name} :</span>
                     <span>
                         <a class="notification-link" href="/document/request/${data.document_encoded_id}/show">
@@ -64,12 +135,13 @@ channelRequest.bind('App\\Events\\RequestEvent', function(data) {
     notificationsWrapper.find('.notif-count').text(notificationsCount);
     notificationsWrapper.show();
 });
+
 channelClosedConsultation.bind('closedConsultationClient', function(data) {
     var newClosedConsultation = `
    <li class="notification-message">
         <div class="media d-flex">
             <div class="media-body flex-grow-1 notification-item">
-                  <p class="notification-title">This consultation has been closed
+                  <p class="notification-title">${translatedClosedConsultation}
                       <span>
                           <a class="notification-link"
                               href="/consultation/${data.consultation_encode_id}/details">
@@ -97,7 +169,7 @@ channelClosedRequest.bind('closedRequestClient', function(data) {
    <li class="notification-message">
         <div class="media d-flex">
             <div class="media-body flex-grow-1 notification-item">
-                  <p class="notification-title">This request has been closed
+                  <p class="notification-title">${translatedClosedRequest}
                       <span>
                           <a class="notification-link"
                               href="/document/request/${data.request_encode_id}/show">
@@ -126,7 +198,7 @@ channelClosedCase.bind('closedCaseClient', function(data) {
     <li class="notification-message">
         <div class="media d-flex">
             <div class="media-body flex-grow-1 notification-item">
-                  <p class="notification-title">This case has been closed
+                  <p class="notification-title">${translatedClosedCase}
                       <span>
                           <a class="notification-link"
                               href="/case/${data.case_encode_id}/show">
@@ -155,7 +227,7 @@ channelConsultation.bind('App\\Events\\ConsultationEvent', function(data) {
     <li class="notification-message">
         <div class="media d-flex">
             <div class="media-body flex-grow-1 notification-item">
-                <p class="notification-title">A consultation has been sent by
+                <p class="notification-title">${translatedSendConsultation}
                     <span class="details_notification">${data.client_name} :</span>
                     <span>
                         <a class="notification-link" href="/consultation/${data.consultation_encoded_id}/details">
@@ -186,8 +258,7 @@ channelCase.bind('App\\Events\\CaseEvent', function(data) {
     <li class="notification-message">
         <div class="media d-flex">
             <div class="media-body flex-grow-1 notification-item">
-                <p class="notification-title">A case has been sent by
-                    <span class="details_notification">${data.lawyer_name} :</span>
+                <p class="notification-title">${translatedSendCase}
                     <span>
                         <a class="notification-link" href="/case/${data.case_encoded_id}/details">
                             <span class="notification-title">${data.case_title}</span>
@@ -218,7 +289,7 @@ channelAcceptCase.bind('App\\Events\\AcceptCaseEvent', function(data) {
     <li class="notification-message">
         <div class="media d-flex">
             <div class="media-body flex-grow-1 notification-item">
-                <p class="notification-title">The case has been accepted by
+                <p class="notification-title">${translatedAcceptCase}
                     <span class="details_notification">${data.client_name} :</span>
                     <span>
                         <a class="notification-link" href="/case/${data.case_encoded_id}/show">
@@ -250,7 +321,7 @@ channelRejectCase.bind('App\\Events\\RejectCaseEvent', function(data) {
     <li class="notification-message">
         <div class="media d-flex">
             <div class="media-body flex-grow-1 notification-item">
-                <p class="notification-title">The case was rejected by
+                <p class="notification-title">${translatedRejectCase}
                     <span class="details_notification">${data.client_name} :</span>
                     <span>
                         <a class="notification-link" href="/case/${data.case_encoded_id}/show">
@@ -302,55 +373,7 @@ channelPivateNewChat.bind('newChatMessage', function (data) {
 
 });
 
-//chat
-var channelPivateChat = pusherPrivate.subscribe('private-chat-channel-' + localStorage.getItem('user_id'));
-channelPivateChat.bind('chatMessage', function (data) {
-    var extension = data.attachment ? data.attachment.extension.toLowerCase() : null;
-    message = "";
-    let receiverMessage = `
-    <div class="media media-chat" id="chat_area_receiver">
-        <div class="media-body">
-            <div class="text-content">
-                ${data.attachment ?
-            (extension === 'jpg' || extension === 'png' ?
-                `<img class="img_group clickable" src="${data.attachment.url}">
-                 <span class="message">${data.message}</span>` :
-                `<a href="${data.attachment.url}" target="_blank"><p class="message">${data.message}</p></a>`) :
-            `<p class="message">${data.message}</p>`}
-                <time class="time">${data.created_at}</time>
-            </div>
-        </div>
-    </div>`;
 
-    let senderMessage = `
-    <div class="media media-chat media-chat-right" id="chat_area_sender">
-        <div class="media-body">
-            <div class="text-content">
-                ${data.attachment ?
-            (extension === 'jpg' || extension === 'png' ?
-                `<img class="img_group clickable" src="${data.attachment.url}">
-                 <span class="message">${data.message}</span>` :
-                `<a href="${data.attachment.url}" target="_blank"><p class="message">${data.message}</p></a>`) :
-            `<p class="message">${data.message}</p>`}
-                <time class="time">${data.created_at}</time>
-            </div>
-        </div>
-    </div>`;
-
-    if (data.sender_id === localStorage.getItem('user_id')) {
-        message = senderMessage;
-    } else if (data.receiver_id === localStorage.getItem('user_id')) {
-        message = receiverMessage;
-    }
-
-    if (message != "") {
-        $('.empty-messages').remove();
-    }
-    $("#chat_div").append(message);
-
-     const newImages = document.querySelectorAll(".img_group.clickable");
-     newImages.forEach(addModalFunctionality);
-});
 
 
 //counter chat

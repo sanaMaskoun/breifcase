@@ -112,6 +112,7 @@
                 var channelClosedConsultation = pusherPrivate.subscribe('private-closed-consultation-admin-channel');
                 var channelClosedRequest = pusherPrivate.subscribe('private-closed-request-admin-channel');
 
+                var translatedRequestToJoin = "{{ __('pages.request_to_join') }}";
 
                 $(document).ready(function() {
 
@@ -119,7 +120,7 @@
                         var newNotificationHtml = `
                             <div class="media-body flex-grow-1 notification-item">
                                 <a class="notification-link" href="/request-to-join">
-                                    <span class="notification-title">these user request to join: ${data.user_name}</span>
+                                    <span class="notification-title"> ${translatedRequestToJoin} ${data.user_name}</span>
                                 </a>
                                 <span class="notification-time">${data.date}</span>
                             </div>
@@ -137,7 +138,7 @@
                     var newClosedRequest = `
 
                             <div class="media-body flex-grow-1 notification-item">
-                                  <p class="notification-title">This request has been closed
+                                  <p class="notification-title">{{ __('pages.closed_case_notification') }}
                                       <span>
                                           <a class="notification-link"
                                               href="/document/request/${data.request_encode_id}/show">
@@ -163,7 +164,7 @@
                     var newClosedConsultation = `
 
                             <div class="media-body flex-grow-1 notification-item">
-                                  <p class="notification-title">This consultation has been closed
+                                  <p class="notification-title">{{ __('pages.closed_consultation_notification') }}
                                       <span>
                                           <a class="notification-link"
                                               href="/consultation/${data.consultation_encode_id}/details">
@@ -190,7 +191,7 @@
                     var newClosedCase = `
 
                             <div class="media-body flex-grow-1 notification-item">
-                                  <p class="notification-title">This case has been closed
+                                  <p class="notification-title">{{ __('pages.closed_case_notification') }}"
                                       <span>
                                           <a class="notification-link"
                                               href="/case/${data.case_encode_id}/show">
@@ -219,7 +220,7 @@
                     var newRefundConsultationHtml = `
                         <div class="media-body flex-grow-1 notification-item">
                             <a class="notification-link" href="/consultation/${data.consultation_encoded_id}/details">
-                                <span class="notification-title">This consultation has not been responded to. Return the amount to the customer: ${data.title}</span>
+                                <span class="notification-title">{{ __('pages.refund_consultation_notification') }} ${data.title}</span>
                             </a>
                          <span class="notification-time">${formattedDate}</span>
                         </div>

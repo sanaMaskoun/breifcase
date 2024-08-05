@@ -62,11 +62,32 @@ class ChatApiController extends Controller
         }
 
         $message = $new_message->message;
-        $sender_id = auth()->user()->id;
-        $created_at = $new_message->created_at->diffForHumans();
-        $attachment = $request->attachments ? null : $new_message->getFirstMediaUrl('attachments');
 
-        broadcast(new chatPrivateEvent($receiver, $sender_id, $message, $attachment, $created_at));
+        $receiver_data = [
+            'receiver_encoded_id' => base64_encode($receiver->id),
+            'receiver_id' => $receiver->id,
+            'name' => $receiver->name,
+            'profile' => $receiver->getFirstMediaUrl('profile'),
+        ];
+        $sender_data = [
+            'sender_encoded_id' => base64_encode(auth()->user()->id),
+            'sender_id' => auth()->user()->id,
+            'name' => auth()->user()->name,
+            'profile' => Auth()->user()->getFirstMediaUrl('profile'),
+        ];
+        $created_at = $new_message->created_at->diffForHumans();
+        $attachment = null;
+
+        if ($new_message->getFirstMediaUrl('attachments') != null) {
+            $media = $new_message->getMedia('attachments')->first();
+            $mime_type = $media->mime_type;
+            $extension = explode('/', $mime_type)[1];
+            $attachment = [
+                'url' => $media->getUrl(),
+                'extension' => $extension,
+            ];
+        }
+        broadcast(new chatPrivateEvent($receiver_data, $sender_data , $message, $attachment, $created_at));
 
         return new ChatResource($new_message->load('receiver', 'sender'));
 

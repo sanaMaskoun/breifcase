@@ -23,7 +23,7 @@ return [
     'person_suggestion_notification' => 'بواسطة',
     'evaluted_question_notification' => 'تم تقييم ردك على السؤال العام بواسطة:',
     'sent_consultation_notification' => 'تم إرسال الاستشارة بواسطة ',
-    'sent_case_notification' => 'تم إرسال قضية بواسطة ',
+    'sent_case_notification' => 'تم إرسال قضية  ',
     'sent_request_notification' => 'تم إرسال طلب بواسطة ',
     'accept_case_notification' => 'تم قبول القضية من قبل ',
     'reject_case_notification' => 'تم رفض القضية من قبل ',

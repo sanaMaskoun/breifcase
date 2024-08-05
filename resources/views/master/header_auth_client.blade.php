@@ -71,8 +71,8 @@
                             @if ($notification->type === 'App\Notifications\CaseNotification')
                                 <div class="media-body flex-grow-1 notification-item">
                                     <p class="notification-title"> @lang('pages.sent_case_notification')
-                                        <span class="details_notification">{{ $notification->data['lawyer_name'] }}:
-                                        </span>
+                                        {{--  <span class="details_notification">{{ $notification->data['lawyer_name'] }}:
+                                        </span>  --}}
 
                                         <span>
                                             <a class="notification-link"
@@ -154,4 +154,11 @@
             </ul>
         </div>
     </nav>
+    <script>
+        var translatedSendCase = "{{ __('pages.sent_case_notification') }}";
+        var translatedClosedCase = "{{ __('pages.closed_case_notification') }}";
+        var translatedClosedConsultation = "{{ __('pages.closed_consultation_notification') }}";
+        var translatedClosedRequest = "{{ __('pages.closed_request_notification') }}";
+
+    </script>
 </header>

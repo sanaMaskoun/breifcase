@@ -294,4 +294,20 @@
             </ul>
         </div>
     </nav>
+    <script>
+        var translatedSendCase = "{{ __('pages.sent_case_notification') }}";
+        var translatedClosedCase = "{{ __('pages.closed_case_notification') }}";
+        var translatedRejectCase = "{{ __('pages.reject_case_notification') }}";
+        var translatedAcceptCase = "{{ __('pages.accept_case_notification') }}";
+
+        var translatedClosedConsultation = "{{ __('pages.closed_consultation_notification') }}";
+        var translatedRefundConsultation = "{{ __('pages.refund_consultation_notification') }}";
+        var translatedSendConsultation = "{{ __('pages.sent_consultation_notification') }}";
+
+        var translatedClosedRequest = "{{ __('pages.closed_request_notification') }}";
+        var translatedSendRequest = "{{ __('pages.sent_request_notification') }}";
+
+        var translatedRequestToJoin = "{{ __('pages.request_to_join') }}";
+
+    </script>
 </header>

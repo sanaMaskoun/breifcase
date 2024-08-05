@@ -67,12 +67,12 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth:sanctum'], function ()
 });
 
 
-Route::group(['prefix' => 'practice', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'practice'], function () {
     Route::get('/', [PracticeApiController::class, 'index']);
 
 });
 
-Route::group(['prefix' => 'language', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'language'], function () {
     Route::get('/', [LanguageApiController::class, 'index']);
 
 });

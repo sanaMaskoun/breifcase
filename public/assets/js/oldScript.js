@@ -13,10 +13,6 @@ $(document).ready(function () {
 });
 
 
-
-
-
-
 const fileInput = document.getElementById('fileInput');
 fileInput.addEventListener('change', function () {
     const fileName = this.files[0].name;
@@ -38,7 +34,6 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (response) {
-                // تفريغ محتوى حقل النص
                 form.find('textarea[name="message"]').val('');
 
                 // إنشاء عناصر DOM لعرض الرسالة الجديدة
