@@ -27,7 +27,7 @@
                     <h2 class="text_explore_lawyer">@lang('pages.lawyers')</h2>
                     <div class="row" id="lawyer-list">
                         @foreach ($lawyers as $lawyer)
-                            <div class="profile-card col-lg-2 col-md-6 col-sm-12">
+                            <div class="profile-card col-lg-2 col-md-6 col-sm-12" data-encoded-id="{{ base64_encode($lawyer->id) }}">
                                 @php
                                     $lawyer_encoded_id = base64_encode($lawyer->id);
                                 @endphp

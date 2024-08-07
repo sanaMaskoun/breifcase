@@ -51,7 +51,7 @@ a.link-profile {
     font-weight: 900;
     font-size: 30px;
     display: flex;
-    text-align: inherit;
+    text-align: initial;
     justify-content: start;
 
 }
@@ -724,7 +724,7 @@ ul.navbar-nav {
 }
 
 .label-inline {
-    text-align: justify;
+    text-align: initial;
     white-space: nowrap;
 }
 
@@ -1036,7 +1036,7 @@ ul.navbar-nav {
 
 /***** end join lawyer ****/
 .form-group-sign.col-md-6.bio {
-    text-align: justify;
+    text-align: initial;
 }
 
 /**** start join translation company ***/
@@ -1230,7 +1230,7 @@ ul.navbar-nav {
 }
 
 h1.text_5 {
-    text-align: justify;
+    text-align: initial;
 }
 
 .form-group-sign.file-upload.available-24.col-md-12 {
@@ -1243,7 +1243,7 @@ label.form-check-label.available-text {
 }
 
 .submit-btn {
-    text-align: justify;
+    text-align: initial;
 }
 
 .form-group {
@@ -1251,17 +1251,17 @@ label.form-check-label.available-text {
 }
 
 small.form-text.text-danger {
-    text-align: justify;
+    text-align: initial;
 }
 
 .form-check {
 
-    text-align: justify;
+    text-align: initial;
     padding-right: 1.25rem;
 }
 
 .Expertise.col-md-3 {
-    text-align: justify;
+    text-align: initial;
 }
 
 .file-upload {
@@ -1451,7 +1451,7 @@ small.form-text.text-danger {
 }
 
 .sidebar {
-    height: 100vh;
+    /* height: 100vh; */
     background-color: rgb(125 125 125 / 71%);
     padding: 20px;
     margin-left: 20px;

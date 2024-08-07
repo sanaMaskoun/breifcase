@@ -109,8 +109,8 @@ $(document).ready(function () {
                 $('#lawyer-list').empty();
                 if (data.lawyers.length > 0) {
                     $.each(data.lawyers, function (index, lawyer) {
-                        var lawyerHtml = '<div class="profile-card col-lg-3 col-md-6 col-sm-12">' +
-                            '<a class="link-in-explore-page" href="/lawyer/' + lawyer.encoded_id + '">' +
+                        var lawyerHtml = '<div class="profile-card col-lg-2 col-md-6 col-sm-12">' +
+                            '<a class="link-in-explore-page" href="/lawyer/' + lawyer.encoded_id +'/show">' +
                             '<img src="' + lawyer.profile_url + '" alt="Profile" />' +
                             '<p class="name-in-explore-page">' + lawyer.name + '</p>' +
                             '</a></div>';
@@ -154,10 +154,12 @@ $(document).ready(function () {
                 $('#company-list').empty();
                 if (data.translation_companies.length > 0) {
                     $.each(data.translation_companies, function (index, company) {
-                        var companyHtml = '<div class="profile-card col-lg-3 col-md-6 col-sm-12">' +
-                            '<img src="' + company.profile_url + '" alt="Profile" />' +
+                        console.log(company.company_encoded_id);
+                        var companyHtml = '<div class=" col-lg-2 col-md-6 col-sm-4 card-company"><div class="profile-card_1 ">' +
+                                '<a class="link-in-explore-page" href="/translation-company/' + company.company_encoded_id +'/show">'+
+                            '<img src="' + company.profile_url + '" alt="Profile" /></a> ' +
                             '<p>' + company.name + '</p>' +
-                            '</div>';
+                            '</div> </div>';
                         $('#company-list').append(companyHtml);
                     });
                 } else {

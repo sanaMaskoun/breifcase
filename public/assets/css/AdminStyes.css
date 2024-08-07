@@ -13,13 +13,13 @@
 }
 
 .list_contact_info:lang(ar) {
-    text-align: justify;
+    text-align: initial;
     margin-left: 10px;
     margin-right: 10px;
 }
 
 .box-news.mt-3 {
-    text-align: justify;
+    text-align: initial;
 }
 
 .selected-filter {
@@ -107,7 +107,7 @@ div:lang(ar) .custom-control-label::after {
 
     .Expertise.col-md-3 {
         width: 50%;
-        text-align: justify;
+        text-align: initial;
     }
 
     .container.box-sign.mt-5 .row {
@@ -133,10 +133,98 @@ div:lang(ar) .custom-control-label::after {
         padding: 10px 0;
     }
 
+    .filter-translation-companies {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .box1 {
+        margin-bottom: 20px;
+    }
+
+    .profile-card img {
+        max-width: 75%;
+
+
+    }
+
+    .sidebar.explore_lawyer .row {
+        display: block !important;
+    }
+
+    .sidebar.explore_lawyer .container {
+        max-width: 100% !important;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+
+    a.language-link,
+    a.practice-link {
+        width: 49% !important;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        display: inline-block !important;
+    }
+
+    .sidebar.explore_lawyer .col-lg-6 {
+        padding: 5px;
+        display: block !important;
+
+    }
+
+    .content {
+
+        height: auto !important;
+
+    }
+
+    .content.explore_lawyer.col-lg-8.col-md-9.col-sm-12 {
+        padding: 5px !important;
+    }
+
+    .col-lg-2.col-md-6.col-sm-4.card-company {
+        padding: 5px;
+    }
+
+    .content.explore_lawyer .profile-card {
+        flex: 1 1 45%;
+        padding: 5px;
+        margin: 10px auto;
+        max-width: 45%;
+    }
+
+    .content.explore_lawyer .profile-card img {
+        max-width: 75%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .sidebar.explore_lawyer {
+
+        padding: 10px !important;
+        margin-left: 0 !important;
+
+    }
+
+    .profile-card_1 {
+
+        padding: 5px !important;
+
+    }
+
     .card-company {
         width: 50%;
-        padding: 5px;
+
+
         margin: 0 !important;
+        display: block !important;
+        flex: unset;
+    }
+
+    .profile-card_1 img {
+        max-width: 100%;
+
     }
 
     .logo__img {
@@ -194,6 +282,32 @@ div:lang(ar) .custom-control-label::after {
         position: fixed;
         bottom: 0;
         width: 100%;
+    }
+
+    h2.text_7 {
+        font-size: 40px;
+    }
+
+    .row.text-center.content-dashboard.box-book.mt-3 {
+        margin-bottom: 50px
+    }
+
+    .row.text-center.content-dashboard.box-book.mt-3 {
+        max-height: max-content;
+        padding: 10px 5px;
+    }
+
+    .col-lg-2.col-md-3.mb-4.book-1 {
+        margin-bottom: 5px !important;
+        padding: 5px !important;
+    }
+
+    .row.search-bar-lib {
+        width: 100%;
+        justify-content: flex-start !important;
+        display: flex;
+        margin: auto;
+        margin-bottom: 20px;
     }
 
     .chat-dashboard ul.nav {
@@ -322,8 +436,37 @@ div:lang(ar) .custom-control-label::after {
         margin-top: 0;
     }
 
+    .col-12.d-flex.header_lang .card-language.col-12 {
+        display: block;
+        grid-column: 2;
+        column-count: 2;
+        margin-bottom: 20px;
+    }
+
+    /*
+    .sidebar.explore_lawyer.col-lg-4.col-md-3.col-sm-12 {
+        margin: 0;
+        padding: 0;
+        display: block;
+    }
+
+    .sidebar.explore_lawyer.col-lg-4.col-md-3.col-sm-12 .container {
+        max-width: 100% !important;
+        padding: 5px !important;
+    }
+*/
+    .sidebar {
+        height: auto !important;
+
+    }
+
     header {
-        margin-bottom: 120px;
+        margin-bottom: 100px;
+    }
+
+    nav.navbar.navbar-expand-lg.navbar-light.fixed-top.d-flex.align-items-center {
+        max-height: 85px;
+        background: #7d7d7dd9;
     }
 
     .content-dashboard.col-lg-9.col-md-1 h2 {

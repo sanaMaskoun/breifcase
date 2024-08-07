@@ -1,7 +1,7 @@
 @extends('master.app')
 
 @section('content')
-    <div>
+    <div class="container login">
         <div class="row">
             @if (Session::has('error'))
                 <div class="alert alert-danger text-center" role="alert">
@@ -14,15 +14,16 @@
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-12 ">
-                <div class="box_1">
+                <div class="box-login">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-12 form-group-Sign">
+                                <div class="col-md-12 form-group-Sign ">
                                     <label for="email">@lang('pages.email'):</label>
                                     <div class="input-group form_login">
-                                        <input type="email" id="email" name="email" value="{{ old('email')}}" class="form-control" />
+                                        <input type="email" id="email" name="email" value="{{ old('email') }}"
+                                            class="form-control" />
                                         {{--  <div class="input-group-append">
                                             <span>
                                                 <i class="fas fa-user-circle"></i> </span>
@@ -60,5 +61,4 @@
             </div>
         </div>
     </div>
-
 @endsection

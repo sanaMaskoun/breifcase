@@ -16,7 +16,7 @@
     </style>
 </head>
 
-<body>
+<body class="faq">
     <section class="container-about">
         <div class="container">
             <div class="overlay"></div>
@@ -252,7 +252,7 @@
 
     </section>
 
-    <section class="container-about mt-3">
+    <section class="container-about mt-3 paddfaq">
         <div class="container">
             <div class="overlay"></div>
             <div class="faq-header">

@@ -31,17 +31,21 @@ img.img-news {
     max-height: 80px;
 }
 
+/*
 .input-group.form_login .input-group-append {
     position: absolute;
     right: 10px;
     top: 10px;
     z-index: 1234;
 }
+*/
 
+section.home-home {
+    margin-bottom: 50px;
+}
 
-
-[dir="rtl"] .form_login {
-    right: -89px !important;
+.form-group-Sign {
+    text-align: initial;
 }
 
 [dir="rtl"] .logo__name {
@@ -146,7 +150,7 @@ header {
 
 @media screen and (max-width: 980px) {
     .navbar-nav {
-        width: 100%;
+        width: 90%;
         background: #494646;
     }
 }
@@ -398,7 +402,7 @@ header {
 /*sign*/
 .client-sign .col-md-6.form-group-Sign {
     display: block;
-    text-align: justify;
+    text-align: initial;
 }
 
 .box_1 {
@@ -410,7 +414,7 @@ header {
 }
 
 .col-md-6.form-group {
-    text-align: justify;
+    text-align: initial;
 }
 
 button.btn.btn1.submit-client {
@@ -418,7 +422,7 @@ button.btn.btn1.submit-client {
 }
 
 .form-group-sign.col-md-6 {
-    text-align: justify !important;
+    text-align: initial !important;
 }
 
 .col-md-8.mt-5.body-suggestion {
@@ -455,7 +459,7 @@ button.btn.btn1.submit-client {
 }
 
 .form-group-Sign {
-    display: flex;
+    display: block;
     /* align-items: center; */
     margin-top: 15px;
 }
@@ -466,7 +470,6 @@ button.btn.btn1.submit-client {
 
 .form-group-Sign label {
     flex: 0 0 30%;
-    margin-bottom: 20px;
     font-weight: 500;
     font-size: 18px;
     padding-right: 10px;
@@ -1639,10 +1642,19 @@ nav.navbar.navbar-expand-lg.navbar-light.fixed-top.d-flex.align-items-center.my-
       background-color: red;
       color: white;
   } */
-
+/*
 .form_login {
     position: relative;
     right: 68px;
+}
+*/
+.box-login .container {
+    background: rgb(125 125 125 / 71%);
+}
+
+.alert.alert-danger.text-center {
+    display: block;
+    width: 100%;
 }
 
 .btn_login {
@@ -1652,6 +1664,7 @@ nav.navbar.navbar-expand-lg.navbar-light.fixed-top.d-flex.align-items-center.my-
     color: white;
     padding: 10px;
     border: none;
+    width: 100%;
 }
 
 .btn_post_general_question {

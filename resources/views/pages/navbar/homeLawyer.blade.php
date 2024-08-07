@@ -2,7 +2,7 @@
 @section('content')
     <!-- home section starts  -->
 
-    <section>
+    <section class="home-home">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-sm-12">
@@ -54,23 +54,24 @@
                             <div class="container">
                                 <div class="row">
                                     @foreach ($news as $object)
-                                    <a class="link-show-news" href="{{ route('show_news', base64_encode($object->id)) }}">
+                                        <a class="link-show-news"
+                                            href="{{ route('show_news', base64_encode($object->id)) }}">
 
-                                        <div class="col-lg-8 news-item mb-4 p-2 border-bottom">
-                                            <p class="news-text">{{ $object->title }}</p>
-                                            <span>{{ $object->short_description }}</span>
+                                            <div class="col-lg-8 news-item mb-4 p-2 border-bottom">
+                                                <p class="news-text">{{ $object->title }}</p>
+                                                <span>{{ $object->short_description }}</span>
 
-                                        </div>
+                                            </div>
 
-                                        <div class="col-lg-4 news-item mb-4 p-2 border-bottom">
-                                            @if ($object->getFirstMediaUrl('news'))
-                                                <img src="{{ $object->getFirstMediaUrl('news') }}" alt="News Image"
-                                                    class="img-fluid rounded img_news" />
-                                            @endif
+                                            <div class="col-lg-4 news-item mb-4 p-2 border-bottom">
+                                                @if ($object->getFirstMediaUrl('news'))
+                                                    <img src="{{ $object->getFirstMediaUrl('news') }}" alt="News Image"
+                                                        class="img-fluid rounded img_news" />
+                                                @endif
 
 
-                                        </div>
-                                    </a>
+                                            </div>
+                                        </a>
                                     @endforeach
                                 </div>
                             </div>

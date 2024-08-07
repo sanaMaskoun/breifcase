@@ -30,8 +30,8 @@
 
         <div id="company-list" class="row filter-translation-companies">
             @foreach ($translation_companies as $translation_company)
-                <div class="col-lg-2 col-md-6 col-sm-4  card-company">
-                    <div class="profile-card_1">
+            <div class="col-lg-2 col-md-6 col-sm-4 card-company" data-encoded-id="{{ base64_encode($translation_company->id) }}">
+                <div class="profile-card_1">
                         <a class="link-in-explore-page"
                             href="{{ route('show_company', base64_encode($translation_company->id)) }}">
                             <img src="{{ $translation_company->getFirstMediaUrl('profile') }}" alt="Profile" />

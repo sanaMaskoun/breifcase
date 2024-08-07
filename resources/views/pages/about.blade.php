@@ -336,7 +336,7 @@
                 <div class="content-final">
                     <p>@lang('pages.final_page')
                     </p>
-                    <h2 class="mt-5">@lang('pages.footer_final_page')</h2>
+                    <h2 class="mt-5 pb-5">@lang('pages.footer_final_page')</h2>
                 </div>
             </div>
         </div>

@@ -40,8 +40,8 @@ class TranslationCompanyController extends Controller
         $company_decoded_id = base64_decode($company_encoded_id);
         $company = User::find($company_decoded_id);
 
-        $get_notify = DB::table('notifications')->where('data->user_id', $company->id)->where('notifiable_id', Auth()->user()->id)->first();
-        if ($get_notify != null) {DB::table('notifications')->where('id', $get_notify->id)->update(['read_at' => now()]);}
+        // $get_notify = DB::table('notifications')->where('data->user_id', $company->id)->where('notifiable_id', Auth()->user()->id)->first();
+        // if ($get_notify != null) {DB::table('notifications')->where('id', $get_notify->id)->update(['read_at' => now()]);}
 
         return view('pages.company.show', compact('company'));
     }
