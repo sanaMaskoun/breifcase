@@ -94,7 +94,7 @@
                         </div>
 
 
-                        <div class="text-right">
+                        {{--  <div class="text-right">
                             <a href="{{ route('send_request', base64_encode($company->id)) }}"
                                 class=" btn1">@lang('pages.send_request')</a>
 
@@ -102,7 +102,7 @@
                                 @lang('pages.contact') <br/>
                                 <i class="bx bx-chat bx-chat-1"></i>
                             </a>
-                        </div>
+                        </div>  --}}
 
 
                     </div>
@@ -115,7 +115,65 @@
 
 
 
-            @yield('form_document')
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="card box  card-1 card_send_consultation">
+                    <p> @lang('pages.title_page_send_request')</p>
+
+                    <form method="POST" action="{{ route('store_request', base64_encode($company->id)) }}"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
+                            <input type="text" name="title" class="title-consultation" placeholder="@lang('pages.title')">
+                            @error('title')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center text-Questions">
+                            <textarea name="description" placeholder=" @lang('pages.description_page_send_request')"></textarea>
+                            @error('description')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+
+                        <div class="col-md-12 form-group upload-documents">
+                            <label for="upload_document">@lang('pages.upload_document')</label>
+                            <label for="upload_document" class="upload-icon">
+                                <i class="bx bx-upload icon-sign"></i>
+                            </label>
+                            <input type="file" id="upload_document" name="upload_document" class="custom-file-input" required
+                                onchange="handleFileUpload()" />
+
+                            <div id="upload_document_preview" style="margin-top: 10px; display: none;">
+
+                                    <img id="image_preview" style="max-width: 100%; max-height: 50px;display: none;">
+
+                                    <iframe id="file_preview" style="width: 0; height: 0; display:none!important;">
+                                    </iframe>
+
+                                    <div id="file_info" style="display: flex; align-items: center;">
+                                        <button id="remove_file" onclick="removeFile()" style="display: none; margin-top: 10px;">
+                                            <i class="bx bx-x icon-remove"></i>
+                                        </button>
+                                    <i class="bx bx-file icon-file"></i>
+                                    <p id="file_name" style="margin: 0; font-size: 12px;"></p>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+
+                        <p> @lang('pages.rejected_document') </p>
+
+                        <div class="col-md-12 d-flex justify-content-center btn">
+                            <button type="submit" class="btn1">@lang('pages.pay_send')</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
 
 
         </div>

@@ -98,6 +98,8 @@ Route::group(['prefix' => 'general-question', 'middleware' => 'auth:sanctum'], f
     Route::post('/reply/{general_question}', [GeneralQuestionController::class, 'store_reply'])->name('store_reply_general_question');
 
 });
+Route::get('/general-question/reply/{encoded_general_question}', [GeneralQuestionController::class, 'reply'])->name('reply_general_question');
+
 Route::get('general-question', [GeneralQuestionController::class, 'home'])->name('home_general_questions');
 
 Route::group(['prefix' => 'lawyer', 'middleware' => 'auth:sanctum'], function () {
