@@ -1475,8 +1475,13 @@ small.form-text.text-danger {
     border-radius: 15px;
     background-color: rgb(125 125 125 / 71%);
     padding: 20px;
-    height: 72ch;
-    overflow-y: scroll;
+
+
+}
+
+.filter-lawyer {
+    justify-content: center;
+    /* width: 100% !important; */
 }
 
 .reviews {

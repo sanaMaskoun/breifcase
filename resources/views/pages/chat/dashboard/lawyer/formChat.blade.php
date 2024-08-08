@@ -5,7 +5,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat" id="contact-list">
+                <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat form-hide-chat" id="contact-list">
                     <div class="list-group">
                         <ul class="card-body px-0" id="new_chat_div">
 

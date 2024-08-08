@@ -5,7 +5,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat" id="contact-list">
+                <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat form-hide-chat" id="contact-list">
                     <div class="list-group">
                         @foreach ($general_chats as $object)
                             <a href="{{ route('general_chat_form', base64_encode($object->id)) }}" class="list-group-item1"

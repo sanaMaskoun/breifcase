@@ -24,7 +24,7 @@
 
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat" id="contact-list">
+                            <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat form-hide-chat" id="contact-list">
                                 <div class="list-group">
                                     @foreach ($users as $user)
                                         <a href="{{ route('chat_company_form', base64_encode($user->id)) }}"

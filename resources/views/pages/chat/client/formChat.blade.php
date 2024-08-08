@@ -6,7 +6,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat" id="contact-list">
+                <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat form-hide-chat" id="contact-list">
                     <div class="list-group">
                         <ul class="card-body px-0" id="new_chat_div">
 
@@ -119,15 +119,16 @@
                                 action="{{ route('send_message_to_user', base64_encode($receiver->id)) }}" method="POST"
                                 enctype="multipart/form-data" class="form_chat_profile">
                                 @csrf
-                                <div class="container">
+                                <div class="container footerchat" id="footer">
                                     <div class="row">
-                                        <div class="col-lg-10 d-flex align-items-center">
+                                        <div class="col-lg-10 d-flex align-items-center form-contact-chat">
                                             <textarea name="message" class="form-control message-input" placeholder="@lang('pages.type_message')"></textarea>
                                             <button class="btn send-button" type="submit"><i
                                                     class="fas fa-paper-plane"></i></button>
                                         </div>
 
-                                        <div class="col-lg-2 d-flex justify-content-center align-items-center">
+                                        <div
+                                            class="col-lg-2 d-flex justify-content-center align-items-center send-document">
                                             <label for="fileInput" class="send_file_chat">
                                                 <i class="fas fa-paperclip"></i>
                                             </label>

@@ -14,20 +14,19 @@
 
         $client_encoded_id = base64_encode($client->id);
 
-
     @endphp
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 ">
-                <div class="box-profile">
+            <div class="col-lg-4 col-md-6 col-sm-12  ">
+                <div class="box-profile chat-client-page">
                     <div class="row">
-                        <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="col-lg-4 col-md-12 col-sm-12 ">
                             <img src="{{ $client->getFirstMediaUrl('profile') }}" alt="" class="img_3" />
                         </div>
                         <div class="col-lg-8 col-md-12 col-sm-12 mt-3 ">
                             <h3>{{ $client->name }}</h3>
-                            <span class="span"> {{ $client->gender == 1 ? __('EnumFile.male') : __('EnumFile.female') }}  -
-                                {{ $client->client->occupation }} - {{ __('EnumFile.'.$city) }}</span>
+                            <span class="span"> {{ $client->gender == 1 ? __('EnumFile.male') : __('EnumFile.female') }} -
+                                {{ $client->client->occupation }} - {{ __('EnumFile.' . $city) }}</span>
                         </div>
                         <div class="row row1 mt-3">
                             <div class="col-12 d-flex justify-content-center align-items-center mb-2">
@@ -49,7 +48,7 @@
                                     {{ $client->birth }}
                                 </div>
                             </div>
-                            <form action="{{ route('edit_client' ,$client_encoded_id) }}" method="GET" class="form_edit">
+                            <form action="{{ route('edit_client', $client_encoded_id) }}" method="GET" class="form_edit">
                                 <div class="col-12 mb-2 edit">
                                     <button type="submit"class="btn_edit_profile">@lang('pages.update_info') </button>
                                 </div>
@@ -75,9 +74,9 @@
                                 <a href="{{ route('list_invoices') }}" class="link-profile">@lang('pages.bills')</a>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12 text-center">
-                                <img src="{{ asset('assets/img/generalQuestion.png') }}" alt=""
-                                    class="img_4" />
-                                <a href="{{ route('list_general_questions',$client_encoded_id) }}" class="link-profile">@lang('pages.questions')</a>
+                                <img src="{{ asset('assets/img/generalQuestion.png') }}" alt="" class="img_4" />
+                                <a href="{{ route('list_general_questions', $client_encoded_id) }}"
+                                    class="link-profile">@lang('pages.questions')</a>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                                 <img src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__7_-removebg-preview.png') }}"
@@ -89,7 +88,7 @@
                 </div>
 
 
-                    @yield('profile_content')
+                @yield('profile_content')
 
             </div>
         </div>

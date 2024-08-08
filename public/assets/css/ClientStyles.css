@@ -912,7 +912,7 @@ p.last-msg.text-smoke {
 }
 
 .last-msg {
-    position: relative;
+    /* position: relative; */
     top: 21px;
     right: 55px;
     font-size: 16px;
