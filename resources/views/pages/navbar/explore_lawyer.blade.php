@@ -27,11 +27,14 @@
                     <h2 class="text_explore_lawyer">@lang('pages.lawyers')</h2>
                     <div class="row" id="lawyer-list">
                         @foreach ($lawyers as $lawyer)
-                            <div class="profile-card col-lg-2 col-md-6 col-sm-12" data-encoded-id="{{ base64_encode($lawyer->id) }}">
-                                @php
-                                    $lawyer_encoded_id = base64_encode($lawyer->id);
-                                @endphp
-                                <a class="link-in-explore-page" href="{{ route('show_lawyer', $lawyer_encoded_id) }}">
+                            <div class="profile-card col-lg-2 col-md-6 col-sm-12"
+                                data-encoded-id="{{ base64_encode($lawyer->id) }}">
+                                <a class="style-link-box"
+                                    href="{{ route('show_lawyer', base64_encode($lawyer->id)) }}">link
+
+                                </a>
+                                <a class="link-in-explore-page"
+                                    href="{{ route('show_lawyer', base64_encode($lawyer->id)) }}">
                                     <img src="{{ $lawyer->getFirstMediaUrl('profile') }}" alt="Profile" />
                                     <p class="name-in-explore-page">{{ $lawyer->name }}</p>
                                 </a>

@@ -24,6 +24,8 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 box-news-2 ">
 
                             <div class="box-Questions-1">
+                                <a class="style-link-box" href="{{ route('list_general_questions') }}">
+                                    link </a>
                                 <p class="link-questions-1">@lang('pages.questions')</p>
                                 <a href="{{ route('list_general_questions') }}"> <img
                                         src="{{ asset('assets/img/reply_general_question.png') }}" alt=""
@@ -31,6 +33,9 @@
                             </div>
 
                             <div class="box-Questions-1">
+                                <a class="style-link-box" href="{{ route('general_chat') }}">
+                                    link
+                                </a>
                                 <p class="link-questions-1">@lang('pages.forum')</p>
                                 <a href="{{ route('general_chat') }}"> <img src="{{ asset('assets/img/forum.png') }}"
                                         alt="" class="img_1" /></a>

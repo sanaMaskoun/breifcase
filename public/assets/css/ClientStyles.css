@@ -1103,19 +1103,42 @@ span.text-smoke.time_message {
     border-radius: 15px;
     background-color: rgb(125 125 125 / 71%);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
-    height: 60ch;
+
     width: 100%;
     padding: 0;
 }
 
 .profile-image img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.container.show-lawyer-page ul {
+    padding: 10px;
+}
+
+.container.show-lawyer-page h5 {
+    text-align: initial;
+    font-size: 20px;
+
+    font-weight: 700;
+}
+.license img.img-fluid.img_certification_license_profile.clickable {
+    width: 100% !important;
+    height: auto;
+    aspect-ratio: 5 / 3;
+    object-fit: cover;
+}
+.container.show-lawyer-page li {
+    list-style: none;
+    text-align: initial;
 }
 
 .certifications,
 .license {
-    height: 80px;
+    height: 120px;
     overflow-y: scroll;
     margin-top: 0;
 }
@@ -1132,7 +1155,9 @@ span.text-smoke.time_message {
 
 .img_certification_license_profile {
     width: 100px;
-    height: 50px;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
     margin-bottom: 5px;
 }
 

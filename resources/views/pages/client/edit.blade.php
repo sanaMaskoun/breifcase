@@ -63,23 +63,38 @@
                 <div class="container">
                     <div class="row d-flex">
                         <div class="col-lg-3 col-md-6 col-sm-12 text-center">
+                            <a href="{{ route('list_documents') }}" class="link-profile">
+
                             <img src="{{ asset('assets/img/Full_Website_-_CLIENT_V1__1_-removebg-preview.png') }}"
                                 alt="" class="img_4" />
-                            <a href="" class="link-profile">@lang('pages.documents')</a>
+                            </a>
+                            <a href="{{ route('list_documents') }}" class="link-profile">@lang('pages.documents')</a>
                         </div>
+
                         <div class="col-lg-3 col-md-6 col-sm-12 text-center">
+                            <a href="{{ route('list_invoices') }}" class="link-profile">
+
                             <img src="{{ asset('assets/img/Full_Website_-_CLIENT_V1-removebg-preview.png') }}"
-                                alt="" class="img_4" />
-                            <a href="" class="link-profile">@lang('pages.bills')</a>
+                                alt="" class="img_4" /></a>
+                            <a href="{{ route('list_invoices') }}" class="link-profile">
+                                @lang('pages.bills')</a>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 text-center">
+                            <a href="{{ route('list_general_questions', $client_encoded_id) }}"
+                            class="link-profile">
                             <img src="{{ asset('assets/img/generalQuestion.png') }}" alt="" class="img_4" />
-                            <a href="" class="link-profile">@lang('pages.questions')</a>
+                            </a>
+                            <a href="{{ route('list_general_questions', $client_encoded_id) }}"
+                                class="link-profile">
+                                @lang('pages.questions')</a>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 text-center">
+                            <a href="{{ route('chat_client') }}" class="link-profile">
+
                             <img src="{{ asset('assets/img/Full_Website_-_LAWYER_V1__7_-removebg-preview.png') }}"
-                                alt="" class="img_4" />
-                            <a href="" class="link-profile">@lang('pages.chats')</a>
+                                alt="" class="img_4" /></a>
+                            <a href="{{ route('chat_client') }}" class="link-profile">
+                                @lang('pages.chats')</a>
                         </div>
                     </div>
                 </div>

@@ -154,11 +154,136 @@
             </ul>
         </div>
     </nav>
+    <div class="fixed-btn-nav">
+        <li class="nav-item  nav-box-header">
+            <a class="nav-link active" href="{{ route('chat_client') }}">
+                <i class="bx bx-chat icon-header"></i></a>
+        </li>
+
+        <li class="nav-item dropdown notification nav-box-header">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bx bx-bell icon-header"></i>
+                <span class="badge"
+                    data-count="{{ Auth()->user()->unreadNotifications->count() }}">{{ Auth()->user()->unreadNotifications->count() }}</span>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right notification-list" aria-labelledby="navbarDropdown">
+
+                @foreach (Auth()->user()->unreadNotifications as $notification)
+                    @if ($notification->type === 'App\Notifications\CaseNotification')
+                        <div class="media-body flex-grow-1 notification-item">
+                            <p class="notification-title"> @lang('pages.sent_case_notification')
+                                {{--  <span class="details_notification">{{ $notification->data['lawyer_name'] }}:
+                                </span>  --}}
+
+                                <span>
+                                    <a class="notification-link"
+                                        href="{{ route('details_case', base64_encode($notification->data['case_id'])) }}">
+                                        <span class="notification-title">
+                                            {{ $notification->data['case_title'] }}</span>
+                                    </a>
+                                </span>
+                            </p>
+
+                            <span class="notification-time">
+                                {{ $notification->created_at?->format('j M Y') }}
+                            </span>
+                        </div>
+                    @elseif($notification->type === 'App\Notifications\ClosedConsultationClientNotification')
+                        <div class="media-body flex-grow-1 notification-item">
+                            <p class="notification-title"> @lang('pages.closed_consultation_notification')
+                                <span>
+                                    <a class="notification-link"
+                                        href="{{ route('details_consultation', $notification->data['consultation_encode_id']) }}">
+                                        <span class="notification-title">
+                                            {{ $notification->data['consultation_title'] }}
+                                        </span>
+                                    </a>
+                                </span>
+                            </p>
+                            <span class="notification-time">
+                                {{ $notification->data['created_at'] }}
+                            </span>
+                        </div>
+                    @elseif($notification->type === 'App\Notifications\ClosedCaseClientNotification')
+                        <div class="media-body flex-grow-1 notification-item">
+                            <p class="notification-title"> @lang('pages.closed_case_notification')
+                                <span>
+                                    <a class="notification-link"
+                                        href="{{ route('show_case', $notification->data['case_encode_id']) }}">
+                                        <span class="notification-title">
+                                            {{ $notification->data['case_title'] }}
+                                        </span>
+                                    </a>
+                                </span>
+                            </p>
+                            <span class="notification-time">
+                                {{ $notification->data['created_at'] }}
+                            </span>
+                        </div>
+                    @elseif($notification->type === 'App\Notifications\ClosedRequestClientNotification')
+                        <div class="media-body flex-grow-1 notification-item">
+                            <p class="notification-title"> @lang('pages.closed_request_notification')
+                                <span>
+                                    <a class="notification-link"
+                                        href="{{ route('show_requests', $notification->data['request_encode_id']) }}">
+                                        <span class="notification-title">
+                                            {{ $notification->data['request_title'] }}
+                                        </span>
+                                    </a>
+                                </span>
+                            </p>
+                            <span class="notification-time">
+                                {{ $notification->data['created_at'] }}
+                            </span>
+                        </div>
+                    @endif
+                @endforeach
+
+                <div class="topnav-dropdown-header d-flex justify-content-end" id="notificationCount">
+                    <a href="{{ route('notification_clear_all') }}" class="notification-clear">@lang('pages.clear_all')</a>
+                </div>
+            </div>
+        </li>
+
+        @hasanyrole('client|admin')
+            <li class="nav-item  nav-box-header">
+                <a href="{{ route('home_client') }}" class="footer">
+                    <i class="bx bx-home" style="font-size: 25px"></i>
+                </a>
+            </li>
+        @endhasanyrole
+
+        @role('client')
+            <li class="nav-item  nav-box-header">
+                <a href="{{ route('edit_client', $client_encoded_id) }}" class="footer">
+                    <i class="bx bx-cog" style="font-size: 25px"></i>
+                </a>
+            </li>
+        @endrole
+
+
+
+        <li class="nav-item  nav-box-header">
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+
+            <a href="#" class="footer"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="bx bx-log-out" style="font-size: 25px"></i>
+            </a>
+        </li>
+
+
+
+
+    </div>
     <script>
         var translatedSendCase = "{{ __('pages.sent_case_notification') }}";
         var translatedClosedCase = "{{ __('pages.closed_case_notification') }}";
         var translatedClosedConsultation = "{{ __('pages.closed_consultation_notification') }}";
         var translatedClosedRequest = "{{ __('pages.closed_request_notification') }}";
-
     </script>
 </header>

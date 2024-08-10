@@ -14,7 +14,7 @@
 
     @endphp
 
-    <div class="container">
+    <div class="container show-lawyer-page">
         <div class="row">
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="card box">
@@ -141,20 +141,21 @@
                             <label for="upload_document" class="upload-icon">
                                 <i class="bx bx-upload icon-sign"></i>
                             </label>
-                            <input type="file" id="upload_document" name="upload_document" class="custom-file-input" required
-                                onchange="handleFileUpload()" />
+                            <input type="file" id="upload_document" name="upload_document" class="custom-file-input"
+                                required onchange="handleFileUpload()" />
 
                             <div id="upload_document_preview" style="margin-top: 10px; display: none;">
 
-                                    <img id="image_preview" style="max-width: 100%; max-height: 50px;display: none;">
+                                <img id="image_preview" style="max-width: 100%; max-height: 50px;display: none;">
 
-                                    <iframe id="file_preview" style="width: 0; height: 0; display:none!important;">
-                                    </iframe>
+                                <iframe id="file_preview" style="width: 0; height: 0; display:none!important;">
+                                </iframe>
 
-                                    <div id="file_info" style="display: flex; align-items: center;">
-                                        <button id="remove_file" onclick="removeFile()" style="display: none; margin-top: 10px;">
-                                            <i class="bx bx-x icon-remove"></i>
-                                        </button>
+                                <div id="file_info" style="display: flex; align-items: center;">
+                                    <button id="remove_file" onclick="removeFile()"
+                                        style="display: none; margin-top: 10px;">
+                                        <i class="bx bx-x icon-remove"></i>
+                                    </button>
                                     <i class="bx bx-file icon-file"></i>
                                     <p id="file_name" style="margin: 0; font-size: 12px;"></p>
                                 </div>

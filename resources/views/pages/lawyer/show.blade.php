@@ -16,7 +16,7 @@
         $receiver_encoded_id = base64_encode($lawyer->id);
 
     @endphp
-    <div class="container">
+    <div class="container show-lawyer-page">
         <div class="row">
             <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="card box">
@@ -58,8 +58,9 @@
 
 
                         <div class="row">
+
                             <div class="certifications col-md-6">
-                                <h5>@lang('pages.certifications'):</h5>
+                                <h5>@lang('pages.certifications')</h5>
                                 <div class="row">
                                     @foreach ($lawyer->lawyer?->getMedia('certification') as $certification)
                                         <div class="col-4">

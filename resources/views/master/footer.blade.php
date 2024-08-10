@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 3px">
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            {{--  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
 
@@ -38,7 +38,7 @@
                     <i class="bx bx-cog" style="font-size: 25px"></i>
                     @lang('pages.settings')
                 </a>
-            @endrole
+            @endrole  --}}
         </div>
     </div>
 </div>

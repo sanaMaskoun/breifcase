@@ -102,7 +102,84 @@ div:lang(ar) .custom-control-label::after {
     margin: 0 !important;
 }
 
+.fixed-btn-nav {
+    display: none !important;
+}
+
+ul.navbar-nav {
+    z-index: 1222324242424242;
+}
+
 @media (max-width:768px) {
+    .show-lawyer-page .profile-image img {
+        width: 151px !important;
+        height: auto;
+        aspect-ratio: 1;
+    }
+
+    .license img.img-fluid.img_certification_license_profile.clickable {
+
+        aspect-ratio: 1 !important;
+
+    }
+
+    .license .col-4 {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+
+    .container.show-lawyer-page h5 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .description {
+        width: 100%;
+    }
+
+    .container.show-lawyer-page .card.box {
+        padding: 10px 0 !important;
+    }
+
+    .fixed-btn-nav .footer {
+        color: rgb(164 164 164) !important;
+
+    }
+
+    nav :is(.notification, .chat-nav, .dashboard-nav) {
+        display: none !important;
+    }
+
+    body {
+        padding-bottom: 50px !important;
+    }
+
+    .fixed-btn-nav a {
+        padding: 10px 5px;
+    }
+
+    .fixed-btn-nav {
+        display: flex !important;
+        position: fixed;
+        z-index: 14444444444;
+        background: #363636;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        justify-content: space-around;
+        width: 100%;
+        text-align: center;
+    }
+
+    li.nav-item.nav-box-header {
+        display: inline-block;
+        /* flex: 1 1 30%; */
+        max-width: 100% !important;
+        width: auto !important;
+        margin: 0;
+    }
+
     .form-group-sign.available-24.col-md-12 {
         padding: 5px;
     }
@@ -599,6 +676,41 @@ div:lang(ar) .custom-control-label::after {
     .row.text-center.content-dashboard.box-book.mt-3 {
         max-height: 80vh;
     }
+
+    .stars {
+        display: inline-block;
+        font-size: 16px;
+        margin-top: -6px;
+    }
+
+    .star-rating {
+        display: flex;
+        font-size: 16px;
+    }
+
+    .title-document-rate {
+        font-size: 20px;
+    }
+
+    .review {
+        display: block !important;
+    }
+
+
+}
+
+.box-Questions-1 {
+    position: relative;
+}
+
+a.style-link-box {
+    position: absolute;
+    font-size: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10000;
 }
 
 .row.text-center.content-dashboard.box-book.mt-3 {
@@ -1663,6 +1775,7 @@ label.custom-control-label {
     .box-profile-1 button.tablinks {
         padding: 16px 5px;
         margin-bottom: 10px;
+
     }
 
     .box-profile-1 .search-status {

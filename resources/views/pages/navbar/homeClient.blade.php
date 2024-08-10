@@ -24,14 +24,20 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 box-news-2 ">
 
                             <div class="box-Questions-1">
+                                <a class="style-link-box" href="{{ route('home_general_questions') }}">
+                                    link </a>
                                 <p class="link-questions-1">@lang('pages.questions')</p>
+
                                 <a href="{{ route('home_general_questions') }}"> <img
                                         src="{{ asset('assets/img/reply_general_question.png') }}" alt=""
                                         class="img_1" /></a>
                             </div>
 
                             <div class="box-Questions-1">
+                                <a class="style-link-box" href="{{ route('explore_translation_company') }}">
+                                    link </a>
                                 <p class="link-questions-1">@lang('pages.companies')</p>
+
                                 <a href="{{ route('explore_translation_company') }}"> <img
                                         src="{{ asset('assets/img/translation.png') }}" alt="" class="img_1" /></a>
                             </div>
@@ -39,12 +45,20 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12 box-news-2 ">
                             <div class="box-Questions-1">
+                                <a class="style-link-box" href="{{ route('explore_lawyer') }}">
+                                    link
+                                </a>
                                 <p class="  link-questions-1">@lang('pages.lawyers')</p>
+
                                 <a href="{{ route('explore_lawyer') }}"> <img
-                                        src="{{ asset('assets/img/lawyer_icon.png') }}" alt="" class="img_1" /></a>
+                                        src="{{ asset('assets/img/lawyer_icon.png') }}" alt=""
+                                        class="img_1" /></a>
                             </div>
 
                             <div class="box-Questions-1">
+                                <a class="style-link-box"href="{{ route('page_frequently_question') }}">
+                                    link
+                                </a>
                                 <p class="link-questions-1">@lang('pages.FAQ')</p>
                                 <a href="{{ route('page_frequently_question') }}"> <img
                                         src="{{ asset('assets/img/FAQ.png') }}" alt="" class="img_1" /></a>
@@ -66,7 +80,8 @@
                             <div class="container">
                                 <div class="row">
                                     @foreach ($news as $object)
-                                        <a class="link-show-news" href="{{ route('show_news', base64_encode($object->id)) }}">
+                                        <a class="link-show-news"
+                                            href="{{ route('show_news', base64_encode($object->id)) }}">
                                             <div class="col-lg-8 news-item mb-4 p-2 border-bottom">
                                                 <p class="news-text">{{ $object->title }}</p>
                                                 <span>{{ $object->short_description }}</span>
