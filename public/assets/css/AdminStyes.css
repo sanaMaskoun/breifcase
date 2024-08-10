@@ -109,8 +109,29 @@ div:lang(ar) .custom-control-label::after {
 ul.navbar-nav {
     z-index: 1222324242424242;
 }
+/* @media (max-width: 600px) { */
+    #myChartCompany {
+        height: 300px;
+    }
+    #myChartAdmin {
+        height: 300px;
+    }
+    #myChartLawyer {
+        height: 300px;
+    }
+/* } */
+@media (min-width: 768px) and (max-width: 991px) {
+    #myChartLawyer {
+        height: 400px; /* تعديل الارتفاع للتوافق مع هذا النطاق */
+        width: 100%; /* التأكد من أن العرض يتناسب مع الشاشة */
+    }
+}
+
 
 @media (max-width:768px) {
+    .footer-media{
+        display: none;
+    }
     .show-lawyer-page .profile-image img {
         width: 151px !important;
         height: auto;

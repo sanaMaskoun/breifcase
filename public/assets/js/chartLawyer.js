@@ -52,19 +52,21 @@ document.addEventListener("DOMContentLoaded", function () {
                     pointHoverBackgroundColor: "white",
                     pointHoverBorderColor: "white",
                 },
-
-
             ],
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false, // لتحسين العرض على الشاشات الصغيرة
             scales: {
                 x: {
                     ticks: {
                         color: "black",
                         font: {
                             weight: "800",
+                            size: 10, // تعديل حجم الخط للشاشات الصغيرة
                         },
+                        maxRotation: 45, // تدوير التسميات لتحسين العرض
+                        minRotation: 45,
                     },
                 },
                 y: {
@@ -73,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         color: "black",
                         font: {
                             weight: "800",
+                            size: 10, // تعديل حجم الخط للشاشات الصغيرة
                         },
                     },
                 },
@@ -81,9 +84,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 legend: {
                     labels: {
                         color: "black",
+                        font: {
+                            size: 12, // تعديل حجم الخط في وسيلة الإيضاح
+                        },
                     },
+                },
+            },
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 10,
+                    top: 10,
+                    bottom: 10,
                 },
             },
         },
     });
 });
+
