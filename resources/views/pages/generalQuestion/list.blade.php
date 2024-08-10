@@ -9,17 +9,19 @@
 
             @foreach ($questions as $question)
                 <div class="col-lg-3 col-md-6 col-sm-12">
+                    <a href="{{ route('reply_general_question', base64_encode($question->id)) }}"
+                        class="style-link-box">link</a>
                     <div class="profile-card_1">
 
                         {{--  @hasanyrole('lawyer')  --}}
-                            <a href="{{ route('reply_general_question', base64_encode($question->id)) }}"
-                                class="link-reply-question">
+                        <a href="{{ route('reply_general_question', base64_encode($question->id)) }}"
+                            class="link-reply-question">
                             {{--  @endhasanyrole  --}}
                             <img src="{{ $question->user->getFirstMediaUrl('profile') }}" alt="Profile" />
                             {{--  <p>{{ $question->user->name }}</p>  --}}
                             <p>{{ $question->title }}</p>
                             {{--  @hasanyrole('lawyer')  --}}
-                            </a>
+                        </a>
                         {{--  @endhasanyrole  --}}
 
                         {{--  @role('client')  --}}

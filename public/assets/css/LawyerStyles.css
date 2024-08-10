@@ -94,13 +94,13 @@ a.link-profile {
     background-color: rgb(125 125 125 / 71%);
     width: 80%;
     border-radius: 30px;
-    height: 525px;
+    height: 80vh;
     overflow-y: scroll;
 }
 
 .title-reply-general-question {
     font-weight: 700;
-    font-size: 25px;
+    font-size: 16px;
     text-transform: uppercase;
 
 }
@@ -111,7 +111,7 @@ a.link-profile {
 
 .answer-general-question {
     font-weight: 700;
-    font-size: 25px;
+    font-size: 16px;
 }
 
 .reply-general-question {
@@ -1725,10 +1725,10 @@ div#company-list .col-lg-3.col-md-6.col-sm-12 {
 }
 
 .box-text {
-    padding-left: 3rem;
-    padding-top: 50px;
+    padding-left: 0;
+    padding-top: 20px;
+    padding-right: 0;
 }
-
 
 /* .submit-btn {
     padding-right: 3rem;

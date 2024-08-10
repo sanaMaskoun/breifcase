@@ -1558,6 +1558,23 @@ label.custom-control-label {
 
 @media (max-width: 768px) {
 
+
+    .card-lawyer-question {
+        height: auto !important;
+        overflow: unset !important;
+    }
+
+    .card-lawyer-question .row {
+        display: block !important;
+    }
+
+    .col-md-6.mt-4.card-lawyer-question .lawyer {
+        margin-top: 10px !important;
+        flex: 0 0 100%;
+        max-width: 100% !important;
+        padding: 5px !important;
+    }
+
     nav.navbar.navbar-expand-lg.navbar-light.fixed-top.d-flex.align-items-center.container {
         margin: 0;
         width: 100% !important;
