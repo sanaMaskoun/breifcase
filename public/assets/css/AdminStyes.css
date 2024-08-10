@@ -135,8 +135,31 @@ ul.navbar-nav {
 
 
 @media (max-width:768px) {
+    :has(.row.general-question-dash) .content .col-md-6 {
+        padding: 0;
+    }
+
+    .lawyer-card h5.company-name {
+        font-size: 16px;
+        display: block;
+    }
+
     .footer-media {
         display: none;
+    }
+     .profile-gq .img-client-question {
+        width: 85px;
+        height: auto;
+        aspect-ratio: 1;
+        object-fit: contain;
+    }
+
+    :has(.row.general-question-dash) .content {
+        padding: 5px;
+    }
+
+    :has(.row.general-question-dash) .content .col-md-6 {
+        padding: 0;
     }
 
     .show-lawyer-page .profile-image img {
@@ -1165,14 +1188,17 @@ label.me-2 {
 .lawyer-card {
     position: relative;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    padding: 5px;
 }
 
 .lawyer-card img {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1;
     border-radius: 50%;
-    background-color: #ccc;
+
 }
 
 .toggle-switch {
