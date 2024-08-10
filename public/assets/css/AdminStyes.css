@@ -109,29 +109,36 @@ div:lang(ar) .custom-control-label::after {
 ul.navbar-nav {
     z-index: 1222324242424242;
 }
+
 /* @media (max-width: 600px) { */
-    #myChartCompany {
-        height: 300px;
-    }
-    #myChartAdmin {
-        height: 300px;
-    }
-    #myChartLawyer {
-        height: 300px;
-    }
+#myChartCompany {
+    height: 300px;
+}
+
+#myChartAdmin {
+    height: 300px;
+}
+
+#myChartLawyer {
+    height: 300px;
+}
+
 /* } */
 @media (min-width: 768px) and (max-width: 991px) {
     #myChartLawyer {
-        height: 400px; /* تعديل الارتفاع للتوافق مع هذا النطاق */
-        width: 100%; /* التأكد من أن العرض يتناسب مع الشاشة */
+        height: 400px;
+        /* تعديل الارتفاع للتوافق مع هذا النطاق */
+        width: 100%;
+        /* التأكد من أن العرض يتناسب مع الشاشة */
     }
 }
 
 
 @media (max-width:768px) {
-    .footer-media{
+    .footer-media {
         display: none;
     }
+
     .show-lawyer-page .profile-image img {
         width: 151px !important;
         height: auto;
@@ -717,6 +724,31 @@ ul.navbar-nav {
         display: block !important;
     }
 
+    :has(:is(.chat-dashboard)) .content-dashboard.col-lg-9.col-md-1 {
+        width: 100% !important;
+    }
+
+    :has(:is(.chat-dashboard)) .col-lg-3.col-md-12.col-sm-12.sidebar-dashboard {
+        display: none !important;
+        width: 0 !important;
+    }
+
+    .card-chat-dashboard {
+        max-height: 80% !important;
+    }
+
+    .chat-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    div#chat-area {
+        position: relative;
+        min-height: 77vh;
+        padding-bottom: 70px !important;
+    }
 
 }
 
@@ -731,7 +763,7 @@ a.style-link-box {
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: 10000;
+    z-index: 2;
 }
 
 .row.text-center.content-dashboard.box-book.mt-3 {
@@ -1525,6 +1557,23 @@ label.custom-control-label {
 }
 
 @media (max-width: 768px) {
+
+    nav.navbar.navbar-expand-lg.navbar-light.fixed-top.d-flex.align-items-center.container {
+        margin: 0;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .sidebar-dashboard>.container {
+        padding: 10px 5px;
+        max-width: 100% !important;
+    }
+
+    .dropdown-menu {
+        background-color: #f8f9fa;
+        min-width: 100%;
+    }
+
     .bill-details-container {
         padding: 10px;
     }

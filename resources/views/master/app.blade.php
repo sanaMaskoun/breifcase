@@ -241,6 +241,7 @@
     @yield('scripts')
 
 
+    <script src="{{ asset('assets/js/ScrollChat.js') }}"></script>
     <script src="{{ asset('assets/js/searchLawyer.js') }}"></script>
     <script src="{{ asset('assets/js/searchStatusDocument.js') }}"></script>
     <script src="{{ asset('assets/js/searchClient.js') }}"></script>
