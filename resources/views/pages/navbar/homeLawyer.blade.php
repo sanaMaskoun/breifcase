@@ -43,6 +43,29 @@
                         </div>
 
 
+                        <div class="col-lg-12 col-md-12 col-sm-12 box-news-2 ">
+                            <div class="box-Questions-1">
+                                <a class="style-link-box"href="{{ route('page_frequently_question') }}">
+                                    link
+                                </a>
+                                <p class="link-questions-1">@lang('pages.FAQ')</p>
+                                <a href="{{ route('page_frequently_question') }}"> <img
+                                        src="{{ asset('assets/img/FAQ.png') }}" alt="" class="img_1" /></a>
+                            </div>
+                            <div class="box-Questions-1">
+                                <a class="style-link-box" href="{{ route('explore_translation_company') }}">
+                                    link </a>
+                                <p class="link-questions-1">@lang('pages.companies')</p>
+
+                                <a href="{{ route('explore_translation_company') }}"> <img
+                                        src="{{ asset('assets/img/translation.png') }}" alt=""
+                                        class="img_1" /></a>
+                            </div>
+
+                        </div>
+
+
+
 
 
 

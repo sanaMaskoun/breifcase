@@ -271,10 +271,14 @@ header {
     height: auto;
 }
 
+.form-news {
+    margin: 0px 3%;
+}
+
 .text_4 {
     font-weight: 600;
     margin-top: 0;
-    font-size: 47px;
+    font-size: 44px;
     color: #000000;
 }
 
@@ -989,7 +993,7 @@ p.last-msg.text-smoke {
     position: absolute;
     top: 1rem;
 
-    background-color: green;
+    background-color: #9d3d01;
     color: #fff;
     border-radius: 50%;
     padding: 4px 8px;
@@ -1125,12 +1129,14 @@ span.text-smoke.time_message {
 
     font-weight: 700;
 }
+
 .license img.img-fluid.img_certification_license_profile.clickable {
     width: 100% !important;
     height: auto;
     aspect-ratio: 5 / 3;
     object-fit: cover;
 }
+
 .container.show-lawyer-page li {
     list-style: none;
     text-align: initial;

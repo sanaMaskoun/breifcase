@@ -146,6 +146,10 @@ ul.navbar-nav {
     max-width: 100%;
 }
 
+.bx-globe:before {
+    font-size: 22px;
+}
+
 @media (max-width:768px) {
     .box-profile-1 button.tablinks {
         font-size: 13px;
