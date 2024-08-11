@@ -2,7 +2,7 @@
 @section('dashboard')
     {{--  <div class="col-lg-9 col-md-1">  --}}
         <div class="content">
-            <div class="container">
+            <div class="">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="form-container-template">
