@@ -275,6 +275,24 @@ header {
     margin: 0px 3%;
 }
 
+.card-language .form-row {
+    text-align: initial;
+}
+
+ul.navbar-nav .dropdown-menu:lang(ar) {
+    right: 0 !important;
+    left: auto !important;
+}
+
+ul.navbar-nav li:lang(ar) {
+    margin-right: 10px;
+    text-align: right !important;
+}
+
+nav.navbar {
+    direction: ltr;
+}
+
 .text_4 {
     font-weight: 600;
     margin-top: 0;
