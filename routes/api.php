@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\AuthApiController;
 use App\Http\Controllers\api\ChatApiController;
 use App\Http\Controllers\api\ClientApiController;
+use App\Http\Controllers\api\CompanyApiController;
 use App\Http\Controllers\api\ConsultationApiController;
 use App\Http\Controllers\api\FrequentlyQuestionApiController;
 use App\Http\Controllers\api\GeneralChatApiController;
@@ -57,6 +58,8 @@ Route::group(['prefix' => 'lawyer', 'middleware' => 'auth:sanctum'], function ()
     Route::post('{user}', [LawyerApiController::class, 'update']);
 
 });
+
+Route::post('/company/{user}', [CompanyApiController::class, 'update'])->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'client', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [ClientApiController::class, 'index']);

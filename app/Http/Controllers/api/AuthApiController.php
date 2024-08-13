@@ -9,10 +9,8 @@ use App\Enums\UserTypeEnum;
 use App\Events\NotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ContactResource;
-use App\Http\Resources\PracticeResource;
 use App\Http\Resources\UserResource;
 use App\Models\Message;
-use App\Models\Practice;
 use App\Models\User;
 use App\Notifications\RequestToJoin;
 use Illuminate\Http\JsonResponse;
@@ -74,14 +72,11 @@ class AuthApiController extends Controller
             'phone' => ['required', 'numeric', 'digits_between:7,14'],
             'password' => ['required', 'string', 'confirmed'],
             'password_confirmation' => ['required', 'same:password'],
-            'gender' => ['required'],
-            'birth' => ['required'],
+
             'country' => ['required', Rule::in(CountryEnum::getValues())],
             'city' => ['required'],
-            'emirates_id' => ['required', 'numeric'],
-            'front_emirates_id' => ['required'],
-            'back_emirates_id' => ['required'],
-            'profile'  => ['nullable']
+
+            'profile' => ['nullable'],
 
         ];
 
@@ -99,23 +94,23 @@ class AuthApiController extends Controller
             'phone' => $request->phone,
             'type' => $request->type,
             'password' => bcrypt($request->password),
-            'gender' => $request->gender,
-            'birth' => $request->birth,
+
             'country' => $request->country,
             'city' => $request->city,
-            'emirates_id' => $request->emirates_id,
         ]);
 
         $user->save();
 
-        $user->addMedia($request->front_emirates_id)
-            ->toMediaCollection('front_emirates_id');
-
-        $user->addMedia($request->back_emirates_id)
-            ->toMediaCollection('back_emirates_id');
+        if (!is_null($request->front_emirates_id)) {
+            $user->addMedia($request->front_emirates_id)
+                ->toMediaCollection('front_emirates_id');
+        }
+        if (!is_null($request->back_emirates_id)) {
+            $user->addMedia($request->back_emirates_id)
+                ->toMediaCollection('back_emirates_id');
+        }
 
         $this->createUserSpecificData($user, $request);
-
 
         $admins = User::whereHas('roles', function ($query) {
             $query->where('name', 'admin');
@@ -135,15 +130,17 @@ class AuthApiController extends Controller
         ];
         event(new NotificationEvent($data, $user_encoded_id));
 
-            if ($user->type == UserTypeEnum::client) {
-                $user->load('client');
-            } elseif ($user->type ==  UserTypeEnum::lawyer ||  $user->type ==  UserTypeEnum::translation_company) {
-                $user->load(['lawyer','practices','languages']);
-            }
-            return response()->json([
-                'accessToken' => $user->createToken('Personal Access Token')->plainTextToken,
-                'user' => new UserResource($user),
-            ], 201);
+        if ($user->type == UserTypeEnum::client) {
+            $user->load('client');
+        } elseif ($user->type == UserTypeEnum::lawyer) {
+            $user->load(['lawyer', 'practices', 'languages']);
+        } elseif ($user->type == UserTypeEnum::translation_company) {
+            $user->load(['lawyer', 'languages']);
+        }
+        return response()->json([
+            'accessToken' => $user->createToken('Personal Access Token')->plainTextToken,
+            'user' => new UserResource($user),
+        ], 201);
 
     }
 
@@ -154,23 +151,47 @@ class AuthApiController extends Controller
 
         $specific_rules = [];
 
-        if ($type == "client")
-         {
-            $specific_rules = ['occupation' => 'required|string|max:255'];
+        if ($type == "client") {
+            $specific_rules = ['occupation' => 'required|string|max:255',
+                'emirates_id' => ['required', 'numeric'],
+                'front_emirates_id' => ['required'],
+                'back_emirates_id' => ['required'],
+                'gender' => ['required'],
+                'birth' => ['required'],
+            ];
 
-        }
-        elseif ($type == "lawyer" ||$type == "translation_company") {
+        } elseif ($type == "lawyer") {
             $specific_rules = [
                 'land_line' => ['required', 'numeric'],
                 'consultation_price' => ['required', 'numeric'],
                 'location' => ['required'],
+                'facebook' => ['nullable'],
+                'tiktok' => ['nullable'],
                 'bio' => ['required', 'max:250'],
                 'years_of_practice' => ['required', 'numeric'],
                 'available' => ['nullable'],
                 'certifications' => ['required', 'array'],
                 'licenses' => ['required', 'array'],
-                'practices' => ['required', 'array' , 'exists:practices,id'],
-                'languages' => ['required', 'array' , 'exists:languages,id'],
+                'practices' => ['required', 'array', 'exists:practices,id'],
+                'languages' => ['required', 'array', 'exists:languages,id'],
+                'emirates_id' => ['required', 'numeric'],
+                'front_emirates_id' => ['required'],
+                'back_emirates_id' => ['required'],
+                'gender' => ['required'],
+                'birth' => ['required'],
+            ];
+        } elseif ($type == "translation_company") {
+            $specific_rules = [
+                'land_line' => ['required', 'numeric'],
+                'translation_price' => ['required', 'numeric'],
+                'location' => ['required'],
+                'facebook' => ['nullable'],
+                'tiktok' => ['nullable'],
+                'bio' => ['required', 'max:250'],
+                'available' => ['nullable'],
+                'certifications' => ['required', 'array'],
+                'licenses' => ['required', 'array'],
+                'languages' => ['required', 'array', 'exists:languages,id'],
             ];
         }
 
@@ -184,24 +205,26 @@ class AuthApiController extends Controller
 
         $user->assignRole($type);
 
-        if($request->profile != null)
-        {
+        if ($request->profile != null) {
             $user->addMedia($request->profile)->toMediaCollection('profile');
         }
 
         if ($type == "client") {
 
             $user->client()->create(['occupation' => $request->occupation]);
-            $user->update(['is_active' => true]);
+            $user->update(['is_active' => true,
+                'gender' => $request->gender,
+                'birth' => $request->birth,
+                'emirates_id' => $request->emirates_id,
+            ]);
 
-
-        }
-         elseif ($type == "lawyer" || $type == "translation_company")
-         {
+        } elseif ($type == "lawyer") {
             $user->lawyer()->create([
                 'land_line' => $request->land_line,
                 'consultation_price' => $request->consultation_price,
                 'location' => $request->location,
+                'tiktok' => $request->tiktok,
+                'facebook' => $request->facebook,
                 'bio' => $request->bio,
                 'years_of_practice' => $request->years_of_practice,
                 'available' => $request->available ?? false,
@@ -217,6 +240,25 @@ class AuthApiController extends Controller
                 $user->lawyer->addMedia($license)->toMediaCollection('license');
             }
 
+        } elseif ($type == "translation_company") {
+            $user->lawyer()->create([
+                'land_line' => $request->land_line,
+                'consultation_price' => $request->translation_price,
+                'location' => $request->location,
+                'tiktok' => $request->tiktok,
+                'facebook' => $request->facebook,
+                'bio' => $request->bio,
+                'available' => $request->available ?? false,
+            ]);
+
+            $user->languages()->sync($request->languages);
+
+            foreach ($request->certifications as $certification) {
+                $user->lawyer->addMedia($certification)->toMediaCollection('certification');
+            }
+            foreach ($request->licenses as $license) {
+                $user->lawyer->addMedia($license)->toMediaCollection('license');
+            }
 
         }
     }
@@ -263,34 +305,34 @@ class AuthApiController extends Controller
     {
         if ($user->type == UserTypeEnum::client) {
             $user->load('client');
-        } elseif ($user->type ==  UserTypeEnum::lawyer) {
+        } elseif ($user->type == UserTypeEnum::lawyer) {
             $user->load('lawyer');
         }
-        $contacts = Message::where('group_id' , null)
-        ->where('sender_id', $user->id)
-        ->orWhere('receiver_id', $user->id)
-        ->with('sender', 'receiver')
-        ->get()
-        ->map(function ($message) use ($user) {
-            return $message->sender_id == $user->id ? $message->receiver : $message->sender;
-        })
-        ->unique('id') ;
+        $contacts = Message::where('group_id', null)
+            ->where('sender_id', $user->id)
+            ->orWhere('receiver_id', $user->id)
+            ->with('sender', 'receiver')
+            ->get()
+            ->map(function ($message) use ($user) {
+                return $message->sender_id == $user->id ? $message->receiver : $message->sender;
+            })
+            ->unique('id');
 
         return new JsonResponse([
             'access_token' => $token,
             'user' => new UserResource($user
-            ->load(['consultations_receiver',
-                    'consultations_sender',
-                    'cases_sender',
-                    'cases_receiver',
-                    'unreadNotifications',
-                    'general_questions',
-                    'questions_replies',
-                    'practices',
-                    'groups',
-                    'general_chats'
-            ])),
-            'contacts' => ContactResource::collection($contacts)
+                    ->load(['consultations_receiver',
+                        'consultations_sender',
+                        'cases_sender',
+                        'cases_receiver',
+                        'unreadNotifications',
+                        'general_questions',
+                        'questions_replies',
+                        'practices',
+                        'groups',
+                        'general_chats',
+                    ])),
+            'contacts' => ContactResource::collection($contacts),
 
         ]);
     }

@@ -511,8 +511,10 @@ ul.navbar-nav {
 
 .img-contact-dashboard {
     width: 12% !important;
-    height: 12% !important;
+    aspect-ratio: 1;
+    object-fit: cover;
     border-radius: 50%;
+    height: auto !important;
     margin-right: 10px;
 }
 

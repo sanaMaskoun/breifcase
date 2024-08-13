@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('land_line');
             $table->integer('consultation_price');
             $table->string('location');
+            $table->string('tiktok')->nullable();
+            $table->string('facebook')->nullable();
             $table->string('bio');
             $table->integer('years_of_practice')->nullable();
             $table->boolean('available');

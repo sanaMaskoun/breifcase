@@ -4,9 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Enums\DocumentStatusEnum;
 use App\Enums\DocumentTypeEnum;
 use App\Enums\GroupTypeEnum;
-use App\Enums\UserTypeEnum;
+use App\Traits\CalculatesAverageRate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,11 +15,10 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
-use App\Traits\CalculatesAverageRate;
 
 class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia, CalculatesAverageRate,HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia, CalculatesAverageRate, HasRoles;
 
     protected $guarded = [];
     protected $hidden = [
@@ -48,18 +48,31 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Document::class, 'receiver_id')
             ->where('type', DocumentTypeEnum::consultation);
     }
+
+    public function consultation_ongoing_sender()
+    {
+        return $this->hasMany(Document::class, 'sender_id')
+            ->where('status', DocumentStatusEnum::ongoing)
+            ->where('type', DocumentTypeEnum::consultation);
+
+    }
+    public function consultation_ongoing_receiver()
+    {
+        return $this->hasMany(Document::class, 'receiver_id')
+            ->where('status', DocumentStatusEnum::ongoing)
+            ->where('type', DocumentTypeEnum::consultation);
+
+    }
     public function cases_sender()
     {
         return $this->hasMany(Document::class, 'sender_id')
-            ->where('type', DocumentTypeEnum::case);
+            ->where('type', DocumentTypeEnum::case );
     }
     public function cases_receiver()
     {
         return $this->hasMany(Document::class, 'receiver_id')
-            ->where('type', DocumentTypeEnum::case);
+            ->where('type', DocumentTypeEnum::case );
     }
-
-
 
     public function invoice_sender()
     {
@@ -92,7 +105,6 @@ class User extends Authenticatable implements HasMedia
         return $this->calculateAverageRate($this->id);
     }
 
-
     public function sender_message()
     {
         return $this->hasMany(Message::class, 'sender_id');
@@ -104,7 +116,6 @@ class User extends Authenticatable implements HasMedia
 
     ////////////
 
-
     public function replies()
     {
         return $this->hasMany(QuestionReply::class, 'user_id');
@@ -114,7 +125,6 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasOne(Rate::class, 'employee_id');
     }
-
 
     public function groups()
     {
@@ -135,7 +145,7 @@ class User extends Authenticatable implements HasMedia
         $this->addMediaCollection('profile')
             ->useFallbackUrl(config('app.url') . '/img/user_icon.png')
             ->singleFile();
-        $this->addMediaCollection('front_emirates_id')->singleFile();;
-        $this->addMediaCollection('back_emirates_id')->singleFile();;
+        $this->addMediaCollection('front_emirates_id')->singleFile();
+        $this->addMediaCollection('back_emirates_id')->singleFile();
     }
 }

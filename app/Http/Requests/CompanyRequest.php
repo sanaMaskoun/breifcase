@@ -29,12 +29,14 @@ class CompanyRequest extends FormRequest
 
             'country'              => ['required', Rule::in(CountryEnum::getValues())],
             'city'                 => ['required'],
+            'facebook' => ['nullable'],
+            'tiktok' => ['nullable'],
 
             'profile'              => ['nullable', 'mimes:jpg,bmp,png'],
             'languages'            => ['required', 'array' , 'exists:languages,id'],
 
 
-            'consultation_price'   => ['required','numeric'],
+            'translation_price'    => ['required','numeric'],
             'land_line'            => ['required', 'numeric'],
             'location'             => ['required'],
             'bio'                  => ['required', 'max:250'],
@@ -69,16 +71,18 @@ class CompanyRequest extends FormRequest
             'country'                    => $this->country,
             'city'                       => $this->city,
             'type'                       => UserTypeEnum::translation_company,
-            'is_active'                  => false
+            'is_active'                  => false,
         ];
     }
     public function companyValidated($key = null, $default = null)
     {
-        return [    
+        return [
 
             'land_line'                => $this->land_line,
-            'consultation_price'       => $this->consultation_price,
+            'consultation_price'       => $this->translation_price,
             'location'                 => $this->location,
+            'facebook'                 => $this->facebook,
+            'tiktok'                 => $this->tiktok,
             'bio'                      => $this->bio,
             'available'                => $this->available == null ? false : true,
            ];

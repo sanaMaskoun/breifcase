@@ -9,13 +9,14 @@ use App\Enums\UserTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class LawyerRequest extends FormRequest
+class CompanyUpdateRequest extends FormRequest
 {
 
     public function authorize(): bool
     {
         return true;
     }
+
 
     public function rules(): array
     {
@@ -26,24 +27,19 @@ class LawyerRequest extends FormRequest
             'password'             => ['required', 'string', 'confirmed'],
             'password_confirmation'=> ['required', 'same:password'],
             'phone'                => ['required', 'numeric', 'digits_between:7,14'],
-            'gender'               => ['required' ],
-            'birth'                => ['required'],
+
             'country'              => ['required', Rule::in(CountryEnum::getValues())],
             'city'                 => ['required'],
-            'emirates_id'          => ['required', 'numeric'],
-            'front_emirates_id'    => ['required'],
-            'back_emirates_id'     => ['required'],
-            'profile'              => ['nullable', 'mimes:jpg,bmp,png'],
-            'practices'            => ['required', 'array', 'exists:practices,id'],
-            'languages'            => ['required', 'array' , 'exists:languages,id'],
 
-            'facebook' => ['nullable'],
-            'tiktok' => ['nullable'],
-            'consultation_price'   => ['required','numeric'],
+            'profile'              => ['nullable', 'mimes:jpg,bmp,png'],
+            'languages'            => ['required', 'array' , 'exists:languages,id'],
+            'facebook'             => ['nullable'],
+            'tiktok'               => ['nullable']  ,
+
+            'translation_price'    => ['required','numeric'],
             'land_line'            => ['required', 'numeric'],
             'location'             => ['required'],
             'bio'                  => ['required', 'max:250'],
-            'years_of_practice'    => ['required','numeric'],
             'available'            => ['nullable'],
             'certifications'       => ['required', 'array'],
             'licenses'             => ['required', 'array'],
@@ -72,26 +68,21 @@ class LawyerRequest extends FormRequest
             'email'                      => $this->email,
             'password'                   => bcrypt($this->password),
             'phone'                      => $this->phone,
-            'gender'                     => $this->gender,
-            'birth'                      => $this->birth,
             'country'                    => $this->country,
             'city'                       => $this->city,
-            'emirates_id'                => $this->emirates_id,
-            'type'                       => UserTypeEnum::lawyer,
-            'is_active'                  => false
+
         ];
     }
-    public function lawyerValidated($key = null, $default = null)
+    public function companyValidated($key = null, $default = null)
     {
         return [
 
             'land_line'                => $this->land_line,
-            'consultation_price'       => $this->consultation_price,
+            'consultation_price'       => $this->translation_price,
             'location'                 => $this->location,
             'facebook'                 => $this->facebook,
             'tiktok'                 => $this->tiktok,
             'bio'                      => $this->bio,
-            'years_of_practice'        => $this->years_of_practice,
             'available'                => $this->available == null ? false : true,
            ];
     }

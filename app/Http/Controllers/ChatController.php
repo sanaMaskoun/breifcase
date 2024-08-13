@@ -281,8 +281,10 @@ class ChatController extends Controller
     public function contact_client()
     {
         $users = $this->get_clients_for_chat();
+        $clients= Auth()->user()->consultation_ongoing_receiver;
+        // dd( $clients ,$users);
 
-        return view('pages.chat.dashboard.lawyer.ContactClient', compact('users'));
+        return view('pages.chat.dashboard.lawyer.ContactClient', compact('users','clients'));
     }
     public function form_contact_client($receiver_encoded_id)
     {

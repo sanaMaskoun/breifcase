@@ -14,6 +14,8 @@ class LawyerResource extends JsonResource
             'landLine'                => $this->land_line,
              'consultationPrice'      => $this->consultation_price,
              'location'               => $this->location,
+             'tiktok'               => $this->tiktok,
+             'facebook'               => $this->facebook,
              'yearsOfPractice'        => $this->years_of_practice,
              'available'              => $this->available == 0 ? false :true,
              'bio'                    => $this->bio,
