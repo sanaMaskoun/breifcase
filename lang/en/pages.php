@@ -352,8 +352,7 @@ return [
 
  //FAQ
  'question1'      =>'What is Briefcase?',
- 'answer1'        =>' Briefcase is a platform that connects legal practitioners with
-                         clients and other legal professionals. Our mission is to
+ 'answer1'        =>' Briefcase is a platform that connects legal practitioners with clients and other legal professionals. Our mission is to
                          streamline legal practice by providing advanced tools and
                          resources to enhance your reach and efficiency.',
  'question2'      =>'How do I register on Briefcase?',
@@ -370,6 +369,7 @@ return [
                          management, document sharing, client communication, and a
                          network of legal professionals to enhance collaboration and
                          knowledge sharing.',
+
  'question5'      =>'How can Briefcase help my legal practice?',
  'answer5'        =>' Briefcase helps you manage your practice more efficiently by
                          providing tools for case management, client communication, and

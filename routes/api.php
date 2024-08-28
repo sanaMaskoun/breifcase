@@ -5,6 +5,7 @@ use App\Http\Controllers\api\ChatApiController;
 use App\Http\Controllers\api\ClientApiController;
 use App\Http\Controllers\api\CompanyApiController;
 use App\Http\Controllers\api\ConsultationApiController;
+use App\Http\Controllers\api\FAQController;
 use App\Http\Controllers\api\FrequentlyQuestionApiController;
 use App\Http\Controllers\api\GeneralChatApiController;
 use App\Http\Controllers\api\GeneralQuestionApiController;
@@ -151,6 +152,12 @@ Route::group(['prefix' => 'general-chat', 'middleware' => 'auth:sanctum'], funct
     Route::get('for-user/{user}', [GeneralChatApiController::class, 'index']);
     Route::post('/', [GeneralChatApiController::class, 'store']);
     Route::post('{general_chat}', [GeneralChatApiController::class, 'update']);
+});
+
+Route::group(['prefix' => 'FAQ'], function () {
+    Route::get('en', [FAQController::class, 'index_en']);
+    Route::get('ar', [FAQController::class, 'index_ar']);
+
 });
 
 

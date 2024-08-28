@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DocumentStatusEnum;
 use App\Enums\UserTypeEnum;
 use App\Events\chatPrivateEvent;
 use App\Events\CounterChatEvent;
@@ -28,7 +29,14 @@ class ChatController extends Controller
     public function chat_client()
     {
         $client = Auth()->user();
-        $users = $this->get_users_for_chat();
+        $contacts = $this->get_users_for_chat();
+
+        $new_contacts=User::whereHas('consultation_ongoing_receiver', function ($query) {
+            $query->where('sender_id', Auth()->user()->id)
+                  ->where('status', DocumentStatusEnum::ongoing);
+        })->get();
+          $users =$new_contacts->merge($contacts);
+
         return view('pages.chat.client.chat', compact('client', 'users'));
     }
 
@@ -274,7 +282,13 @@ class ChatController extends Controller
 
     public function contact()
     {
-        $users = User::where('is_active', true)->where('type', UserTypeEnum::lawyer)->where('id', '<>', Auth()->user()->id)->get();
+        $lawyers = User::where('is_active', true)->where('type', UserTypeEnum::lawyer)->where('id', '<>', Auth()->user()->id)->get();
+        $clients=User::whereHas('consultation_ongoing_sender', function ($query) {
+            $query->where('receiver_id', Auth()->user()->id)
+                  ->where('status', DocumentStatusEnum::ongoing);
+        })->get();
+
+        $users =$clients->merge($lawyers);
 
         return view('pages.chat.dashboard.lawyer.contact', compact('users'));
     }
@@ -282,7 +296,6 @@ class ChatController extends Controller
     {
         $users = $this->get_clients_for_chat();
         $clients= Auth()->user()->consultation_ongoing_receiver;
-        // dd( $clients ,$users);
 
         return view('pages.chat.dashboard.lawyer.ContactClient', compact('users','clients'));
     }

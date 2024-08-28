@@ -24,8 +24,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if($user->message_count<>0)
                                 <span class="badge-2"
                                     id="counter_chat_{{ $user->id }}">{{ $user->message_count }}</span>
+                                    @endif
                             </a>
                         </li>
                         @endforeach

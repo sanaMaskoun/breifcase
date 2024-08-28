@@ -19,10 +19,13 @@
                                                 <div class="list_contact_info">
                                                     <div class="user-name">{{ $group->name }}</div>
 
+                                                    @if($group->message_count<>0)
+
                                                     <div style="display: inline; ">
                                                         <span class="message-counter"
                                                             id="counter_chat_{{ $group->id }}">{{ $group->message_count }}</span>
                                                     </div>
+                                                    @endif
                                                     <div class="message-contents">
                                                         <p class="last-msg last-message-dashboard text-smoke"id="last_message_{{ $group->id }}">
                                                             {{ $group->latest_message?->message }} </p>

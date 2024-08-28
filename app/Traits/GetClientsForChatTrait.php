@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 
+use App\Enums\DocumentStatusEnum;
 use App\Enums\UserTypeEnum;
 use App\Models\Message;
 use App\Models\User;
@@ -38,4 +39,45 @@ trait GetClientsForChatTrait
         });
         return $users;
     }
+    // public function get_clients_for_chat()
+    // {
+    //     $user = auth()->user();
+
+    //     if ($user->type == UserTypeEnum::lawyer) {
+    //         $users = User::where('type', UserTypeEnum::client)
+    //             ->whereHas('consultations_receiver', function ($query) use ($user) {
+    //                 $query->where('receiver_id', $user->id)
+    //                     ->where('status', DocumentStatusEnum::ongoing);
+    //             })
+    //             ->get();
+    //     } else if ($user->type == UserTypeEnum::client) {
+    //         $users = User::where('type', UserTypeEnum::lawyer)
+    //             ->whereHas('consultations_sender', function ($query) use ($user) {
+    //                 $query->where('sender_id', $user->id)
+    //                     ->where('status', DocumentStatusEnum::ongoing);
+    //             })
+    //             ->get();
+    //     } else {
+    //         $users = collect();
+    //     }
+
+    //     $users->each(function ($user) {
+    //         $latest_message = Message::where('sender_id', auth()->user()->id)
+    //             ->where('receiver_id', $user->id)
+    //             ->orWhere(function ($query) use ($user) {
+    //                 $query->where('sender_id', $user->id)
+    //                     ->where('receiver_id', auth()->user()->id);
+    //             })
+    //             ->latest()
+    //             ->first();
+
+    //         $message_count = $this->message_count($user->id);
+
+    //         $user->latest_message = $latest_message;
+    //         $user->message_count = $message_count;
+    //     });
+
+    //     return $users;
+    // }
+
 }

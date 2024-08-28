@@ -49,6 +49,7 @@ class User extends Authenticatable implements HasMedia
             ->where('type', DocumentTypeEnum::consultation);
     }
 
+
     public function consultation_ongoing_sender()
     {
         return $this->hasMany(Document::class, 'sender_id')

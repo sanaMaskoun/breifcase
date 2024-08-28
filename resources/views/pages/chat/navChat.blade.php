@@ -17,10 +17,14 @@
                     <li class="nav-item">
                         <a class="nav-dashboard" href="{{ route('contact_dashboard') }}">@lang('pages.contacts')</a>
                     </li>
+                    @role('lawyer')
+
                     <li class="nav-item">
                         <a class="nav-dashboard" href="{{ route('contact_client') }}" data-target="clients"
                             onclick="openTab(event, 'clients')">@lang('pages.clients')</a>
                     </li>
+                    @endrole
+
                 </ul>
                 <div>
                     @role('lawyer|admin')

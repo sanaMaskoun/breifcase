@@ -14,11 +14,13 @@
                                             alt="User Image">
                                         <div class="list_contact_info">
                                             <div class="user-name">{{ $user->name }}</div>
+                                            @if($user->message_count<>0)
 
                                             <div style="display: inline; ">
                                                 <span class="message-counter"
                                                     id="counter_chat_{{ $user->id }}">{{ $user->message_count }}</span>
                                             </div>
+                                            @endif
                                             <div class="message-contents">
                                                 <p
                                                     class="last-msg last-message-dashboard text-smoke"id="last_message_{{ $user->id }}">

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             PracticeSeeder::class,
             LanguageSeeder::class,
             ForumSeeder::class,
+            f_a_q_sSeeder::class,
         ]);
     }
 }
