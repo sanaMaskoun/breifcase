@@ -156,9 +156,9 @@
                 </div>
                 <div class="form-group-sign id-back-1 col-md-6">
                     <label for="consultationPrice" class="label-inline">@lang('pages.translation_price')</label>
-                    <input type="text" class="form-control-sign input-inline" id="consultationPrice"
-                        name="consultation_price" value="{{ old('consultation_price') }}" />
-                    @error('consultation_price')
+                    <input type="text" name="translation_price" class="form-control-sign input-inline" id="consultationPrice"
+                        value="{{ old('translation_price') }}" />
+                    @error('translation_price')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>

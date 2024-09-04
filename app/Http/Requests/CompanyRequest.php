@@ -19,28 +19,25 @@ class CompanyRequest extends FormRequest
 
     public function rules(): array
     {
-        // $emailUnique = Rule::unique('users', 'email')->ignore($this->user);
+        $emailUnique = Rule::unique('users', 'email')->ignore($this->user);
         return [
-            'name' => ['required', 'max:50'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'phone' => ['required', 'numeric', 'digits_between:7,14'],
-            'password' => ['required', 'string', 'confirmed'],
-            'password_confirmation' => ['required', 'same:password'],
+            'name'                 => ['required', 'max:50'],
+            'email'                => ['required', 'email', $emailUnique],
+            'password'             => ['required', 'string', 'confirmed'],
+            'password_confirmation'=> ['required', 'same:password'],
+            'phone'                => ['required', 'numeric', 'digits_between:7,14'],
+           'profile'              => ['nullable', 'mimes:jpg,bmp,png'],
+            'languages'            => ['required', 'array' , 'exists:languages,id'],
 
-            'country' => ['required', Rule::in(CountryEnum::getValues())],
-            'city' => ['required'],
-
-            'profile' => ['nullable'],
-            'land_line' => ['required', 'numeric'],
-                'translation_price' => ['required', 'numeric'],
-                'location' => ['required'],
-                'facebook' => ['nullable'],
-                'tiktok' => ['nullable'],
-                'bio' => ['required', 'max:250'],
-                'available' => ['nullable'],
-                'certifications' => ['required', 'array'],
-                'licenses' => ['required', 'array'],
-                'languages' => ['required', 'array', 'exists:languages,id'],
+            'facebook' => ['nullable'],
+            'tiktok' => ['nullable'],
+            'translation_price'   => ['required','numeric'],
+            'land_line'            => ['required', 'numeric'],
+            'location'             => ['required'],
+            'bio'                  => ['required', 'max:250'],
+            'available'            => ['nullable'],
+            'certifications'       => ['required', 'array'],
+            'licenses'             => ['required', 'array'],
 
 
 
