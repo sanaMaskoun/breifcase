@@ -19,30 +19,28 @@ class CompanyRequest extends FormRequest
 
     public function rules(): array
     {
-        $emailUnique = Rule::unique('users', 'email')->ignore($this->user);
+        // $emailUnique = Rule::unique('users', 'email')->ignore($this->user);
         return [
-            'name'                 => ['required', 'max:50'],
-            'email'                => ['required', 'email', $emailUnique],
-            'password'             => ['required', 'string', 'confirmed'],
-            'password_confirmation'=> ['required', 'same:password'],
-            'phone'                => ['required', 'numeric', 'digits_between:7,14'],
+            'name' => ['required', 'max:50'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'phone' => ['required', 'numeric', 'digits_between:7,14'],
+            'password' => ['required', 'string', 'confirmed'],
+            'password_confirmation' => ['required', 'same:password'],
 
-            'country'              => ['required', Rule::in(CountryEnum::getValues())],
-            'city'                 => ['required'],
-            'facebook' => ['nullable'],
-            'tiktok' => ['nullable'],
+            'country' => ['required', Rule::in(CountryEnum::getValues())],
+            'city' => ['required'],
 
-            'profile'              => ['nullable', 'mimes:jpg,bmp,png'],
-            'languages'            => ['required', 'array' , 'exists:languages,id'],
-
-
-            'translation_price'    => ['required','numeric'],
-            'land_line'            => ['required', 'numeric'],
-            'location'             => ['required'],
-            'bio'                  => ['required', 'max:250'],
-            'available'            => ['nullable'],
-            'certifications'       => ['required', 'array'],
-            'licenses'             => ['required', 'array'],
+            'profile' => ['nullable'],
+            'land_line' => ['required', 'numeric'],
+                'translation_price' => ['required', 'numeric'],
+                'location' => ['required'],
+                'facebook' => ['nullable'],
+                'tiktok' => ['nullable'],
+                'bio' => ['required', 'max:250'],
+                'available' => ['nullable'],
+                'certifications' => ['required', 'array'],
+                'licenses' => ['required', 'array'],
+                'languages' => ['required', 'array', 'exists:languages,id'],
 
 
 
@@ -78,13 +76,13 @@ class CompanyRequest extends FormRequest
     {
         return [
 
-            'land_line'                => $this->land_line,
-            'consultation_price'       => $this->translation_price,
-            'location'                 => $this->location,
-            'facebook'                 => $this->facebook,
-            'tiktok'                 => $this->tiktok,
-            'bio'                      => $this->bio,
-            'available'                => $this->available == null ? false : true,
+            'land_line' => $this->land_line,
+                'consultation_price' => $this->translation_price,
+                'location' => $this->location,
+                'tiktok' => $this->tiktok,
+                'facebook' => $this->facebook,
+                'bio' => $this->bio,
+                'available' => $this->available ?? false,
            ];
     }
 }

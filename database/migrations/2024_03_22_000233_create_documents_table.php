@@ -18,7 +18,7 @@ return new class extends Migration
             $table->tinyInteger('status');
             $table->string('answer')->nullable();
             $table->tinyInteger('type');
-            $table->integer('price');
+            $table->integer('price')->nullable();
             $table->boolean('accept_case')->nullable();
             $table->unsignedBigInteger('sender_id')->nullable();
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');

@@ -88,7 +88,7 @@ class JoinController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home');
+        return redirect()->route('home_client');
     }
 
     public function join_translation_company()
@@ -143,7 +143,7 @@ class JoinController extends Controller
             ->where('is_active', false)
             ->paginate(config('constants.PAGINATION_COUNT'));
 
-            
+
         return view('pages.dashboard.requestToJoin', compact('users'));
     }
 }
