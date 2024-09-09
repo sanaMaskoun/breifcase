@@ -5,7 +5,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat form-hide-chat" id="contact-list">
+                {{--  <div class="col-md-6 col-lg-4 p-0  contact_list_form_chat form-hide-chat" id="contact-list">
                     <div class="list-group">
                         @foreach ($general_chats as $object)
                             <a href="{{ route('general_chat_form', base64_encode($object->id)) }}" class="list-group-item1"
@@ -21,7 +21,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                    @if($object->message_count<>0)
+                                    @if ($object->message_count != 0)
 
                                 <span class="badge-2"
                                     id="counter_chat_{{ $object->id }}">{{ $object->message_count }}</span>
@@ -29,21 +29,22 @@
                             </a>
                         @endforeach
                     </div>
-                </div>
+                </div>  --}}
 
 
 
-                <div class="col-lg-8 col-md-12 col-sm-12">
-                    <div id="chat-area" class="card card_form_chat card-chat-dashboard">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div id="chat-area" class="card card_form_chat card-chat-dashboard furma">
                         <div id="chat-header_1">
                             <i class="fas fa-users icon-group-dashboard"></i>
                             <span class="title-name-form-chat d-flex">{{ $general_chat->name }}
-                                @if($admin_general_chat <> null || Auth()->user()->type == 1)
-                                <form action="{{ route('edit_general_chat', base64_encode($general_chat->id)) }}" method="GET">
-                                    <button class="btn d-flex">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </form>
+                                @if ($admin_general_chat != null || Auth()->user()->type == 1)
+                                    <form action="{{ route('edit_general_chat', base64_encode($general_chat->id)) }}"
+                                        method="GET">
+                                        <button class="btn d-flex">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </form>
                                 @endif
 
                             </span>
@@ -98,20 +99,21 @@
                                                     class="rounded-circle img_group" alt="user_img">
                                                 <div class="text-content">
                                                     @if ($message->getFirstMediaUrl('attachments') != null)
-                                                    @if (  $message->getMedia('attachments')->first()->extension == 'jpg' ||
-                                                            $message->getMedia('attachments')->first()->extension == 'png')
-                                                        <img class=" img_group clickable"
-                                                            src="{{ asset($message->getFirstMediaUrl('attachments')) }}">
-                                                        <span class="message">{{ $message->message }}</span>
+                                                        @if (
+                                                            $message->getMedia('attachments')->first()->extension == 'jpg' ||
+                                                                $message->getMedia('attachments')->first()->extension == 'png')
+                                                            <img class=" img_group clickable"
+                                                                src="{{ asset($message->getFirstMediaUrl('attachments')) }}">
+                                                            <span class="message">{{ $message->message }}</span>
+                                                        @else
+                                                            <a href="{{ $message->getFirstMediaUrl('attachments') }}"
+                                                                target="_blank">
+                                                                <p class="message">{{ $message->message }}</p>
+                                                            </a>
+                                                        @endif
                                                     @else
-                                                        <a href="{{ $message->getFirstMediaUrl('attachments') }}"
-                                                            target="_blank">
-                                                            <p class="message">{{ $message->message }}</p>
-                                                        </a>
+                                                        <span class="message">{{ $message->message }}</span>
                                                     @endif
-                                                @else
-                                                    <span class="message">{{ $message->message }}</span>
-                                                @endif
                                                     <time class="time">{{ $message->created_at->diffForHumans() }}</time>
                                                 </div>
                                             </div>
@@ -124,7 +126,8 @@
 
                         <div class="chat-footer">
 
-                            <form id="messageForm" action="{{ route('send_message_to_group', base64_encode($general_chat->id)) }}"
+                            <form id="messageForm"
+                                action="{{ route('send_message_to_group', base64_encode($general_chat->id)) }}"
                                 method="POST" enctype="multipart/form-data" class="form_chat_profile">
                                 @csrf
                                 <div class="container">
@@ -187,7 +190,7 @@
                 ${data.attachment ?
                 (extension === 'jpg' || extension === 'png' ?
                 `<img class="img_group clickable" src="${data.attachment.url}">
-                 <span class="message">${data.message}</span>` :
+                     <span class="message">${data.message}</span>` :
                 `<a href="${data.attachment.url}" target="_blank"><p class="message">${data.message}</p></a>`) :
             `<p class="message">${data.message}</p>`}
                 <time class="time">${data.created_at}</time>
@@ -202,7 +205,7 @@
             ${data.attachment ?
                 (extension === 'jpg' || extension === 'png' ?
                     `<img class="img_group clickable" src="${data.attachment.url}">
-                     <span class="message">${data.message}</span>` :
+                         <span class="message">${data.message}</span>` :
                     `<a href="${data.attachment.url}" target="_blank"><p class="message">${data.message}</p></a>`) :
                 `<p class="message">${data.message} </p>`}
            <time class="time">${data.created_at}</time>

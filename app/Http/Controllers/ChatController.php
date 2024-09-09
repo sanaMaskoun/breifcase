@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\DocumentStatusEnum;
+use App\Enums\GroupTypeEnum;
 use App\Enums\UserTypeEnum;
 use App\Events\chatPrivateEvent;
 use App\Events\CounterChatEvent;
@@ -119,17 +120,17 @@ class ChatController extends Controller
         return view('pages.chat.dashboard.lawyer.formGroup', compact(['groups', 'messages', 'group', 'admin_group']));
 
     }
+    // public function general_chat()
+    // {
+    //     $general_chats = $this->get_user_general_chats();
+    //     return view('pages.chat.dashboard.lawyer.generalChat', compact('general_chats'));
+
+    // }
     public function general_chat()
     {
-        $general_chats = $this->get_user_general_chats();
-        return view('pages.chat.dashboard.lawyer.generalChat', compact('general_chats'));
-
-    }
-
-    public function general_chat_form($general_chat_encoded_id)
-    {
-        $general_chat_decoded_id = base64_decode($general_chat_encoded_id);
-        $general_chat = Group::find($general_chat_decoded_id);
+        $general_chat= Group::where('type', GroupTypeEnum::general_chat)->first();
+        // $general_chat_decoded_id = base64_decode($general_chat_encoded_id);
+        // $general_chat = Group::find($general_chat_decoded_id);
         MessageReadStatusInGroup::where('user_id', Auth()->user()->id)
             ->update(['is_read' => true]);
 
@@ -142,7 +143,26 @@ class ChatController extends Controller
         })->first();
         return view('pages.chat.dashboard.lawyer.formGeneralChat', compact(['general_chats', 'admin_general_chat', 'messages', 'general_chat']));
 
+
     }
+
+    // public function general_chat_form($general_chat_encoded_id)
+    // {
+    //     $general_chat_decoded_id = base64_decode($general_chat_encoded_id);
+    //     $general_chat = Group::find($general_chat_decoded_id);
+    //     MessageReadStatusInGroup::where('user_id', Auth()->user()->id)
+    //         ->update(['is_read' => true]);
+
+    //     $messages = Message::where('group_id', $general_chat->id)->get();
+    //     $general_chats = $this->get_user_general_chats();
+
+    //     $admin_general_chat = User::whereHas('general_chats', function ($query) use ($general_chat) {
+    //         $query->where('groups.id', $general_chat->id)->where('is_admin', true)->where('user_id', Auth()->user()->id);
+
+    //     })->first();
+    //     return view('pages.chat.dashboard.lawyer.formGeneralChat', compact(['general_chats', 'admin_general_chat', 'messages', 'general_chat']));
+
+    // }
 
     public function send_message_to_user(Request $request, $receiver_encoded_id)
     {

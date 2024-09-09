@@ -26,15 +26,11 @@ class FatoorahService
 
     public function buildRequest($url, $mothod, $data = [])
     {
-
         $request = new Request($mothod, $this->base_url . $url, $this->headers);
-
         if (!$data) {
             return false;
         }
-
-        $response = $this->request_client->send($request, ['json' => $data]);
-
+       $response = $this->request_client->send($request, ['json' => $data]);
         if ($response->getStatusCode() != 200) {
             return false;
         }
@@ -46,6 +42,7 @@ class FatoorahService
     public function sendPayment($data)
     {
 
+        // dd($data);
         $response = $this->buildRequest('v2/SendPayment', 'POST', $data);
         return $response;
     }

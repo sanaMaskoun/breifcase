@@ -150,6 +150,32 @@ ul.navbar-nav {
     font-size: 22px;
 }
 
+input.title-consultation {
+    border: 1px solid !important;
+    background: #eee;
+    text-align: initial;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    height: auto;
+    font-size: 25px;
+}
+
+:has(.furma) .sidebar-dashboard {
+    display: none !important;
+
+}
+
+:has(.furma) .content-dashboard {
+
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.furma {
+    min-height: 65vh !important;
+}
+
 @media (max-width:768px) {
     .box-profile-1 button.tablinks {
         font-size: 13px;

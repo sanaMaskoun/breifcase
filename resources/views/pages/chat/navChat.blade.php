@@ -33,12 +33,11 @@
                         </a>
                     @endrole
 
-                    @role('admin')
+                    {{--  @role('admin')
                         <a href="{{ route('add_general_chat') }}" class="btn btn-outline-secondary">
-                            {{--  <i class="fas fa-landmark ml-auto icon-forum"></i>  --}}
                             <img class="icon-forum" src="{{ asset('assets/img/forum.png') }}">
                         </a>
-                    @endrole
+                    @endrole  --}}
                 </div>
             </div>
 
